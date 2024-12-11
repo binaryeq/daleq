@@ -25,9 +25,9 @@ public class FactExtractor   {
 
     public static final Logger LOG = LoggerFactory.getLogger(FactExtractor.class);
 
-    public static Option OPT_CLASSPATH = Option.builder()
-        .argName("classpath")
-        .option("c")
+    public static Option OPT_CLASSLOC = Option.builder()
+        .argName("classes")
+        .option("cl")
         .hasArg()
         .required(true)
         .desc("the location of compiled classes, a jar file or folder")
@@ -44,7 +44,7 @@ public class FactExtractor   {
     public static void main(String[] args) throws IOException {
 
         Options options = new Options();
-        options.addOption(OPT_CLASSPATH);
+        options.addOption(OPT_CLASSLOC);
         options.addOption(OPT_DB);
         CommandLine cli = null;
         CommandLineParser parser = new DefaultParser();
@@ -52,9 +52,9 @@ public class FactExtractor   {
         try {
             cli = parser.parse(options, args);
             String dbFolderName = cli.getOptionValue(OPT_DB);
-            String classLocation = cli.getOptionValue(OPT_DB);
+            String classLocation = cli.getOptionValue(OPT_CLASSLOC);
 
-
+            extractAndExport(Path.of(classLocation),Path.of(dbFolderName));
 
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
@@ -64,7 +64,7 @@ public class FactExtractor   {
         }
     }
 
-    void extractAndExport (Path classPath, Path dbDir) throws IOException {
+    static void extractAndExport (Path classPath, Path dbDir) throws IOException {
 
         LOG.info("extracting classes from {}", classPath);
         List<Path> classFiles = Utils.getClassFiles(classPath);
@@ -119,7 +119,7 @@ public class FactExtractor   {
 
     }
 
-    List<Fact> extract (byte[] bytes) throws IOException {
+    static List<Fact> extract (byte[] bytes) throws IOException {
         ClassNode classNode = new ClassNode();
         new ClassReader(bytes).accept(classNode, 0);
         List<Fact> facts = new ArrayList<>();
