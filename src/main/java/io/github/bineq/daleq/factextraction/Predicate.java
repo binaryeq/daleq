@@ -28,8 +28,8 @@ public enum Predicate {
     METHOD_SIGNATURE(symslot("methodid"),symslot("signature")),
 
     // instructions
-    INSTRUCTION(symslot("methodId"),symslot("instruction")),
-    FIELD_INS(symslot("methodId"),symslot("name"),symslot("descriptor"),symslot("instruction")),
+    INSTRUCTION(symslot("methodId"),numslot("instructioncounter"),symslot("instruction")),
+    FIELD_INS(symslot("methodId"),numslot("instructioncounter"),symslot("name"),symslot("descriptor"),symslot("instruction")),
     ;
 
     public final Slot[] slots;

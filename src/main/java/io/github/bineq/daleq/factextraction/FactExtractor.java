@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -139,12 +140,14 @@ public class FactExtractor   {
 
         // methods
         classNode.methods.stream().sorted((METHOD_NODE_COMPARATOR)).forEach(methodNode -> {
+            AtomicInteger instructionCounter = new AtomicInteger(0);
             String methodId = classNode.name + "::" +  methodNode.name +  methodNode.desc;
             facts.add(new SimpleFact(Predicate.METHOD, methodId, classNode.name, methodNode.name, methodNode.desc));
             facts.add(new SimpleFact(Predicate.METHOD_SIGNATURE,methodId, methodNode.signature));
             //AtomicInteger line = new AtomicInteger(-1);
-            
+
             methodNode.instructions.forEach(instructionNode -> {
+                // TODO deal with pseudo nodes
                 //  if (instructionNode instanceof LineNumberNode) {
                 //      line.set(((LineNumberNode) instructionNode).line);
                 //  }
@@ -156,9 +159,10 @@ public class FactExtractor   {
                     LOG.warn("unknown instruction type found, opcode is {}", opCode);
                 }
                 else {
-                    facts.add(new SimpleFact(Predicate.INSTRUCTION, methodId, instr));
+                    int instCounter = instructionCounter.incrementAndGet();
+                    facts.add(new SimpleFact(Predicate.INSTRUCTION, methodId, instCounter,instr));
                     if (instructionNode instanceof FieldInsnNode fInsNode) {
-                        facts.add(new SimpleFact(Predicate.FIELD_INS, methodId,fInsNode.name, fInsNode.desc,instr));
+                        facts.add(new SimpleFact(Predicate.FIELD_INS, methodId, instCounter,fInsNode.name, fInsNode.desc,instr));
                     }
                     else  {
                         LOG.warn("TODO: create detailed fact for instruction {} , node type {}",instr,instructionNode.getClass());
