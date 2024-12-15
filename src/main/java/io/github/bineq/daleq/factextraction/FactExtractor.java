@@ -132,16 +132,18 @@ public class FactExtractor   {
 
         // fields
         classNode.fields.stream().sorted((FIELD_COMP)).forEach(fieldNode -> {
-            facts.add(new SimpleFact(Predicate.FIELD, classNode.name, fieldNode.name));
-            facts.add(new SimpleFact(Predicate.FIELD_DESCRIPTOR, classNode.name, fieldNode.name, fieldNode.desc));
-            facts.add(new SimpleFact(Predicate.FIELD_SIGNATURE, classNode.name, fieldNode.name, fieldNode.signature));
+            String fieldId = classNode.name + "::" +  fieldNode.name +  fieldNode.desc;
+            facts.add(new SimpleFact(Predicate.FIELD, fieldId,classNode.name, fieldNode.name,fieldNode.desc));
+            facts.add(new SimpleFact(Predicate.FIELD_SIGNATURE, fieldId, fieldNode.signature));
         });
 
         // methods
         classNode.methods.stream().sorted((METHOD_NODE_COMPARATOR)).forEach(methodNode -> {
-            facts.add(new SimpleFact(Predicate.METHOD, classNode.name, methodNode.name, methodNode.desc));
-            facts.add(new SimpleFact(Predicate.METHOD_SIGNATURE, classNode.name, methodNode.name, methodNode.desc, methodNode.signature));
+            String methodId = classNode.name + "::" +  methodNode.name +  methodNode.desc;
+            facts.add(new SimpleFact(Predicate.METHOD, methodId, classNode.name, methodNode.name, methodNode.desc));
+            facts.add(new SimpleFact(Predicate.METHOD_SIGNATURE,methodId, methodNode.signature));
             //AtomicInteger line = new AtomicInteger(-1);
+            
             methodNode.instructions.forEach(instructionNode -> {
                 //  if (instructionNode instanceof LineNumberNode) {
                 //      line.set(((LineNumberNode) instructionNode).line);
@@ -154,7 +156,13 @@ public class FactExtractor   {
                     LOG.warn("unknown instruction type found, opcode is {}", opCode);
                 }
                 else {
-                    facts.add(new SimpleFact(Predicate.INSTRUCTION, classNode.name, methodNode.name, methodNode.desc, instr));
+                    facts.add(new SimpleFact(Predicate.INSTRUCTION, methodId, instr));
+                    if (instructionNode instanceof FieldInsnNode fInsNode) {
+                        facts.add(new SimpleFact(Predicate.FIELD_INS, methodId,fInsNode.name, fInsNode.desc,instr));
+                    }
+                    else  {
+                        LOG.warn("TODO: create detailed fact for instruction {} , node type {}",instr,instructionNode.getClass());
+                    }
                 }
             });
 

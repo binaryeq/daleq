@@ -17,17 +17,19 @@ public enum Predicate {
     // class properties
     SUPERCLASS(symslot("name"),symslot("supername")),
     INTERFACE(symslot("name"),symslot("interface")),
-    FIELD(symslot("classname"),symslot("name")),
-    METHOD(symslot("classname"),symslot("name"),symslot("descriptor")),
+    FIELD(symslot("id"),symslot("classname"),symslot("name"),symslot("descriptor")),
+    METHOD(symslot("id"),symslot("classname"),symslot("name"),symslot("descriptor")),
     VERSION(symslot("classname"),symslot("version")),
 
     // field properties
-    FIELD_DESCRIPTOR(symslot("classname"),symslot("name"),symslot("descriptor")),
-    FIELD_SIGNATURE(symslot("classname"),symslot("name"),symslot("signature")),
+    FIELD_SIGNATURE(symslot("fieldid"),symslot("signature")),
 
     // method properties
-    METHOD_SIGNATURE(symslot("classname"),symslot("name"),symslot("descriptor"),symslot("signature")),
-    INSTRUCTION(symslot("classname"),symslot("name"),symslot("descriptor"),symslot("signature"),symslot("instruction"))
+    METHOD_SIGNATURE(symslot("methodid"),symslot("signature")),
+
+    // instructions
+    INSTRUCTION(symslot("methodId"),symslot("instruction")),
+    FIELD_INS(symslot("methodId"),symslot("name"),symslot("descriptor"),symslot("instruction")),
     ;
 
     public final Slot[] slots;
