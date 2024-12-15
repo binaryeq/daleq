@@ -19,6 +19,7 @@ public enum Predicate {
     INTERFACE(symslot("name"),symslot("interface")),
     FIELD(symslot("classname"),symslot("name")),
     METHOD(symslot("classname"),symslot("name"),symslot("descriptor")),
+    VERSION(symslot("classname"),symslot("version")),
 
     // field properties
     FIELD_DESCRIPTOR(symslot("classname"),symslot("name"),symslot("descriptor")),
@@ -26,7 +27,7 @@ public enum Predicate {
 
     // method properties
     METHOD_SIGNATURE(symslot("classname"),symslot("name"),symslot("descriptor"),symslot("signature")),
-    INSTRUCTION(symslot("classname"),symslot("name"),symslot("descriptor"),symslot("signature"),numslot("opcode"),numslot("line"))
+    INSTRUCTION(symslot("classname"),symslot("name"),symslot("descriptor"),symslot("signature"),symslot("instruction"))
     ;
 
     public final Slot[] slots;

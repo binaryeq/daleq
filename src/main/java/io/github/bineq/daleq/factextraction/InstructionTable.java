@@ -15,7 +15,7 @@ import java.util.Map;
  * Data sources from org/objectweb/asm/Opcodes.java.
  * @author jens dietrich
  */
-public class OpCodes {
+public class InstructionTable {
 
     private static final Map<Integer,String> OPCODE_MAP = new HashMap<>();
 
@@ -27,11 +27,11 @@ public class OpCodes {
         return instr;
     }
 
-    private static Logger LOG = LoggerFactory.getLogger(OpCodes.class);
+    private static Logger LOG = LoggerFactory.getLogger(InstructionTable.class);
 
     static {
         try {
-            URL url = OpCodes.class.getResource("/bytecode-instructions.csv");
+            URL url = InstructionTable.class.getResource("/bytecode-instructions.csv");
             Path loc = Path.of(url.getFile());
             for (String line : Files.readAllLines(loc)) {
                 String[] tokens = line.split(",");

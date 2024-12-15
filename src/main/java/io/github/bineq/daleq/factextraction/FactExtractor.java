@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -125,9 +124,11 @@ public class FactExtractor   {
         List<Fact> facts = new ArrayList<>();
 
         facts.add(new SimpleFact(Predicate.SUPERCLASS, classNode.name, classNode.superName));
-        for (String intrf:classNode.interfaces) {
+        for (String intrf : classNode.interfaces) {
             facts.add(new SimpleFact(Predicate.INTERFACE, classNode.name, intrf));
         }
+
+        facts.add(new SimpleFact(Predicate.VERSION,classNode.name,classNode.version));
 
         // fields
         classNode.fields.stream().sorted((FIELD_COMP)).forEach(fieldNode -> {
@@ -138,22 +139,29 @@ public class FactExtractor   {
 
         // methods
         classNode.methods.stream().sorted((METHOD_NODE_COMPARATOR)).forEach(methodNode -> {
-            facts.add(new SimpleFact(Predicate.METHOD, classNode.name, methodNode.name,methodNode.desc));
+            facts.add(new SimpleFact(Predicate.METHOD, classNode.name, methodNode.name, methodNode.desc));
             facts.add(new SimpleFact(Predicate.METHOD_SIGNATURE, classNode.name, methodNode.name, methodNode.desc, methodNode.signature));
-            AtomicInteger line = new AtomicInteger(-1);
+            //AtomicInteger line = new AtomicInteger(-1);
             methodNode.instructions.forEach(instructionNode -> {
-                if (instructionNode instanceof LineNumberNode) {
-                    line.set(((LineNumberNode) instructionNode).line);
+                //  if (instructionNode instanceof LineNumberNode) {
+                //      line.set(((LineNumberNode) instructionNode).line);
+                //  }
+
+                // TODO: label nodes, frame nodes, line number nodes
+                int opCode = instructionNode.getOpcode();
+                String instr = InstructionTable.getInstruction(opCode);
+                if (instr == null) {
+                    LOG.warn("unknown instruction type found, opcode is {}", opCode);
                 }
                 else {
-                    int opCode = instructionNode.getOpcode();
-                    facts.add(new SimpleFact(Predicate.INSTRUCTION,classNode.name, methodNode.name, methodNode.desc,opCode,line.get()));
+                    facts.add(new SimpleFact(Predicate.INSTRUCTION, classNode.name, methodNode.name, methodNode.desc, instr));
                 }
             });
+
+            // TODO annotations
+
+
         });
-
-        // TODO annotations
-
         return facts;
     }
 }
