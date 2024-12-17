@@ -35,7 +35,7 @@ public class InstructionTable {
             Path loc = Path.of(url.getFile());
             for (String line : Files.readAllLines(loc)) {
                 String[] tokens = line.split(",");
-                assert tokens.length == 3;
+                assert tokens.length == 2;
                 int opcode = Integer.parseInt(tokens[1]);
                 String name = tokens[0];
                 OPCODE_MAP.put(opcode,name);
