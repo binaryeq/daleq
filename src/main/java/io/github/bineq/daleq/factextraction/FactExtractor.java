@@ -41,11 +41,20 @@ public class FactExtractor   {
         .desc("a folder where to create the database, the folder will be created if it does not exist")
         .build();
 
-    public static void main(String[] args) throws IOException {
+    public static Option OPT_VERIFY = Option.builder()
+        .argName("verify")
+        .option("v")
+        .hasArg(false)
+        .required(false)
+        .desc("whether to verify the datalog facts against the schema, must be true or false, default is true")
+        .build();
+
+    public static void main(String[] args) throws Exception {
 
         Options options = new Options();
         options.addOption(OPT_CLASSLOC);
         options.addOption(OPT_DB);
+        options.addOption(OPT_VERIFY);
         CommandLine cli = null;
         CommandLineParser parser = new DefaultParser();
 
@@ -53,8 +62,12 @@ public class FactExtractor   {
             cli = parser.parse(options, args);
             String dbFolderName = cli.getOptionValue(OPT_DB);
             String classLocation = cli.getOptionValue(OPT_CLASSLOC);
+            boolean verify = true;
+            if (cli.hasOption(OPT_VERIFY)) {
+                verify = Boolean.valueOf(cli.getOptionValue(OPT_VERIFY));
+            }
 
-            extractAndExport(Path.of(classLocation),Path.of(dbFolderName));
+            extractAndExport(Path.of(classLocation),Path.of(dbFolderName),verify);
 
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
@@ -64,7 +77,7 @@ public class FactExtractor   {
         }
     }
 
-    static void extractAndExport (Path classPath, Path dbDir) throws IOException {
+    static void extractAndExport (Path classPath, Path dbDir, boolean verify) throws Exception {
 
         LOG.info("extracting classes from {}", classPath);
         List<Path> classFiles = Utils.getClassFiles(classPath);
@@ -76,7 +89,7 @@ public class FactExtractor   {
         for (Path classFile : classFiles) {
             currentFacts.clear();
             byte[] bytes = Files.readAllBytes(classFile);
-            currentFacts = extract(bytes);
+            currentFacts = extract(bytes,verify);
             LOG.info("reading {}",classFile);
             LOG.info("{} facts created",currentFacts.size());
             allFacts.addAll(currentFacts);
@@ -119,7 +132,7 @@ public class FactExtractor   {
 
     }
 
-    static List<Fact> extract (byte[] bytes) throws IOException {
+    static List<Fact> extract (byte[] bytes, boolean verify) throws VerificationException {
         ClassNode classNode = new ClassNode();
         new ClassReader(bytes).accept(classNode, 0);
         List<Fact> facts = new ArrayList<>();
@@ -174,6 +187,14 @@ public class FactExtractor   {
 
 
         });
+
+
+        if (verify) {
+            LOG.info("verifying facts");
+            for (Fact fact : facts) {
+                fact.verify();
+            }
+        }
         return facts;
     }
 }

@@ -23,11 +23,11 @@ public class TestFactExtraction1 {
     private List<Fact> facts = new ArrayList<>();
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() throws Exception {
         classModel = JavapClassModel.parse("mypck.MyClass", Path.of(JavapModelTest.class.getResource("/basic/mypck/MyClass.javap").getFile()));
         Path classFile = Path.of(JavapModelTest.class.getResource("/basic/mypck/MyClass.class").getFile());
         byteCode = Files.readAllBytes(classFile);
-        facts = FactExtractor.extract(byteCode);
+        facts = FactExtractor.extract(byteCode,false); // verification will be done in dedicated test
     }
 
     private Fact getFirstFact(Predicate predicate) {
@@ -41,6 +41,13 @@ public class TestFactExtraction1 {
         return facts.stream()
             .filter(fact -> fact.predicate().equals(predicate))
             .collect(Collectors.toUnmodifiableList());
+    }
+
+    @Test
+    public void testFactVerification() throws VerificationException {
+        for (Fact fact : facts) {
+            fact.verify();
+        }
     }
 
     @Test
