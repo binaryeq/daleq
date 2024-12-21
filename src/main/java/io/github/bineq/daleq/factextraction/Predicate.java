@@ -29,7 +29,7 @@ public enum Predicate {
 
     // instructions
     INSTRUCTION(symslot("methodId"),numslot("instructioncounter"),symslot("instruction")),
-    FIELD_INS(symslot("methodId"),numslot("instructioncounter"),symslot("name"),symslot("descriptor"),symslot("instruction")),
+    FIELD_INS(symslot("methodId"),numslot("instructioncounter"),symslot("owner"),symslot("name"),symslot("descriptor"),symslot("instruction")),
     ;
 
     public final Slot[] slots;

@@ -162,7 +162,7 @@ public class FactExtractor   {
                     int instCounter = instructionCounter.incrementAndGet();
                     facts.add(new SimpleFact(Predicate.INSTRUCTION, methodId, instCounter,instr));
                     if (instructionNode instanceof FieldInsnNode fInsNode) {
-                        facts.add(new SimpleFact(Predicate.FIELD_INS, methodId, instCounter,fInsNode.name, fInsNode.desc,instr));
+                        facts.add(new SimpleFact(Predicate.FIELD_INS, methodId, instCounter,fInsNode.owner,fInsNode.name, fInsNode.desc,instr));
                     }
                     else  {
                         LOG.warn("TODO: create detailed fact for instruction {} , node type {}",instr,instructionNode.getClass());
