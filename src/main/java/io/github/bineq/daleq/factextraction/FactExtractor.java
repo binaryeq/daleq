@@ -5,7 +5,6 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -128,8 +127,16 @@ public class FactExtractor   {
 
         String dbName = "database.souffle";
         Files.write(dbDir.resolve(dbName),dbMain);
-        LOG.info("databse definition written to: {}",dbName);
+        LOG.info("database definition written to: {}",dbName);
 
+    }
+
+    static String getMethodReference(String className, String methodName,String descriptor) {
+        return className + "::" + methodName + descriptor;
+    }
+
+    static String getFieldReference(String className, String fieldName,String descriptor) {
+        return className + "::" + fieldName + descriptor;
     }
 
     static List<Fact> extract (byte[] bytes, boolean verify) throws VerificationException {
@@ -146,7 +153,7 @@ public class FactExtractor   {
 
         // fields
         classNode.fields.stream().sorted((FIELD_COMP)).forEach(fieldNode -> {
-            String fieldId = classNode.name + "::" +  fieldNode.name +  fieldNode.desc;
+            String fieldId = getFieldReference(classNode.name,fieldNode.name,fieldNode.desc);
             facts.add(new SimpleFact(Predicate.FIELD, fieldId,classNode.name, fieldNode.name,fieldNode.desc));
             facts.add(new SimpleFact(Predicate.FIELD_SIGNATURE, fieldId, fieldNode.signature));
         });
@@ -154,7 +161,7 @@ public class FactExtractor   {
         // methods
         classNode.methods.stream().sorted((METHOD_NODE_COMPARATOR)).forEach(methodNode -> {
             AtomicInteger instructionCounter = new AtomicInteger(0);
-            String methodId = classNode.name + "::" +  methodNode.name +  methodNode.desc;
+            String methodId = getMethodReference(classNode.name,methodNode.name,methodNode.desc);
             facts.add(new SimpleFact(Predicate.METHOD, methodId, classNode.name, methodNode.name, methodNode.desc));
             facts.add(new SimpleFact(Predicate.METHOD_SIGNATURE,methodId, methodNode.signature));
             //AtomicInteger line = new AtomicInteger(-1);
@@ -176,6 +183,12 @@ public class FactExtractor   {
                     facts.add(new SimpleFact(Predicate.INSTRUCTION, methodId, instCounter,instr));
                     if (instructionNode instanceof FieldInsnNode fInsNode) {
                         facts.add(new SimpleFact(Predicate.FIELD_INS, methodId, instCounter,fInsNode.owner,fInsNode.name, fInsNode.desc,instr));
+                    }
+                    else if (instructionNode instanceof MethodInsnNode mInsNode) {
+                        facts.add(new SimpleFact(Predicate.METHOD_INS, methodId, instCounter,mInsNode.owner,mInsNode.name, mInsNode.desc,instr));
+                    }
+                    else if (instructionNode instanceof TypeInsnNode tInsNode) {
+                        facts.add(new SimpleFact(Predicate.TYPE_INSN, methodId, instCounter, tInsNode.desc));
                     }
                     else  {
                         LOG.warn("TODO: create detailed fact for instruction {} , node type {}",instr,instructionNode.getClass());
