@@ -12,8 +12,6 @@ import static io.github.bineq.daleq.factextraction.Slot.*;
  */
 public enum Predicate {
 
-
-
     // class properties
     SUPERCLASS(symslot("name"),symslot("supername")),
     INTERFACE(symslot("name"),symslot("interface")),
@@ -31,7 +29,20 @@ public enum Predicate {
     INSTRUCTION(symslot("methodId"),numslot("instructioncounter"),symslot("instruction")),
     FIELD_INS(symslot("methodId"),numslot("instructioncounter"),symslot("owner"),symslot("name"),symslot("descriptor"),symslot("instruction")),
     METHOD_INS(symslot("methodId"),numslot("instructioncounter"),symslot("owner"),symslot("name"),symslot("descriptor"),symslot("instruction")),
-    TYPE_INSN(symslot("methodId"),numslot("instructioncounter"),symslot("descriptor"));
+    TYPE_INSN(symslot("methodId"),numslot("instructioncounter"),symslot("descriptor")),
+    DUP(symslot("methodId"),numslot("instructioncounter")),
+    ATHROW(symslot("methodId"),numslot("instructioncounter")),
+    JSR(symslot("methodId"),numslot("instructioncounter")),
+
+    ARETURN(symslot("methodId"),numslot("instructioncounter")),
+    DRETURN(symslot("methodId"),numslot("instructioncounter")),
+    FRETURN(symslot("methodId"),numslot("instructioncounter")),
+    IRETURN(symslot("methodId"),numslot("instructioncounter")),
+    LRETURN(symslot("methodId"),numslot("instructioncounter")),
+    RETURN(symslot("methodId"),numslot("instructioncounter")),
+
+    LDC(symslot("methodId"),numslot("instructioncounter"),symslot("value")),
+    VAR_INST(symslot("methodId"),numslot("instructioncounter"),numslot("variable")),
     ;
 
     public final Slot[] slots;

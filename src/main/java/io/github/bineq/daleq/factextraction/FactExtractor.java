@@ -2,6 +2,7 @@ package io.github.bineq.daleq.factextraction;
 
 import org.apache.commons.cli.*;
 import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -188,7 +189,42 @@ public class FactExtractor   {
                         facts.add(new SimpleFact(Predicate.METHOD_INS, methodId, instCounter,mInsNode.owner,mInsNode.name, mInsNode.desc,instr));
                     }
                     else if (instructionNode instanceof TypeInsnNode tInsNode) {
-                        facts.add(new SimpleFact(Predicate.TYPE_INSN, methodId, instCounter, tInsNode.desc));
+                        facts.add(new SimpleFact(Predicate.TYPE_INSN, methodId, instCounter,tInsNode.desc));
+                    }
+                    else if (instructionNode instanceof LdcInsnNode ldcInsnNode) {
+                        facts.add(new SimpleFact(Predicate.LDC, methodId, instCounter,ldcInsnNode.cst));
+                    }
+                    else if (instructionNode instanceof VarInsnNode varInsnNode) {
+                        facts.add(new SimpleFact(Predicate.VAR_INST, methodId, instCounter,varInsnNode.var));
+                    }
+                    // target not modelled, this will be done with facts representing CFG - TODO check for completness
+                    else if (instructionNode instanceof JumpInsnNode jumpInsnNode) {
+                        assert opCode==Opcodes.JSR;
+                        facts.add(new SimpleFact(Predicate.JSR, methodId, instCounter));
+                    }
+                    else if (opCode == Opcodes.DUP) {
+                        facts.add(new SimpleFact(Predicate.DUP, methodId, instCounter));
+                    }
+                    else if (opCode == Opcodes.ATHROW) {
+                        facts.add(new SimpleFact(Predicate.ATHROW, methodId, instCounter));
+                    }
+                    else if (opCode == Opcodes.ARETURN) {
+                        facts.add(new SimpleFact(Predicate.ARETURN, methodId, instCounter));
+                    }
+                    else if (opCode == Opcodes.DRETURN) {
+                        facts.add(new SimpleFact(Predicate.DRETURN, methodId, instCounter));
+                    }
+                    else if (opCode == Opcodes.FRETURN) {
+                        facts.add(new SimpleFact(Predicate.FRETURN, methodId, instCounter));
+                    }
+                    else if (opCode == Opcodes.IRETURN) {
+                        facts.add(new SimpleFact(Predicate.IRETURN, methodId, instCounter));
+                    }
+                    else if (opCode == Opcodes.LRETURN) {
+                        facts.add(new SimpleFact(Predicate.LRETURN, methodId, instCounter));
+                    }
+                    else if (opCode == Opcodes.RETURN) {
+                        facts.add(new SimpleFact(Predicate.RETURN, methodId, instCounter));
                     }
                     else  {
                         LOG.warn("TODO: create detailed fact for instruction {} , node type {}",instr,instructionNode.getClass());
