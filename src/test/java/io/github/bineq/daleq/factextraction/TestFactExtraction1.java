@@ -4,7 +4,7 @@ import io.github.bineq.daleq.factextraction.javap.JavapClassModel;
 import io.github.bineq.daleq.factextraction.javap.JavapModelTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -30,14 +30,14 @@ public class TestFactExtraction1 {
         facts = FactExtractor.extract(byteCode,false); // verification will be done in dedicated test
     }
 
-    private Fact getFirstFact(Predicate predicate) {
+    private Fact getFirstFact(AdditionalPredicates predicate) {
         return facts.stream()
             .filter(fact -> fact.predicate().equals(predicate))
             .findFirst()
             .orElseThrow();
     }
 
-    private List<Fact> getFacts(Predicate predicate) {
+    private List<Fact> getFacts(AdditionalPredicates predicate) {
         return facts.stream()
             .filter(fact -> fact.predicate().equals(predicate))
             .collect(Collectors.toUnmodifiableList());
@@ -52,22 +52,22 @@ public class TestFactExtraction1 {
 
     @Test
     public void testSuperClass() {
-        Fact superClassFact = getFirstFact(Predicate.SUPERCLASS);
-        assertEquals(Predicate.SUPERCLASS,superClassFact.predicate());
+        Fact superClassFact = getFirstFact(AdditionalPredicates.SUPERCLASS);
+        assertEquals(AdditionalPredicates.SUPERCLASS,superClassFact.predicate());
         assertEquals("mypck/MyClass",superClassFact.values()[0]);
         assertEquals("java/lang/Object",superClassFact.values()[1]);
     }
 
     @Test
     public void testInterfaces() {
-        List<Fact> interfaceFacts = getFacts(Predicate.INTERFACE);
+        List<Fact> interfaceFacts = getFacts(AdditionalPredicates.INTERFACE);
         assertEquals(0,interfaceFacts.size());
     }
 
     @Test
     public void testClassVersion() {
-        Fact classVersionFact = getFirstFact(Predicate.VERSION);
-        assertEquals(Predicate.VERSION,classVersionFact.predicate());
+        Fact classVersionFact = getFirstFact(AdditionalPredicates.VERSION);
+        assertEquals(AdditionalPredicates.VERSION,classVersionFact.predicate());
         assertEquals("mypck/MyClass",classVersionFact.values()[0]);
         assertEquals(65,classVersionFact.values()[1]);
     }

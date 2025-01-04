@@ -1,0 +1,19 @@
+{
+  "name": "BIPUSH",
+  "opCode": 16,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER"
+    },
+    {
+      "name": "operand",
+      "type": "NUMBER"
+    }
+  ],
+  "asmNodeType": "org.objectweb.asm.tree.IntInsnNode"
+}

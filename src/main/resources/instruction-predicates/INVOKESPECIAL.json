@@ -1,0 +1,31 @@
+{
+  "name": "INVOKESPECIAL",
+  "opCode": 183,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER"
+    },
+    {
+      "name": "owner",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "name",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "desc",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "itf",
+      "type": "NUMBER"
+    }
+  ],
+  "asmNodeType": "org.objectweb.asm.tree.MethodInsnNode"
+}

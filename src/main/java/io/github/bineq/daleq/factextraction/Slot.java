@@ -7,10 +7,10 @@ package io.github.bineq.daleq.factextraction;
 public record Slot(String name,SlotType type) {
 
     static Slot symslot(String name) {
-        return new Slot(name, SlotType.symbol);
+        return new Slot(name, SlotType.SYMBOL);
     }
 
     static Slot numslot(String name) {
-        return new Slot(name, SlotType.number);
+        return new Slot(name, SlotType.NUMBER);
     }
 }

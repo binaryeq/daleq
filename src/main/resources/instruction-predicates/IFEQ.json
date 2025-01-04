@@ -1,0 +1,19 @@
+{
+  "name": "IFEQ",
+  "opCode": 153,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL"
+    }
+  ],
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}

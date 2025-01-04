@@ -1,0 +1,19 @@
+{
+  "name": "CHECKCAST",
+  "opCode": 192,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER"
+    },
+    {
+      "name": "desc",
+      "type": "SYMBOL"
+    }
+  ],
+  "asmNodeType": "org.objectweb.asm.tree.TypeInsnNode"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "ARETURN",
+  "opCode": 176,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER"
+    }
+  ],
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

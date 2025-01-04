@@ -1,0 +1,19 @@
+{
+  "name": "ALOAD",
+  "opCode": 25,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER"
+    },
+    {
+      "name": "var",
+      "type": "NUMBER"
+    }
+  ],
+  "asmNodeType": "org.objectweb.asm.tree.VarInsnNode"
+}

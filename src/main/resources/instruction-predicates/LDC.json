@@ -1,0 +1,19 @@
+{
+  "name": "LDC",
+  "opCode": 18,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER"
+    },
+    {
+      "name": "cst",
+      "type": "SYMBOL"
+    }
+  ],
+  "asmNodeType": "org.objectweb.asm.tree.LdcInsnNode"
+}

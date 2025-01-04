@@ -1,0 +1,15 @@
+{
+  "name": "ICONST_4",
+  "opCode": 7,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER"
+    }
+  ],
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

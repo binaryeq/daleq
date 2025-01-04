@@ -5,5 +5,5 @@ package io.github.bineq.daleq.factextraction;
  * @author jens dietrich
  */
 public enum SlotType {
-    symbol, number
+    SYMBOL, NUMBER, UNSIGNED, FLOAT
 }
