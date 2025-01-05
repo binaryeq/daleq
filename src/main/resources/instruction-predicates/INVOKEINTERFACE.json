@@ -4,28 +4,35 @@
   "slots": [
     {
       "name": "methodid",
-      "type": "SYMBOL"
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
     },
     {
       "name": "instructioncounter",
-      "type": "NUMBER"
+      "type": "NUMBER",
+      "jtype": "int"
     },
     {
       "name": "owner",
-      "type": "SYMBOL"
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
     },
     {
       "name": "name",
-      "type": "SYMBOL"
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
     },
     {
       "name": "desc",
-      "type": "SYMBOL"
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
     },
     {
       "name": "itf",
-      "type": "NUMBER"
+      "type": "NUMBER",
+      "jtype": "boolean"
     }
   ],
+  "id": "95e7afd5-7480-4c5a-8a25-4510b954fbdd",
   "asmNodeType": "org.objectweb.asm.tree.MethodInsnNode"
 }

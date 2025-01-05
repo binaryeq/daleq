@@ -4,16 +4,20 @@
   "slots": [
     {
       "name": "methodid",
-      "type": "SYMBOL"
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
     },
     {
       "name": "instructioncounter",
-      "type": "NUMBER"
+      "type": "NUMBER",
+      "jtype": "int"
     },
     {
       "name": "var",
-      "type": "NUMBER"
+      "type": "NUMBER",
+      "jtype": "int"
     }
   ],
+  "id": "64c7428d-a625-4271-b4d7-83fc70962062",
   "asmNodeType": "org.objectweb.asm.tree.VarInsnNode"
 }

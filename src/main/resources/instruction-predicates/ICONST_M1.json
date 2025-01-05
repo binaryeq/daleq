@@ -1,6 +1,6 @@
 {
-  "name": "POP",
-  "opCode": 87,
+  "name": "ICONST_M1",
+  "opCode": 2,
   "slots": [
     {
       "name": "methodid",
@@ -13,6 +13,6 @@
       "jtype": "int"
     }
   ],
-  "id": "58e386db-6577-4500-a7a5-836c2a285e49",
+  "id": "cc0f501a-22ff-4a38-8aba-8d508902154b",
   "asmNodeType": "org.objectweb.asm.tree.InsnNode"
 }

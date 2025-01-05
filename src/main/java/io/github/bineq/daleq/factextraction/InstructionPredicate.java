@@ -15,18 +15,20 @@ public class InstructionPredicate implements Predicate {
     private String name = null;
     private int opCode = -1;
     private Slot[] slots = null;
-
+    private String id = null;
     private String asmNodeType = null;  // for provenance of this has been inferred
-
-    @Override
-    public String asSouffleFactFileName() {
-        return "";
-    }
-
 
     @Override
     public String getName() {
         return name;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public int getOpCode() {
@@ -63,12 +65,12 @@ public class InstructionPredicate implements Predicate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InstructionPredicate predicate = (InstructionPredicate) o;
-        return opCode == predicate.opCode && Objects.equals(name, predicate.name) && Objects.deepEquals(slots, predicate.slots);
+        return opCode == predicate.opCode && Objects.equals(name, predicate.name) && Objects.deepEquals(slots, predicate.slots) && Objects.equals(id, predicate.id) && Objects.equals(asmNodeType, predicate.asmNodeType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, opCode, Arrays.hashCode(slots));
+        return Objects.hash(name, opCode, Arrays.hashCode(slots), id, asmNodeType);
     }
 
     public void toJson(File f) throws IOException {

@@ -247,12 +247,13 @@ public class FactExtractor   {
         if (predicate == null) {
             // use reflection to construct predicate
             predicate = new InstructionPredicate();
+            predicate.setId(createUUID());
             predicate.setOpCode(opCode);
             predicate.setName(instr);
             predicate.setAsmNodeType(aClass.getName());
             List<Slot> slots = new ArrayList<>();
-            slots.add(new Slot("methodid",SlotType.SYMBOL));
-            slots.add(new Slot("instructioncounter",SlotType.NUMBER));
+            slots.add(Slot.symslot("methodid"));
+            slots.add(Slot.numslot("instructioncounter",Integer.TYPE.getName()));
 
             // TODO add additional slots from inspecting asm node class for properties
             try {
@@ -262,6 +263,7 @@ public class FactExtractor   {
                     if (Modifier.isPublic(field.getModifiers())) {
                         Class cl = field.getType();
                         SlotType slotType = null;
+                        String jSlotType = cl.getName();
                         if (Number.class.isAssignableFrom(cl)) {
                             slotType = SlotType.NUMBER;
                         }
@@ -281,7 +283,7 @@ public class FactExtractor   {
                             LOG.warn("Mapping slot type {} to SYMBOL",cl);
                             slotType = SlotType.SYMBOL;
                         }
-                        Slot slot = new Slot(field.getName(), slotType);
+                        Slot slot = new Slot(field.getName(), slotType,jSlotType);
                         slots.add(slot);
                     }
                 }
@@ -312,4 +314,7 @@ public class FactExtractor   {
     }
 
 
+    private static String createUUID() {
+        return UUID.randomUUID().toString();
+    }
 }

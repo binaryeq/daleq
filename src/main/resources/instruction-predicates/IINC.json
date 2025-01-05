@@ -1,6 +1,6 @@
 {
-  "name": "ILOAD",
-  "opCode": 21,
+  "name": "IINC",
+  "opCode": 132,
   "slots": [
     {
       "name": "methodid",
@@ -13,11 +13,16 @@
       "jtype": "int"
     },
     {
+      "name": "incr",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
       "name": "var",
       "type": "NUMBER",
       "jtype": "int"
     }
   ],
-  "id": "5f3298a4-bd27-4981-9e51-9db70a187268",
-  "asmNodeType": "org.objectweb.asm.tree.VarInsnNode"
+  "id": "0e3d75db-d1c4-4094-8510-3cf1167a8ad2",
+  "asmNodeType": "org.objectweb.asm.tree.IincInsnNode"
 }
