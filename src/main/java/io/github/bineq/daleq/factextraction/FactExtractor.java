@@ -30,7 +30,7 @@ public class FactExtractor   {
     public static final Logger LOG = LoggerFactory.getLogger(FactExtractor.class);
     public static final String INFERRED_INSTRUCTION_PREDICATE_SPECS = "inferred-instruction-predicates";
 
-    static Map<Integer,InstructionPredicate> REGISTRY = new HashMap<>();
+    public static final Map<Integer,InstructionPredicate> REGISTRY = new HashMap<>();
 
     static {
         LOG.info("Loading Instruction Predicate registry");

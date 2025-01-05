@@ -18,7 +18,6 @@ public interface InstructionPredicateFactFactory<NT extends AbstractInsnNode> {
 
     InstructionPredicate getPredicate();
 
-    String createFact(NT node);
-
+    String createFact(NT node, String methodRef,int instructionCounter);
 
 }
