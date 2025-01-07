@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class InstructionFactFactoryCodeGenerator {
 
@@ -19,6 +18,10 @@ public class InstructionFactFactoryCodeGenerator {
     public static final Logger LOG = LoggerFactory.getLogger(InstructionFactFactoryCodeGenerator.class);
     public static final String FACTORY_INTERFACE = InstructionPredicateFactFactory.class.getName();
     public static final String INSTRUCTION_PREDICATE = InstructionPredicate.class.getName();
+    public static final String SIMPLE_FACT = SimpleFact.class.getName();
+    public static final String FACT = Fact.class.getName();
+    public static final String FACT_EXTRACTOR = FactExtractor.class.getName();
+    public static final String INSTRUCTION_PREDICATE_REGISTRY = FACT_EXTRACTOR + ".REGISTRY";
 
     // for ISO 8601 timestamps
     public static final TimeZone TIME_ZONE = TimeZone.getTimeZone("UTC");
@@ -56,6 +59,7 @@ public class InstructionFactFactoryCodeGenerator {
             lines.add("package " + PACKAGE_NAME + ";");
             lines.add("");
             lines.add("import javax.annotation.processing.Generated;");
+            lines.add("import " + FACT + ';');
             lines.add("");
             lines.add("@Generated(value=\""+ InstructionFactFactoryCodeGenerator.class.getName() + "\", date= \"" + getTimestamp()+ "\",\n" + "      comments= \"factory generated from ASM tree API nodes\")");
             lines.add("public class " + className + " implements " + FACTORY_INTERFACE + "<" + predicate.getAsmNodeType() + "> {");
@@ -71,11 +75,11 @@ public class InstructionFactFactoryCodeGenerator {
             lines.add("    }");
 
             lines.add("");
-            lines.add("    @Override public String createFact(" +  predicate.getAsmNodeType() + " node,String methodRef,int instructionCounter) {");
-            String terms = IntStream.range(0,predicate.getSlots().length)
+            lines.add("    @Override public Fact createFact(" +  predicate.getAsmNodeType() + " node,String methodRef,int instructionCounter) {");
+            Object values = IntStream.range(0,predicate.getSlots().length)
                 .mapToObj(i -> generateCode(i,predicate.getSlots()[i]))
-                .collect(Collectors.joining(" + \'\\t\' + "));
-            lines.add("        return " + terms+ ";");
+                .collect(Collectors.joining(",","new Object[]{","}"));
+            lines.add("        return new " + SIMPLE_FACT + "(" + INSTRUCTION_PREDICATE_REGISTRY + ".get("+ entry.getKey() + ")," + values + ");");
             lines.add("    }");
 
             lines.add("");
@@ -98,10 +102,10 @@ public class InstructionFactFactoryCodeGenerator {
             return "methodRef";
         }
         else if (i==1) {
-            return "String.valueOf(instructionCounter)";
+            return "instructionCounter";
         }
         else {
-            return "String.valueOf(node." + s.name() + ')';  // TODO finetuning, support for particular types
+            return "node." + s.name();
         }
     }
 

@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.factextraction;
 
+import com.google.common.base.Preconditions;
 import org.apache.commons.cli.*;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.*;
@@ -31,9 +32,10 @@ public class FactExtractor   {
     public static final String INFERRED_INSTRUCTION_PREDICATE_SPECS = "inferred-instruction-predicates";
 
     public static final Map<Integer,InstructionPredicate> REGISTRY = new HashMap<>();
+    public static final Map<Integer,InstructionPredicateFactFactory> FACT_FACTORIES = new HashMap<>();
 
     static {
-        LOG.info("Loading Instruction Predicate registry");
+        LOG.info("Loading instruction predicate registry");
         URL folder = InstructionPredicate.class.getResource("/instruction-predicates");
         assert folder != null;
         File dir = new File(folder.getPath());
@@ -52,6 +54,22 @@ public class FactExtractor   {
                 LOG.error("Failed to load instruction predicate from " + file.getAbsolutePath(), x);
             }
         }
+        LOG.info(""+REGISTRY.size() + " instruction predicates loaded");
+
+        LOG.info("Loading instruction predicate fact factories");
+        ServiceLoader<InstructionPredicateFactFactory> factories = ServiceLoader.load(InstructionPredicateFactFactory.class);
+        for (InstructionPredicateFactFactory factory : factories) {
+            InstructionPredicate predicate = factory.getPredicate();
+            try {
+                factory.verify();
+            }
+            catch (Exception x) {
+                LOG.error("Failed to verify fact factory", x);
+                System.exit(1);
+            }
+            FACT_FACTORIES.put(predicate.getOpCode(), factory);
+        }
+        LOG.info(""+FACT_FACTORIES.size() + " instruction predicate fact factories loaded");
     }
 
     public static Option OPT_CLASSLOC = Option.builder()
@@ -132,16 +150,16 @@ public class FactExtractor   {
         // write db
 
         // sort facts by predicate
-        Map<AdditionalPredicates,List<Fact>> factsByPredicate = new HashMap<>();
+        Map<Predicate,List<Fact>> factsByPredicate = new HashMap<>();
         for (Fact fact:allFacts) {
-            AdditionalPredicates predicate = fact.predicate();
+            Predicate predicate = fact.predicate();
             List<Fact> facts = factsByPredicate.computeIfAbsent(predicate, k -> new ArrayList<>());
             facts.add(fact);
         }
 
         // lines of predicate definitions and imports
         List<String> dbMain = new ArrayList<>();
-        for (AdditionalPredicates predicate : factsByPredicate.keySet()) {
+        for (Predicate predicate : factsByPredicate.keySet()) {
             dbMain.add(predicate.asSouffleDecl());
             dbMain.add(predicate.asSouffleFactImportStatement());
             dbMain.add("");
@@ -239,7 +257,9 @@ public class FactExtractor   {
     }
 
     private static Fact createFact(InstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode) {
-        return null;
+        InstructionPredicateFactFactory factory = FACT_FACTORIES.get(predicate.getOpCode());
+        Preconditions.checkNotNull(factory,"no fact factory found for instruction " + predicate.getName());
+        return factory.createFact(instructionNode,methodId,instCounter);
     }
 
     private static InstructionPredicate findPredicate(int opCode, String instr, Class<? extends AbstractInsnNode> aClass) {

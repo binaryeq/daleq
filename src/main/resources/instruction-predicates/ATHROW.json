@@ -1,0 +1,18 @@
+{
+  "name": "ATHROW",
+  "opCode": 191,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "5f513677-38e9-44cb-8c53-cde1ac926f47",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

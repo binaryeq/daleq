@@ -7,7 +7,7 @@ import java.util.stream.Stream;
  * Represents a single fact.
  * @author jens dietrich
  */
-public record SimpleFact(AdditionalPredicates predicate, Object... values) implements Fact {
+public record SimpleFact(Predicate predicate, Object... values) implements Fact {
 
     @Override
     public String asSouffleFact() {
