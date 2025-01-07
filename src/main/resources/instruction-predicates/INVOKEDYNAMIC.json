@@ -1,0 +1,58 @@
+{
+  "name": "INVOKEDYNAMIC",
+  "opCode": 186,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "name",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "desc",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "bsmArgs",
+      "type": "SYMBOL",
+      "jtype": "java.lang.Object[]"
+    },
+    {
+      "name": "bsm.getOwner()",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "bsm.getName()",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "bsm.getDesc()",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "bsm.getTag()",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "bsm.isInterface()",
+      "type": "NUMBER",
+      "jtype": "boolean"
+    }
+  ],
+  "id": "1f1af445-7633-49a6-b910-b03542d41ff5",
+  "asmNodeType": "org.objectweb.asm.tree.InvokeDynamicInsnNode"
+}

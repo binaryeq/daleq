@@ -3,6 +3,7 @@ package io.github.bineq.daleq.factextraction;
 import com.google.common.base.Preconditions;
 import org.apache.commons.cli.*;
 import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.Handle;
 import org.objectweb.asm.tree.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -283,8 +284,19 @@ public class FactExtractor   {
                     if (Modifier.isPublic(field.getModifiers())) {
                         Class cl = field.getType();
                         SlotType slotType = null;
-                        String jSlotType = cl.getName();
-                        if (Number.class.isAssignableFrom(cl)) {
+                        String jSlotType = getClassName(cl);
+                        boolean addSingle = true;
+
+                        // deep access for properties of special types
+                        if (cl== Handle.class) {
+                            addSingle = false;
+                            slots.add(new Slot(field.getName()+".getOwner()", SlotType.SYMBOL, String.class.getName()));
+                            slots.add(new Slot(field.getName()+".getName()", SlotType.SYMBOL, String.class.getName()));
+                            slots.add(new Slot(field.getName()+".getDesc()", SlotType.SYMBOL, String.class.getName()));
+                            slots.add(new Slot(field.getName()+".getTag()", SlotType.NUMBER, Integer.TYPE.getName()));
+                            slots.add(new Slot(field.getName()+".isInterface()", SlotType.NUMBER, Boolean.TYPE.getName()));
+                        }
+                        else if (Number.class.isAssignableFrom(cl)) {
                             slotType = SlotType.NUMBER;
                         }
                         else if (Boolean.class.isAssignableFrom(cl)) {
@@ -299,12 +311,17 @@ public class FactExtractor   {
                         else if (cl == Double.TYPE || cl == Float.TYPE ) {
                             slotType = SlotType.FLOAT;
                         }
+                        else if (cl.isArray()) {
+                            slotType = SlotType.SYMBOL; // serialized as list
+                        }
                         else {
                             LOG.warn("Mapping slot type {} to SYMBOL",cl);
                             slotType = SlotType.SYMBOL;
                         }
-                        Slot slot = new Slot(field.getName(), slotType,jSlotType);
-                        slots.add(slot);
+                        if (addSingle) {
+                            Slot slot = new Slot(field.getName(), slotType, jSlotType);
+                            slots.add(slot);
+                        }
                     }
                 }
 
@@ -331,6 +348,14 @@ public class FactExtractor   {
             }
         }
         return predicate;
+    }
+
+    private static String getClassName(Class cl) {
+        if (cl.isArray()) {
+            return getClassName(cl.getComponentType())+"[]";
+        }
+        else return cl.getName();
+
     }
 
 
