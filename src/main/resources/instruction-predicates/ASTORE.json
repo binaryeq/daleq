@@ -1,0 +1,23 @@
+{
+  "name": "ASTORE",
+  "opCode": 58,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "var",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "21dfa0a5-93ce-4f8b-bc11-07fe83666879",
+  "asmNodeType": "org.objectweb.asm.tree.VarInsnNode"
+}

@@ -1,0 +1,18 @@
+{
+  "name": "ICONST_2",
+  "opCode": 5,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "7283cbf1-6539-46b8-bf09-50f1c5137e43",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

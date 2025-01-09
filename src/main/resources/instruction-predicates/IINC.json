@@ -1,0 +1,28 @@
+{
+  "name": "IINC",
+  "opCode": 132,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "incr",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "var",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "0e3d75db-d1c4-4094-8510-3cf1167a8ad2",
+  "asmNodeType": "org.objectweb.asm.tree.IincInsnNode"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "IFNONNULL",
+  "opCode": 199,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    }
+  ],
+  "id": "4c3d4405-1ee0-4f6c-9443-8d6ee696cafb",
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}

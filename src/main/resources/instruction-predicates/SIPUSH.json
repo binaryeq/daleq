@@ -1,0 +1,23 @@
+{
+  "name": "SIPUSH",
+  "opCode": 17,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "operand",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "7d02c1d9-1b44-4480-b3be-7aeda11017aa",
+  "asmNodeType": "org.objectweb.asm.tree.IntInsnNode"
+}

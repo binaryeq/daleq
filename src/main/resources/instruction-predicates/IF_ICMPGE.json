@@ -1,0 +1,23 @@
+{
+  "name": "IF_ICMPGE",
+  "opCode": 162,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    }
+  ],
+  "id": "57834388-5be6-45ac-b6af-123c463fb3fd",
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}

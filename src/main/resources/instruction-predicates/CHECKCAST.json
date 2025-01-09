@@ -1,0 +1,23 @@
+{
+  "name": "CHECKCAST",
+  "opCode": 192,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "desc",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    }
+  ],
+  "id": "4f7aaf0e-352e-40cc-aa08-f3b15a911ca1",
+  "asmNodeType": "org.objectweb.asm.tree.TypeInsnNode"
+}

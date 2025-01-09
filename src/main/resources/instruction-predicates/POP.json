@@ -1,0 +1,18 @@
+{
+  "name": "POP",
+  "opCode": 87,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "58e386db-6577-4500-a7a5-836c2a285e49",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

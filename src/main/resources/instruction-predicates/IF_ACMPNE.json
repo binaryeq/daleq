@@ -1,0 +1,23 @@
+{
+  "name": "IF_ACMPNE",
+  "opCode": 166,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    }
+  ],
+  "id": "569bf0ce-5950-4f3a-a801-f0d2626f599a",
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}

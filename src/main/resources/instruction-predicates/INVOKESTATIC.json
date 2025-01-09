@@ -1,0 +1,38 @@
+{
+  "name": "INVOKESTATIC",
+  "opCode": 184,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "owner",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "name",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "desc",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "itf",
+      "type": "NUMBER",
+      "jtype": "boolean"
+    }
+  ],
+  "id": "55abea99-d1e8-4821-bb5b-9bf877cef040",
+  "asmNodeType": "org.objectweb.asm.tree.MethodInsnNode"
+}

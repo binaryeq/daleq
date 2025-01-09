@@ -1,0 +1,18 @@
+{
+  "name": "AASTORE",
+  "opCode": 83,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "be02d324-3ae9-4b57-8f46-fbc2310a95e0",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

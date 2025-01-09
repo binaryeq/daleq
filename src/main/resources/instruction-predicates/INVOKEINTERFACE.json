@@ -1,0 +1,38 @@
+{
+  "name": "INVOKEINTERFACE",
+  "opCode": 185,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "owner",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "name",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "desc",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "itf",
+      "type": "NUMBER",
+      "jtype": "boolean"
+    }
+  ],
+  "id": "95e7afd5-7480-4c5a-8a25-4510b954fbdd",
+  "asmNodeType": "org.objectweb.asm.tree.MethodInsnNode"
+}

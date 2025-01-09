@@ -1,0 +1,18 @@
+{
+  "name": "ACONST_NULL",
+  "opCode": 1,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "d1c840ef-cb2b-4127-b090-e0e4a981f225",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}
