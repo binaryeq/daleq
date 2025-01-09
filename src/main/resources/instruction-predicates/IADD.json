@@ -1,0 +1,18 @@
+{
+  "name": "IADD",
+  "opCode": 96,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "56cb9811-ee14-41ae-8d30-ca26220b6896",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}
