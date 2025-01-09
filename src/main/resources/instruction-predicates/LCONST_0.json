@@ -1,6 +1,6 @@
 {
-  "name": "CALOAD",
-  "opCode": 52,
+  "name": "LCONST_0",
+  "opCode": 9,
   "slots": [
     {
       "name": "methodid",
@@ -13,6 +13,6 @@
       "jtype": "int"
     }
   ],
-  "id": "10fd1b7e-cde5-413d-864a-44a616f37668",
+  "id": "9eb162ad-6191-4407-b651-ebec8bbc3662",
   "asmNodeType": "org.objectweb.asm.tree.InsnNode"
 }

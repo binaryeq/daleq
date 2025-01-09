@@ -1,6 +1,6 @@
 {
-  "name": "IADD",
-  "opCode": 96,
+  "name": "LCONST_1",
+  "opCode": 10,
   "slots": [
     {
       "name": "methodid",
@@ -13,6 +13,6 @@
       "jtype": "int"
     }
   ],
-  "id": "56cb9811-ee14-41ae-8d30-ca26220b6896",
+  "id": "af77db8a-80f0-4243-860b-d055ebae1e0c",
   "asmNodeType": "org.objectweb.asm.tree.InsnNode"
 }

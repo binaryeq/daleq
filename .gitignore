@@ -2,3 +2,4 @@ db
 target
 inferred-instructions-fact-factories/io/github/bineq/daleq/factextraction/instruction_fact_factories
 inferred-instructions-fact-factories
+inferred-instruction-predicates
