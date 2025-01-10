@@ -1,0 +1,23 @@
+{
+  "name": "IFLT",
+  "opCode": 155,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    }
+  ],
+  "id": "95fb791b-e60b-4751-93e5-4be363e56152",
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}

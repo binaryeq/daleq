@@ -125,7 +125,7 @@ public class FactExtractor   {
         }
     }
 
-    static void extractAndExport (Path classPath, Path dbDir, boolean verify) throws Exception {
+    public static void extractAndExport (Path classPath, Path dbDir, boolean verify) throws Exception {
 
         LOG.info("extracting classes from {}", classPath);
         List<Path> classFiles = Utils.getClassFiles(classPath);
@@ -188,7 +188,7 @@ public class FactExtractor   {
         return className + "::" + fieldName + descriptor;
     }
 
-    static List<Fact> extract (byte[] bytes, boolean verify) throws VerificationException {
+    public static List<Fact> extract (byte[] bytes, boolean verify) throws VerificationException {
         ClassNode classNode = new ClassNode();
         new ClassReader(bytes).accept(classNode, 0);
         List<Fact> facts = new ArrayList<>();

@@ -1,0 +1,22 @@
+package io.github.bineq.daleq.factextraction.instruction_fact_factories;
+
+import javax.annotation.processing.Generated;
+import io.github.bineq.daleq.factextraction.Fact;
+
+@Generated(value="io.github.bineq.daleq.factextraction.InstructionFactFactoryCodeGenerator", date= "2025-01-10T02:47Z",
+      comments= "factory generated from ASM tree API nodes")
+public class InstructionFactFactory__IDIV implements io.github.bineq.daleq.factextraction.InstructionPredicateFactFactory<org.objectweb.asm.tree.InsnNode> {
+
+    @Override public String getVersion() {
+        return "32494de4-0e35-4b93-8981-5b093012e5da";
+    }
+
+    @Override public io.github.bineq.daleq.factextraction.InstructionPredicate getPredicate() {
+        return io.github.bineq.daleq.factextraction.FactExtractor.REGISTRY.get(108);
+    }
+
+    @Override public Fact createFact(org.objectweb.asm.tree.InsnNode node,String methodRef,int instructionCounter) {
+        return new io.github.bineq.daleq.factextraction.SimpleFact(io.github.bineq.daleq.factextraction.FactExtractor.REGISTRY.get(108),new Object[]{methodRef,instructionCounter});
+    }
+
+};

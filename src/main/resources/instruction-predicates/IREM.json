@@ -1,0 +1,18 @@
+{
+  "name": "IREM",
+  "opCode": 112,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "a084c2cd-1b53-4957-ba31-dacc578a9177",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

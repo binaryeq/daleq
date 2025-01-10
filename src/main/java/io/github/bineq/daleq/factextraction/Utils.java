@@ -31,7 +31,11 @@ public class Utils {
         Preconditions.checkArgument(Files.exists(jarFileOrFolder), "Jar file or folder does not exist");
         if (Files.isDirectory(jarFileOrFolder)) {
             return getClassFilesFromFolder(jarFileOrFolder);
-        } else if (jarFileOrFolder.getFileName().toString().endsWith(".jar") || jarFileOrFolder.getFileName().toString().endsWith(".zip")) {
+        }
+        else if (jarFileOrFolder.getFileName().toString().endsWith(".class")) {
+            return List.of(jarFileOrFolder);
+        }
+        else if (jarFileOrFolder.getFileName().toString().endsWith(".jar") || jarFileOrFolder.getFileName().toString().endsWith(".zip")) {
 
             File tmp = com.google.common.io.Files.createTempDir();
             // unzip
