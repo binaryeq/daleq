@@ -86,19 +86,24 @@ public class RunBenchmark {
         }
         Files.createDirectories(scenarioDBRoot);
 
-        Path edb1 = scenarioDBRoot.resolve("db1").resolve(EDB);
-        Files.createDirectories(edb1);
-        LOG.debug("DB folder created for class version1: {}",edb1);
+        Path factDB1 = scenarioDBRoot.resolve("db1").resolve(EDB);
+        Files.createDirectories(factDB1);
+        LOG.debug("Fact folder created for class version1: {}",factDB1);
+        Path edb1 = scenarioDBRoot.resolve("db1").resolve("db.souffle");
+        LOG.debug("EDB for class version1 will be written to: {}",factDB1);
 
-        Path edb2 = scenarioDBRoot.resolve("db2").resolve(EDB);
-        Files.createDirectories(edb2);
-        LOG.debug("DB folder created for class version2: {}",edb2);
+        Path factDB2 = scenarioDBRoot.resolve("db2").resolve(EDB);
+        Files.createDirectories(factDB2);
+        LOG.debug("DB folder created for class version2: {}",factDB2);
+        Path edb2 = scenarioDBRoot.resolve("db2").resolve("db.souffle");
+        LOG.debug("EDB for class version2 will be written to: {}",factDB2);
 
-        FactExtractor.extractAndExport(cl1,edb1,true);
-        FactExtractor.extractAndExport(cl2,edb2,true);
+
+        FactExtractor.extractAndExport(cl1,edb1,factDB1,true);
+        FactExtractor.extractAndExport(cl2,edb2,factDB2,true);
 
         LOG.info("Comparing EDBs");
-        boolean edbEqual = DBCompare.compareAll(edb1,edb2);
+        boolean edbEqual = DBCompare.compareAll(factDB1,factDB2);
         if (edbEqual) {
             LOG.info("EDBs are equal");
         }

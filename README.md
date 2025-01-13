@@ -7,11 +7,14 @@ datalog-based binary equivalence
 ```
 usage: java -cp <path-to-built-jar>
             io.github.bineq.daleq.factextraction.FactExtractor
- -cl <classes>    the location of compiled classes, a jar file or folder
- -db <database>   a folder where to create the database, the folder will
-                  be created if it does not exist
- -v               whether to verify the datalog facts against the schema,
-                  must be true or false, default is true
+ -cl <classes>   the location of compiled classes, a jar file or folder
+ -f <facts>      a folder where to create the extension database (input
+                 .facts files), the folder will be created if it does not
+                 exist
+ -s <souffle>    a file where to create the souffle program (.souffle
+                 file) containing imports and input predicate declarations
+ -v              whether to verify the datalog facts against the schema,
+                 must be true or false, default is true
 ```
 
 ## Assessing Souffle-Based Equivalence
