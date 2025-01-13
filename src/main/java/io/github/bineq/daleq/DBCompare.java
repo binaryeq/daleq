@@ -33,7 +33,7 @@ public class DBCompare {
         List<String> lines2 = Files.readAllLines(f2);
 
         if (lines1.size() != lines2.size()) {
-            LOG.warn("Files have different number of lines: {}, {}",f1,f2);
+            LOG.warn("Files have different NUMBER of lines: {}, {}",f1,f2);
             return false;
         }
 

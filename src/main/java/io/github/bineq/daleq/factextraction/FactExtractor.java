@@ -339,7 +339,7 @@ public class FactExtractor   {
             File dir = new File(INFERRED_INSTRUCTION_PREDICATE_SPECS);
             if (!dir.exists()) {
                 dir.mkdirs();
-                LOG.info("Created folder for inferred instructiin predicate specs: {}", dir.getAbsolutePath());
+                LOG.info("Created folder for inferred instruction predicate specs: {}", dir.getAbsolutePath());
             }
             File spec = new File(dir,instr+".json");
             try {

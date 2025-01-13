@@ -26,8 +26,10 @@ public interface Predicate {
     default String asSouffleDecl() {
         String pre =  ".decl " + this.getName() + '(';
         String post =  ")";
-        return Arrays.stream(getSlots()).map(slot -> slot.name() + ": " + slot.type().name()).collect(Collectors.joining(",",pre, post));
+        return Arrays.stream(getSlots()).map(
+            slot -> slot.name() + ": " + slot.type().souffleType()).collect(Collectors.joining(",",pre, post));
     }
+
 
     Slot[] getSlots();
 
