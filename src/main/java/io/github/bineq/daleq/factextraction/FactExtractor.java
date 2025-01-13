@@ -170,13 +170,15 @@ public class FactExtractor   {
                 .map(fact -> fact.asSouffleFact())
                 .collect(Collectors.toUnmodifiableList());
 
-            Files.write(dbDir.resolve(predicate.asSouffleFactFileNameWithExtension()), factRecords);
-            LOG.info("facts written to: {}",predicate.asSouffleFactFileNameWithExtension() );
+            Path factFile = dbDir.resolve(predicate.asSouffleFactFileNameWithExtension());
+            Files.write(factFile, factRecords);
+            LOG.info("facts written to: {}",factFile.toFile().getAbsolutePath());
         }
 
         String dbName = "database.souffle";
-        Files.write(dbDir.resolve(dbName),dbMain);
-        LOG.info("database definition written to: {}",dbName);
+        Path rulesFile = dbDir.resolve(dbName);
+        Files.write(rulesFile,dbMain);
+        LOG.info("database definition written to: {}",rulesFile.toFile().getAbsolutePath());
 
     }
 

@@ -8,4 +8,8 @@ package io.github.bineq.daleq.benchmark;
  * @param class2
  * @param category
  */
-public record Scenario(String name, String description, String class1, String class2,Category category) {}
+public record Scenario(String name, String description, String class1, String class2,Category category) {
+    String asDirName() {
+        return name().replace(' ', '_');
+    }
+}

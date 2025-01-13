@@ -2,10 +2,10 @@ package io.github.bineq.daleq.benchmark;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
+import io.github.bineq.daleq.DBCompare;
 import io.github.bineq.daleq.factextraction.FactExtractor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,10 +20,12 @@ import java.util.stream.Stream;
  */
 public class RunBenchmark {
 
-    public static final Logger LOG = LoggerFactory.getLogger(RunBenchmark.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RunBenchmark.class);
     public static final Path BENCHMARK_ROOT = Path.of(RunBenchmark.class.getResource("/benchmark").getPath());
     public static final String SPEC = "scenario.json";
     public static final Path DB_ROOT = Path.of(".benchmarks");
+    public static final String EDB = "EDB";
+    public static final String IDB = "IDB";
 
     public static void main(String[] args) throws IOException {
         Preconditions.checkState(Files.exists(BENCHMARK_ROOT));
@@ -78,23 +80,34 @@ public class RunBenchmark {
     private static boolean compareBytecodes4Equivalence(Scenario scenario,Path cl1, Path cl2) throws Exception {
 
         // create tmp folders for dbs
-        Path scenarioDBRoot = DB_ROOT.resolve(scenario.name());
+        Path scenarioDBRoot = DB_ROOT.resolve(scenario.asDirName());
         if (Files.exists(scenarioDBRoot)) {
             delDir(scenarioDBRoot);
         }
         Files.createDirectories(scenarioDBRoot);
 
-        Path db1 = scenarioDBRoot.resolve("db1");
-        Files.createDirectories(db1);
-        LOG.debug("DB folder created for class version1: {}",db1);
+        Path edb1 = scenarioDBRoot.resolve("db1").resolve(EDB);
+        Files.createDirectories(edb1);
+        LOG.debug("DB folder created for class version1: {}",edb1);
 
-        Path db2 = scenarioDBRoot.resolve("db2");
-        Files.createDirectories(db2);
-        LOG.debug("DB folder created for class version2: {}",db2);
+        Path edb2 = scenarioDBRoot.resolve("db2").resolve(EDB);
+        Files.createDirectories(edb2);
+        LOG.debug("DB folder created for class version2: {}",edb2);
 
-        FactExtractor.extractAndExport(cl1,db1,true);
-        FactExtractor.extractAndExport(cl2,db2,true);
+        FactExtractor.extractAndExport(cl1,edb1,true);
+        FactExtractor.extractAndExport(cl2,edb2,true);
 
+        LOG.info("Comparing EDBs");
+        boolean edbEqual = DBCompare.compareAll(edb1,edb2);
+        if (edbEqual) {
+            LOG.info("EDBs are equal");
+        }
+        else {
+            LOG.info("EDBs are different");
+        }
+
+        // TODO do: compare IDBs
+        LOG.info("TODO: Generate and comparie IDBs");
         return false;
     }
 
