@@ -4,3 +4,4 @@ inferred-instructions-fact-factories/io/github/bineq/daleq/factextraction/instru
 inferred-instructions-fact-factories
 inferred-instruction-predicates
 .benchmarks
+merged-facts-and-rules.souffle

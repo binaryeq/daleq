@@ -3,6 +3,7 @@ package io.github.bineq.daleq.benchmark;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import io.github.bineq.daleq.DBCompare;
+import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.factextraction.FactExtractor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,8 @@ public class RunBenchmark {
     public static final Path DB_ROOT = Path.of(".benchmarks");
     public static final String EDB = "EDB";
     public static final String IDB = "IDB";
+
+    public static final String RULES = "/rules/simple.souffle";
 
     public static void main(String[] args) throws IOException {
         Preconditions.checkState(Files.exists(BENCHMARK_ROOT));
@@ -79,6 +82,9 @@ public class RunBenchmark {
 
     private static boolean compareBytecodes4Equivalence(Scenario scenario,Path cl1, Path cl2) throws Exception {
 
+        Path rules = Path.of(RunBenchmark.class.getResource(RULES).getFile());
+        Preconditions.checkState(Files.exists(rules),"Rules not found: " + rules);
+
         // create tmp folders for dbs
         Path scenarioDBRoot = DB_ROOT.resolve(scenario.asDirName());
         if (Files.exists(scenarioDBRoot)) {
@@ -89,12 +95,18 @@ public class RunBenchmark {
         Path factDB1 = scenarioDBRoot.resolve("db1").resolve(EDB);
         Files.createDirectories(factDB1);
         LOG.debug("Fact folder created for class version1: {}",factDB1);
+        Path idb1 = scenarioDBRoot.resolve("db1").resolve(IDB);
+        Files.createDirectories(idb1);
+        LOG.debug("IDB folder created for class version2: {}",idb1);
         Path edb1 = scenarioDBRoot.resolve("db1").resolve("db.souffle");
         LOG.debug("EDB for class version1 will be written to: {}",factDB1);
 
         Path factDB2 = scenarioDBRoot.resolve("db2").resolve(EDB);
         Files.createDirectories(factDB2);
-        LOG.debug("DB folder created for class version2: {}",factDB2);
+        LOG.debug("EDB folder created for class version2: {}",factDB2);
+        Path idb2 = scenarioDBRoot.resolve("db2").resolve(IDB);
+        Files.createDirectories(idb2);
+        LOG.debug("IDB folder created for class version2: {}",idb2);
         Path edb2 = scenarioDBRoot.resolve("db2").resolve("db.souffle");
         LOG.debug("EDB for class version2 will be written to: {}",factDB2);
 
@@ -112,7 +124,10 @@ public class RunBenchmark {
         }
 
         // TODO do: compare IDBs
-        LOG.info("TODO: Generate and comparie IDBs");
+        Souffle.createIDB(edb1,rules,factDB1,idb1);
+        Souffle.createIDB(edb2,rules,factDB2,idb2);
+
+        LOG.info("TODO: compare IDBs");
         return false;
     }
 
