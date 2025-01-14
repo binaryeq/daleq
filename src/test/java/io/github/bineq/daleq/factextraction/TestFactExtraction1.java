@@ -1,47 +1,20 @@
 package io.github.bineq.daleq.factextraction;
 
-import io.github.bineq.daleq.factextraction.javap.JavapClassModel;
-import io.github.bineq.daleq.factextraction.javap.JavapModelTest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Test fact extraction, use javap as oracle.
+ * Test fact extraction.
  * @author jens dietrich
  */
-public class TestFactExtraction1 {
-    private JavapClassModel classModel;
-    private byte[] byteCode;
-    private List<Fact> facts = new ArrayList<>();
+public class TestFactExtraction1 extends AbstractFactExtractionTest {
 
-    @BeforeEach
-    public void setup() throws Exception {
-        classModel = JavapClassModel.parse("mypck.MyClass", Path.of(JavapModelTest.class.getResource("/basic/mypck/MyClass.javap").getFile()));
-        Path classFile = Path.of(JavapModelTest.class.getResource("/basic/mypck/MyClass.class").getFile());
-        byteCode = Files.readAllBytes(classFile);
-        facts = FactExtractor.extract(byteCode,false); // verification will be done in dedicated test
+    @Override
+    protected String getTestClass() {
+        return "/basic/mypck/MyClass.class";
     }
 
-    private Fact getFirstFact(AdditionalPredicates predicate) {
-        return facts.stream()
-            .filter(fact -> fact.predicate().equals(predicate))
-            .findFirst()
-            .orElseThrow();
-    }
-
-    private List<Fact> getFacts(AdditionalPredicates predicate) {
-        return facts.stream()
-            .filter(fact -> fact.predicate().equals(predicate))
-            .collect(Collectors.toUnmodifiableList());
-    }
 
     @Test
     public void testFactVerification() throws VerificationException {
@@ -71,4 +44,27 @@ public class TestFactExtraction1 {
         assertEquals("mypck/MyClass",classVersionFact.values()[0]);
         assertEquals(65,classVersionFact.values()[1]);
     }
+
+    @Test
+    public void testMethod1() {
+
+        String methodRef = FactExtractor.getMethodReference("mypck/MyClass", "<init>","()V");
+        List<Fact> instructionFacts = getInstructionFacts(methodRef);
+
+        assertEquals(3,instructionFacts.size());
+
+        assertEquals("ALOAD",instructionFacts.get(0).predicate().getName());
+        assertEquals("INVOKESPECIAL",instructionFacts.get(1).predicate().getName());
+        assertEquals("RETURN",instructionFacts.get(2).predicate().getName());
+
+        assertEquals(methodRef,instructionFacts.get(0).values()[0]);
+        assertEquals(methodRef,instructionFacts.get(1).values()[0]);
+        assertEquals(methodRef,instructionFacts.get(2).values()[0]);
+
+        assertEquals(1,instructionFacts.get(0).values()[1]);
+        assertEquals(2,instructionFacts.get(1).values()[1]);
+        assertEquals(3,instructionFacts.get(2).values()[1]);
+
+    }
+
 }

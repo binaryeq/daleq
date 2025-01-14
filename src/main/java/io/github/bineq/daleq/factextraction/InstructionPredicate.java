@@ -86,5 +86,8 @@ public class InstructionPredicate implements Predicate {
         }
     }
 
-
+    @Override
+    public boolean isInstructionPredicate() {
+        return true;
+    }
 }

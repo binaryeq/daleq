@@ -41,5 +41,10 @@ public enum AdditionalPredicates implements Predicate {
         return name();
     }
 
+    @Override
+    public boolean isInstructionPredicate() {
+        return false;
+    }
+
 
 }

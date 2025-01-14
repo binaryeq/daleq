@@ -195,7 +195,7 @@ public class FactExtractor   {
 
     }
 
-    static String getMethodReference(String className, String methodName,String descriptor) {
+    public static String getMethodReference(String className, String methodName,String descriptor) {
         return className + "::" + methodName + descriptor;
     }
 
