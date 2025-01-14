@@ -230,7 +230,32 @@ public class FactExtractor   {
             facts.add(new SimpleFact(AdditionalPredicates.METHOD_SIGNATURE,methodId, methodNode.signature));
             //AtomicInteger line = new AtomicInteger(-1);
 
-            methodNode.instructions.forEach(instructionNode -> {
+            // first iteration to resolve labels
+            LabelNode lastLabel = null;
+            final Map<LabelNode,Integer> labelMap = new HashMap<>();
+            for (AbstractInsnNode instructionNode:methodNode.instructions) {
+                // TODO: label nodes, frame nodes, line NUMBER nodes
+                int opCode = instructionNode.getOpcode();
+                String instr = InstructionTable.getInstruction(opCode);
+                if (instr == null) {
+                    LOG.warn("unknown instruction type found, opcode is {}", opCode);
+                    if (instructionNode instanceof LabelNode labelNode) {
+                        LOG.debug("label: " + labelNode);
+                        lastLabel = labelNode;
+                    }
+                }
+                else {
+                    int instCounter = instructionCounter.incrementAndGet();
+                    if (lastLabel != null) {
+                        labelMap.put(lastLabel, instCounter);
+                        lastLabel = null;
+                    }
+                }
+            }
+
+            // second iteration to build facts
+            instructionCounter.set(0); // reset !
+            for (AbstractInsnNode instructionNode:methodNode.instructions) {
                 // TODO deal with pseudo nodes
                 //  if (instructionNode instanceof LineNumberNode) {
                 //      line.set(((LineNumberNode) instructionNode).line);
@@ -260,7 +285,7 @@ public class FactExtractor   {
                         LOG.error("Fact generation has failed",x);
                     }
                 }
-            });
+            };
 
             // TODO annotations
 
