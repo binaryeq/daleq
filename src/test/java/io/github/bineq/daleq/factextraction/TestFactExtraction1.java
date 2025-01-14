@@ -2,7 +2,10 @@ package io.github.bineq.daleq.factextraction;
 
 import org.junit.jupiter.api.Test;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test fact extraction.
@@ -34,7 +37,12 @@ public class TestFactExtraction1 extends AbstractFactExtractionTest {
     @Test
     public void testInterfaces() {
         List<Fact> interfaceFacts = getFacts(AdditionalPredicates.INTERFACE);
-        assertEquals(0,interfaceFacts.size());
+        assertEquals(2,interfaceFacts.size());
+        List<String> interfaces = interfaceFacts.stream()
+            .map(fact -> fact.values()[1].toString())
+            .collect(Collectors.toUnmodifiableList());
+        assertTrue(interfaces.contains("java/io/Serializable"));
+        assertTrue(interfaces.contains("java/lang/Cloneable"));
     }
 
     @Test
