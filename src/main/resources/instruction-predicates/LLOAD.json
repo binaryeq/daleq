@@ -1,0 +1,23 @@
+{
+  "name": "LLOAD",
+  "opCode": 22,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "var",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "d6160ad6-8765-4812-95e2-398a51de0f76",
+  "asmNodeType": "org.objectweb.asm.tree.VarInsnNode"
+}

@@ -1,0 +1,18 @@
+{
+  "name": "I2C",
+  "opCode": 146,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "cb77a5e2-5155-483c-8d08-d0dbaf62e72c",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

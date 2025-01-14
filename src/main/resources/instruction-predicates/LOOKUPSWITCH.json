@@ -1,0 +1,33 @@
+{
+  "name": "LOOKUPSWITCH",
+  "opCode": 171,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "dflt",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    },
+    {
+      "name": "keys",
+      "type": "SYMBOL",
+      "jtype": "java.util.List"
+    },
+    {
+      "name": "labels",
+      "type": "SYMBOL",
+      "jtype": "java.util.List"
+    }
+  ],
+  "id": "cf81047e-c7fb-48b8-94b7-ff250a4791e8",
+  "asmNodeType": "org.objectweb.asm.tree.LookupSwitchInsnNode"
+}

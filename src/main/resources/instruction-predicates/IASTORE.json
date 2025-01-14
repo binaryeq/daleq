@@ -1,0 +1,18 @@
+{
+  "name": "IASTORE",
+  "opCode": 79,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "0c975835-de4a-4d1b-b524-12bf87e03d08",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

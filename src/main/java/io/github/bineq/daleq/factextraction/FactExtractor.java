@@ -250,10 +250,15 @@ public class FactExtractor   {
                     assert predicate != null;
 
                     // create fact
-                    Fact fact = createFact(predicate,instCounter,methodId,instructionNode);
-                    assert fact != null;
+                    try {
+                        Fact fact = createFact(predicate, instCounter, methodId, instructionNode);
+                        //assert fact != null;
 
-                    facts.add(fact);
+                        facts.add(fact);
+                    }
+                    catch (Exception x) {
+                        LOG.error("Fact generation has failed",x);
+                    }
                 }
             });
 

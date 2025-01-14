@@ -1,0 +1,23 @@
+{
+  "name": "NEWARRAY",
+  "opCode": 188,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "operand",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "96cb62fe-750c-4c6d-a44c-579cc96ead01",
+  "asmNodeType": "org.objectweb.asm.tree.IntInsnNode"
+}

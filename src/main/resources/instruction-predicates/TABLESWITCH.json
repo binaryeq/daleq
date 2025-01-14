@@ -1,0 +1,38 @@
+{
+  "name": "TABLESWITCH",
+  "opCode": 170,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "dflt",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    },
+    {
+      "name": "labels",
+      "type": "SYMBOL",
+      "jtype": "java.util.List"
+    },
+    {
+      "name": "max",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "min",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "34b7f7e7-c408-463f-9673-6be96d9291ff",
+  "asmNodeType": "org.objectweb.asm.tree.TableSwitchInsnNode"
+}

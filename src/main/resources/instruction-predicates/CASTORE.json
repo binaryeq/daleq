@@ -1,0 +1,18 @@
+{
+  "name": "CASTORE",
+  "opCode": 85,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "2197e7a2-a675-4ca9-a073-880a45762383",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

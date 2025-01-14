@@ -1,0 +1,23 @@
+{
+  "name": "IF_ICMPGT",
+  "opCode": 163,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    }
+  ],
+  "id": "b052f360-ac30-4294-b41a-af877e4e104d",
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}

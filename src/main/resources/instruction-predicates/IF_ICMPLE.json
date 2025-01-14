@@ -1,0 +1,23 @@
+{
+  "name": "IF_ICMPLE",
+  "opCode": 164,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    }
+  ],
+  "id": "67ae4661-2d3b-4e46-bde5-ab187ce4e6c1",
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}
