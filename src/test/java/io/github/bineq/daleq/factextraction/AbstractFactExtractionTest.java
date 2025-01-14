@@ -49,7 +49,7 @@ public abstract class AbstractFactExtractionTest {
         return facts.stream()
             .filter(fact -> fact.predicate().isInstructionPredicate())
             .filter(fact -> fact.values()[0].equals(methodRef))
-            .sorted(Comparator.comparing(fact -> fact.values()[1].toString()))
+            .sorted(Comparator.comparing(fact -> Integer.parseInt(fact.values()[1].toString())))
             .collect(Collectors.toList());
     }
 

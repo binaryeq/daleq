@@ -29,7 +29,7 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
     public void testSuperClass() {
         Fact superClassFact = getFirstFact(AdditionalPredicates.SUPERCLASS);
         assertEquals(AdditionalPredicates.SUPERCLASS,superClassFact.predicate());
-        assertEquals("mypck/MyClass",superClassFact.values()[0]);
+        assertEquals("mypck/ClassWithConditionals",superClassFact.values()[0]);
         assertEquals("java/lang/Object",superClassFact.values()[1]);
     }
 
@@ -43,14 +43,14 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
     public void testClassVersion() {
         Fact classVersionFact = getFirstFact(AdditionalPredicates.VERSION);
         assertEquals(AdditionalPredicates.VERSION,classVersionFact.predicate());
-        assertEquals("mypck/MyClass",classVersionFact.values()[0]);
+        assertEquals("mypck/ClassWithConditionals",classVersionFact.values()[0]);
         assertEquals(65,classVersionFact.values()[1]);
     }
 
     @Test
     public void testMethod1() {
 
-        String methodRef = FactExtractor.getMethodReference("mypck/MyClass", "<init>","()V");
+        String methodRef = FactExtractor.getMethodReference("mypck/ClassWithConditionals", "<init>","()V");
         List<Fact> instructionFacts = getInstructionFacts(methodRef);
 
         assertEquals(3,instructionFacts.size());
@@ -66,6 +66,37 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
         assertEquals(1,instructionFacts.get(0).values()[1]);
         assertEquals(2,instructionFacts.get(1).values()[1]);
         assertEquals(3,instructionFacts.get(2).values()[1]);
+
+    }
+
+    @Test
+    public void testMethod2() {
+
+        String methodRef = FactExtractor.getMethodReference("mypck/ClassWithConditionals", "foo","(II)I");
+        List<Fact> instructionFacts = getInstructionFacts(methodRef);
+
+        assertEquals(12,instructionFacts.size());
+
+        assertEquals("ILOAD",instructionFacts.get(0).predicate().getName());
+        assertEquals("ILOAD",instructionFacts.get(1).predicate().getName());
+        assertEquals("IF_ICMPGE",instructionFacts.get(2).predicate().getName());
+        assertEquals("ICONST_1",instructionFacts.get(3).predicate().getName());
+        assertEquals("IRETURN",instructionFacts.get(4).predicate().getName());
+        assertEquals("ILOAD",instructionFacts.get(5).predicate().getName());
+        assertEquals("ILOAD",instructionFacts.get(6).predicate().getName());
+        assertEquals("IF_ICMPLE",instructionFacts.get(7).predicate().getName());
+        assertEquals("ICONST_M1",instructionFacts.get(8).predicate().getName());
+        assertEquals("IRETURN",instructionFacts.get(9).predicate().getName());
+        assertEquals("ICONST_0",instructionFacts.get(10).predicate().getName());
+        assertEquals("IRETURN",instructionFacts.get(11).predicate().getName());
+
+//        assertEquals(methodRef,instructionFacts.get(0).values()[0]);
+//        assertEquals(methodRef,instructionFacts.get(1).values()[0]);
+//        assertEquals(methodRef,instructionFacts.get(2).values()[0]);
+//
+//        assertEquals(1,instructionFacts.get(0).values()[1]);
+//        assertEquals(2,instructionFacts.get(1).values()[1]);
+//        assertEquals(3,instructionFacts.get(2).values()[1]);
 
     }
 

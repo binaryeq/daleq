@@ -1,5 +1,23 @@
 Compiled from "ClassWithConditionals.java"
 public class mypck.ClassWithConditionals {
   public mypck.ClassWithConditionals();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
   public int foo(int, int);
+    Code:
+       0: iload_1
+       1: iload_2
+       2: if_icmpge     7
+       5: iconst_1
+       6: ireturn
+       7: iload_1
+       8: iload_2
+       9: if_icmple     14
+      12: iconst_m1
+      13: ireturn
+      14: iconst_0
+      15: ireturn
 }
