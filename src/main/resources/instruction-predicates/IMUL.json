@@ -1,6 +1,6 @@
 {
-  "name": "IADD",
-  "opCode": 96,
+  "name": "IMUL",
+  "opCode": 104,
   "slots": [
     {
       "name": "methodid",
@@ -13,6 +13,6 @@
       "jtype": "int"
     }
   ],
-  "id": "56cb9811-ee14-41ae-8d30-ca26220b6896",
+  "id": "6fbb0fc3-9a2c-4eb6-8290-fc00b133e972",
   "asmNodeType": "org.objectweb.asm.tree.InsnNode"
 }

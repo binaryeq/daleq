@@ -1,0 +1,7 @@
+{
+  "name": "different constantpool order 1",
+  "class1": "version1/Headers.class",
+  "class2": "version2/Headers.class",
+  "category": "CONSTANT_POOL_ORDER",
+  "description": "Two versions of `com.squareup.okhttp.Headers` in `okhttp-2.7.5.jar` built by the developer (Maven-Central) and by Google (GAOSS) respectivly. \nBoth versions differ in the constant pool orders used by the binaries. See `https://github.com/binaryeq/bineq-study-supplementary/tree/main/mvnc-vs-gaoss/example3` for more info."
+}

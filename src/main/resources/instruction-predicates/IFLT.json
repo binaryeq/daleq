@@ -1,6 +1,6 @@
 {
-  "name": "IF_ICMPLT",
-  "opCode": 161,
+  "name": "IFLT",
+  "opCode": 155,
   "slots": [
     {
       "name": "methodid",
@@ -18,6 +18,6 @@
       "jtype": "org.objectweb.asm.tree.LabelNode"
     }
   ],
-  "id": "34b06d87-f747-47dc-a857-985dbb4629fd",
+  "id": "95fb791b-e60b-4751-93e5-4be363e56152",
   "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
 }

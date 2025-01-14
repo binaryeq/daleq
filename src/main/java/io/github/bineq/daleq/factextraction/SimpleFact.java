@@ -32,4 +32,11 @@ public record SimpleFact(Predicate predicate, Object... values) implements Fact 
         }
         return String.valueOf(obj);
     }
+
+    @Override
+    public String toString() {
+        return IntStream.range(0, predicate.getSlots().length)
+            .mapToObj(i -> predicate.getSlots()[i].name() + "=" + this.values[i])
+            .collect(Collectors.joining(", ",this.predicate.getName()+"[","]"));
+    }
 }

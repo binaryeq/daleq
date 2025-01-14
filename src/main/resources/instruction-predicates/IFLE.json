@@ -1,0 +1,23 @@
+{
+  "name": "IFLE",
+  "opCode": 158,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    }
+  ],
+  "id": "17f80a11-013b-4996-b65c-b6db6107626f",
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}

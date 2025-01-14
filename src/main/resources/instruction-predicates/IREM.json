@@ -1,6 +1,6 @@
 {
-  "name": "CALOAD",
-  "opCode": 52,
+  "name": "IREM",
+  "opCode": 112,
   "slots": [
     {
       "name": "methodid",
@@ -13,6 +13,6 @@
       "jtype": "int"
     }
   ],
-  "id": "10fd1b7e-cde5-413d-864a-44a616f37668",
+  "id": "a084c2cd-1b53-4957-ba31-dacc578a9177",
   "asmNodeType": "org.objectweb.asm.tree.InsnNode"
 }

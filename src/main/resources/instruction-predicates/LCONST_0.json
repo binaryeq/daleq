@@ -1,0 +1,18 @@
+{
+  "name": "LCONST_0",
+  "opCode": 9,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "9eb162ad-6191-4407-b651-ebec8bbc3662",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

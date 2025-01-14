@@ -82,11 +82,19 @@ public class FactExtractor   {
         .build();
 
     public static Option OPT_DB = Option.builder()
-        .argName("database")
-        .option("db")
+        .argName("souffle")
+        .option("s")
         .hasArg()
         .required(true)
-        .desc("a folder where to create the database, the folder will be created if it does not exist")
+        .desc("a file where to create the souffle program (.souffle file) containing imports and input predicate declarations")
+        .build();
+
+    public static Option OPT_FACTS = Option.builder()
+        .argName("facts")
+        .option("f")
+        .hasArg()
+        .required(true)
+        .desc("a folder where to create the extension database (input .facts files), the folder will be created if it does not exist")
         .build();
 
     public static Option OPT_VERIFY = Option.builder()
@@ -102,20 +110,22 @@ public class FactExtractor   {
         Options options = new Options();
         options.addOption(OPT_CLASSLOC);
         options.addOption(OPT_DB);
+        options.addOption(OPT_FACTS);
         options.addOption(OPT_VERIFY);
         CommandLine cli = null;
         CommandLineParser parser = new DefaultParser();
 
         try {
             cli = parser.parse(options, args);
-            String dbFolderName = cli.getOptionValue(OPT_DB);
+            String edbDefFileName = cli.getOptionValue(OPT_DB);
+            String factsFolderName = cli.getOptionValue(OPT_FACTS);
             String classLocation = cli.getOptionValue(OPT_CLASSLOC);
             boolean verify = true;
             if (cli.hasOption(OPT_VERIFY)) {
                 verify = Boolean.valueOf(cli.getOptionValue(OPT_VERIFY));
             }
 
-            extractAndExport(Path.of(classLocation),Path.of(dbFolderName),verify);
+            extractAndExport(Path.of(classLocation),Path.of(edbDefFileName),Path.of(factsFolderName),verify);
 
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
@@ -125,7 +135,7 @@ public class FactExtractor   {
         }
     }
 
-    static void extractAndExport (Path classPath, Path dbDir, boolean verify) throws Exception {
+    public static void extractAndExport (Path classPath, Path dbDef, Path factDir, boolean verify) throws Exception {
 
         LOG.info("extracting classes from {}", classPath);
         List<Path> classFiles = Utils.getClassFiles(classPath);
@@ -143,9 +153,13 @@ public class FactExtractor   {
             allFacts.addAll(currentFacts);
         }
 
-        if (!Files.exists(dbDir)) {
-            LOG.info("creating folder: {}", dbDir);
-            Files.createDirectories(dbDir);
+        if (!Files.exists(factDir)) {
+            LOG.info("creating folder: {}", factDir);
+            Files.createDirectories(factDir);
+        }
+        if (!Files.exists(dbDef.getParent())) {
+            LOG.info("creating folder: {}", dbDef.getParent());
+            Files.createDirectories(dbDef.getParent());
         }
 
         // write db
@@ -170,17 +184,18 @@ public class FactExtractor   {
                 .map(fact -> fact.asSouffleFact())
                 .collect(Collectors.toUnmodifiableList());
 
-            Files.write(dbDir.resolve(predicate.asSouffleFactFileNameWithExtension()), factRecords);
-            LOG.info("facts written to: {}",predicate.asSouffleFactFileNameWithExtension() );
+            Path factFile = factDir.resolve(predicate.asSouffleFactFileNameWithExtension());
+            Files.write(factFile, factRecords);
+            LOG.info("facts written to: {}",factFile.toFile().getAbsolutePath());
         }
 
         String dbName = "database.souffle";
-        Files.write(dbDir.resolve(dbName),dbMain);
-        LOG.info("database definition written to: {}",dbName);
+        Files.write(dbDef,dbMain);
+        LOG.info("database definition written to: {}",dbDef.toFile().getAbsolutePath());
 
     }
 
-    static String getMethodReference(String className, String methodName,String descriptor) {
+    public static String getMethodReference(String className, String methodName,String descriptor) {
         return className + "::" + methodName + descriptor;
     }
 
@@ -188,7 +203,7 @@ public class FactExtractor   {
         return className + "::" + fieldName + descriptor;
     }
 
-    static List<Fact> extract (byte[] bytes, boolean verify) throws VerificationException {
+    public static List<Fact> extract (byte[] bytes, boolean verify) throws VerificationException {
         ClassNode classNode = new ClassNode();
         new ClassReader(bytes).accept(classNode, 0);
         List<Fact> facts = new ArrayList<>();
@@ -235,10 +250,15 @@ public class FactExtractor   {
                     assert predicate != null;
 
                     // create fact
-                    Fact fact = createFact(predicate,instCounter,methodId,instructionNode);
-                    assert fact != null;
+                    try {
+                        Fact fact = createFact(predicate, instCounter, methodId, instructionNode);
+                        //assert fact != null;
 
-                    facts.add(fact);
+                        facts.add(fact);
+                    }
+                    catch (Exception x) {
+                        LOG.error("Fact generation has failed",x);
+                    }
                 }
             });
 
@@ -337,7 +357,7 @@ public class FactExtractor   {
             File dir = new File(INFERRED_INSTRUCTION_PREDICATE_SPECS);
             if (!dir.exists()) {
                 dir.mkdirs();
-                LOG.info("Created folder for inferred instructiin predicate specs: {}", dir.getAbsolutePath());
+                LOG.info("Created folder for inferred instruction predicate specs: {}", dir.getAbsolutePath());
             }
             File spec = new File(dir,instr+".json");
             try {

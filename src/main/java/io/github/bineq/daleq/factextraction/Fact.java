@@ -20,7 +20,7 @@ public interface Fact {
             Slot slot = predicate.getSlots()[i];
             Object obj = values()[i];
 
-            if (slot.type()==SlotType.NUMBER && !(obj instanceof Number)) {
+            if (slot.type()==SlotType.NUMBER && !((obj instanceof Number) || (obj instanceof Boolean))) {
                 throw new VerificationException("Unexpected value type in value at index " + i + ", is : " + obj.getClass().getName() + ", expected subtypeof " + Number.class.getName());
             }
         }

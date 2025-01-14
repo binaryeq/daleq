@@ -1,0 +1,18 @@
+{
+  "name": "IALOAD",
+  "opCode": 46,
+  "slots": [
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "4821fd4d-26d2-4e9a-b187-b558a75cced4",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

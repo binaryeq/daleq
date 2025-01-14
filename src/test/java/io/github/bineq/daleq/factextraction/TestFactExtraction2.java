@@ -1,18 +1,20 @@
 package io.github.bineq.daleq.factextraction;
 
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test fact extraction.
  * @author jens dietrich
  */
-public class TestFactExtraction1 extends AbstractFactExtractionTest {
+public class TestFactExtraction2 extends AbstractFactExtractionTest {
 
     @Override
     protected String getTestClass() {
-        return "/basic/mypck/MyClass.class";
+        return "/conditional/mypck/ClassWithConditionals.class";
     }
 
 
@@ -65,48 +67,6 @@ public class TestFactExtraction1 extends AbstractFactExtractionTest {
         assertEquals(2,instructionFacts.get(1).values()[1]);
         assertEquals(3,instructionFacts.get(2).values()[1]);
 
-        // arguments
-        assertEquals("java/lang/Object",instructionFacts.get(1).values()[2]);
-        assertEquals("<init>",instructionFacts.get(1).values()[3]);
-        assertEquals("()V",instructionFacts.get(1).values()[4]);
-
-    }
-
-
-    @Test
-    public void testMethod2() {
-
-        String methodRef = FactExtractor.getMethodReference("mypck/MyClass", "main","([Ljava/lang/String;)V");
-        List<Fact> instructionFacts = getInstructionFacts(methodRef);
-
-        assertEquals(4,instructionFacts.size());
-
-        assertEquals("GETSTATIC",instructionFacts.get(0).predicate().getName());
-        assertEquals("LDC",instructionFacts.get(1).predicate().getName());
-        assertEquals("INVOKEVIRTUAL",instructionFacts.get(2).predicate().getName());
-        assertEquals("RETURN",instructionFacts.get(3).predicate().getName());
-
-        assertEquals(methodRef,instructionFacts.get(0).values()[0]);
-        assertEquals(methodRef,instructionFacts.get(1).values()[0]);
-        assertEquals(methodRef,instructionFacts.get(2).values()[0]);
-        assertEquals(methodRef,instructionFacts.get(3).values()[0]);
-
-        assertEquals(1,instructionFacts.get(0).values()[1]);
-        assertEquals(2,instructionFacts.get(1).values()[1]);
-        assertEquals(3,instructionFacts.get(2).values()[1]);
-        assertEquals(4,instructionFacts.get(3).values()[1]);
-
-        // arguments
-
-        assertEquals("java/lang/System",instructionFacts.get(0).values()[2]);
-        assertEquals("out",instructionFacts.get(0).values()[3]);
-        assertEquals("Ljava/io/PrintStream;",instructionFacts.get(0).values()[4]);
-
-        assertEquals("Hello World",instructionFacts.get(1).values()[2]);
-
-        assertEquals("java/io/PrintStream",instructionFacts.get(2).values()[2]);
-        assertEquals("println",instructionFacts.get(2).values()[3]);
-        assertEquals("(Ljava/lang/String;)V",instructionFacts.get(2).values()[4]);
     }
 
 }
