@@ -1,0 +1,5 @@
+Compiled from "ClassWithConditionals.java"
+public class mypck.ClassWithConditionals {
+  public mypck.ClassWithConditionals();
+  public int foo(int, int);
+}

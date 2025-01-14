@@ -5,3 +5,4 @@ inferred-instructions-fact-factories
 inferred-instruction-predicates
 .benchmarks
 merged-facts-and-rules.souffle
+trainingdata
