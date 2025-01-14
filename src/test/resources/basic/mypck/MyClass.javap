@@ -1,5 +1,5 @@
 Compiled from "MyClass.java"
-public class mypck.MyClass {
+public class mypck.MyClass implements java.io.Serializable,java.lang.Cloneable {
   public mypck.MyClass();
     Code:
        0: aload_0
