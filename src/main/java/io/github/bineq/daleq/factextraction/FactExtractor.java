@@ -230,7 +230,7 @@ public class FactExtractor   {
             facts.add(new SimpleFact(AdditionalPredicates.METHOD_SIGNATURE,methodId, methodNode.signature));
             //AtomicInteger line = new AtomicInteger(-1);
 
-            // first iteration to resolve labels
+            // first iteration to collect labels
             LabelNode lastLabel = null;
             final Map<LabelNode,Integer> labelMap = new HashMap<>();
             for (AbstractInsnNode instructionNode:methodNode.instructions) {
@@ -276,7 +276,7 @@ public class FactExtractor   {
 
                     // create fact
                     try {
-                        Fact fact = createFact(predicate, instCounter, methodId, instructionNode);
+                        Fact fact = createFact(predicate, instCounter, methodId, instructionNode,labelMap);
                         //assert fact != null;
 
                         facts.add(fact);
@@ -302,10 +302,10 @@ public class FactExtractor   {
         return facts;
     }
 
-    private static Fact createFact(InstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode) {
+    private static Fact createFact(InstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode,Map<LabelNode,Integer> labelMap) {
         InstructionPredicateFactFactory factory = FACT_FACTORIES.get(predicate.getOpCode());
         Preconditions.checkNotNull(factory,"no fact factory found for instruction " + predicate.getName());
-        return factory.createFact(instructionNode,methodId,instCounter);
+        return factory.createFact(instructionNode,methodId,instCounter,labelMap);
     }
 
     private static InstructionPredicate findPredicate(int opCode, String instr, Class<? extends AbstractInsnNode> aClass) {

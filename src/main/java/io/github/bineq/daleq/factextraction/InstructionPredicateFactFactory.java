@@ -1,8 +1,11 @@
 package io.github.bineq.daleq.factextraction;
 
 import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.LabelNode;
 
 import javax.annotation.processing.Generated;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -19,7 +22,7 @@ public interface InstructionPredicateFactFactory<NT extends AbstractInsnNode> {
 
     InstructionPredicate getPredicate();
 
-    Fact createFact(NT node, String methodRef,int instructionCounter);
+    Fact createFact(NT node, String methodRef, int instructionCounter, Map<LabelNode,Integer> labelMap);
 
     default void verify() throws VerificationException {
         if (!Objects.equals(getVersion(), getPredicate().getId())) {

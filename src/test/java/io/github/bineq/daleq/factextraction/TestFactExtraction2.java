@@ -3,11 +3,13 @@ package io.github.bineq.daleq.factextraction;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Test fact extraction.
+ * Test fact extraction for a class containing conditionals.
  * @author jens dietrich
  */
 public class TestFactExtraction2 extends AbstractFactExtractionTest {
@@ -90,14 +92,23 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
         assertEquals("ICONST_0",instructionFacts.get(10).predicate().getName());
         assertEquals("IRETURN",instructionFacts.get(11).predicate().getName());
 
-//        assertEquals(methodRef,instructionFacts.get(0).values()[0]);
-//        assertEquals(methodRef,instructionFacts.get(1).values()[0]);
-//        assertEquals(methodRef,instructionFacts.get(2).values()[0]);
-//
-//        assertEquals(1,instructionFacts.get(0).values()[1]);
-//        assertEquals(2,instructionFacts.get(1).values()[1]);
-//        assertEquals(3,instructionFacts.get(2).values()[1]);
 
+    }
+
+    @Test
+    public void testMethod2Jumps() {
+
+        String methodRef = FactExtractor.getMethodReference("mypck/ClassWithConditionals", "foo","(II)I");
+        List<Fact> instructionFacts = getInstructionFacts(methodRef);
+
+        Set<Fact> jumpFacts = instructionFacts.stream()
+            .filter(fact -> isJump(fact))
+            .collect(Collectors.toSet());
+
+        // inspect src/test/resources/conditional/mypck/ClassWithConditionals.javap for oracle
+        assertEquals(2,jumpFacts.size());
+        containsJump(jumpFacts,3,6);
+        containsJump(jumpFacts,8,11);
     }
 
 }
