@@ -2,12 +2,17 @@ package io.github.bineq.daleq.factextraction;
 
 import io.github.bineq.daleq.factextraction.javap.JavapModelTest;
 import org.junit.jupiter.api.BeforeEach;
+import org.objectweb.asm.tree.JumpInsnNode;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Abstract fact abstraction test.
@@ -66,4 +71,22 @@ public abstract class AbstractFactExtractionTest {
     }
 
 
+    protected void containsJump(Collection<Fact> facts, int from, int to) {
+        int count = (int)facts.stream()
+            .filter(f -> f.values()[1].equals(from))
+            .filter(f -> f.values()[2].equals(to))
+            .count();
+        assertEquals(1,count);
+    }
+
+    protected boolean isJump(Fact fact) {
+        Predicate predicate = fact.predicate();
+        if (predicate instanceof InstructionPredicate) {
+            InstructionPredicate instructionPredicate = (InstructionPredicate) predicate;
+            return instructionPredicate.getAsmNodeType().equals(JumpInsnNode.class.getName());
+        }
+        else {
+            return false;
+        }
+    }
 }

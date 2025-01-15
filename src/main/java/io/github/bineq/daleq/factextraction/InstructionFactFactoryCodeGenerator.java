@@ -59,6 +59,8 @@ public class InstructionFactFactoryCodeGenerator {
             lines.add("package " + PACKAGE_NAME + ";");
             lines.add("");
             lines.add("import javax.annotation.processing.Generated;");
+            lines.add("import java.util.Map;");
+            lines.add("import org.objectweb.asm.tree.LabelNode;");
             lines.add("import " + FACT + ';');
             lines.add("");
             lines.add("@Generated(value=\""+ InstructionFactFactoryCodeGenerator.class.getName() + "\", date= \"" + getTimestamp()+ "\",\n" + "      comments= \"factory generated from ASM tree API nodes\")");
@@ -75,7 +77,7 @@ public class InstructionFactFactoryCodeGenerator {
             lines.add("    }");
 
             lines.add("");
-            lines.add("    @Override public Fact createFact(" +  predicate.getAsmNodeType() + " node,String methodRef,int instructionCounter) {");
+            lines.add("    @Override public Fact createFact(" +  predicate.getAsmNodeType() + " node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {");
             Object values = IntStream.range(0,predicate.getSlots().length)
                 .mapToObj(i -> generateCode(i,predicate.getSlots()[i]))
                 .collect(Collectors.joining(",","new Object[]{","}"));
@@ -105,7 +107,12 @@ public class InstructionFactFactoryCodeGenerator {
             return "instructionCounter";
         }
         else {
-            return "node." + s.name();
+            if (s.jtype().equals("org.objectweb.asm.tree.LabelNode")) {
+                return "labelMap.get(node." + s.name()+")";
+            }
+            else {
+                return "node." + s.name();
+            }
         }
     }
 
