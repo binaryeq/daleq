@@ -56,8 +56,13 @@ subclass (y,x,cat(cat(cat(rid,"["),id),"]")) :- ruleid(rid), superclass(id,x,y,p
 
 ## Soundness
 
-Each fact must be used to compute the ODB, this can be checked
-by analysing the provenance values.
+Each EDB fact **should** be used to compute the ODB, this can be checked
+by analysing the provenance values. 
+
+TODO: expand discussion. 
+
+
+
 
 
 
