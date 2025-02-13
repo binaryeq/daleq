@@ -5,7 +5,7 @@ import java.util.Map;
 import org.objectweb.asm.tree.LabelNode;
 import io.github.bineq.daleq.factextraction.Fact;
 
-@Generated(value="io.github.bineq.daleq.factextraction.InstructionFactFactoryCodeGenerator", date= "2025-01-15T01:04Z",
+@Generated(value="io.github.bineq.daleq.factextraction.InstructionFactFactoryCodeGenerator", date= "2025-02-13T10:40Z",
       comments= "factory generated from ASM tree API nodes")
 public class InstructionFactFactory__CHECKCAST implements io.github.bineq.daleq.factextraction.InstructionPredicateFactFactory<org.objectweb.asm.tree.TypeInsnNode> {
 
@@ -17,8 +17,8 @@ public class InstructionFactFactory__CHECKCAST implements io.github.bineq.daleq.
         return io.github.bineq.daleq.factextraction.FactExtractor.REGISTRY.get(192);
     }
 
-    @Override public Fact createFact(org.objectweb.asm.tree.TypeInsnNode node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {
-        return new io.github.bineq.daleq.factextraction.SimpleFact(io.github.bineq.daleq.factextraction.FactExtractor.REGISTRY.get(192),new Object[]{methodRef,instructionCounter,node.desc});
+    @Override public Fact createFact(String factId,org.objectweb.asm.tree.TypeInsnNode node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {
+        return new io.github.bineq.daleq.factextraction.SimpleFact(io.github.bineq.daleq.factextraction.FactExtractor.REGISTRY.get(192),new Object[]{factId,methodRef,instructionCounter,node.desc});
     }
 
 };

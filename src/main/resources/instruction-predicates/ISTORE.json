@@ -3,6 +3,11 @@
   "opCode": 54,
   "slots": [
     {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
       "name": "methodid",
       "type": "SYMBOL",
       "jtype": "java.lang.String"

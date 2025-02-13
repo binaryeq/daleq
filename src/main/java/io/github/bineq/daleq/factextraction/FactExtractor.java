@@ -208,26 +208,26 @@ public class FactExtractor   {
         new ClassReader(bytes).accept(classNode, 0);
         List<Fact> facts = new ArrayList<>();
 
-        facts.add(new SimpleFact(AdditionalPredicates.SUPERCLASS, classNode.name, classNode.superName));
+        facts.add(new SimpleFact(AdditionalPredicates.SUPERCLASS, FactIdGenerator.nextId(AdditionalPredicates.SUPERCLASS),classNode.name, classNode.superName));
         for (String intrf : classNode.interfaces) {
-            facts.add(new SimpleFact(AdditionalPredicates.INTERFACE, classNode.name, intrf));
+            facts.add(new SimpleFact(AdditionalPredicates.INTERFACE, FactIdGenerator.nextId(AdditionalPredicates.INTERFACE),classNode.name, intrf));
         }
 
-        facts.add(new SimpleFact(AdditionalPredicates.VERSION,classNode.name,classNode.version));
+        facts.add(new SimpleFact(AdditionalPredicates.VERSION,FactIdGenerator.nextId(AdditionalPredicates.VERSION),classNode.name,classNode.version));
 
         // fields
         classNode.fields.stream().sorted((FIELD_COMP)).forEach(fieldNode -> {
             String fieldId = getFieldReference(classNode.name,fieldNode.name,fieldNode.desc);
-            facts.add(new SimpleFact(AdditionalPredicates.FIELD, fieldId,classNode.name, fieldNode.name,fieldNode.desc));
-            facts.add(new SimpleFact(AdditionalPredicates.FIELD_SIGNATURE, fieldId, fieldNode.signature));
+            facts.add(new SimpleFact(AdditionalPredicates.FIELD,FactIdGenerator.nextId(AdditionalPredicates.FIELD), fieldId,classNode.name, fieldNode.name,fieldNode.desc));
+            facts.add(new SimpleFact(AdditionalPredicates.FIELD_SIGNATURE, FactIdGenerator.nextId(AdditionalPredicates.FIELD_SIGNATURE), fieldId, fieldNode.signature));
         });
 
         // methods
         classNode.methods.stream().sorted((METHOD_NODE_COMPARATOR)).forEach(methodNode -> {
             AtomicInteger instructionCounter = new AtomicInteger(0);
             String methodId = getMethodReference(classNode.name,methodNode.name,methodNode.desc);
-            facts.add(new SimpleFact(AdditionalPredicates.METHOD, methodId, classNode.name, methodNode.name, methodNode.desc));
-            facts.add(new SimpleFact(AdditionalPredicates.METHOD_SIGNATURE,methodId, methodNode.signature));
+            facts.add(new SimpleFact(AdditionalPredicates.METHOD, FactIdGenerator.nextId(AdditionalPredicates.METHOD),methodId, classNode.name, methodNode.name, methodNode.desc));
+            facts.add(new SimpleFact(AdditionalPredicates.METHOD_SIGNATURE,FactIdGenerator.nextId(AdditionalPredicates.METHOD_SIGNATURE),methodId, methodNode.signature));
             //AtomicInteger line = new AtomicInteger(-1);
 
             // first iteration to collect labels
@@ -305,7 +305,8 @@ public class FactExtractor   {
     private static Fact createFact(InstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode,Map<LabelNode,Integer> labelMap) {
         InstructionPredicateFactFactory factory = FACT_FACTORIES.get(predicate.getOpCode());
         Preconditions.checkNotNull(factory,"no fact factory found for instruction " + predicate.getName());
-        return factory.createFact(instructionNode,methodId,instCounter,labelMap);
+        String factId = FactIdGenerator.nextId(predicate);
+        return factory.createFact(factId,instructionNode,methodId,instCounter,labelMap);
     }
 
     private static InstructionPredicate findPredicate(int opCode, String instr, Class<? extends AbstractInsnNode> aClass) {
@@ -318,6 +319,7 @@ public class FactExtractor   {
             predicate.setName(instr);
             predicate.setAsmNodeType(aClass.getName());
             List<Slot> slots = new ArrayList<>();
+            slots.add(Slot.symslot("factid"));
             slots.add(Slot.symslot("methodid"));
             slots.add(Slot.numslot("instructioncounter",Integer.TYPE.getName()));
 

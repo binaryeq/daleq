@@ -41,18 +41,15 @@ Rules have a rule id predicate in the body. The provenance value in the
 head is synthesised from the rule id and the ids of the premisses
 to encode a proof tree. 
 
-Example (pseudo-code):
+Example:
+
+[Souffle syntax](https://souffle-lang.github.io/arguments)
 
 ```
-subclass (y,x,rid+'['+id+']') :- ruleid(rid), superclass(id,x,y,p)
+SUBCLASS(cat("R1","[",id,"]"),x,y) :- SUPERCLASS(id,y,x).
 ```
 
-[Souffle syntax](https://souffle-lang.github.io/arguments):
-
-```
-subclass (y,x,cat(cat(cat(rid,"["),id),"]")) :- ruleid(rid), superclass(id,x,y,p)
-```
-
+Note the rule id (`R1`) in the head.
 
 ## Soundness
 
@@ -61,7 +58,33 @@ by analysing the provenance values.
 
 TODO: expand discussion. 
 
+## Example (from Listing 3 in TODO)
 
+The first slot is the unique fact id, the second slot the context (method containing the instruction).
+
+``` 
+// PROGRAM 1 EDB
+invokeinterface('id1','Foo::foo()V',42,'ch/qos/logback/access/spi/IAccessEvent','getClass','()java/lang/Class;');
+```
+
+``` 
+// PROGRAM 2 EDB
+invokevirtual('id1','Foo::foo()V',42,'java/lang/Object','getClass','()java/lang/Class;');
+```
+
+### Rules
+
+```
+// uses several helper predicates / facts that are defined by further rules
+// output predicates have the `_` prefix
+// the rule id is `rid1`
+
+_invokevirtual('rid1'+'['+id+']',context,instructioncounter,class,methodName,descriptor) :- 
+   invokevirtual(id,context,instructioncounter,class,methodName,descriptor').
+_invokeinterface('rid2'+'['+id1+','+id2+']',context,instructioncounter,class,methodName,descriptor) :- 
+   invokeinterface(id1,context,instructioncounter,class,methodName,descriptor'),
+   !rootmethod(id2,class,methodname,descriptor).   
+```
 
 
 

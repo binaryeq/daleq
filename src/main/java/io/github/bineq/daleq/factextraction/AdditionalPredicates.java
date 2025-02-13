@@ -12,17 +12,17 @@ import static io.github.bineq.daleq.factextraction.Slot.*;
 public enum AdditionalPredicates implements Predicate {
 
     // class properties
-    SUPERCLASS(symslot("name"),symslot("supername")),
-    INTERFACE(symslot("name"),symslot("interface")),
-    FIELD(symslot("id"),symslot("classname"),symslot("name"),symslot("descriptor")),
-    METHOD(symslot("id"),symslot("classname"),symslot("name"),symslot("descriptor")),
-    VERSION(symslot("classname"),symslot("version")),
+    SUPERCLASS(symslot("factId"),symslot("name"),symslot("supername")),
+    INTERFACE(symslot("factId"),symslot("name"),symslot("interface")),
+    FIELD(symslot("factId"),symslot("id"),symslot("classname"),symslot("name"),symslot("descriptor")),
+    METHOD(symslot("factId"),symslot("id"),symslot("classname"),symslot("name"),symslot("descriptor")),
+    VERSION(symslot("factId"),symslot("classname"),symslot("version")),
 
     // field properties
-    FIELD_SIGNATURE(symslot("fieldid"),symslot("signature")),
+    FIELD_SIGNATURE(symslot("factId"),symslot("fieldid"),symslot("signature")),
 
     // method properties
-    METHOD_SIGNATURE(symslot("methodid"),symslot("signature"))
+    METHOD_SIGNATURE(symslot("factId"),symslot("methodid"),symslot("signature"))
     ;
 
     public final Slot[] slots;
