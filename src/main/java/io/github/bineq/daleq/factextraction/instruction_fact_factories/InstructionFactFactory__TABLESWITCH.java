@@ -18,11 +18,7 @@ public class InstructionFactFactory__TABLESWITCH implements io.github.bineq.dale
     }
 
     @Override public Fact createFact(String factId,org.objectweb.asm.tree.TableSwitchInsnNode node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {
-<<<<<<< HEAD
         return new io.github.bineq.daleq.factextraction.SimpleFact(io.github.bineq.daleq.factextraction.PredicateRegistry.INSTRUCTION_PREDICATES.get(170),new Object[]{factId,methodRef,instructionCounter,labelMap.get(node.dflt),node.labels,node.max,node.min});
-=======
-        return new io.github.bineq.daleq.factextraction.SimpleFact(io.github.bineq.daleq.factextraction.FactExtractor.REGISTRY.get(170),new Object[]{factId,methodRef,instructionCounter,labelMap.get(node.dflt),node.labels,node.max,node.min});
->>>>>>> 53b61a67ecfe151d2d821f2a207ffaee6b9d2d98
     }
 
 };

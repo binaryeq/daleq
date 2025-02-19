@@ -309,11 +309,7 @@ public class FactExtractor   {
             predicate.setName(instr);
             predicate.setAsmNodeType(aClass.getName());
             List<Slot> slots = new ArrayList<>();
-<<<<<<< HEAD
             slots.add(Slot.symslot(Fact.ID_SLOT_NAME));
-=======
-            slots.add(Slot.symslot("factid"));
->>>>>>> 53b61a67ecfe151d2d821f2a207ffaee6b9d2d98
             slots.add(Slot.symslot("methodid"));
             slots.add(Slot.numslot("instructioncounter",Integer.TYPE.getName()));
 

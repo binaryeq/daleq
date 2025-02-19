@@ -18,11 +18,7 @@ public class InstructionFactFactory__IF_ACMPNE implements io.github.bineq.daleq.
     }
 
     @Override public Fact createFact(String factId,org.objectweb.asm.tree.JumpInsnNode node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {
-<<<<<<< HEAD
         return new io.github.bineq.daleq.factextraction.SimpleFact(io.github.bineq.daleq.factextraction.PredicateRegistry.INSTRUCTION_PREDICATES.get(166),new Object[]{factId,methodRef,instructionCounter,labelMap.get(node.label)});
-=======
-        return new io.github.bineq.daleq.factextraction.SimpleFact(io.github.bineq.daleq.factextraction.FactExtractor.REGISTRY.get(166),new Object[]{factId,methodRef,instructionCounter,labelMap.get(node.label)});
->>>>>>> 53b61a67ecfe151d2d821f2a207ffaee6b9d2d98
     }
 
 };

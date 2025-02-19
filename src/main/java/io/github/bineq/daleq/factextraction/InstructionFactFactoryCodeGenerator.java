@@ -77,11 +77,7 @@ public class InstructionFactFactoryCodeGenerator {
             lines.add("    }");
 
             lines.add("");
-<<<<<<< HEAD
             lines.add("    @Override public Fact createFact(String " + Fact.ID_SLOT_NAME + "," +  predicate.getAsmNodeType() + " node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {");
-=======
-            lines.add("    @Override public Fact createFact(String factId," +  predicate.getAsmNodeType() + " node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {");
->>>>>>> 53b61a67ecfe151d2d821f2a207ffaee6b9d2d98
             Object values = IntStream.range(0,predicate.getSlots().length)
                 .mapToObj(i -> generateCode(i,predicate.getSlots()[i]))
                 .collect(Collectors.joining(",","new Object[]{","}"));
