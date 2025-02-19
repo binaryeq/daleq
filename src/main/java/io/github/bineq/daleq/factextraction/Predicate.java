@@ -27,7 +27,7 @@ public interface Predicate {
         String pre =  ".decl " + this.getName() + '(';
         String post =  ")";
         return Arrays.stream(getSlots()).map(
-            slot -> slot.name() + ": " + slot.type().souffleType()).collect(Collectors.joining(",",pre, post));
+            slot -> slot.encodeName() + ": " + slot.type().souffleType()).collect(Collectors.joining(",",pre, post));
     }
 
 

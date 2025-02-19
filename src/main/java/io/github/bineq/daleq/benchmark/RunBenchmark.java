@@ -28,7 +28,7 @@ public class RunBenchmark {
     public static final String EDB = "EDB";
     public static final String IDB = "IDB";
 
-    public static final String RULES = "/rules/simple.souffle";
+    public static final String RULES = "/rules/vanilla.souffle";
 
     public static void main(String[] args) throws IOException {
         Preconditions.checkState(Files.exists(BENCHMARK_ROOT));

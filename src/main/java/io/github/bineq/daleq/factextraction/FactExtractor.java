@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -32,30 +31,9 @@ public class FactExtractor   {
     public static final Logger LOG = LoggerFactory.getLogger(FactExtractor.class);
     public static final String INFERRED_INSTRUCTION_PREDICATE_SPECS = "inferred-instruction-predicates";
 
-    public static final Map<Integer,InstructionPredicate> REGISTRY = new HashMap<>();
     public static final Map<Integer,InstructionPredicateFactFactory> FACT_FACTORIES = new HashMap<>();
 
     static {
-        LOG.info("Loading instruction predicate registry");
-        URL folder = InstructionPredicate.class.getResource("/instruction-predicates");
-        assert folder != null;
-        File dir = new File(folder.getPath());
-        File[] files = dir.listFiles(f -> f.getName().endsWith(".json"));
-        LOG.info("{} instruction predicates found", files.length);
-        for (File file : files) {
-            try {
-                InstructionPredicate predicate = InstructionPredicate.fromJson(file);
-                int opCode = predicate.getOpCode();
-                if (REGISTRY.containsKey(opCode)) {
-                    LOG.warn("Duplicate instruction predicate for op code {}", opCode);
-                }
-                REGISTRY.put(opCode, predicate);
-            }
-            catch (Exception x) {
-                LOG.error("Failed to load instruction predicate from " + file.getAbsolutePath(), x);
-            }
-        }
-        LOG.info(""+REGISTRY.size() + " instruction predicates loaded");
 
         LOG.info("Loading instruction predicate fact factories");
         ServiceLoader<InstructionPredicateFactFactory> factories = ServiceLoader.load(InstructionPredicateFactFactory.class);
@@ -173,20 +151,32 @@ public class FactExtractor   {
         }
 
         // lines of predicate definitions and imports
-        List<String> dbMain = new ArrayList<>();
-        for (Predicate predicate : factsByPredicate.keySet()) {
-            dbMain.add(predicate.asSouffleDecl());
-            dbMain.add(predicate.asSouffleFactImportStatement());
-            dbMain.add("");
 
+        // generate fact files
+        for (Predicate predicate : PredicateRegistry.ALL_PREDICATES) {
             List<Fact> facts = factsByPredicate.get(predicate);
+            if (facts == null) {
+                facts = new ArrayList<>();
+            }
             List<String> factRecords = facts.stream()
                 .map(fact -> fact.asSouffleFact())
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toList());
+
+            // comments makes sure that the fact file is written even if there are no facts
+            // factRecords.add(0,"// facts for predicate " + predicate.getName());
 
             Path factFile = factDir.resolve(predicate.asSouffleFactFileNameWithExtension());
             Files.write(factFile, factRecords);
             LOG.info("facts written to: {}",factFile.toFile().getAbsolutePath());
+        }
+
+        // generate imports for the predicates where we have facts
+        // generate declarations for all predicates available (as they are used in rule sets)
+        List<String> dbMain = new ArrayList<>();
+        for (Predicate predicate : PredicateRegistry.ALL_PREDICATES) {
+            dbMain.add(predicate.asSouffleDecl());
+            dbMain.add(predicate.asSouffleFactImportStatement());
+            dbMain.add("");
         }
 
         String dbName = "database.souffle";
@@ -310,7 +300,7 @@ public class FactExtractor   {
     }
 
     private static InstructionPredicate findPredicate(int opCode, String instr, Class<? extends AbstractInsnNode> aClass) {
-        InstructionPredicate predicate = REGISTRY.get(opCode);
+        InstructionPredicate predicate = PredicateRegistry.INSTRUCTION_PREDICATES.get(opCode);
         if (predicate == null) {
             // use reflection to construct predicate
             predicate = new InstructionPredicate();
@@ -319,11 +309,14 @@ public class FactExtractor   {
             predicate.setName(instr);
             predicate.setAsmNodeType(aClass.getName());
             List<Slot> slots = new ArrayList<>();
+<<<<<<< HEAD
+            slots.add(Slot.symslot(Fact.ID_SLOT_NAME));
+=======
             slots.add(Slot.symslot("factid"));
+>>>>>>> 53b61a67ecfe151d2d821f2a207ffaee6b9d2d98
             slots.add(Slot.symslot("methodid"));
             slots.add(Slot.numslot("instructioncounter",Integer.TYPE.getName()));
 
-            // TODO add additional slots from inspecting asm node class for properties
             try {
                 Field[] fields = aClass.getDeclaredFields();
                 Arrays.sort(fields,Comparator.comparing(Field::getName));
@@ -404,7 +397,6 @@ public class FactExtractor   {
         else return cl.getName();
 
     }
-
 
     private static String createUUID() {
         return UUID.randomUUID().toString();
