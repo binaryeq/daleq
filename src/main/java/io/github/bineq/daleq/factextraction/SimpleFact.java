@@ -18,19 +18,39 @@ public record SimpleFact(Predicate predicate, Object... values) implements Fact 
         return IntStream.range(0, predicate.getSlots().length)
             .mapToObj(i -> {
                 Slot slot = predicate.getSlots()[i];
-                return stringify(values[i],slot);
+                //  do we need to sanitise string literals for CSV ?
+                boolean sanitizeValue4CSV = predicate.getName().equals("LDC") && slot.name().equals("cst");
+                return stringify(values[i],slot,sanitizeValue4CSV);
             })
             .collect(Collectors.joining("\t"));
     }
 
-    private String stringify(Object obj,Slot slot) {
-        if (slot.jtype().endsWith("]")) {
+    private String stringify(Object obj,Slot slot,boolean sanitizeValue4CSV) {
+        if (sanitizeValue4CSV) {
+            return String.valueOf(obj)
+                .replace("\t","\\t")
+                .replace("\n","\\n")
+                .replace("\r","\\r");
+        }
+        else if (slot.jtype().endsWith("]")) {
             assert obj.getClass().isArray();
             Object[] array = (Object[]) obj;
             // nested arrays are not supported
             return Stream.of(array).map(v -> String.valueOf(v)).collect(Collectors.joining(","));
         }
-        return String.valueOf(obj);
+        else if (slot.jtype().equals("boolean")) {
+            if (obj==Boolean.TRUE) {
+                return "1";
+            }
+            else if (obj==Boolean.FALSE) {
+                return "0";
+            }
+            assert false;
+            return String.valueOf(obj);
+        }
+        else {
+            return String.valueOf(obj);
+        }
     }
 
     @Override

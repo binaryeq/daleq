@@ -1,6 +1,8 @@
 package io.github.bineq.daleq.factextraction;
 
 public interface Fact {
+
+    String ID_SLOT_NAME = "factid";
     Predicate predicate();
 
     Object[] values();

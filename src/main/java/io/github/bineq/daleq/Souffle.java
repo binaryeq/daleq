@@ -30,7 +30,7 @@ public class Souffle {
      */
     public static void createIDB(Path edb, Path rules, Path edbDir, Path idbDir) throws IOException {
         String souffleExe = System.getProperty(SOUFFLE);
-        Preconditions.checkNotNull(souffleExe, SOUFFLE + " property not set, must point to the souffle binary");
+        Preconditions.checkNotNull(souffleExe, SOUFFLE + " property not set, must point to the souffle binary, pass to JVM as follows: \"-DSOUFFLE=<dir>\"");
         Path souffle = Path.of(souffleExe);
         Preconditions.checkState(souffle.toFile().exists(), SOUFFLE + " does not exist");
 
@@ -62,7 +62,7 @@ public class Souffle {
         lines.addAll(Files.readAllLines(rules));
 
         Files.write(merged, lines);
-        LOG.info("Merged rules and facts into single souffle program {}", merged);
+        LOG.info("Merged rules and facts into single souffle program {}", merged.toFile());
 
         LOG.info("Starting souffle");
         new ProcessBuilder(souffle.toString(),"-F",edbDir.toString(),"-D",idbDir.toString(),merged.toString())

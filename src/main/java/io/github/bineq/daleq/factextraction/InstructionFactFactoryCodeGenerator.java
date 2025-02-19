@@ -21,7 +21,7 @@ public class InstructionFactFactoryCodeGenerator {
     public static final String SIMPLE_FACT = SimpleFact.class.getName();
     public static final String FACT = Fact.class.getName();
     public static final String FACT_EXTRACTOR = FactExtractor.class.getName();
-    public static final String INSTRUCTION_PREDICATE_REGISTRY = FACT_EXTRACTOR + ".REGISTRY";
+    public static final String INSTRUCTION_PREDICATE_REGISTRY = FACT_EXTRACTOR + ".INSTRUCTION_PREDICATES";
 
     // for ISO 8601 timestamps
     public static final TimeZone TIME_ZONE = TimeZone.getTimeZone("UTC");
@@ -32,7 +32,7 @@ public class InstructionFactFactoryCodeGenerator {
 
     public static void main(String[] args) throws IOException {
 
-        Map<Integer,InstructionPredicate> REGISTRY = FactExtractor.REGISTRY;
+        Map<Integer,InstructionPredicate> REGISTRY = PredicateRegistry.INSTRUCTION_PREDICATES;
         LOG.info("generating fact factories for {} instructions", REGISTRY.size());
 
         if (!Files.exists(DESTINATION)) {
@@ -73,11 +73,11 @@ public class InstructionFactFactoryCodeGenerator {
 
             lines.add("");
             lines.add("    @Override public " + INSTRUCTION_PREDICATE + " getPredicate() {");
-            lines.add("        return " + FactExtractor.class.getName() +".REGISTRY.get("+ opCode + ");");
+            lines.add("        return " + FactExtractor.class.getName() +".INSTRUCTION_PREDICATES.get("+ opCode + ");");
             lines.add("    }");
 
             lines.add("");
-            lines.add("    @Override public Fact createFact(" +  predicate.getAsmNodeType() + " node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {");
+            lines.add("    @Override public Fact createFact(String " + Fact.ID_SLOT_NAME + "," +  predicate.getAsmNodeType() + " node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {");
             Object values = IntStream.range(0,predicate.getSlots().length)
                 .mapToObj(i -> generateCode(i,predicate.getSlots()[i]))
                 .collect(Collectors.joining(",","new Object[]{","}"));
@@ -101,9 +101,15 @@ public class InstructionFactFactoryCodeGenerator {
 
     private static String generateCode(int i,Slot s) {
         if (i==0) {
+            assert s.name().equals("factid");
+            return "factId";
+        }
+        if (i==1) {
+            assert s.name().equals("methodref");
             return "methodRef";
         }
-        else if (i==1) {
+        else if (i==2) {
+            assert s.name().equals("instructioncounter");
             return "instructionCounter";
         }
         else {

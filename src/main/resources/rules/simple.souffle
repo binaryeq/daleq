@@ -1,3 +1,0 @@
-.decl SUBCLASS(name: symbol,supername: symbol)
-SUBCLASS(x,y) :- SUPERCLASS(y,x).
-.output SUBCLASS
