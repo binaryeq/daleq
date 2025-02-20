@@ -1,3 +1,0 @@
-.decl SUBCLASS(id:symbol,name: symbol,supername: symbol)
-SUBCLASS(cat("R1","[",id,"]"),x,y) :- SUPERCLASS(id,y,x).
-.output SUBCLASS
