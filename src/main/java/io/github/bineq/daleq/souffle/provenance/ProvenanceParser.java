@@ -35,8 +35,6 @@ public class ProvenanceParser {
             List<DerivationNode> lastChildren = null;
             DerivationNode node = null;
 
-
-
             @Override
             public void exitProof(ProofParser.ProofContext ctx) {
                 super.exitProof(ctx);
@@ -48,7 +46,6 @@ public class ProvenanceParser {
             public void enterChildren(ProofParser.ChildrenContext ctx) {
                 super.enterChildren(ctx);
                 stack.push(new ArrayList<>());
-                System.out.println("enter children: "+ctx.getText());
             }
 
             @Override
@@ -56,30 +53,12 @@ public class ProvenanceParser {
                 super.exitChildren(ctx);
                 assert stack.size() > 0;
                 assert stack.peek().size() > 0;
-                System.out.println("exit children: "+ctx.getText());
                 lastChildren = stack.pop();
             }
 
-//            @Override
-//            public void visitTerminal(TerminalNode node) {
-//                super.visitTerminal(node);
-//                String txt = node.getText();
-//                if (!(txt.equals("[") || txt.equals("]") || txt.equals(","))) {
-////                    if (children!=null) {
-////                        children.add(new DerivationNode(txt));
-////                    }
-////                    else {
-////                        label = txt;
-////                    }
-//                }
-//                System.out.println("visit terminal: "+ node.getText());
-//            }
-
             @Override
             public void enterNode(ProofParser.NodeContext ctx) {
-                super.enterNode(ctx);
-                System.out.println("enter node: "+ctx.getText());
-            }
+                super.enterNode(ctx);}
 
             @Override
             public void exitNode(ProofParser.NodeContext ctx) {
@@ -93,7 +72,6 @@ public class ProvenanceParser {
                 else {
                     children = List.of();
                 }
-
                 DerivationNode node = new DerivationNode(ctx.ID().getText(),children);
                 if (stack.isEmpty()) {
                     this.node = node;
@@ -101,11 +79,7 @@ public class ProvenanceParser {
                 else {
                     stack.peek().add(node);
                 }
-
-                System.out.println("exit node: "+ctx.getText());
             }
-
-
         };
 
         parser.addParseListener(listener);

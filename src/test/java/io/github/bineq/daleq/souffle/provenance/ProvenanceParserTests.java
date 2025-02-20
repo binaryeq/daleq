@@ -7,14 +7,22 @@ public class ProvenanceParserTests {
 
     @Test
     public void test1() {
-        DerivationNode root = ProvenanceParser.parse("R1");
+        String input = "R1";
+        DerivationNode root = ProvenanceParser.parse(input);
+
+        printDerivation(input,root);
+
         assertEquals("R1",root.id());
         assertEquals(0,root.children().size());
     }
 
     @Test
     public void test2() {
-        DerivationNode root = ProvenanceParser.parse("R1[F1,F2]");
+        String input = "R1[F1,F2]";
+        DerivationNode root = ProvenanceParser.parse(input);
+
+        printDerivation(input,root);
+
         assertEquals("R1",root.id());
         assertEquals(2,root.children().size());
         assertEquals("F1",root.children().get(0).id());
@@ -23,7 +31,11 @@ public class ProvenanceParserTests {
 
     @Test
     public void test3() {
-        DerivationNode root = ProvenanceParser.parse("R1[F1,R2[F2,F3,F4]]");
+        String input = "R1[F1,R2[F2,F3,F4]]";
+        DerivationNode root = ProvenanceParser.parse(input);
+
+        printDerivation(input,root);
+
         assertEquals("R1",root.id());
         assertEquals(2,root.children().size());
         assertEquals("F1",root.children().get(0).id());
@@ -38,7 +50,11 @@ public class ProvenanceParserTests {
 
     @Test
     public void test4() {
-        DerivationNode root = ProvenanceParser.parse("_R1_xX[_F1_xX,_F2_xX]");
+        String input = "_R1_xX[_F1_xX,_F2_xX]";
+        DerivationNode root = ProvenanceParser.parse(input);
+
+        printDerivation(input,root);
+
         assertEquals("_R1_xX",root.id());
         assertEquals(2,root.children().size());
         assertEquals("_F1_xX",root.children().get(0).id());
@@ -47,11 +63,22 @@ public class ProvenanceParserTests {
 
     @Test
     public void test5() {
+        String input = "R1 [ F1 ,  F2 ]";
         DerivationNode root = ProvenanceParser.parse("R1 [ F1 ,  F2 ] ");
+
+        printDerivation(input,root);
+
         assertEquals("R1",root.id());
         assertEquals(2,root.children().size());
         assertEquals("F1",root.children().get(0).id());
         assertEquals("F2",root.children().get(1).id());
+    }
+
+    private void printDerivation(String input, DerivationNode root) {
+        System.out.println("***************************");
+        System.out.println("derivation tree for \"" + input + "\":");
+        DerivationPrinter.toConsole(root);
+        System.out.println("***************************");
     }
 
 }
