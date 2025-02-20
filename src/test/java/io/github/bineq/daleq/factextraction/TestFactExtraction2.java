@@ -31,8 +31,8 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
     public void testSuperClass() {
         Fact superClassFact = getFirstFact(AdditionalPredicates.SUPERCLASS);
         assertEquals(AdditionalPredicates.SUPERCLASS,superClassFact.predicate());
-        assertEquals("mypck/ClassWithConditionals",superClassFact.values()[0]);
-        assertEquals("java/lang/Object",superClassFact.values()[1]);
+        assertEquals("mypck/ClassWithConditionals",superClassFact.values()[1]);
+        assertEquals("java/lang/Object",superClassFact.values()[2]);
     }
 
     @Test
@@ -45,8 +45,8 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
     public void testClassVersion() {
         Fact classVersionFact = getFirstFact(AdditionalPredicates.VERSION);
         assertEquals(AdditionalPredicates.VERSION,classVersionFact.predicate());
-        assertEquals("mypck/ClassWithConditionals",classVersionFact.values()[0]);
-        assertEquals(65,classVersionFact.values()[1]);
+        assertEquals("mypck/ClassWithConditionals",classVersionFact.values()[1]);
+        assertEquals(65,classVersionFact.values()[2]);
     }
 
     @Test
@@ -61,13 +61,13 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
         assertEquals("INVOKESPECIAL",instructionFacts.get(1).predicate().getName());
         assertEquals("RETURN",instructionFacts.get(2).predicate().getName());
 
-        assertEquals(methodRef,instructionFacts.get(0).values()[0]);
-        assertEquals(methodRef,instructionFacts.get(1).values()[0]);
-        assertEquals(methodRef,instructionFacts.get(2).values()[0]);
+        assertEquals(methodRef,instructionFacts.get(0).values()[1]);
+        assertEquals(methodRef,instructionFacts.get(1).values()[1]);
+        assertEquals(methodRef,instructionFacts.get(2).values()[1]);
 
-        assertEquals(1,instructionFacts.get(0).values()[1]);
-        assertEquals(2,instructionFacts.get(1).values()[1]);
-        assertEquals(3,instructionFacts.get(2).values()[1]);
+        assertEquals(1,instructionFacts.get(0).values()[2]);
+        assertEquals(2,instructionFacts.get(1).values()[2]);
+        assertEquals(3,instructionFacts.get(2).values()[2]);
 
     }
 

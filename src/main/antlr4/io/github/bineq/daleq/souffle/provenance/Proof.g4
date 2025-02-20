@@ -1,7 +1,6 @@
 grammar Proof;
 
-proof : node <EOF>  ;
+proof : node <EOF> ;
 node : ID children? ;
-children : '[' ID (',' ID)* ']' ;
+children : '[' node (',' node)* ']' ;
 ID : [a-zA-Z0-9_]+ ;  // id of a fact or rule
-WS : [ \t\n\r] + -> skip ;

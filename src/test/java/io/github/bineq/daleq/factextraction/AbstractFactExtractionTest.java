@@ -53,8 +53,8 @@ public abstract class AbstractFactExtractionTest {
     List<Fact> getInstructionFacts(String methodRef) {
         return facts.stream()
             .filter(fact -> fact.predicate().isInstructionPredicate())
-            .filter(fact -> fact.values()[0].equals(methodRef))
-            .sorted(Comparator.comparing(fact -> Integer.parseInt(fact.values()[1].toString())))
+            .filter(fact -> fact.values()[1].equals(methodRef))
+            .sorted(Comparator.comparing(fact -> Integer.parseInt(fact.values()[2].toString())))
             .collect(Collectors.toList());
     }
 
@@ -73,8 +73,8 @@ public abstract class AbstractFactExtractionTest {
 
     protected void containsJump(Collection<Fact> facts, int from, int to) {
         int count = (int)facts.stream()
-            .filter(f -> f.values()[1].equals(from))
-            .filter(f -> f.values()[2].equals(to))
+            .filter(f -> f.values()[2].equals(from))
+            .filter(f -> f.values()[3].equals(to))
             .count();
         assertEquals(1,count);
     }
