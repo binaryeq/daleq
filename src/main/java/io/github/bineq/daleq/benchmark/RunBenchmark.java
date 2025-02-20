@@ -127,8 +127,15 @@ public class RunBenchmark {
         Souffle.createIDB(edb1,rules,factDB1,idb1);
         Souffle.createIDB(edb2,rules,factDB2,idb2);
 
-        LOG.info("TODO: compare IDBs");
-        return false;
+        LOG.info("Comparing IDBs");
+        boolean idbEqual = DBCompare.compareAll(idb1,idb2);
+        if (idbEqual) {
+            LOG.info("IDBs are equal");
+        }
+        else {
+            LOG.info("IDBs are different");
+        }
+        return idbEqual;
     }
 
     private static void delDir(Path dir) throws IOException {
