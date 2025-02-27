@@ -8,15 +8,15 @@ import java.util.Objects;
  */
 public record Slot(String name,SlotType type,String jtype) {
 
-    static Slot symslot(String name) {
+    public static Slot symslot(String name) {
         return new Slot(name, SlotType.SYMBOL,String.class.getName());
     }
 
-    static Slot symslot(String name,String jname) {
+    public static Slot symslot(String name,String jname) {
         return new Slot(name, SlotType.SYMBOL,jname);
     }
 
-    static Slot numslot(String name,String jname) {
+    public static Slot numslot(String name,String jname) {
         return new Slot(name, SlotType.NUMBER,jname);
     }
 
