@@ -2,10 +2,8 @@
 NOPE(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,"]")) :- CHECKCAST(factid2,methodid,instructioncounter+1,desc),CHECKCAST(factid2,methodid,instructioncounter,desc).
 .output NOPE
 
-// TODO: need to put an exception in the standard checkcast rule , must also work if checkcast is first instruction
-
 .decl IDB_CHECKCAST(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
-IDB_CHECKCAST(cat("R_CHECKCAST","[",factid,"]"),methodid,instructioncounter,desc) :- CHECKCAST(factid,methodid,instructioncounter,desc).
+IDB_CHECKCAST(cat("R_CHECKCAST","[",factid,"]"),methodid,instructioncounter,desc) :- CHECKCAST(factid,methodid,instructioncounter,desc), !CHECKCAST(factid,methodid,instructioncounter-1,desc).
 .output IDB_CHECKCAST
 
 
