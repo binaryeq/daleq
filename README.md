@@ -6,7 +6,7 @@ datalog-based binary equivalence
 
 ```
 usage: java -cp <path-to-built-jar>
-            io.github.bineq.daleq.factextraction.FactExtractor
+            io.github.bineq.daleq.edb.FactExtractor
  -cl <classes>   the location of compiled classes, a jar file or folder
  -f <facts>      a folder where to create the extension database (input
                  .facts files), the folder will be created if it does not

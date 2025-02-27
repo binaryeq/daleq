@@ -5,7 +5,7 @@ The fact extraction layer creates facts that represent the program. This include
 (e.g. the class hierarchy), and facts representing the bytecode instructions within methods. 
 
 Much of this is done by generated predicate factories, see `src/main/java/io/github/bineq/daleq/factextraction/instruction_fact_factories`.
-Those factory classes are generated using `io.github.bineq.daleq.factextraction.InstructionFactFactoryCodeGenerator` from
+Those factory classes are generated using `io.github.bineq.daleq.edb.InstructionFactFactoryCodeGenerator` from
 the predicate specs in `src/main/resources/instruction-predicates`. Those specs are generated 
 from ASM tree API notes.   Predicate factories are loaded using the service loader mechanism.
 
@@ -14,7 +14,7 @@ For instance, while there are several dedicated instructions to load local varia
 ASM represents them as [a single `aload` instruction](https://asm.ow2.io/javadoc/org/objectweb/asm/Opcodes.html). 
 We follow this approach.
 
-The facts are extracted from bytecode using `io.github.bineq.daleq.factextraction.FactExtractor`, and 
+The facts are extracted from bytecode using `io.github.bineq.daleq.edb.FactExtractor`, and 
 the database is created in a local folder. This **extensional database (EDB for short)** consists
 of `<predicate-name>.fact` files (tab separated) containing fact definitions, and a `.souffle` 
 file containing predicate definitions and import declarations for the respective fact files.

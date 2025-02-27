@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import io.github.bineq.daleq.DBCompare;
 import io.github.bineq.daleq.Souffle;
-import io.github.bineq.daleq.factextraction.FactExtractor;
+import io.github.bineq.daleq.edb.FactExtractor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.FileReader;
