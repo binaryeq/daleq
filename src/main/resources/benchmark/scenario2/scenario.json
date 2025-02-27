@@ -1,0 +1,15 @@
+{
+  "name": "different constantpool order 1",
+  "class1": "version1//XMLPropertyListConfiguration.class",
+  "class2": "version2//XMLPropertyListConfiguration.class",
+  "categories": [
+    "CONSTANT_POOL_ORDER",
+    "DUPLICATE_CHECKCAST"
+  ],
+  "description": "Two versions of `org.apache.commons.configuration2.plist.XMLPropertyListConfiguration` in `commons-configuration2-2.7.jar` built with *openjdk-8.0.372* and *openjdk-9.0.1* respectivly. \nBoth versions differ in the constant pool orders used by the binaries. The version built with openjdk 8 also has a redundant `checkcast` instruction due to a compiler bug.",
+  "references" : [
+    "https://bugs.java.com/bugdatabase/view_bug?bug_id=6246854",
+    "https://dl.acm.org/doi/10.1145/3689944.3696162",
+    "https://zenodo.org/records/13381845"
+  ]
+}
