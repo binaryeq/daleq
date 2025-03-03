@@ -5,6 +5,7 @@ import io.github.bineq.daleq.edb.Fact;
 import io.github.bineq.daleq.edb.Predicate;
 import io.github.bineq.daleq.edb.Slot;
 
+import static io.github.bineq.daleq.edb.Slot.numslot;
 import static io.github.bineq.daleq.edb.Slot.symslot;
 
 /**
@@ -15,8 +16,9 @@ public enum AdditionalPredicates implements Predicate {
 
 
     // placeholder if a rule remove a fact (e.g. a redundant checkcast)
-    // a NOPE fact will still carry provenance that references the removed fast
-    NOPE(symslot(Fact.ID_SLOT_NAME));
+    // a NOPE fact will still carry provenance that references the removed fact
+    // and the context (method + instruction id)
+    NOPE(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),numslot("instructioncounter",Integer.TYPE.getName()));
 
     public final Slot[] slots;
 

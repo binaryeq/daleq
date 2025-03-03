@@ -62,7 +62,7 @@ public class Souffle {
         lines.addAll(Files.readAllLines(rules));
 
         Files.write(merged, lines);
-        LOG.info("Merged rules and facts into single souffle program {}", merged.toFile());
+        LOG.info("Merged rules and facts into single souffle program {}", merged.toFile().getAbsolutePath());
 
         LOG.info("Starting souffle");
         new ProcessBuilder(souffle.toString(),"-F",edbDir.toString(),"-D",idbDir.toString(),merged.toString())

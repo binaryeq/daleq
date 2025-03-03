@@ -1,0 +1,491 @@
+Compiled from "Headers.java"
+public final class com.squareup.okhttp.Headers {
+  private final java.lang.String[] namesAndValues;
+
+  private com.squareup.okhttp.Headers(com.squareup.okhttp.Headers$Builder);
+    Code:
+       0: aload_0
+       1: invokespecial #2                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: invokestatic  #3                  // Method com/squareup/okhttp/Headers$Builder.access$000:(Lcom/squareup/okhttp/Headers$Builder;)Ljava/util/List;
+       9: aload_1
+      10: invokestatic  #3                  // Method com/squareup/okhttp/Headers$Builder.access$000:(Lcom/squareup/okhttp/Headers$Builder;)Ljava/util/List;
+      13: invokeinterface #4,  1            // InterfaceMethod java/util/List.size:()I
+      18: anewarray     #5                  // class java/lang/String
+      21: invokeinterface #6,  2            // InterfaceMethod java/util/List.toArray:([Ljava/lang/Object;)[Ljava/lang/Object;
+      26: checkcast     #7                  // class "[Ljava/lang/String;"
+      29: putfield      #8                  // Field namesAndValues:[Ljava/lang/String;
+      32: return
+
+  private com.squareup.okhttp.Headers(java.lang.String[]);
+    Code:
+       0: aload_0
+       1: invokespecial #2                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #8                  // Field namesAndValues:[Ljava/lang/String;
+       9: return
+
+  public java.lang.String get(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #8                  // Field namesAndValues:[Ljava/lang/String;
+       4: aload_1
+       5: invokestatic  #9                  // Method get:([Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+       8: areturn
+
+  public java.util.Date getDate(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #10                 // Method get:(Ljava/lang/String;)Ljava/lang/String;
+       5: astore_2
+       6: aload_2
+       7: ifnull        17
+      10: aload_2
+      11: invokestatic  #11                 // Method com/squareup/okhttp/internal/http/HttpDate.parse:(Ljava/lang/String;)Ljava/util/Date;
+      14: goto          18
+      17: aconst_null
+      18: areturn
+
+  public int size();
+    Code:
+       0: aload_0
+       1: getfield      #8                  // Field namesAndValues:[Ljava/lang/String;
+       4: arraylength
+       5: iconst_2
+       6: idiv
+       7: ireturn
+
+  public java.lang.String name(int);
+    Code:
+       0: iload_1
+       1: iconst_2
+       2: imul
+       3: istore_2
+       4: iload_2
+       5: iflt          17
+       8: iload_2
+       9: aload_0
+      10: getfield      #8                  // Field namesAndValues:[Ljava/lang/String;
+      13: arraylength
+      14: if_icmplt     19
+      17: aconst_null
+      18: areturn
+      19: aload_0
+      20: getfield      #8                  // Field namesAndValues:[Ljava/lang/String;
+      23: iload_2
+      24: aaload
+      25: areturn
+
+  public java.lang.String value(int);
+    Code:
+       0: iload_1
+       1: iconst_2
+       2: imul
+       3: iconst_1
+       4: iadd
+       5: istore_2
+       6: iload_2
+       7: iflt          19
+      10: iload_2
+      11: aload_0
+      12: getfield      #8                  // Field namesAndValues:[Ljava/lang/String;
+      15: arraylength
+      16: if_icmplt     21
+      19: aconst_null
+      20: areturn
+      21: aload_0
+      22: getfield      #8                  // Field namesAndValues:[Ljava/lang/String;
+      25: iload_2
+      26: aaload
+      27: areturn
+
+  public java.util.Set<java.lang.String> names();
+    Code:
+       0: new           #12                 // class java/util/TreeSet
+       3: dup
+       4: getstatic     #13                 // Field java/lang/String.CASE_INSENSITIVE_ORDER:Ljava/util/Comparator;
+       7: invokespecial #14                 // Method java/util/TreeSet."<init>":(Ljava/util/Comparator;)V
+      10: astore_1
+      11: iconst_0
+      12: istore_2
+      13: aload_0
+      14: invokevirtual #15                 // Method size:()I
+      17: istore_3
+      18: iload_2
+      19: iload_3
+      20: if_icmpge     39
+      23: aload_1
+      24: aload_0
+      25: iload_2
+      26: invokevirtual #16                 // Method name:(I)Ljava/lang/String;
+      29: invokevirtual #17                 // Method java/util/TreeSet.add:(Ljava/lang/Object;)Z
+      32: pop
+      33: iinc          2, 1
+      36: goto          18
+      39: aload_1
+      40: invokestatic  #18                 // Method java/util/Collections.unmodifiableSet:(Ljava/util/Set;)Ljava/util/Set;
+      43: areturn
+
+  public java.util.List<java.lang.String> values(java.lang.String);
+    Code:
+       0: aconst_null
+       1: astore_2
+       2: iconst_0
+       3: istore_3
+       4: aload_0
+       5: invokevirtual #15                 // Method size:()I
+       8: istore        4
+      10: iload_3
+      11: iload         4
+      13: if_icmpge     59
+      16: aload_1
+      17: aload_0
+      18: iload_3
+      19: invokevirtual #16                 // Method name:(I)Ljava/lang/String;
+      22: invokevirtual #19                 // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+      25: ifeq          53
+      28: aload_2
+      29: ifnonnull     41
+      32: new           #20                 // class java/util/ArrayList
+      35: dup
+      36: iconst_2
+      37: invokespecial #21                 // Method java/util/ArrayList."<init>":(I)V
+      40: astore_2
+      41: aload_2
+      42: aload_0
+      43: iload_3
+      44: invokevirtual #22                 // Method value:(I)Ljava/lang/String;
+      47: invokeinterface #23,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      52: pop
+      53: iinc          3, 1
+      56: goto          10
+      59: aload_2
+      60: ifnull        70
+      63: aload_2
+      64: invokestatic  #24                 // Method java/util/Collections.unmodifiableList:(Ljava/util/List;)Ljava/util/List;
+      67: goto          73
+      70: invokestatic  #25                 // Method java/util/Collections.emptyList:()Ljava/util/List;
+      73: areturn
+
+  public com.squareup.okhttp.Headers$Builder newBuilder();
+    Code:
+       0: new           #26                 // class com/squareup/okhttp/Headers$Builder
+       3: dup
+       4: invokespecial #27                 // Method com/squareup/okhttp/Headers$Builder."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: invokestatic  #3                  // Method com/squareup/okhttp/Headers$Builder.access$000:(Lcom/squareup/okhttp/Headers$Builder;)Ljava/util/List;
+      12: aload_0
+      13: getfield      #8                  // Field namesAndValues:[Ljava/lang/String;
+      16: invokestatic  #28                 // Method java/util/Collections.addAll:(Ljava/util/Collection;[Ljava/lang/Object;)Z
+      19: pop
+      20: aload_1
+      21: areturn
+
+  public java.lang.String toString();
+    Code:
+       0: new           #29                 // class java/lang/StringBuilder
+       3: dup
+       4: invokespecial #30                 // Method java/lang/StringBuilder."<init>":()V
+       7: astore_1
+       8: iconst_0
+       9: istore_2
+      10: aload_0
+      11: invokevirtual #15                 // Method size:()I
+      14: istore_3
+      15: iload_2
+      16: iload_3
+      17: if_icmpge     54
+      20: aload_1
+      21: aload_0
+      22: iload_2
+      23: invokevirtual #16                 // Method name:(I)Ljava/lang/String;
+      26: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      29: ldc           #32                 // String :
+      31: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      34: aload_0
+      35: iload_2
+      36: invokevirtual #22                 // Method value:(I)Ljava/lang/String;
+      39: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      42: ldc           #33                 // String \n
+      44: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      47: pop
+      48: iinc          2, 1
+      51: goto          15
+      54: aload_1
+      55: invokevirtual #34                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      58: areturn
+
+  public java.util.Map<java.lang.String, java.util.List<java.lang.String>> toMultimap();
+    Code:
+       0: new           #35                 // class java/util/LinkedHashMap
+       3: dup
+       4: invokespecial #36                 // Method java/util/LinkedHashMap."<init>":()V
+       7: astore_1
+       8: iconst_0
+       9: istore_2
+      10: aload_0
+      11: invokevirtual #15                 // Method size:()I
+      14: istore_3
+      15: iload_2
+      16: iload_3
+      17: if_icmpge     85
+      20: aload_0
+      21: iload_2
+      22: invokevirtual #16                 // Method name:(I)Ljava/lang/String;
+      25: astore        4
+      27: aload_1
+      28: aload         4
+      30: invokeinterface #37,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      35: checkcast     #38                 // class java/util/List
+      38: astore        5
+      40: aload         5
+      42: ifnonnull     66
+      45: new           #20                 // class java/util/ArrayList
+      48: dup
+      49: iconst_2
+      50: invokespecial #21                 // Method java/util/ArrayList."<init>":(I)V
+      53: astore        5
+      55: aload_1
+      56: aload         4
+      58: aload         5
+      60: invokeinterface #39,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      65: pop
+      66: aload         5
+      68: aload_0
+      69: iload_2
+      70: invokevirtual #22                 // Method value:(I)Ljava/lang/String;
+      73: invokeinterface #23,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      78: pop
+      79: iinc          2, 1
+      82: goto          15
+      85: aload_1
+      86: areturn
+
+  private static java.lang.String get(java.lang.String[], java.lang.String);
+    Code:
+       0: aload_0
+       1: arraylength
+       2: iconst_2
+       3: isub
+       4: istore_2
+       5: iload_2
+       6: iflt          31
+       9: aload_1
+      10: aload_0
+      11: iload_2
+      12: aaload
+      13: invokevirtual #19                 // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+      16: ifeq          25
+      19: aload_0
+      20: iload_2
+      21: iconst_1
+      22: iadd
+      23: aaload
+      24: areturn
+      25: iinc          2, -2
+      28: goto          5
+      31: aconst_null
+      32: areturn
+
+  public static com.squareup.okhttp.Headers of(java.lang.String...);
+    Code:
+       0: aload_0
+       1: ifnull        11
+       4: aload_0
+       5: arraylength
+       6: iconst_2
+       7: irem
+       8: ifeq          21
+      11: new           #40                 // class java/lang/IllegalArgumentException
+      14: dup
+      15: ldc           #41                 // String Expected alternating header names and values
+      17: invokespecial #42                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      20: athrow
+      21: aload_0
+      22: invokevirtual #43                 // Method "[Ljava/lang/String;".clone:()Ljava/lang/Object;
+      25: checkcast     #7                  // class "[Ljava/lang/String;"
+      28: astore_0
+      29: iconst_0
+      30: istore_1
+      31: iload_1
+      32: aload_0
+      33: arraylength
+      34: if_icmpge     68
+      37: aload_0
+      38: iload_1
+      39: aaload
+      40: ifnonnull     53
+      43: new           #40                 // class java/lang/IllegalArgumentException
+      46: dup
+      47: ldc           #44                 // String Headers cannot be null
+      49: invokespecial #42                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      52: athrow
+      53: aload_0
+      54: iload_1
+      55: aload_0
+      56: iload_1
+      57: aaload
+      58: invokevirtual #45                 // Method java/lang/String.trim:()Ljava/lang/String;
+      61: aastore
+      62: iinc          1, 1
+      65: goto          31
+      68: iconst_0
+      69: istore_1
+      70: iload_1
+      71: aload_0
+      72: arraylength
+      73: if_icmpge     153
+      76: aload_0
+      77: iload_1
+      78: aaload
+      79: astore_2
+      80: aload_0
+      81: iload_1
+      82: iconst_1
+      83: iadd
+      84: aaload
+      85: astore_3
+      86: aload_2
+      87: invokevirtual #46                 // Method java/lang/String.length:()I
+      90: ifeq          111
+      93: aload_2
+      94: iconst_0
+      95: invokevirtual #47                 // Method java/lang/String.indexOf:(I)I
+      98: iconst_m1
+      99: if_icmpne     111
+     102: aload_3
+     103: iconst_0
+     104: invokevirtual #47                 // Method java/lang/String.indexOf:(I)I
+     107: iconst_m1
+     108: if_icmpeq     147
+     111: new           #40                 // class java/lang/IllegalArgumentException
+     114: dup
+     115: new           #29                 // class java/lang/StringBuilder
+     118: dup
+     119: invokespecial #30                 // Method java/lang/StringBuilder."<init>":()V
+     122: ldc           #48                 // String Unexpected header:
+     124: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     127: aload_2
+     128: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     131: ldc           #32                 // String :
+     133: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     136: aload_3
+     137: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     140: invokevirtual #34                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     143: invokespecial #42                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+     146: athrow
+     147: iinc          1, 2
+     150: goto          70
+     153: new           #49                 // class com/squareup/okhttp/Headers
+     156: dup
+     157: aload_0
+     158: invokespecial #50                 // Method "<init>":([Ljava/lang/String;)V
+     161: areturn
+
+  public static com.squareup.okhttp.Headers of(java.util.Map<java.lang.String, java.lang.String>);
+    Code:
+       0: aload_0
+       1: ifnonnull     14
+       4: new           #40                 // class java/lang/IllegalArgumentException
+       7: dup
+       8: ldc           #51                 // String Expected map with header names and values
+      10: invokespecial #42                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      13: athrow
+      14: aload_0
+      15: invokeinterface #52,  1           // InterfaceMethod java/util/Map.size:()I
+      20: iconst_2
+      21: imul
+      22: anewarray     #5                  // class java/lang/String
+      25: astore_1
+      26: iconst_0
+      27: istore_2
+      28: aload_0
+      29: invokeinterface #53,  1           // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
+      34: invokeinterface #54,  1           // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      39: astore_3
+      40: aload_3
+      41: invokeinterface #55,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      46: ifeq          204
+      49: aload_3
+      50: invokeinterface #56,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      55: checkcast     #57                 // class java/util/Map$Entry
+      58: astore        4
+      60: aload         4
+      62: invokeinterface #58,  1           // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      67: ifnull        80
+      70: aload         4
+      72: invokeinterface #59,  1           // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+      77: ifnonnull     90
+      80: new           #40                 // class java/lang/IllegalArgumentException
+      83: dup
+      84: ldc           #44                 // String Headers cannot be null
+      86: invokespecial #42                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      89: athrow
+      90: aload         4
+      92: invokeinterface #58,  1           // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
+      97: checkcast     #5                  // class java/lang/String
+     100: invokevirtual #45                 // Method java/lang/String.trim:()Ljava/lang/String;
+     103: astore        5
+     105: aload         4
+     107: invokeinterface #59,  1           // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
+     112: checkcast     #5                  // class java/lang/String
+     115: invokevirtual #45                 // Method java/lang/String.trim:()Ljava/lang/String;
+     118: astore        6
+     120: aload         5
+     122: invokevirtual #46                 // Method java/lang/String.length:()I
+     125: ifeq          148
+     128: aload         5
+     130: iconst_0
+     131: invokevirtual #47                 // Method java/lang/String.indexOf:(I)I
+     134: iconst_m1
+     135: if_icmpne     148
+     138: aload         6
+     140: iconst_0
+     141: invokevirtual #47                 // Method java/lang/String.indexOf:(I)I
+     144: iconst_m1
+     145: if_icmpeq     186
+     148: new           #40                 // class java/lang/IllegalArgumentException
+     151: dup
+     152: new           #29                 // class java/lang/StringBuilder
+     155: dup
+     156: invokespecial #30                 // Method java/lang/StringBuilder."<init>":()V
+     159: ldc           #48                 // String Unexpected header:
+     161: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     164: aload         5
+     166: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     169: ldc           #32                 // String :
+     171: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     174: aload         6
+     176: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     179: invokevirtual #34                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     182: invokespecial #42                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+     185: athrow
+     186: aload_1
+     187: iload_2
+     188: aload         5
+     190: aastore
+     191: aload_1
+     192: iload_2
+     193: iconst_1
+     194: iadd
+     195: aload         6
+     197: aastore
+     198: iinc          2, 2
+     201: goto          40
+     204: new           #49                 // class com/squareup/okhttp/Headers
+     207: dup
+     208: aload_1
+     209: invokespecial #50                 // Method "<init>":([Ljava/lang/String;)V
+     212: areturn
+
+  com.squareup.okhttp.Headers(com.squareup.okhttp.Headers$Builder, com.squareup.okhttp.Headers$1);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #1                  // Method "<init>":(Lcom/squareup/okhttp/Headers$Builder;)V
+       5: return
+}
