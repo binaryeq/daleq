@@ -1,6 +1,8 @@
 package io.github.bineq.daleq.edb;
 
 
+import java.util.Set;
+
 import static io.github.bineq.daleq.edb.Slot.*;
 
 /**
@@ -24,6 +26,10 @@ public enum AdditionalPredicates implements Predicate {
     // method properties
     METHOD_SIGNATURE(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),symslot("signature"))
     ;
+
+    public static Set<AdditionalPredicates> valuesAsSet() {
+        return Set.of(values());
+    };
 
     public final Slot[] slots;
 

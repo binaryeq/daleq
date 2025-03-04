@@ -5,6 +5,8 @@ import io.github.bineq.daleq.edb.Fact;
 import io.github.bineq.daleq.edb.Predicate;
 import io.github.bineq.daleq.edb.Slot;
 
+import java.util.Set;
+
 import static io.github.bineq.daleq.edb.Slot.numslot;
 import static io.github.bineq.daleq.edb.Slot.symslot;
 
@@ -19,6 +21,10 @@ public enum AdditionalPredicates implements Predicate {
     // a NOPE fact will still carry provenance that references the removed fact
     // and the context (method + instruction id)
     NOPE(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),numslot("instructioncounter",Integer.TYPE.getName()));
+
+    public static Set<AdditionalPredicates> valuesAsSet() {
+        return Set.of(values());
+    };
 
     public final Slot[] slots;
 
