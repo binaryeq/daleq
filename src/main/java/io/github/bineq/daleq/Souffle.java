@@ -29,10 +29,7 @@ public class Souffle {
      * @param idbDir - a folder where inferred facts for output relations will be stored
      */
     public static void createIDB(Path edb, Path rules, Path edbDir, Path idbDir) throws IOException {
-        String souffleExe = System.getProperty(SOUFFLE);
-        Preconditions.checkNotNull(souffleExe, SOUFFLE + " property not set, must point to the souffle binary, pass to JVM as follows: \"-DSOUFFLE=<dir>\"");
-        Path souffle = Path.of(souffleExe);
-        Preconditions.checkState(souffle.toFile().exists(), SOUFFLE + " does not exist");
+        Path souffle = getAndCheckSouffleExe();
 
         LOG.info("Using souffle {}", souffle);
 
@@ -68,7 +65,15 @@ public class Souffle {
         new ProcessBuilder(souffle.toString(),"-F",edbDir.toString(),"-D",idbDir.toString(),merged.toString())
             .inheritIO()
             .start();
+    }
 
 
+    // public to check earlier, e.g. in test fixture
+    public static Path getAndCheckSouffleExe() {
+        String souffleExe = System.getProperty(SOUFFLE);
+        Preconditions.checkNotNull(souffleExe, SOUFFLE + " property not set, must point to the souffle binary, pass to JVM as follows: \"-DSOUFFLE=<dir>\"");
+        Path souffle = Path.of(souffleExe);
+        Preconditions.checkState(souffle.toFile().exists(), SOUFFLE + " does not exist");
+        return souffle;
     }
 }

@@ -3,7 +3,6 @@ package io.github.bineq.daleq.idb;
 import io.github.bineq.daleq.Souffle;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,6 +35,9 @@ public abstract class AbstractIDBTest {
 
         Path idbRoot = Path.of(".tests/" + className + "/idb");
         idbFactDir = createOrEmpty(idbRoot.resolve( "facts"));
+
+        // checks some preconditions !
+        Souffle.getAndCheckSouffleExe();
 
     }
 
