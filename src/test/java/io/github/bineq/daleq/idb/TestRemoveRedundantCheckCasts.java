@@ -3,9 +3,7 @@ package io.github.bineq.daleq.idb;
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
 import java.util.function.Predicate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {

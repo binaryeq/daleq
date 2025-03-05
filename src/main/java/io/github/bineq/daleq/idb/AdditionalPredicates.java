@@ -1,12 +1,9 @@
 package io.github.bineq.daleq.idb;
 
-
 import io.github.bineq.daleq.edb.Fact;
 import io.github.bineq.daleq.edb.Predicate;
 import io.github.bineq.daleq.edb.Slot;
-
 import java.util.Set;
-
 import static io.github.bineq.daleq.edb.Slot.numslot;
 import static io.github.bineq.daleq.edb.Slot.symslot;
 

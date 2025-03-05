@@ -7,3 +7,4 @@ inferred-instruction-predicates
 merged-facts-and-rules.souffle
 trainingdata
 .tests
+.tmp

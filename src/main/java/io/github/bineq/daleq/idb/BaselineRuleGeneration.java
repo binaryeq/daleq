@@ -4,8 +4,6 @@ import io.github.bineq.daleq.edb.*;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.File;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -17,34 +15,8 @@ import java.util.stream.Collectors;
  */
 public class BaselineRuleGeneration {
 
-
     public static final Logger LOG = LoggerFactory.getLogger(BaselineRuleGeneration.class);
 
-    public static final Map<Integer, InstructionPredicate> REGISTRY = new HashMap<>();
-
-    static {
-        LOG.info("Loading instruction predicate registry");
-        URL folder = InstructionPredicate.class.getResource("/instruction-predicates");
-        assert folder != null;
-        File dir = new File(folder.getPath());
-        File[] files = dir.listFiles(f -> f.getName().endsWith(".json"));
-        LOG.info("{} instruction predicates found", files.length);
-        for (File file : files) {
-            try {
-                InstructionPredicate predicate = InstructionPredicate.fromJson(file);
-                int opCode = predicate.getOpCode();
-                if (REGISTRY.containsKey(opCode)) {
-                    LOG.warn("Duplicate instruction predicate for op code {}", opCode);
-                }
-                REGISTRY.put(opCode, predicate);
-            }
-            catch (Exception x) {
-                LOG.error("Failed to load instruction predicate from " + file.getAbsolutePath(), x);
-            }
-        }
-        LOG.info(""+REGISTRY.size() + " instruction predicates loaded");
-
-    }
 
     public static Option OPT_DB = Option.builder()
         .argName("rules")
@@ -121,14 +93,8 @@ public class BaselineRuleGeneration {
             .collect(Collectors.joining(",",pre, post));
 
         String rule = head +  " :- " + body + ".";
-
         String outDecl = ".output " + idbPredicateName;
-
         return List.of(declaration,rule,outDecl,"");
 
     }
-
-
-
-
 }
