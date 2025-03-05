@@ -19,13 +19,20 @@ public enum AdditionalPredicates implements Predicate {
     FIELD(symslot(Fact.ID_SLOT_NAME),symslot("id"),symslot("classname"),symslot("name"),symslot("descriptor")),
     METHOD(symslot(Fact.ID_SLOT_NAME),symslot("id"),symslot("classname"),symslot("name"),symslot("descriptor")),
     VERSION(symslot(Fact.ID_SLOT_NAME),symslot("classname"),symslot("version")),
+    CLASS_SIGNATURE(symslot(Fact.ID_SLOT_NAME),symslot("classname"),symslot("signature")),
 
     // field properties
     FIELD_SIGNATURE(symslot(Fact.ID_SLOT_NAME),symslot("fieldid"),symslot("signature")),
 
     // method properties
-    METHOD_SIGNATURE(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),symslot("signature"))
+    METHOD_SIGNATURE(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),symslot("signature")),
+
+    // property of classes, interfaces and methods
+    // the id is the unique name of this class, method or field
+    ACCESS(symslot(Fact.ID_SLOT_NAME),symslot("id"),numslot("access",Integer.TYPE.getName()))
+
     ;
+
 
     public static Set<AdditionalPredicates> valuesAsSet() {
         return Set.of(values());

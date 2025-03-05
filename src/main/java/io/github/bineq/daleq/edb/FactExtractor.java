@@ -203,13 +203,16 @@ public class FactExtractor   {
             facts.add(new SimpleFact(AdditionalPredicates.INTERFACE, FactIdGenerator.nextId(AdditionalPredicates.INTERFACE),classNode.name, intrf));
         }
 
+        facts.add(new SimpleFact(AdditionalPredicates.CLASS_SIGNATURE,FactIdGenerator.nextId(AdditionalPredicates.CLASS_SIGNATURE),classNode.name, classNode.signature));
         facts.add(new SimpleFact(AdditionalPredicates.VERSION,FactIdGenerator.nextId(AdditionalPredicates.VERSION),classNode.name,classNode.version));
+        facts.add(new SimpleFact(AdditionalPredicates.ACCESS,FactIdGenerator.nextId(AdditionalPredicates.ACCESS),classNode.name,classNode.access));
 
         // fields
         classNode.fields.stream().sorted((FIELD_COMP)).forEach(fieldNode -> {
             String fieldId = getFieldReference(classNode.name,fieldNode.name,fieldNode.desc);
             facts.add(new SimpleFact(AdditionalPredicates.FIELD,FactIdGenerator.nextId(AdditionalPredicates.FIELD), fieldId,classNode.name, fieldNode.name,fieldNode.desc));
             facts.add(new SimpleFact(AdditionalPredicates.FIELD_SIGNATURE, FactIdGenerator.nextId(AdditionalPredicates.FIELD_SIGNATURE), fieldId, fieldNode.signature));
+            facts.add(new SimpleFact(AdditionalPredicates.ACCESS,FactIdGenerator.nextId(AdditionalPredicates.ACCESS),fieldId,fieldNode.access));
         });
 
         // methods
@@ -218,6 +221,8 @@ public class FactExtractor   {
             String methodId = getMethodReference(classNode.name,methodNode.name,methodNode.desc);
             facts.add(new SimpleFact(AdditionalPredicates.METHOD, FactIdGenerator.nextId(AdditionalPredicates.METHOD),methodId, classNode.name, methodNode.name, methodNode.desc));
             facts.add(new SimpleFact(AdditionalPredicates.METHOD_SIGNATURE,FactIdGenerator.nextId(AdditionalPredicates.METHOD_SIGNATURE),methodId, methodNode.signature));
+            facts.add(new SimpleFact(AdditionalPredicates.ACCESS,FactIdGenerator.nextId(AdditionalPredicates.ACCESS),methodId,methodNode.access));
+
             //AtomicInteger line = new AtomicInteger(-1);
 
             // first iteration to collect labels
