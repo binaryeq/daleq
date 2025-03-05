@@ -6,7 +6,6 @@ NOPE(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"]"),methodid,in
 IDB_CHECKCAST(cat("R_CHECKCAST","[",factid1,"]"),methodid,instructioncounter,desc) :- CHECKCAST(factid1,methodid,instructioncounter,desc), !CHECKCAST(_,methodid,instructioncounter-1,desc).
 .output IDB_CHECKCAST
 
-
 .decl IDB_SUPERCLASS(factid: symbol,name: symbol,supername: symbol)
 IDB_SUPERCLASS(cat("R_SUPERCLASS","[",factid,"]"),name,supername) :- SUPERCLASS(factid,name,supername).
 .output IDB_SUPERCLASS

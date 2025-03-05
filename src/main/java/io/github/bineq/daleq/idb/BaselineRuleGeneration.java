@@ -17,7 +17,6 @@ public class BaselineRuleGeneration {
 
     public static final Logger LOG = LoggerFactory.getLogger(BaselineRuleGeneration.class);
 
-
     public static Option OPT_DB = Option.builder()
         .argName("rules")
         .option("r")

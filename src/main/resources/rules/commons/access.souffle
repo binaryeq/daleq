@@ -1,0 +1,92 @@
+.decl IDB_IS_SYNCHRONIZED(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_SYNCHRONIZED(cat("R_IS_SYNCHRONIZED","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0020)!=0.
+.output IDB_IS_SYNCHRONIZED
+
+.decl IDB_IS_TRANSITIVE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_TRANSITIVE(cat("R_IS_TRANSITIVE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0020)!=0.
+.output IDB_IS_TRANSITIVE
+
+.decl IDB_IS_VOLATILE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_VOLATILE(cat("R_IS_VOLATILE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0040)!=0.
+.output IDB_IS_VOLATILE
+
+.decl IDB_IS_VARARGS(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_VARARGS(cat("R_IS_VARARGS","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0080)!=0.
+.output IDB_IS_VARARGS
+
+.decl IDB_IS_STRICT(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_STRICT(cat("R_IS_STRICT","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0800)!=0.
+.output IDB_IS_STRICT
+
+.decl IDB_IS_ENUM(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_ENUM(cat("R_IS_ENUM","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x4000)!=0.
+.output IDB_IS_ENUM
+
+.decl IDB_IS_SUPER(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_SUPER(cat("R_IS_SUPER","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0020)!=0.
+.output IDB_IS_SUPER
+
+.decl IDB_IS_NATIVE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_NATIVE(cat("R_IS_NATIVE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0100)!=0.
+.output IDB_IS_NATIVE
+
+.decl IDB_IS_SYNTHETIC(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_SYNTHETIC(cat("R_IS_SYNTHETIC","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x1000)!=0.
+.output IDB_IS_SYNTHETIC
+
+.decl IDB_IS_FINAL(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_FINAL(cat("R_IS_FINAL","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0010)!=0.
+.output IDB_IS_FINAL
+
+.decl IDB_IS_BRIDGE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_BRIDGE(cat("R_IS_BRIDGE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0040)!=0.
+.output IDB_IS_BRIDGE
+
+.decl IDB_IS_ABSTRACT(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_ABSTRACT(cat("R_IS_ABSTRACT","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0400)!=0.
+.output IDB_IS_ABSTRACT
+
+.decl IDB_IS_STATIC(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_STATIC(cat("R_IS_STATIC","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0008)!=0.
+.output IDB_IS_STATIC
+
+.decl IDB_IS_PRIVATE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_PRIVATE(cat("R_IS_PRIVATE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0002)!=0.
+.output IDB_IS_PRIVATE
+
+.decl IDB_IS_OPEN(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_OPEN(cat("R_IS_OPEN","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0020)!=0.
+.output IDB_IS_OPEN
+
+.decl IDB_IS_STATIC_PHASE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_STATIC_PHASE(cat("R_IS_STATIC_PHASE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0040)!=0.
+.output IDB_IS_STATIC_PHASE
+
+.decl IDB_IS_MODULE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_MODULE(cat("R_IS_MODULE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x8000)!=0.
+.output IDB_IS_MODULE
+
+.decl IDB_IS_INTERFACE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_INTERFACE(cat("R_IS_INTERFACE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0200)!=0.
+.output IDB_IS_INTERFACE
+
+.decl IDB_IS_ANNOTATION(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_ANNOTATION(cat("R_IS_ANNOTATION","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x2000)!=0.
+.output IDB_IS_ANNOTATION
+
+.decl IDB_IS_PUBLIC(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_PUBLIC(cat("R_IS_PUBLIC","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0001)!=0.
+.output IDB_IS_PUBLIC
+
+.decl IDB_IS_MANDATED(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_MANDATED(cat("R_IS_MANDATED","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x8000)!=0.
+.output IDB_IS_MANDATED
+
+.decl IDB_IS_PROTECTED(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_PROTECTED(cat("R_IS_PROTECTED","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0004)!=0.
+.output IDB_IS_PROTECTED
+
+.decl IDB_IS_TRANSIENT(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_TRANSIENT(cat("R_IS_TRANSIENT","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0080)!=0.
+.output IDB_IS_TRANSIENT
+
