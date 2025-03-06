@@ -190,7 +190,8 @@ public class FactExtractor   {
     }
 
     static String getFieldReference(String className, String fieldName,String descriptor) {
-        return className + "::" + fieldName + descriptor;
+        // need to seperate field name and descriptor somehow
+        return className + "::" + fieldName + '(' + descriptor;
     }
 
     public static List<Fact> extract (byte[] bytes, boolean verify) throws VerificationException {

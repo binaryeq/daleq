@@ -1,12 +1,11 @@
 package io.github.bineq.daleq.idb;
 
-import io.github.bineq.daleq.Souffle;
-import io.github.bineq.daleq.edb.FactExtractor;
 import org.junit.jupiter.api.Test;
 import java.util.function.Predicate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
+
 
     @Override
     public String getRulesPath() {
@@ -20,8 +19,6 @@ public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
 
     @Test
     public void testEDB() throws Exception {
-        FactExtractor.extractAndExport(this.classFile,this.edbDef,this.edbFactDir,true);
-        // Souffle.createIDB(this.edbDef,rules,this.edbFactDir,this.idbFactDir);
 
         // slot positions in both CHECKCAST and NOP facts
         int idSlotPosition = 0;
@@ -39,8 +36,6 @@ public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
 
     @Test
     public void testIDB() throws Exception {
-        FactExtractor.extractAndExport(this.classFile,this.edbDef,this.edbFactDir,true);
-        Souffle.createIDB(this.edbDef,rules,this.edbFactDir,this.idbFactDir,this.mergedEDBAndRules);
 
         // slot positions in CHECKCAST and NOP facts
         int idSlotPosition = 0;

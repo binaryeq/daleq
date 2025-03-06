@@ -1,6 +1,7 @@
 package io.github.bineq.daleq.idb;
 
 import io.github.bineq.daleq.Souffle;
+import io.github.bineq.daleq.edb.FactExtractor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import java.io.FileNotFoundException;
@@ -23,7 +24,7 @@ public abstract class AbstractIDBTest {
     protected Path mergedEDBAndRules = null;
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() throws Exception {
         rules = Path.of(Souffle.class.getResource(getRulesPath()).getPath());
         assumeTrue(Files.exists(rules));
         classFile = Path.of(AbstractIDBTest.class.getResource(getPathOfClassUnderTest()).getPath());
@@ -42,7 +43,14 @@ public abstract class AbstractIDBTest {
         // checks some preconditions !
         Souffle.getAndCheckSouffleExe();
 
+        // create EDB
+        FactExtractor.extractAndExport(this.classFile,this.edbDef,this.edbFactDir,true);
+
+        // apply rules
+        Souffle.createIDB(this.edbDef,rules,this.edbFactDir,this.idbFactDir,this.mergedEDBAndRules);
+
     }
+
 
     private Path createOrEmpty (Path dir) throws IOException {
         if (Files.exists(dir)) {
