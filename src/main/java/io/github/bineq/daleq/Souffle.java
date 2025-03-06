@@ -31,7 +31,7 @@ public class Souffle {
      * @param idbDir - a folder where inferred facts for output relations will be stored
      * @param mergedEDBAndRules - a file where all rules and files will be merged into
      */
-    public static void createIDB(Path edb, Path rules, Path edbDir, Path idbDir,Path mergedEDBAndRules) throws IOException {
+    public static void createIDB(Path edb, Path rules, Path edbDir, Path idbDir,Path mergedEDBAndRules) throws IOException, InterruptedException {
         Path souffle = getAndCheckSouffleExe();
 
         LOG.info("Using souffle {}", souffle);
@@ -80,7 +80,8 @@ public class Souffle {
         LOG.info("Starting souffle");
         new ProcessBuilder(souffle.toString(),"-F",edbDir.toString(),"-D",idbDir.toString(),mergedEDBAndRules.toString())
             .inheritIO()
-            .start();
+            .start()
+            .waitFor();
     }
 
 

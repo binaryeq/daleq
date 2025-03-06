@@ -51,9 +51,6 @@ public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
         Predicate<String[]> firstInstructionId = line -> line[instructionCounterSlotPosition].equals("18");
         Predicate<String[]> secondInstructionId = line -> line[instructionCounterSlotPosition].equals("19");
 
-        // there is a flakiness issue - without waiting souffle is still busy to write files
-        Thread.sleep(1000);
-
         assertEquals(1,this.getIDBFacts("IDB_CHECKCAST",methodContext.and(firstInstructionId)).size());
         assertEquals(1,this.getIDBFacts("NOPE",methodContext.and(secondInstructionId)).size());
 
