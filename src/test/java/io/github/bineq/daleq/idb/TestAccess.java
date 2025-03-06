@@ -46,6 +46,41 @@ public class TestAccess extends AbstractIDBTest {
         assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_SYNCHRONIZED");
         assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_STATIC");
         assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_SYNTHETIC");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_FINAL");
+    }
+
+    @Test
+    public void testMethod2() throws Exception {
+
+        // private static java.util.Map<java.lang.String, java.lang.Object> transformMap(java.util.Map<?, ?>);
+
+        // inspect javap output to verify oracle
+        String classOrMethodOrFieldId = "org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::transformMap(Ljava/util/Map;)Ljava/util/Map;";
+        assertHasAccess(classOrMethodOrFieldId, "IDB_IS_PRIVATE");
+        assertHasAccess(classOrMethodOrFieldId,"IDB_IS_STATIC");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_PUBLIC");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_PROTECTED");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_ABSTRACT");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_SYNCHRONIZED");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_SYNTHETIC");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_FINAL");
+    }
+
+    @Test
+    public void testConstructor1() throws Exception {
+
+        // private static java.util.Map<java.lang.String, java.lang.Object> transformMap(java.util.Map<?, ?>);
+
+        // inspect javap output to verify oracle
+        String classOrMethodOrFieldId = "org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>()V";
+        assertHasAccess(classOrMethodOrFieldId, "IDB_IS_PUBLIC");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_STATIC");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_PRIVATE");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_PROTECTED");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_ABSTRACT");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_SYNCHRONIZED");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_SYNTHETIC");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_FINAL");
     }
 
     @Test
@@ -60,8 +95,23 @@ public class TestAccess extends AbstractIDBTest {
         assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_SYNCHRONIZED");
         assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_SYNTHETIC");
         assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_STATIC");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_FINAL");
     }
 
+    @Test
+    public void testField2() throws Exception {
+        // inspect javap output to verify oracle
+        String classOrMethodOrFieldId = "org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::INDENT_SIZE(I";
+        assertHasAccess(classOrMethodOrFieldId, "IDB_IS_PRIVATE");
+        assertHasAccess(classOrMethodOrFieldId, "IDB_IS_FINAL");
+        assertHasAccess(classOrMethodOrFieldId, "IDB_IS_STATIC");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_PUBLIC");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_PROTECTED");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_ABSTRACT");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_VOLATILE");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_SYNCHRONIZED");
+        assertDoesNotHaveAccess(classOrMethodOrFieldId,"IDB_IS_SYNTHETIC");
+    }
 
     private void assertHasAccess(String classOrMethodOrFieldId,String accessPredicate) throws IOException {
         Predicate<String[]> filter = line -> line[1].equals(classOrMethodOrFieldId);
