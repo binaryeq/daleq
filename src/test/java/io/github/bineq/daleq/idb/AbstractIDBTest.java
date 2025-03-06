@@ -20,6 +20,7 @@ public abstract class AbstractIDBTest {
     protected Path edbDef = null;
     protected Path edbFactDir = null;
     protected Path idbFactDir = null;
+    protected Path mergedEDBAndRules = null;
 
     @BeforeEach
     public void setup() throws IOException {
@@ -35,6 +36,8 @@ public abstract class AbstractIDBTest {
 
         Path idbRoot = Path.of(".tests/" + className + "/idb");
         idbFactDir = createOrEmpty(idbRoot.resolve( "facts"));
+
+        mergedEDBAndRules = Path.of(".tests/" + className + "/mergedEDBAndRules.souffle");
 
         // checks some preconditions !
         Souffle.getAndCheckSouffleExe();

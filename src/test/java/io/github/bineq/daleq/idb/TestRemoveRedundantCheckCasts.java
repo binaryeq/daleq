@@ -40,7 +40,7 @@ public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
     @Test
     public void testIDB() throws Exception {
         FactExtractor.extractAndExport(this.classFile,this.edbDef,this.edbFactDir,true);
-        Souffle.createIDB(this.edbDef,rules,this.edbFactDir,this.idbFactDir);
+        Souffle.createIDB(this.edbDef,rules,this.edbFactDir,this.idbFactDir,this.mergedEDBAndRules);
 
         // slot positions in CHECKCAST and NOP facts
         int idSlotPosition = 0;

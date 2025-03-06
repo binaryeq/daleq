@@ -27,6 +27,7 @@ public class RunBenchmark {
     public static final Path DB_ROOT = Path.of(".benchmarks");
     public static final String EDB = "EDB";
     public static final String IDB = "IDB";
+    public static final String MERGED = "merged-facts-and-rules1.souffle";
 
     public static final String RULES = "/rules/vanilla.souffle";
 
@@ -110,6 +111,8 @@ public class RunBenchmark {
         Path edb2 = scenarioDBRoot.resolve("db2").resolve("db.souffle");
         LOG.debug("EDB for class version2 will be written to: {}",factDB2);
 
+        Path mergedEDBAndRules1 = scenarioDBRoot.resolve("db1").resolve(MERGED);
+        Path mergedEDBAndRules2 = scenarioDBRoot.resolve("db2").resolve(MERGED);
 
         FactExtractor.extractAndExport(cl1,edb1,factDB1,true);
         FactExtractor.extractAndExport(cl2,edb2,factDB2,true);
@@ -124,8 +127,8 @@ public class RunBenchmark {
         }
 
         // TODO do: compare IDBs
-        Souffle.createIDB(edb1,rules,factDB1,idb1);
-        Souffle.createIDB(edb2,rules,factDB2,idb2);
+        Souffle.createIDB(edb1,rules,factDB1,idb1,mergedEDBAndRules1);
+        Souffle.createIDB(edb2,rules,factDB2,idb2,mergedEDBAndRules2);
 
         LOG.info("Comparing IDBs");
         boolean idbEqual = DBCompare.compareAll(idb1,idb2);
