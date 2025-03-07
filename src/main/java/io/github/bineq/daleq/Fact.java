@@ -1,4 +1,6 @@
-package io.github.bineq.daleq.edb;
+package io.github.bineq.daleq;
+
+import io.github.bineq.daleq.edb.VerificationException;
 
 public interface Fact {
 

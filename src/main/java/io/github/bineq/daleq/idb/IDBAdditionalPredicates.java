@@ -1,17 +1,17 @@
 package io.github.bineq.daleq.idb;
 
-import io.github.bineq.daleq.edb.Fact;
-import io.github.bineq.daleq.edb.Predicate;
-import io.github.bineq.daleq.edb.Slot;
+import io.github.bineq.daleq.Fact;
+import io.github.bineq.daleq.Predicate;
+import io.github.bineq.daleq.Slot;
 import java.util.Set;
-import static io.github.bineq.daleq.edb.Slot.numslot;
-import static io.github.bineq.daleq.edb.Slot.symslot;
+import static io.github.bineq.daleq.Slot.numslot;
+import static io.github.bineq.daleq.Slot.symslot;
 
 /**
  * Predicates used only in the IDB.
  * @author jens dietrich
  */
-public enum AdditionalPredicates implements Predicate {
+public enum IDBAdditionalPredicates implements Predicate {
 
 
     // placeholder if a rule remove a fact (e.g. a redundant checkcast)
@@ -19,13 +19,13 @@ public enum AdditionalPredicates implements Predicate {
     // and the context (method + instruction id)
     NOPE(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),numslot("instructioncounter",Integer.TYPE.getName()));
 
-    public static Set<AdditionalPredicates> valuesAsSet() {
+    public static Set<IDBAdditionalPredicates> valuesAsSet() {
         return Set.of(values());
     };
 
     public final Slot[] slots;
 
-    AdditionalPredicates(Slot... slots) {
+    IDBAdditionalPredicates(Slot... slots) {
         this.slots = slots;
     }
 
@@ -41,6 +41,16 @@ public enum AdditionalPredicates implements Predicate {
 
     @Override
     public boolean isInstructionPredicate() {
+        return false;
+    }
+
+    @Override
+    public boolean isEDBPredicate() {
+        return true;
+    }
+
+    @Override
+    public boolean isIDBPredicate() {
         return false;
     }
 

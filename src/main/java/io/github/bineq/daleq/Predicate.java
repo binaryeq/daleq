@@ -1,4 +1,4 @@
-package io.github.bineq.daleq.edb;
+package io.github.bineq.daleq;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -30,11 +30,14 @@ public interface Predicate {
             slot -> slot.encodeName() + ": " + slot.type().souffleType()).collect(Collectors.joining(",",pre, post));
     }
 
-
     Slot[] getSlots();
 
     String getName();
 
     boolean isInstructionPredicate();
+
+    boolean isEDBPredicate();
+
+    boolean isIDBPredicate();
 
 }

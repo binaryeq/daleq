@@ -1,5 +1,7 @@
 package io.github.bineq.daleq.edb;
 
+import io.github.bineq.daleq.Fact;
+import io.github.bineq.daleq.Predicate;
 import org.junit.jupiter.api.BeforeEach;
 import org.objectweb.asm.tree.JumpInsnNode;
 
@@ -31,14 +33,14 @@ public abstract class AbstractFactExtractionTest {
         facts = FactExtractor.extract(byteCode,false); // verification will be done in dedicated test
     }
 
-    protected Fact getFirstFact(AdditionalPredicates predicate) {
+    protected Fact getFirstFact(EBDAdditionalPredicates predicate) {
         return facts.stream()
             .filter(fact -> fact.predicate().equals(predicate))
             .findFirst()
             .orElseThrow();
     }
 
-    protected List<Fact> getFacts(AdditionalPredicates predicate) {
+    protected List<Fact> getFacts(EBDAdditionalPredicates predicate) {
         return facts.stream()
             .filter(fact -> fact.predicate().equals(predicate))
             .collect(Collectors.toUnmodifiableList());
@@ -80,8 +82,8 @@ public abstract class AbstractFactExtractionTest {
 
     protected boolean isJump(Fact fact) {
         Predicate predicate = fact.predicate();
-        if (predicate instanceof InstructionPredicate) {
-            InstructionPredicate instructionPredicate = (InstructionPredicate) predicate;
+        if (predicate instanceof EBDInstructionPredicate) {
+            EBDInstructionPredicate instructionPredicate = (EBDInstructionPredicate) predicate;
             return instructionPredicate.getAsmNodeType().equals(JumpInsnNode.class.getName());
         }
         else {

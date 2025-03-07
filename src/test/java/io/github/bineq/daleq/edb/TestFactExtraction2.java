@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.edb;
 
+import io.github.bineq.daleq.Fact;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -29,22 +30,22 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
 
     @Test
     public void testSuperClass() {
-        Fact superClassFact = getFirstFact(AdditionalPredicates.SUPERCLASS);
-        assertEquals(AdditionalPredicates.SUPERCLASS,superClassFact.predicate());
+        Fact superClassFact = getFirstFact(EBDAdditionalPredicates.SUPERCLASS);
+        assertEquals(EBDAdditionalPredicates.SUPERCLASS,superClassFact.predicate());
         assertEquals("mypck/ClassWithConditionals",superClassFact.values()[1]);
         assertEquals("java/lang/Object",superClassFact.values()[2]);
     }
 
     @Test
     public void testInterfaces() {
-        List<Fact> interfaceFacts = getFacts(AdditionalPredicates.INTERFACE);
+        List<Fact> interfaceFacts = getFacts(EBDAdditionalPredicates.INTERFACE);
         assertEquals(0,interfaceFacts.size());
     }
 
     @Test
     public void testClassVersion() {
-        Fact classVersionFact = getFirstFact(AdditionalPredicates.VERSION);
-        assertEquals(AdditionalPredicates.VERSION,classVersionFact.predicate());
+        Fact classVersionFact = getFirstFact(EBDAdditionalPredicates.VERSION);
+        assertEquals(EBDAdditionalPredicates.VERSION,classVersionFact.predicate());
         assertEquals("mypck/ClassWithConditionals",classVersionFact.values()[1]);
         assertEquals(65,classVersionFact.values()[2]);
     }

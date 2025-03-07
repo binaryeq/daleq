@@ -1,15 +1,19 @@
 package io.github.bineq.daleq.edb;
 
 
+import io.github.bineq.daleq.Fact;
+import io.github.bineq.daleq.Predicate;
+import io.github.bineq.daleq.Slot;
+
 import java.util.Set;
 
-import static io.github.bineq.daleq.edb.Slot.*;
+import static io.github.bineq.daleq.Slot.*;
 
 /**
  * Predicates used in the extract DB.
  * @author jens dietrich
  */
-public enum AdditionalPredicates implements Predicate {
+public enum EBDAdditionalPredicates implements Predicate {
 
 
 
@@ -34,13 +38,13 @@ public enum AdditionalPredicates implements Predicate {
     ;
 
 
-    public static Set<AdditionalPredicates> valuesAsSet() {
+    public static Set<EBDAdditionalPredicates> valuesAsSet() {
         return Set.of(values());
     };
 
     public final Slot[] slots;
 
-    AdditionalPredicates(Slot... slots) {
+    EBDAdditionalPredicates(Slot... slots) {
         this.slots = slots;
     }
 
@@ -59,5 +63,14 @@ public enum AdditionalPredicates implements Predicate {
         return false;
     }
 
+    @Override
+    public boolean isEDBPredicate() {
+        return true;
+    }
+
+    @Override
+    public boolean isIDBPredicate() {
+        return false;
+    }
 
 }

@@ -93,4 +93,19 @@ public class Souffle {
         Preconditions.checkState(souffle.toFile().exists(), SOUFFLE + " does not exist");
         return souffle;
     }
+
+    // public to check earlier, e.g. in test fixture
+    public static boolean checkSouffleExe() {
+        String souffleExe = System.getProperty(SOUFFLE);
+        if (souffleExe == null) {
+            LOG.warn(souffleExe, SOUFFLE + " property not set, must point to the souffle binary, pass to JVM as follows: \"-DSOUFFLE=<dir>\"");
+            return false;
+        }
+        Path souffle = Path.of(souffleExe);
+        if (!Files.exists(souffle)) {
+            LOG.warn(SOUFFLE + " does not exist");
+            return false;
+        }
+        return true;
+    }
 }

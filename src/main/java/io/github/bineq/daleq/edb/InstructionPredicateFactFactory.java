@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.edb;
 
+import io.github.bineq.daleq.Fact;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.LabelNode;
 
@@ -19,7 +20,7 @@ public interface InstructionPredicateFactFactory<NT extends AbstractInsnNode> {
     // a unique version id, used to verify that the generator is consistent with the predicate spec (InstructionPredicate::id).
     String getVersion() ;
 
-    InstructionPredicate getPredicate();
+    EBDInstructionPredicate getPredicate();
 
     Fact createFact(String id, NT node, String methodRef, int instructionCounter, Map<LabelNode,Integer> labelMap);
 

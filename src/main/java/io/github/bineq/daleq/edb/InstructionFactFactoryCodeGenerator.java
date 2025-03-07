@@ -1,5 +1,8 @@
 package io.github.bineq.daleq.edb;
 
+import io.github.bineq.daleq.Fact;
+import io.github.bineq.daleq.SimpleFact;
+import io.github.bineq.daleq.Slot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
@@ -17,11 +20,11 @@ public class InstructionFactFactoryCodeGenerator {
     public static final Path DESTINATION = Path.of("inferred-instructions-fact-factories");
     public static final Logger LOG = LoggerFactory.getLogger(InstructionFactFactoryCodeGenerator.class);
     public static final String FACTORY_INTERFACE = InstructionPredicateFactFactory.class.getName();
-    public static final String INSTRUCTION_PREDICATE = InstructionPredicate.class.getName();
+    public static final String INSTRUCTION_PREDICATE = EBDInstructionPredicate.class.getName();
     public static final String SIMPLE_FACT = SimpleFact.class.getName();
     public static final String FACT = Fact.class.getName();
     public static final String FACT_EXTRACTOR = FactExtractor.class.getName();
-    public static final String INSTRUCTION_PREDICATE_REGISTRY = FACT_EXTRACTOR + ".INSTRUCTION_PREDICATES";
+    public static final String INSTRUCTION_PREDICATE_REGISTRY = EDBPredicateRegistry.class.getName() + ".INSTRUCTION_PREDICATES";
 
     // for ISO 8601 timestamps
     public static final TimeZone TIME_ZONE = TimeZone.getTimeZone("UTC");
@@ -32,7 +35,7 @@ public class InstructionFactFactoryCodeGenerator {
 
     public static void main(String[] args) throws IOException {
 
-        Map<Integer,InstructionPredicate> REGISTRY = PredicateRegistry.INSTRUCTION_PREDICATES;
+        Map<Integer, EBDInstructionPredicate> REGISTRY = EDBPredicateRegistry.INSTRUCTION_PREDICATES;
         LOG.info("generating fact factories for {} instructions", REGISTRY.size());
 
         if (!Files.exists(DESTINATION)) {
@@ -41,8 +44,8 @@ public class InstructionFactFactoryCodeGenerator {
 
         List<String> generatedClasses = new ArrayList<>();
 
-        for (Map.Entry<Integer,InstructionPredicate> entry : REGISTRY.entrySet()) {
-            InstructionPredicate predicate = entry.getValue();
+        for (Map.Entry<Integer, EBDInstructionPredicate> entry : REGISTRY.entrySet()) {
+            EBDInstructionPredicate predicate = entry.getValue();
             assert predicate.getOpCode() == entry.getKey();
             int opCode = entry.getKey();
 
@@ -99,7 +102,7 @@ public class InstructionFactFactoryCodeGenerator {
         LOG.info("generated service registry (copy to resources/services): {}",serviceRegistryFile);
     }
 
-    private static String generateCode(int i,Slot s) {
+    private static String generateCode(int i, Slot s) {
         if (i==0) {
             assert s.name().equals("factid");
             return "factId";

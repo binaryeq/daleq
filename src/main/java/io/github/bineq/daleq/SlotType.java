@@ -1,4 +1,4 @@
-package io.github.bineq.daleq.edb;
+package io.github.bineq.daleq;
 
 /**
  * Souffle type.

@@ -1,5 +1,7 @@
-package io.github.bineq.daleq.idb;
+package io.github.bineq.daleq.idb.rulegeneration;
 
+import io.github.bineq.daleq.Fact;
+import io.github.bineq.daleq.Predicate;
 import io.github.bineq.daleq.edb.*;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
@@ -48,7 +50,7 @@ public class BaselineRuleGeneration {
     }
 
     static void generateRules (Path ruleFile) throws Exception {
-        List<Predicate> predicates = PredicateRegistry.ALL_PREDICATES;
+        List<Predicate> predicates = EDBPredicateRegistry.ALL_PREDICATES;
         List<String> lines = predicates.stream()
             .flatMap(predicate -> generateRule(predicate).stream())
             .collect(Collectors.toList());

@@ -1,6 +1,7 @@
 package io.github.bineq.daleq.edb;
 
 import com.google.common.base.Preconditions;
+import io.github.bineq.daleq.*;
 import org.apache.commons.cli.*;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Handle;
@@ -38,7 +39,7 @@ public class FactExtractor   {
         LOG.info("Loading instruction predicate fact factories");
         ServiceLoader<InstructionPredicateFactFactory> factories = ServiceLoader.load(InstructionPredicateFactFactory.class);
         for (InstructionPredicateFactFactory factory : factories) {
-            InstructionPredicate predicate = factory.getPredicate();
+            EBDInstructionPredicate predicate = factory.getPredicate();
             try {
                 factory.verify();
             }
@@ -153,7 +154,7 @@ public class FactExtractor   {
         // lines of predicate definitions and imports
 
         // generate fact files
-        for (Predicate predicate : PredicateRegistry.ALL_PREDICATES) {
+        for (Predicate predicate : EDBPredicateRegistry.ALL_PREDICATES) {
             List<Fact> facts = factsByPredicate.get(predicate);
             if (facts == null) {
                 facts = new ArrayList<>();
@@ -173,7 +174,7 @@ public class FactExtractor   {
         // generate imports for the predicates where we have facts
         // generate declarations for all predicates available (as they are used in rule sets)
         List<String> dbMain = new ArrayList<>();
-        for (Predicate predicate : PredicateRegistry.ALL_PREDICATES) {
+        for (Predicate predicate : EDBPredicateRegistry.ALL_PREDICATES) {
             dbMain.add(predicate.asSouffleDecl());
             dbMain.add(predicate.asSouffleFactImportStatement());
             dbMain.add("");
@@ -199,30 +200,30 @@ public class FactExtractor   {
         new ClassReader(bytes).accept(classNode, 0);
         List<Fact> facts = new ArrayList<>();
 
-        facts.add(new SimpleFact(AdditionalPredicates.SUPERCLASS, FactIdGenerator.nextId(AdditionalPredicates.SUPERCLASS),classNode.name, classNode.superName));
+        facts.add(new SimpleFact(EBDAdditionalPredicates.SUPERCLASS, FactIdGenerator.nextId(EBDAdditionalPredicates.SUPERCLASS),classNode.name, classNode.superName));
         for (String intrf : classNode.interfaces) {
-            facts.add(new SimpleFact(AdditionalPredicates.INTERFACE, FactIdGenerator.nextId(AdditionalPredicates.INTERFACE),classNode.name, intrf));
+            facts.add(new SimpleFact(EBDAdditionalPredicates.INTERFACE, FactIdGenerator.nextId(EBDAdditionalPredicates.INTERFACE),classNode.name, intrf));
         }
 
-        facts.add(new SimpleFact(AdditionalPredicates.CLASS_SIGNATURE,FactIdGenerator.nextId(AdditionalPredicates.CLASS_SIGNATURE),classNode.name, classNode.signature));
-        facts.add(new SimpleFact(AdditionalPredicates.VERSION,FactIdGenerator.nextId(AdditionalPredicates.VERSION),classNode.name,classNode.version));
-        facts.add(new SimpleFact(AdditionalPredicates.ACCESS,FactIdGenerator.nextId(AdditionalPredicates.ACCESS),classNode.name,classNode.access));
+        facts.add(new SimpleFact(EBDAdditionalPredicates.CLASS_SIGNATURE,FactIdGenerator.nextId(EBDAdditionalPredicates.CLASS_SIGNATURE),classNode.name, classNode.signature));
+        facts.add(new SimpleFact(EBDAdditionalPredicates.VERSION,FactIdGenerator.nextId(EBDAdditionalPredicates.VERSION),classNode.name,classNode.version));
+        facts.add(new SimpleFact(EBDAdditionalPredicates.ACCESS,FactIdGenerator.nextId(EBDAdditionalPredicates.ACCESS),classNode.name,classNode.access));
 
         // fields
         classNode.fields.stream().sorted((FIELD_COMP)).forEach(fieldNode -> {
             String fieldId = getFieldReference(classNode.name,fieldNode.name,fieldNode.desc);
-            facts.add(new SimpleFact(AdditionalPredicates.FIELD,FactIdGenerator.nextId(AdditionalPredicates.FIELD), fieldId,classNode.name, fieldNode.name,fieldNode.desc));
-            facts.add(new SimpleFact(AdditionalPredicates.FIELD_SIGNATURE, FactIdGenerator.nextId(AdditionalPredicates.FIELD_SIGNATURE), fieldId, fieldNode.signature));
-            facts.add(new SimpleFact(AdditionalPredicates.ACCESS,FactIdGenerator.nextId(AdditionalPredicates.ACCESS),fieldId,fieldNode.access));
+            facts.add(new SimpleFact(EBDAdditionalPredicates.FIELD,FactIdGenerator.nextId(EBDAdditionalPredicates.FIELD), fieldId,classNode.name, fieldNode.name,fieldNode.desc));
+            facts.add(new SimpleFact(EBDAdditionalPredicates.FIELD_SIGNATURE, FactIdGenerator.nextId(EBDAdditionalPredicates.FIELD_SIGNATURE), fieldId, fieldNode.signature));
+            facts.add(new SimpleFact(EBDAdditionalPredicates.ACCESS,FactIdGenerator.nextId(EBDAdditionalPredicates.ACCESS),fieldId,fieldNode.access));
         });
 
         // methods
         classNode.methods.stream().sorted((METHOD_NODE_COMPARATOR)).forEach(methodNode -> {
             AtomicInteger instructionCounter = new AtomicInteger(0);
             String methodId = getMethodReference(classNode.name,methodNode.name,methodNode.desc);
-            facts.add(new SimpleFact(AdditionalPredicates.METHOD, FactIdGenerator.nextId(AdditionalPredicates.METHOD),methodId, classNode.name, methodNode.name, methodNode.desc));
-            facts.add(new SimpleFact(AdditionalPredicates.METHOD_SIGNATURE,FactIdGenerator.nextId(AdditionalPredicates.METHOD_SIGNATURE),methodId, methodNode.signature));
-            facts.add(new SimpleFact(AdditionalPredicates.ACCESS,FactIdGenerator.nextId(AdditionalPredicates.ACCESS),methodId,methodNode.access));
+            facts.add(new SimpleFact(EBDAdditionalPredicates.METHOD, FactIdGenerator.nextId(EBDAdditionalPredicates.METHOD),methodId, classNode.name, methodNode.name, methodNode.desc));
+            facts.add(new SimpleFact(EBDAdditionalPredicates.METHOD_SIGNATURE,FactIdGenerator.nextId(EBDAdditionalPredicates.METHOD_SIGNATURE),methodId, methodNode.signature));
+            facts.add(new SimpleFact(EBDAdditionalPredicates.ACCESS,FactIdGenerator.nextId(EBDAdditionalPredicates.ACCESS),methodId,methodNode.access));
 
             //AtomicInteger line = new AtomicInteger(-1);
 
@@ -267,7 +268,7 @@ public class FactExtractor   {
                     int instCounter = instructionCounter.incrementAndGet();
 
                     // find predicate
-                    InstructionPredicate predicate = findPredicate(opCode,instr,instructionNode.getClass());
+                    EBDInstructionPredicate predicate = findPredicate(opCode,instr,instructionNode.getClass());
                     assert predicate != null;
 
                     // create fact
@@ -298,18 +299,17 @@ public class FactExtractor   {
         return facts;
     }
 
-    private static Fact createFact(InstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode,Map<LabelNode,Integer> labelMap) {
+    private static Fact createFact(EBDInstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode, Map<LabelNode,Integer> labelMap) {
         InstructionPredicateFactFactory factory = FACT_FACTORIES.get(predicate.getOpCode());
         Preconditions.checkNotNull(factory,"no fact factory found for instruction " + predicate.getName());
         String factId = FactIdGenerator.nextId(predicate);
         return factory.createFact(factId,instructionNode,methodId,instCounter,labelMap);
     }
 
-    private static InstructionPredicate findPredicate(int opCode, String instr, Class<? extends AbstractInsnNode> aClass) {
-        InstructionPredicate predicate = PredicateRegistry.INSTRUCTION_PREDICATES.get(opCode);
+    private static EBDInstructionPredicate findPredicate(int opCode, String instr, Class<? extends AbstractInsnNode> aClass) {
+        EBDInstructionPredicate predicate = EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(opCode);
         if (predicate == null) {
-            // use reflection to construct predicate
-            predicate = new InstructionPredicate();
+            predicate = new EBDInstructionPredicate();
             predicate.setId(createUUID());
             predicate.setOpCode(opCode);
             predicate.setName(instr);

@@ -41,7 +41,8 @@ public abstract class AbstractIDBTest {
         mergedEDBAndRules = Path.of(".tests/" + className + "/mergedEDBAndRules.souffle");
 
         // checks some preconditions !
-        Souffle.getAndCheckSouffleExe();
+        //assumeTrue(Souffle.checkSouffleExe());
+        assumeTrue(Souffle.checkSouffleExe(),"Souffle not set");
 
         // create EDB
         FactExtractor.extractAndExport(this.classFile,this.edbDef,this.edbFactDir,true);

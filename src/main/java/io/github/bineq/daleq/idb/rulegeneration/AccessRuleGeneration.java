@@ -1,4 +1,4 @@
-package io.github.bineq.daleq.idb;
+package io.github.bineq.daleq.idb.rulegeneration;
 
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;

@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.edb;
 
+import io.github.bineq.daleq.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,27 +10,27 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Utility to keep track of all predicates
+ * Utility to keep track of all predicates used in the EDB.
  * @author jens dietrich
  */
-public class PredicateRegistry {
+public class EDBPredicateRegistry {
 
-    public static final Map<Integer,InstructionPredicate> INSTRUCTION_PREDICATES = new HashMap<>();
+    public static final Map<Integer, EBDInstructionPredicate> INSTRUCTION_PREDICATES = new HashMap<>();
     public static final List<Predicate> ALL_PREDICATES = new ArrayList<>();
 
-    public static final Logger LOG = LoggerFactory.getLogger(PredicateRegistry.class);
+    public static final Logger LOG = LoggerFactory.getLogger(EDBPredicateRegistry.class);
 
 
     static {
         LOG.info("Loading instruction predicate registry");
-        URL folder = InstructionPredicate.class.getResource("/instruction-predicates");
+        URL folder = EBDInstructionPredicate.class.getResource("/instruction-predicates");
         assert folder != null;
         File dir = new File(folder.getPath());
         File[] files = dir.listFiles(f -> f.getName().endsWith(".json"));
         LOG.info("{} instruction predicates found", files.length);
         for (File file : files) {
             try {
-                InstructionPredicate predicate = InstructionPredicate.fromJson(file);
+                EBDInstructionPredicate predicate = EBDInstructionPredicate.fromJson(file);
                 int opCode = predicate.getOpCode();
                 if (INSTRUCTION_PREDICATES.containsKey(opCode)) {
                     LOG.warn("Duplicate instruction predicate for op code {}", opCode);
@@ -43,10 +44,10 @@ public class PredicateRegistry {
         LOG.info(""+ INSTRUCTION_PREDICATES.size() + " instruction predicates loaded");
 
 
-        for (AdditionalPredicates additionalPredicate : AdditionalPredicates.values()) {
+        for (EBDAdditionalPredicates additionalPredicate : EBDAdditionalPredicates.values()) {
             ALL_PREDICATES.add(additionalPredicate);
         }
-        ALL_PREDICATES.addAll(INSTRUCTION_PREDICATES.values().stream().sorted(Comparator.comparingInt(InstructionPredicate::getOpCode)).collect(Collectors.toList()));
+        ALL_PREDICATES.addAll(INSTRUCTION_PREDICATES.values().stream().sorted(Comparator.comparingInt(EBDInstructionPredicate::getOpCode)).collect(Collectors.toList()));
         LOG.info(""+ ALL_PREDICATES.size() + " predicates found");
 
     }

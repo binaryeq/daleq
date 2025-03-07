@@ -1,9 +1,7 @@
 package io.github.bineq.daleq.idb;
 
 import com.google.common.base.Preconditions;
-import io.github.bineq.daleq.edb.Predicate;
-
-import java.util.Arrays;
+import io.github.bineq.daleq.Predicate;
 
 /**
  * Conversion of EDB predicates into IDB predicates.
@@ -11,22 +9,15 @@ import java.util.Arrays;
  */
 public class IDBPredicates {
 
-    public static final String PREFIX = "IDB_";
+    private static final String PREFIX = "IDB_";
 
-    public String getIDBPredicateName(Predicate predicate) {
-        Preconditions.checkArgument(!isIDBPredicate(predicate));
-        return getIDBPredicateName(predicate.getName());
-    }
-
-    private String getIDBPredicateName(String name) {
+    static String convertPredicateNameToIDB(String name) {
+        Preconditions.checkArgument(!isIDBPredicateName(name));
         return PREFIX + name;
     }
 
-    public boolean isIDBPredicateName(String name) {
-        return name.startsWith(PREFIX) || AdditionalPredicates.valuesAsSet().stream().map(AdditionalPredicates::name).anyMatch(name::equals);
+    static boolean isIDBPredicateName(String name) {
+        return name.startsWith(PREFIX) || IDBAdditionalPredicates.valuesAsSet().stream().map(IDBAdditionalPredicates::name).anyMatch(name::equals);
     }
 
-    public boolean isIDBPredicate(Predicate predicate) {
-        return AdditionalPredicates.valuesAsSet().contains(predicate) || isIDBPredicateName(predicate.getName());
-    }
 }

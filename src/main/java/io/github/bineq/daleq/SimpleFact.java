@@ -1,4 +1,4 @@
-package io.github.bineq.daleq.edb;
+package io.github.bineq.daleq;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

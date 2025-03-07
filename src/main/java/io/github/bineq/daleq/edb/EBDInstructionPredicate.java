@@ -2,6 +2,9 @@ package io.github.bineq.daleq.edb;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import io.github.bineq.daleq.Predicate;
+import io.github.bineq.daleq.Slot;
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.Objects;
@@ -10,7 +13,7 @@ import java.util.Objects;
  * Predicates for facts representing bytecode instructions.
  * @author jens dietrich
  */
-public class InstructionPredicate implements Predicate {
+public class EBDInstructionPredicate implements Predicate {
 
     private String name = null;
     private int opCode = -1;
@@ -64,7 +67,7 @@ public class InstructionPredicate implements Predicate {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        InstructionPredicate predicate = (InstructionPredicate) o;
+        EBDInstructionPredicate predicate = (EBDInstructionPredicate) o;
         return opCode == predicate.opCode && Objects.equals(name, predicate.name) && Objects.deepEquals(slots, predicate.slots) && Objects.equals(id, predicate.id) && Objects.equals(asmNodeType, predicate.asmNodeType);
     }
 
@@ -80,14 +83,24 @@ public class InstructionPredicate implements Predicate {
         }
     }
 
-    public static InstructionPredicate fromJson(File f) throws IOException {
+    public static EBDInstructionPredicate fromJson(File f) throws IOException {
         try (FileReader reader = new FileReader(f)) {
-            return new Gson().fromJson(reader, InstructionPredicate.class);
+            return new Gson().fromJson(reader, EBDInstructionPredicate.class);
         }
     }
 
     @Override
     public boolean isInstructionPredicate() {
         return true;
+    }
+
+    @Override
+    public boolean isEDBPredicate() {
+        return true;
+    }
+
+    @Override
+    public boolean isIDBPredicate() {
+        return false;
     }
 }
