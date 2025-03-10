@@ -15,8 +15,6 @@ import static io.github.bineq.daleq.Slot.*;
  */
 public enum EBDAdditionalPredicates implements Predicate {
 
-
-
     // class properties
     SUPERCLASS(symslot(Fact.ID_SLOT_NAME),symslot("name"),symslot("supername")),
     INTERFACE(symslot(Fact.ID_SLOT_NAME),symslot("name"),symslot("interface")),

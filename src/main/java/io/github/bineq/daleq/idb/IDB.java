@@ -16,7 +16,7 @@ public class IDB {
     Fact classSignatureFact = null;
     Fact bytecodeVersionFact = null;
     List<Fact> classInterfaceFacts = new ArrayList<>();
-    Fact classRawAccessFacts = null; // raw, value is single fact for all int-encoded access flags
+    Fact classRawAccessFact = null; // raw, value is single fact for all int-encoded access flags
     Set<Fact> classAccessFacts = new HashSet<>();
 
     Set<Fact> methodFacts = new TreeSet<>(Comparator.comparing(f -> f.values()[1].toString()));

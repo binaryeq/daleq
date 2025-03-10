@@ -3,7 +3,6 @@ package io.github.bineq.daleq.idb;
 import com.google.common.base.Preconditions;
 import io.github.bineq.daleq.*;
 import io.github.bineq.daleq.edb.EBDAdditionalPredicates;
-import io.github.bineq.daleq.edb.EDBPredicateRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +12,6 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 
 /**
@@ -70,11 +68,9 @@ public class IDBReader {
                     idb.bytecodeVersionFact = fact;
                 }
                 else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.METHOD)) {
-                    String methodId = getMethodId(fact);
                     idb.methodFacts.add(fact);
                 }
                 else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.FIELD)) {
-                    String fieldid = getMethodId(fact);
                     idb.fieldFacts.add(fact);
                 }
                 else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.METHOD_SIGNATURE)) {
@@ -90,7 +86,7 @@ public class IDBReader {
                     String classOrMethodOrFieldId = getClassOrMethodOrFieldId(fact);
                     Type type = classify(classOrMethodOrFieldId);
                     if (type==Type.CLASS) {
-                        idb.classRawAccessFacts = fact;
+                        idb.classRawAccessFact = fact;
                     }
                     else if (type==Type.FIELD) {
                         Set<Fact> facts2 = idb.fieldAccessFacts.computeIfAbsent(classOrMethodOrFieldId, mId -> new HashSet<>());
