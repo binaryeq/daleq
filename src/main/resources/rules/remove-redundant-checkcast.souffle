@@ -14,6 +14,10 @@ IDB_SUPERCLASS(cat("R_SUPERCLASS","[",factid,"]"),name,supername) :- SUPERCLASS(
 IDB_INTERFACE(cat("R_INTERFACE","[",factid,"]"),name,interface) :- INTERFACE(factid,name,interface).
 .output IDB_INTERFACE
 
+.decl IDB_ACCESS(factid: symbol,id: symbol,access: number)
+IDB_ACCESS(cat("R_ACCESS","[",factid,"]"),id,access) :- ACCESS(factid,id,access).
+.output IDB_ACCESS
+
 .decl IDB_FIELD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
 IDB_FIELD(cat("R_FIELD","[",factid,"]"),id,classname,name,descriptor) :- FIELD(factid,id,classname,name,descriptor).
 .output IDB_FIELD

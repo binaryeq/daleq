@@ -1,0 +1,17 @@
+R_ACCESS[F716]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration	33
+R_ACCESS[F719]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::DATA_ENCODING(Ljava/lang/String;	26
+R_ACCESS[F722]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::INDENT_SIZE(I	26
+R_ACCESS[F725]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::locator(Lorg/apache/commons/configuration2/io/FileLocator;	2
+R_ACCESS[F728]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>()V	1
+R_ACCESS[F734]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>(Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V	1
+R_ACCESS[F741]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>(Lorg/apache/commons/configuration2/tree/ImmutableNode;)V	0
+R_ACCESS[F751]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::addPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V	4
+R_ACCESS[F781]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::initFileLocator(Lorg/apache/commons/configuration2/io/FileLocator;)V	1
+R_ACCESS[F788]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::lambda$read$0(Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;	4098
+R_ACCESS[F800]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V	2
+R_ACCESS[F901]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	2
+R_ACCESS[F1224]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::read(Ljava/io/Reader;)V	1
+R_ACCESS[F1277]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyDirect(Ljava/lang/String;Ljava/lang/Object;)V	2
+R_ACCESS[F1301]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V	4
+R_ACCESS[F1331]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::transformMap(Ljava/util/Map;)Ljava/util/Map;	10
+R_ACCESS[F1364]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	1
