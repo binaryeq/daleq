@@ -22,7 +22,7 @@ IDB_FIELD(cat("R_FIELD","[",factid,"]"),id,classname,name,descriptor) :- FIELD(f
 IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor).
 .output IDB_METHOD
 
-.decl IDB_VERSION(factid: symbol,classname: symbol,version: symbol)
+.decl IDB_VERSION(factid: symbol,classname: symbol,version: number)
 IDB_VERSION(cat("R_VERSION","[",factid,"]"),classname,version) :- VERSION(factid,classname,version).
 .output IDB_VERSION
 

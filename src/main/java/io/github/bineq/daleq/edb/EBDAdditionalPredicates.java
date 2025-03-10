@@ -22,7 +22,7 @@ public enum EBDAdditionalPredicates implements Predicate {
     INTERFACE(symslot(Fact.ID_SLOT_NAME),symslot("name"),symslot("interface")),
     FIELD(symslot(Fact.ID_SLOT_NAME),symslot("id"),symslot("classname"),symslot("name"),symslot("descriptor")),
     METHOD(symslot(Fact.ID_SLOT_NAME),symslot("id"),symslot("classname"),symslot("name"),symslot("descriptor")),
-    VERSION(symslot(Fact.ID_SLOT_NAME),symslot("classname"),symslot("version")),
+    VERSION(symslot(Fact.ID_SLOT_NAME),symslot("classname"),numslot("version",Integer.TYPE.getName())),
     CLASS_SIGNATURE(symslot(Fact.ID_SLOT_NAME),symslot("classname"),symslot("signature")),
 
     // field properties
