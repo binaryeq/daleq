@@ -1,0 +1,3 @@
+R_FIELD[F3557]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::DATA_ENCODING(Ljava/lang/String;	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration	DATA_ENCODING	Ljava/lang/String;
+R_FIELD[F3560]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::INDENT_SIZE(I	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration	INDENT_SIZE	I
+R_FIELD[F3563]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::locator(Lorg/apache/commons/configuration2/io/FileLocator;	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration	locator	Lorg/apache/commons/configuration2/io/FileLocator;

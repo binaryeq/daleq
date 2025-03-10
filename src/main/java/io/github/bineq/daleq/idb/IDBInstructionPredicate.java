@@ -13,10 +13,12 @@ public class IDBInstructionPredicate implements Predicate {
 
     private Slot[] slots = null;
     private String name = null;
+    private boolean  isInstructionPredicate = false;
 
-    public IDBInstructionPredicate(String name, Slot[] slots) {
+    public IDBInstructionPredicate(String name, Slot[] slots,boolean isInstructionPredicate) {
         this.slots = slots;
         this.name = name;
+        this.isInstructionPredicate = isInstructionPredicate;
     }
 
     @Override
@@ -31,7 +33,7 @@ public class IDBInstructionPredicate implements Predicate {
 
     @Override
     public boolean isInstructionPredicate() {
-        return true;
+        return this.isInstructionPredicate;
     }
 
     @Override

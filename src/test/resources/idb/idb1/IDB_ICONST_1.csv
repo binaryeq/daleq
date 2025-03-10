@@ -1,0 +1,7 @@
+R_ICONST_1[F3695]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V	55
+R_ICONST_1[F3888]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	150
+R_ICONST_1[F3960]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	222
+R_ICONST_1[F4076]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::read(Ljava/io/Reader;)V	12
+R_ICONST_1[F4129]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyDirect(Ljava/lang/String;Ljava/lang/Object;)V	12
+R_ICONST_1[F4134]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyDirect(Ljava/lang/String;Ljava/lang/Object;)V	17
+R_ICONST_1[F4248]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	44

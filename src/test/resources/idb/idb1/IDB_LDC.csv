@@ -1,0 +1,34 @@
+R_LDC[F3634]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::lambda$read$0(Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;	6	PropertyList-1.0.dtd
+R_LDC[F3641]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V	1	 
+R_LDC[F3656]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V	16	<key>
+R_LDC[F3662]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V	22	</key>
+R_LDC[F3678]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V	38	<dict>
+R_LDC[F3711]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V	71	</dict>
+R_LDC[F3725]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V	85	<dict/>
+R_LDC[F3742]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	1	 
+R_LDC[F3760]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	20	<date>
+R_LDC[F3767]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	27	</date>
+R_LDC[F3807]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	69	<real>
+R_LDC[F3812]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	74	</real>
+R_LDC[F3823]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	85	<integer>
+R_LDC[F3828]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	90	</integer>
+R_LDC[F3846]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	108	<true/>
+R_LDC[F3857]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	119	<false/>
+R_LDC[F3871]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	133	<array>
+R_LDC[F3899]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	161	</array>
+R_LDC[F3929]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	191	<dict>
+R_LDC[F3976]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	238	</dict>
+R_LDC[F4006]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	268	UTF-8
+R_LDC[F4022]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	284	<data>
+R_LDC[F4027]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	289	</data>
+R_LDC[F4040]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	302	<string>
+R_LDC[F4046]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	308	</string>
+R_LDC[F4057]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	319	<string/>
+R_LDC[F4110]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::read(Ljava/io/Reader;)V	46	Unable to parse the configuration file
+R_LDC[F4210]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	6	Save operation not properly initialized! Do not call write(Writer) directly, but use a FileHandler to save a configuration.
+R_LDC[F4226]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	22	<?xml version="1.0" encoding="
+R_LDC[F4232]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	28	"?>
+R_LDC[F4238]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	34	<?xml version="1.0"?>
+R_LDC[F4241]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	37	<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
+R_LDC[F4244]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	40	<plist version="1.0">
+R_LDC[F4256]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	52	</plist>

@@ -1,0 +1,8 @@
+R_IS_PRIVATE[F3559]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::DATA_ENCODING(Ljava/lang/String;
+R_IS_PRIVATE[F3562]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::INDENT_SIZE(I
+R_IS_PRIVATE[F3565]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::locator(Lorg/apache/commons/configuration2/io/FileLocator;
+R_IS_PRIVATE[F3628]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::lambda$read$0(Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;
+R_IS_PRIVATE[F3640]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V
+R_IS_PRIVATE[F3741]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V
+R_IS_PRIVATE[F4117]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyDirect(Ljava/lang/String;Ljava/lang/Object;)V
+R_IS_PRIVATE[F4171]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::transformMap(Ljava/util/Map;)Ljava/util/Map;

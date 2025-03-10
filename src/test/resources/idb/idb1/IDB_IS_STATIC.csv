@@ -1,0 +1,3 @@
+R_IS_STATIC[F3559]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::DATA_ENCODING(Ljava/lang/String;
+R_IS_STATIC[F3562]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::INDENT_SIZE(I
+R_IS_STATIC[F4171]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::transformMap(Ljava/util/Map;)Ljava/util/Map;

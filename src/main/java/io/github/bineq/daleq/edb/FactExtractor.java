@@ -154,7 +154,7 @@ public class FactExtractor   {
         // lines of predicate definitions and imports
 
         // generate fact files
-        for (Predicate predicate : EDBPredicateRegistry.ALL_PREDICATES) {
+        for (Predicate predicate : EDBPredicateRegistry.ALL) {
             List<Fact> facts = factsByPredicate.get(predicate);
             if (facts == null) {
                 facts = new ArrayList<>();
@@ -174,7 +174,7 @@ public class FactExtractor   {
         // generate imports for the predicates where we have facts
         // generate declarations for all predicates available (as they are used in rule sets)
         List<String> dbMain = new ArrayList<>();
-        for (Predicate predicate : EDBPredicateRegistry.ALL_PREDICATES) {
+        for (Predicate predicate : EDBPredicateRegistry.ALL) {
             dbMain.add(predicate.asSouffleDecl());
             dbMain.add(predicate.asSouffleFactImportStatement());
             dbMain.add("");

@@ -1,0 +1,13 @@
+R_METHOD_SIGNATURE[F3567]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>()V	null
+R_METHOD_SIGNATURE[F3573]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>(Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V	(Lorg/apache/commons/configuration2/HierarchicalConfiguration<Lorg/apache/commons/configuration2/tree/ImmutableNode;>;)V
+R_METHOD_SIGNATURE[F3580]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>(Lorg/apache/commons/configuration2/tree/ImmutableNode;)V	null
+R_METHOD_SIGNATURE[F3590]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::addPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V	null
+R_METHOD_SIGNATURE[F3620]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::initFileLocator(Lorg/apache/commons/configuration2/io/FileLocator;)V	null
+R_METHOD_SIGNATURE[F3627]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::lambda$read$0(Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;	null
+R_METHOD_SIGNATURE[F3639]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V	null
+R_METHOD_SIGNATURE[F3740]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	null
+R_METHOD_SIGNATURE[F4063]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::read(Ljava/io/Reader;)V	null
+R_METHOD_SIGNATURE[F4116]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyDirect(Ljava/lang/String;Ljava/lang/Object;)V	null
+R_METHOD_SIGNATURE[F4140]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V	null
+R_METHOD_SIGNATURE[F4170]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::transformMap(Ljava/util/Map;)Ljava/util/Map;	(Ljava/util/Map<**>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;
+R_METHOD_SIGNATURE[F4203]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	null

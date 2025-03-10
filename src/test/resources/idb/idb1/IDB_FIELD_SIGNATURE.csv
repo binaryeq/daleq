@@ -1,0 +1,3 @@
+R_FIELD_SIGNATURE[F3558]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::DATA_ENCODING(Ljava/lang/String;	null
+R_FIELD_SIGNATURE[F3561]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::INDENT_SIZE(I	null
+R_FIELD_SIGNATURE[F3564]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::locator(Lorg/apache/commons/configuration2/io/FileLocator;	null

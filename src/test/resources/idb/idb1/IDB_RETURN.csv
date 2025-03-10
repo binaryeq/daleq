@@ -1,0 +1,11 @@
+R_RETURN[F3571]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>()V	3
+R_RETURN[F3578]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>(Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V	4
+R_RETURN[F3588]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>(Lorg/apache/commons/configuration2/tree/ImmutableNode;)V	7
+R_RETURN[F3618]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::addPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V	27
+R_RETURN[F3625]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::initFileLocator(Lorg/apache/commons/configuration2/io/FileLocator;)V	4
+R_RETURN[F3738]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printNode(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V	98
+R_RETURN[F4061]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	323
+R_RETURN[F4114]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::read(Ljava/io/Reader;)V	50
+R_RETURN[F4138]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyDirect(Ljava/lang/String;Ljava/lang/Object;)V	21
+R_RETURN[F4168]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V	27
+R_RETURN[F4260]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V	56

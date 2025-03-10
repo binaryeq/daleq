@@ -1,0 +1,2 @@
+R_IS_PROTECTED[F3591]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::addPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V
+R_IS_PROTECTED[F4141]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V

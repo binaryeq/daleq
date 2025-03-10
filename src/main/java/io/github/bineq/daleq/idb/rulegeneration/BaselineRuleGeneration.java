@@ -50,7 +50,7 @@ public class BaselineRuleGeneration {
     }
 
     static void generateRules (Path ruleFile) throws Exception {
-        List<Predicate> predicates = EDBPredicateRegistry.ALL_PREDICATES;
+        List<Predicate> predicates = EDBPredicateRegistry.ALL;
         List<String> lines = predicates.stream()
             .flatMap(predicate -> generateRule(predicate).stream())
             .collect(Collectors.toList());

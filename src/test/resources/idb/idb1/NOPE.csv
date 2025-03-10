@@ -1,0 +1,3 @@
+R_REMOVE_REDUNDANT_CHECKCAST[F3610,F3609]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::addPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V	19
+R_REMOVE_REDUNDANT_CHECKCAST[F4004,F4003]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::printValue(Ljava/io/PrintWriter;ILjava/lang/Object;)V	266
+R_REMOVE_REDUNDANT_CHECKCAST[F4160,F4159]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::setPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V	19

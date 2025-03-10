@@ -1,0 +1,6 @@
+R_IS_PUBLIC[F3556]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration
+R_IS_PUBLIC[F3568]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>()V
+R_IS_PUBLIC[F3574]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::<init>(Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V
+R_IS_PUBLIC[F3621]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::initFileLocator(Lorg/apache/commons/configuration2/io/FileLocator;)V
+R_IS_PUBLIC[F4064]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::read(Ljava/io/Reader;)V
+R_IS_PUBLIC[F4204]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::write(Ljava/io/Writer;)V

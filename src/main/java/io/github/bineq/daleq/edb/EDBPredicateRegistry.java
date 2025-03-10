@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class EDBPredicateRegistry {
 
     public static final Map<Integer, EBDInstructionPredicate> INSTRUCTION_PREDICATES = new HashMap<>();
-    public static final List<Predicate> ALL_PREDICATES = new ArrayList<>();
+    public static final List<Predicate> ALL = new ArrayList<>();
 
     public static final Logger LOG = LoggerFactory.getLogger(EDBPredicateRegistry.class);
 
@@ -45,10 +45,10 @@ public class EDBPredicateRegistry {
 
 
         for (EBDAdditionalPredicates additionalPredicate : EBDAdditionalPredicates.values()) {
-            ALL_PREDICATES.add(additionalPredicate);
+            ALL.add(additionalPredicate);
         }
-        ALL_PREDICATES.addAll(INSTRUCTION_PREDICATES.values().stream().sorted(Comparator.comparingInt(EBDInstructionPredicate::getOpCode)).collect(Collectors.toList()));
-        LOG.info(""+ ALL_PREDICATES.size() + " predicates found");
+        ALL.addAll(INSTRUCTION_PREDICATES.values().stream().sorted(Comparator.comparingInt(EBDInstructionPredicate::getOpCode)).collect(Collectors.toList()));
+        LOG.info(""+ ALL.size() + " predicates found");
 
     }
 

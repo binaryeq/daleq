@@ -1,0 +1,3 @@
+R_ACONST_NULL[F4101]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::read(Ljava/io/Reader;)V	37
+R_ACONST_NULL[F4102]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::read(Ljava/io/Reader;)V	38
+R_ACONST_NULL[F4103]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::read(Ljava/io/Reader;)V	39

@@ -1,0 +1,2 @@
+R_INTERFACE[F3552]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration	org/apache/commons/configuration2/FileBasedConfiguration
+R_INTERFACE[F3553]	org/apache/commons/configuration2/plist/XMLPropertyListConfiguration	org/apache/commons/configuration2/io/FileLocatorAware

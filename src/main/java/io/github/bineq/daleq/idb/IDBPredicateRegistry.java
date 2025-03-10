@@ -1,11 +1,10 @@
 package io.github.bineq.daleq.idb;
 
 import io.github.bineq.daleq.Predicate;
+import io.github.bineq.daleq.edb.EDBPredicateRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.*;
-
-import static io.github.bineq.daleq.edb.EDBPredicateRegistry.INSTRUCTION_PREDICATES;
 
 /**
  * Utility to keep track of all predicates used in the IDB.
@@ -14,28 +13,32 @@ import static io.github.bineq.daleq.edb.EDBPredicateRegistry.INSTRUCTION_PREDICA
 public class IDBPredicateRegistry {
 
     // organised by name
-    public static final Map<String,Predicate> ALL_PREDICATES = new HashMap<>();
+    public static final Map<String,Predicate> ALL = new HashMap<>();
 
     public static final Logger LOG = LoggerFactory.getLogger(IDBPredicateRegistry.class);
 
     static {
-        LOG.info("Loading instruction predicate registry");
-        INSTRUCTION_PREDICATES.values().stream()
-            .map(edbPredicate -> new IDBInstructionPredicate(IDBPredicates.convertPredicateNameToIDB(edbPredicate.getName()),edbPredicate.getSlots().clone()))
+        LOG.info("Loading and converting EDB predicates");
+        EDBPredicateRegistry.ALL.stream()
+            .map(edbPredicate -> new IDBInstructionPredicate(IDBPredicates.convertPredicateNameToIDB(edbPredicate.getName()),edbPredicate.getSlots().clone(),edbPredicate.isInstructionPredicate()))
                 .forEach(idbPredicate -> {
-                    Predicate previous = ALL_PREDICATES.put(idbPredicate.getName(),idbPredicate);
+                    Predicate previous = ALL.put(idbPredicate.getName(),idbPredicate);
                     assert previous == null : "two predicates with the same name exists";
                 });
+        LOG.info(""+ ALL.size() + " instruction predicates loaded");
 
-
-        LOG.info(""+ ALL_PREDICATES.size() + " instruction predicates loaded");
+        // adding access predicates
+        for (Predicate predicate : IDBAccessPredicates.ALL) {
+            ALL.put(predicate.getName(),predicate);
+        }
+        LOG.info(""+ IDBAccessPredicates.ALL.size() + " access predicates added");
 
         for (IDBAdditionalPredicates additionalPredicate : IDBAdditionalPredicates.values()) {
-            Predicate previous = ALL_PREDICATES.put(additionalPredicate.getName(),additionalPredicate);
+            Predicate previous = ALL.put(additionalPredicate.getName(),additionalPredicate);
             assert previous == null : "two predicates with the same name exists";
         }
 
-        LOG.info(""+ ALL_PREDICATES.size() + " predicates found");
+        LOG.info(""+ ALL.size() + " predicates found");
 
     }
 
