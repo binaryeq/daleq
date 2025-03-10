@@ -1,717 +1,918 @@
-Compiled from "XMLPropertyListConfiguration.java"
-public class org.apache.commons.configuration2.plist.XMLPropertyListConfiguration extends org.apache.commons.configuration2.BaseHierarchicalConfiguration implements org.apache.commons.configuration2.FileBasedConfiguration,org.apache.commons.configuration2.io.FileLocatorAware {
-  private static final int INDENT_SIZE;
-
-  private static final java.lang.String DATA_ENCODING;
-
-  private org.apache.commons.configuration2.io.FileLocator locator;
-
+Classfile /Users/jens/Development/binaryeq/daleq/src/test/resources/test-scenarios/scenario2/version1/XMLPropertyListConfiguration.class
+  Last modified 27/02/2025; size 12938 bytes
+  SHA-256 checksum b04be59e7a46fa7f040c559c71f130c188133d8845b7418f924cd9589720ce78
+  Compiled from "XMLPropertyListConfiguration.java"
+public class org.apache.commons.configuration2.plist.XMLPropertyListConfiguration extends org.apache.commons.configuration2.BaseHierarchicalConfiguration implements org.apache.commons.configuration2.FileBasedConfiguration,org.apache.commons.configuration2.io.FileLocatorAware
+  minor version: 0
+  major version: 52
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #59                         // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration
+  super_class: #139                       // org/apache/commons/configuration2/BaseHierarchicalConfiguration
+  interfaces: 2, fields: 3, methods: 13, attributes: 3
+Constant pool:
+    #1 = Methodref          #139.#259     // org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":()V
+    #2 = Methodref          #139.#260     // org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":(Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V
+    #3 = Class              #261          // org/apache/commons/configuration2/tree/InMemoryNodeModel
+    #4 = Methodref          #3.#262       // org/apache/commons/configuration2/tree/InMemoryNodeModel."<init>":(Lorg/apache/commons/configuration2/tree/ImmutableNode;)V
+    #5 = Methodref          #139.#263     // org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":(Lorg/apache/commons/configuration2/tree/NodeModel;)V
+    #6 = Methodref          #59.#264      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.setDetailEvents:(Z)V
+    #7 = Methodref          #59.#265      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.clearProperty:(Ljava/lang/String;)V
+    #8 = Methodref          #59.#266      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.addPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
+    #9 = Class              #267          // "[B"
+   #10 = Class              #268          // java/util/List
+   #11 = Methodref          #59.#269      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.setPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
+   #12 = Class              #270          // "[Ljava/lang/Object;"
+   #13 = Methodref          #271.#272     // java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+   #14 = Methodref          #139.#273     // org/apache/commons/configuration2/BaseHierarchicalConfiguration.setPropertyInternal:(Ljava/lang/String;Ljava/lang/Object;)V
+   #15 = Methodref          #139.#274     // org/apache/commons/configuration2/BaseHierarchicalConfiguration.addPropertyInternal:(Ljava/lang/String;Ljava/lang/Object;)V
+   #16 = Fieldref           #59.#275      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.locator:Lorg/apache/commons/configuration2/io/FileLocator;
+   #17 = InvokeDynamic      #0:#280       // #0:resolveEntity:(Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;)Lorg/xml/sax/EntityResolver;
+   #18 = Class              #281          // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler
+   #19 = Methodref          #18.#282      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler."<init>":(Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;)V
+   #20 = Methodref          #283.#284     // javax/xml/parsers/SAXParserFactory.newInstance:()Ljavax/xml/parsers/SAXParserFactory;
+   #21 = Methodref          #283.#285     // javax/xml/parsers/SAXParserFactory.setValidating:(Z)V
+   #22 = Methodref          #283.#286     // javax/xml/parsers/SAXParserFactory.newSAXParser:()Ljavax/xml/parsers/SAXParser;
+   #23 = Methodref          #287.#288     // javax/xml/parsers/SAXParser.getXMLReader:()Lorg/xml/sax/XMLReader;
+   #24 = InterfaceMethodref #289.#290     // org/xml/sax/XMLReader.setEntityResolver:(Lorg/xml/sax/EntityResolver;)V
+   #25 = InterfaceMethodref #289.#291     // org/xml/sax/XMLReader.setContentHandler:(Lorg/xml/sax/ContentHandler;)V
+   #26 = Class              #292          // org/xml/sax/InputSource
+   #27 = Methodref          #26.#293      // org/xml/sax/InputSource."<init>":(Ljava/io/Reader;)V
+   #28 = InterfaceMethodref #289.#294     // org/xml/sax/XMLReader.parse:(Lorg/xml/sax/InputSource;)V
+   #29 = Methodref          #59.#295      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.getNodeModel:()Lorg/apache/commons/configuration2/tree/InMemoryNodeModel;
+   #30 = Methodref          #18.#296      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler.getResultBuilder:()Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder;
+   #31 = Methodref          #146.#297     // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder.createNode:()Lorg/apache/commons/configuration2/tree/ImmutableNode;
+   #32 = Methodref          #3.#298       // org/apache/commons/configuration2/tree/InMemoryNodeModel.mergeRoot:(Lorg/apache/commons/configuration2/tree/ImmutableNode;Ljava/lang/String;Ljava/util/Map;Ljava/lang/Object;Lorg/apache/commons/configuration2/tree/NodeKeyResolver;)V
+   #33 = Class              #299          // java/lang/Exception
+   #34 = Class              #300          // org/apache/commons/configuration2/ex/ConfigurationException
+   #35 = String             #301          // Unable to parse the configuration file
+   #36 = Methodref          #34.#302      // org/apache/commons/configuration2/ex/ConfigurationException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+   #37 = String             #303          // Save operation not properly initialized! Do not call write(Writer) directly, but use a FileHandler to save a configuration.
+   #38 = Methodref          #34.#304      // org/apache/commons/configuration2/ex/ConfigurationException."<init>":(Ljava/lang/String;)V
+   #39 = Class              #305          // java/io/PrintWriter
+   #40 = Methodref          #39.#306      // java/io/PrintWriter."<init>":(Ljava/io/Writer;)V
+   #41 = Methodref          #307.#308     // org/apache/commons/configuration2/io/FileLocator.getEncoding:()Ljava/lang/String;
+   #42 = Class              #309          // java/lang/StringBuilder
+   #43 = Methodref          #42.#259      // java/lang/StringBuilder."<init>":()V
+   #44 = String             #310          // <?xml version=\"1.0\" encoding=\"
+   #45 = Methodref          #42.#311      // java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+   #46 = String             #312          // \"?>
+   #47 = Methodref          #42.#313      // java/lang/StringBuilder.toString:()Ljava/lang/String;
+   #48 = Methodref          #39.#314      // java/io/PrintWriter.println:(Ljava/lang/String;)V
+   #49 = String             #315          // <?xml version=\"1.0\"?>
+   #50 = String             #316          // <!DOCTYPE plist SYSTEM \"file://localhost/System/Library/DTDs/PropertyList.dtd\">
+   #51 = String             #317          // <plist version=\"1.0\">
+   #52 = Methodref          #3.#318       // org/apache/commons/configuration2/tree/InMemoryNodeModel.getNodeHandler:()Lorg/apache/commons/configuration2/tree/NodeHandler;
+   #53 = InterfaceMethodref #319.#320     // org/apache/commons/configuration2/tree/NodeHandler.getRootNode:()Ljava/lang/Object;
+   #54 = Class              #321          // org/apache/commons/configuration2/tree/ImmutableNode
+   #55 = Methodref          #59.#322      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.printNode:(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V
+   #56 = String             #323          // </plist>
+   #57 = Methodref          #39.#324      // java/io/PrintWriter.flush:()V
+   #58 = String             #325          //
+   #59 = Class              #326          // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration
+   #60 = Methodref          #327.#328     // org/apache/commons/lang3/StringUtils.repeat:(Ljava/lang/String;I)Ljava/lang/String;
+   #61 = Methodref          #54.#329      // org/apache/commons/configuration2/tree/ImmutableNode.getNodeName:()Ljava/lang/String;
+   #62 = String             #330          // <key>
+   #63 = Methodref          #331.#332     // org/apache/commons/text/StringEscapeUtils.escapeXml10:(Ljava/lang/String;)Ljava/lang/String;
+   #64 = String             #333          // </key>
+   #65 = Methodref          #54.#334      // org/apache/commons/configuration2/tree/ImmutableNode.getChildren:()Ljava/util/List;
+   #66 = InterfaceMethodref #10.#335      // java/util/List.isEmpty:()Z
+   #67 = String             #336          // <dict>
+   #68 = InterfaceMethodref #10.#337      // java/util/List.iterator:()Ljava/util/Iterator;
+   #69 = InterfaceMethodref #338.#339     // java/util/Iterator.hasNext:()Z
+   #70 = InterfaceMethodref #338.#340     // java/util/Iterator.next:()Ljava/lang/Object;
+   #71 = Methodref          #39.#341      // java/io/PrintWriter.println:()V
+   #72 = String             #342          // </dict>
+   #73 = Methodref          #54.#343      // org/apache/commons/configuration2/tree/ImmutableNode.getValue:()Ljava/lang/Object;
+   #74 = String             #344          // <dict/>
+   #75 = Methodref          #59.#345      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.printValue:(Ljava/io/PrintWriter;ILjava/lang/Object;)V
+   #76 = Class              #346          // java/util/Date
+   #77 = Methodref          #146.#347     // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder.access$000:()Ljava/text/DateFormat;
+   #78 = String             #348          // <date>
+   #79 = Methodref          #349.#350     // java/text/DateFormat.format:(Ljava/util/Date;)Ljava/lang/String;
+   #80 = String             #351          // </date>
+   #81 = Class              #352          // java/util/Calendar
+   #82 = Methodref          #81.#353      // java/util/Calendar.getTime:()Ljava/util/Date;
+   #83 = Class              #354          // java/lang/Number
+   #84 = Class              #355          // java/lang/Double
+   #85 = Class              #356          // java/lang/Float
+   #86 = Class              #357          // java/math/BigDecimal
+   #87 = String             #358          // <real>
+   #88 = Methodref          #359.#313     // java/lang/Object.toString:()Ljava/lang/String;
+   #89 = String             #360          // </real>
+   #90 = String             #361          // <integer>
+   #91 = String             #362          // </integer>
+   #92 = Class              #363          // java/lang/Boolean
+   #93 = Methodref          #92.#364      // java/lang/Boolean.booleanValue:()Z
+   #94 = String             #365          // <true/>
+   #95 = String             #366          // <false/>
+   #96 = String             #367          // <array>
+   #97 = String             #368          // </array>
+   #98 = Class              #369          // org/apache/commons/configuration2/HierarchicalConfiguration
+   #99 = InterfaceMethodref #98.#370      // org/apache/commons/configuration2/HierarchicalConfiguration.getNodeModel:()Lorg/apache/commons/configuration2/tree/NodeModel;
+  #100 = InterfaceMethodref #371.#318     // org/apache/commons/configuration2/tree/NodeModel.getNodeHandler:()Lorg/apache/commons/configuration2/tree/NodeHandler;
+  #101 = Class              #372          // org/apache/commons/configuration2/ImmutableConfiguration
+  #102 = InterfaceMethodref #101.#373     // org/apache/commons/configuration2/ImmutableConfiguration.getKeys:()Ljava/util/Iterator;
+  #103 = Class              #374          // java/lang/String
+  #104 = Class              #375          // org/apache/commons/configuration2/tree/ImmutableNode$Builder
+  #105 = Methodref          #104.#259     // org/apache/commons/configuration2/tree/ImmutableNode$Builder."<init>":()V
+  #106 = Methodref          #104.#377     // org/apache/commons/configuration2/tree/ImmutableNode$Builder.name:(Ljava/lang/String;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
+  #107 = InterfaceMethodref #101.#378     // org/apache/commons/configuration2/ImmutableConfiguration.getProperty:(Ljava/lang/String;)Ljava/lang/Object;
+  #108 = Methodref          #104.#379     // org/apache/commons/configuration2/tree/ImmutableNode$Builder.value:(Ljava/lang/Object;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
+  #109 = Methodref          #104.#380     // org/apache/commons/configuration2/tree/ImmutableNode$Builder.create:()Lorg/apache/commons/configuration2/tree/ImmutableNode;
+  #110 = Class              #381          // java/util/Map
+  #111 = Methodref          #59.#382      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.transformMap:(Ljava/util/Map;)Ljava/util/Map;
+  #112 = Class              #383          // org/apache/commons/configuration2/MapConfiguration
+  #113 = Methodref          #112.#384     // org/apache/commons/configuration2/MapConfiguration."<init>":(Ljava/util/Map;)V
+  #114 = Methodref          #385.#386     // org/apache/commons/codec/binary/Base64.encodeBase64:([B)[B
+  #115 = String             #387          // UTF-8
+  #116 = Methodref          #103.#388     // java/lang/String."<init>":([BLjava/lang/String;)V
+  #117 = Class              #389          // java/io/UnsupportedEncodingException
+  #118 = Class              #390          // java/lang/AssertionError
+  #119 = Methodref          #118.#391     // java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
+  #120 = String             #392          // <data>
+  #121 = String             #393          // </data>
+  #122 = String             #394          // <string>
+  #123 = Methodref          #103.#395     // java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+  #124 = String             #396          // </string>
+  #125 = String             #397          // <string/>
+  #126 = Class              #398          // java/util/HashMap
+  #127 = Methodref          #126.#259     // java/util/HashMap."<init>":()V
+  #128 = InterfaceMethodref #110.#399     // java/util/Map.entrySet:()Ljava/util/Set;
+  #129 = InterfaceMethodref #400.#337     // java/util/Set.iterator:()Ljava/util/Iterator;
+  #130 = Class              #401          // java/util/Map$Entry
+  #131 = InterfaceMethodref #130.#402     // java/util/Map$Entry.getKey:()Ljava/lang/Object;
+  #132 = InterfaceMethodref #130.#343     // java/util/Map$Entry.getValue:()Ljava/lang/Object;
+  #133 = InterfaceMethodref #110.#403     // java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #134 = Methodref          #359.#404     // java/lang/Object.getClass:()Ljava/lang/Class;
+  #135 = Methodref          #405.#406     // java/lang/Class.getClassLoader:()Ljava/lang/ClassLoader;
+  #136 = String             #407          // PropertyList-1.0.dtd
+  #137 = Methodref          #408.#409     // java/lang/ClassLoader.getResourceAsStream:(Ljava/lang/String;)Ljava/io/InputStream;
+  #138 = Methodref          #26.#410      // org/xml/sax/InputSource."<init>":(Ljava/io/InputStream;)V
+  #139 = Class              #411          // org/apache/commons/configuration2/BaseHierarchicalConfiguration
+  #140 = Class              #412          // org/apache/commons/configuration2/FileBasedConfiguration
+  #141 = Class              #413          // org/apache/commons/configuration2/io/FileLocatorAware
+  #142 = Class              #414          // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$1
+  #143 = Utf8               InnerClasses
+  #144 = Class              #415          // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$ArrayNodeBuilder
+  #145 = Utf8               ArrayNodeBuilder
+  #146 = Class              #416          // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder
+  #147 = Utf8               PListNodeBuilder
+  #148 = Utf8               XMLPropertyListHandler
+  #149 = Utf8               INDENT_SIZE
+  #150 = Utf8               I
+  #151 = Utf8               ConstantValue
+  #152 = Integer            4
+  #153 = Utf8               DATA_ENCODING
+  #154 = Utf8               Ljava/lang/String;
+  #155 = Utf8               locator
+  #156 = Utf8               Lorg/apache/commons/configuration2/io/FileLocator;
+  #157 = Utf8               <init>
+  #158 = Utf8               ()V
+  #159 = Utf8               Code
+  #160 = Utf8               LineNumberTable
+  #161 = Utf8               LocalVariableTable
+  #162 = Utf8               this
+  #163 = Utf8               Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;
+  #164 = Utf8               (Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V
+  #165 = Utf8               configuration
+  #166 = Utf8               Lorg/apache/commons/configuration2/HierarchicalConfiguration;
+  #167 = Utf8               LocalVariableTypeTable
+  #168 = Utf8               Lorg/apache/commons/configuration2/HierarchicalConfiguration<Lorg/apache/commons/configuration2/tree/ImmutableNode;>;
+  #169 = Utf8               Signature
+  #170 = Utf8               (Lorg/apache/commons/configuration2/HierarchicalConfiguration<Lorg/apache/commons/configuration2/tree/ImmutableNode;>;)V
+  #171 = Utf8               (Lorg/apache/commons/configuration2/tree/ImmutableNode;)V
+  #172 = Utf8               root
+  #173 = Utf8               Lorg/apache/commons/configuration2/tree/ImmutableNode;
+  #174 = Utf8               setPropertyDirect
+  #175 = Utf8               (Ljava/lang/String;Ljava/lang/Object;)V
+  #176 = Utf8               key
+  #177 = Utf8               value
+  #178 = Utf8               Ljava/lang/Object;
+  #179 = Utf8               StackMapTable
+  #180 = Class              #417          // java/lang/Throwable
+  #181 = Utf8               setPropertyInternal
+  #182 = Utf8               addPropertyInternal
+  #183 = Utf8               initFileLocator
+  #184 = Utf8               (Lorg/apache/commons/configuration2/io/FileLocator;)V
+  #185 = Utf8               read
+  #186 = Utf8               (Ljava/io/Reader;)V
+  #187 = Utf8               factory
+  #188 = Utf8               Ljavax/xml/parsers/SAXParserFactory;
+  #189 = Utf8               parser
+  #190 = Utf8               Ljavax/xml/parsers/SAXParser;
+  #191 = Utf8               e
+  #192 = Utf8               Ljava/lang/Exception;
+  #193 = Utf8               in
+  #194 = Utf8               Ljava/io/Reader;
+  #195 = Utf8               resolver
+  #196 = Utf8               Lorg/xml/sax/EntityResolver;
+  #197 = Utf8               handler
+  #198 = Utf8               Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler;
+  #199 = Class              #326          // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration
+  #200 = Class              #418          // java/io/Reader
+  #201 = Class              #419          // org/xml/sax/EntityResolver
+  #202 = Class              #281          // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler
+  #203 = Class              #299          // java/lang/Exception
+  #204 = Utf8               Exceptions
+  #205 = Utf8               write
+  #206 = Utf8               (Ljava/io/Writer;)V
+  #207 = Utf8               out
+  #208 = Utf8               Ljava/io/Writer;
+  #209 = Utf8               writer
+  #210 = Utf8               Ljava/io/PrintWriter;
+  #211 = Class              #305          // java/io/PrintWriter
+  #212 = Utf8               printNode
+  #213 = Utf8               (Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V
+  #214 = Utf8               child
+  #215 = Utf8               it
+  #216 = Utf8               Ljava/util/Iterator;
+  #217 = Utf8               indentLevel
+  #218 = Utf8               node
+  #219 = Utf8               padding
+  #220 = Utf8               children
+  #221 = Utf8               Ljava/util/List;
+  #222 = Utf8               Ljava/util/Iterator<Lorg/apache/commons/configuration2/tree/ImmutableNode;>;
+  #223 = Utf8               Ljava/util/List<Lorg/apache/commons/configuration2/tree/ImmutableNode;>;
+  #224 = Class              #374          // java/lang/String
+  #225 = Class              #268          // java/util/List
+  #226 = Class              #420          // java/util/Iterator
+  #227 = Utf8               printValue
+  #228 = Utf8               (Ljava/io/PrintWriter;ILjava/lang/Object;)V
+  #229 = Utf8               o
+  #230 = Utf8               config
+  #231 = Utf8               Lorg/apache/commons/configuration2/ImmutableConfiguration;
+  #232 = Utf8               map
+  #233 = Utf8               Ljava/util/Map;
+  #234 = Utf8               base64
+  #235 = Utf8               Ljava/io/UnsupportedEncodingException;
+  #236 = Utf8               Ljava/util/Iterator<Ljava/lang/String;>;
+  #237 = Utf8               Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;
+  #238 = Class              #421          // java/lang/Object
+  #239 = Class              #372          // org/apache/commons/configuration2/ImmutableConfiguration
+  #240 = Class              #389          // java/io/UnsupportedEncodingException
+  #241 = Utf8               transformMap
+  #242 = Utf8               (Ljava/util/Map;)Ljava/util/Map;
+  #243 = Utf8               Entry
+  #244 = Utf8               Ljava/util/Map$Entry;
+  #245 = Utf8               src
+  #246 = Utf8               dest
+  #247 = Utf8               Ljava/util/Map$Entry<**>;
+  #248 = Utf8               Ljava/util/Map<**>;
+  #249 = Class              #381          // java/util/Map
+  #250 = Utf8               (Ljava/util/Map<**>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;
+  #251 = Utf8               lambda$read$0
+  #252 = Utf8               (Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;
+  #253 = Utf8               publicId
+  #254 = Utf8               systemId
+  #255 = Class              #422          // org/xml/sax/SAXException
+  #256 = Class              #423          // java/io/IOException
+  #257 = Utf8               SourceFile
+  #258 = Utf8               XMLPropertyListConfiguration.java
+  #259 = NameAndType        #157:#158     // "<init>":()V
+  #260 = NameAndType        #157:#164     // "<init>":(Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V
+  #261 = Utf8               org/apache/commons/configuration2/tree/InMemoryNodeModel
+  #262 = NameAndType        #157:#171     // "<init>":(Lorg/apache/commons/configuration2/tree/ImmutableNode;)V
+  #263 = NameAndType        #157:#424     // "<init>":(Lorg/apache/commons/configuration2/tree/NodeModel;)V
+  #264 = NameAndType        #425:#426     // setDetailEvents:(Z)V
+  #265 = NameAndType        #427:#428     // clearProperty:(Ljava/lang/String;)V
+  #266 = NameAndType        #429:#175     // addPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
+  #267 = Utf8               [B
+  #268 = Utf8               java/util/List
+  #269 = NameAndType        #174:#175     // setPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
+  #270 = Utf8               [Ljava/lang/Object;
+  #271 = Class              #430          // java/util/Arrays
+  #272 = NameAndType        #431:#432     // asList:([Ljava/lang/Object;)Ljava/util/List;
+  #273 = NameAndType        #181:#175     // setPropertyInternal:(Ljava/lang/String;Ljava/lang/Object;)V
+  #274 = NameAndType        #182:#175     // addPropertyInternal:(Ljava/lang/String;Ljava/lang/Object;)V
+  #275 = NameAndType        #155:#156     // locator:Lorg/apache/commons/configuration2/io/FileLocator;
+  #276 = Utf8               BootstrapMethods
+  #277 = MethodHandle       6:#433        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #278 = MethodType         #252          //  (Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;
+  #279 = MethodHandle       7:#434        // REF_invokeSpecial org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.lambda$read$0:(Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;
+  #280 = NameAndType        #435:#436     // resolveEntity:(Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;)Lorg/xml/sax/EntityResolver;
+  #281 = Utf8               org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler
+  #282 = NameAndType        #157:#437     // "<init>":(Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;)V
+  #283 = Class              #438          // javax/xml/parsers/SAXParserFactory
+  #284 = NameAndType        #439:#440     // newInstance:()Ljavax/xml/parsers/SAXParserFactory;
+  #285 = NameAndType        #441:#426     // setValidating:(Z)V
+  #286 = NameAndType        #442:#443     // newSAXParser:()Ljavax/xml/parsers/SAXParser;
+  #287 = Class              #444          // javax/xml/parsers/SAXParser
+  #288 = NameAndType        #445:#446     // getXMLReader:()Lorg/xml/sax/XMLReader;
+  #289 = Class              #447          // org/xml/sax/XMLReader
+  #290 = NameAndType        #448:#449     // setEntityResolver:(Lorg/xml/sax/EntityResolver;)V
+  #291 = NameAndType        #450:#451     // setContentHandler:(Lorg/xml/sax/ContentHandler;)V
+  #292 = Utf8               org/xml/sax/InputSource
+  #293 = NameAndType        #157:#186     // "<init>":(Ljava/io/Reader;)V
+  #294 = NameAndType        #452:#453     // parse:(Lorg/xml/sax/InputSource;)V
+  #295 = NameAndType        #454:#455     // getNodeModel:()Lorg/apache/commons/configuration2/tree/InMemoryNodeModel;
+  #296 = NameAndType        #456:#457     // getResultBuilder:()Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder;
+  #297 = NameAndType        #458:#459     // createNode:()Lorg/apache/commons/configuration2/tree/ImmutableNode;
+  #298 = NameAndType        #460:#461     // mergeRoot:(Lorg/apache/commons/configuration2/tree/ImmutableNode;Ljava/lang/String;Ljava/util/Map;Ljava/lang/Object;Lorg/apache/commons/configuration2/tree/NodeKeyResolver;)V
+  #299 = Utf8               java/lang/Exception
+  #300 = Utf8               org/apache/commons/configuration2/ex/ConfigurationException
+  #301 = Utf8               Unable to parse the configuration file
+  #302 = NameAndType        #157:#462     // "<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+  #303 = Utf8               Save operation not properly initialized! Do not call write(Writer) directly, but use a FileHandler to save a configuration.
+  #304 = NameAndType        #157:#428     // "<init>":(Ljava/lang/String;)V
+  #305 = Utf8               java/io/PrintWriter
+  #306 = NameAndType        #157:#206     // "<init>":(Ljava/io/Writer;)V
+  #307 = Class              #463          // org/apache/commons/configuration2/io/FileLocator
+  #308 = NameAndType        #464:#465     // getEncoding:()Ljava/lang/String;
+  #309 = Utf8               java/lang/StringBuilder
+  #310 = Utf8               <?xml version=\"1.0\" encoding=\"
+  #311 = NameAndType        #466:#467     // append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #312 = Utf8               \"?>
+  #313 = NameAndType        #468:#465     // toString:()Ljava/lang/String;
+  #314 = NameAndType        #469:#428     // println:(Ljava/lang/String;)V
+  #315 = Utf8               <?xml version=\"1.0\"?>
+  #316 = Utf8               <!DOCTYPE plist SYSTEM \"file://localhost/System/Library/DTDs/PropertyList.dtd\">
+  #317 = Utf8               <plist version=\"1.0\">
+  #318 = NameAndType        #470:#471     // getNodeHandler:()Lorg/apache/commons/configuration2/tree/NodeHandler;
+  #319 = Class              #472          // org/apache/commons/configuration2/tree/NodeHandler
+  #320 = NameAndType        #473:#474     // getRootNode:()Ljava/lang/Object;
+  #321 = Utf8               org/apache/commons/configuration2/tree/ImmutableNode
+  #322 = NameAndType        #212:#213     // printNode:(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V
+  #323 = Utf8               </plist>
+  #324 = NameAndType        #475:#158     // flush:()V
+  #325 = Utf8
+  #326 = Utf8               org/apache/commons/configuration2/plist/XMLPropertyListConfiguration
+  #327 = Class              #476          // org/apache/commons/lang3/StringUtils
+  #328 = NameAndType        #477:#478     // repeat:(Ljava/lang/String;I)Ljava/lang/String;
+  #329 = NameAndType        #479:#465     // getNodeName:()Ljava/lang/String;
+  #330 = Utf8               <key>
+  #331 = Class              #480          // org/apache/commons/text/StringEscapeUtils
+  #332 = NameAndType        #481:#482     // escapeXml10:(Ljava/lang/String;)Ljava/lang/String;
+  #333 = Utf8               </key>
+  #334 = NameAndType        #483:#484     // getChildren:()Ljava/util/List;
+  #335 = NameAndType        #485:#486     // isEmpty:()Z
+  #336 = Utf8               <dict>
+  #337 = NameAndType        #487:#488     // iterator:()Ljava/util/Iterator;
+  #338 = Class              #420          // java/util/Iterator
+  #339 = NameAndType        #489:#486     // hasNext:()Z
+  #340 = NameAndType        #490:#474     // next:()Ljava/lang/Object;
+  #341 = NameAndType        #469:#158     // println:()V
+  #342 = Utf8               </dict>
+  #343 = NameAndType        #491:#474     // getValue:()Ljava/lang/Object;
+  #344 = Utf8               <dict/>
+  #345 = NameAndType        #227:#228     // printValue:(Ljava/io/PrintWriter;ILjava/lang/Object;)V
+  #346 = Utf8               java/util/Date
+  #347 = NameAndType        #492:#493     // access$000:()Ljava/text/DateFormat;
+  #348 = Utf8               <date>
+  #349 = Class              #494          // java/text/DateFormat
+  #350 = NameAndType        #495:#496     // format:(Ljava/util/Date;)Ljava/lang/String;
+  #351 = Utf8               </date>
+  #352 = Utf8               java/util/Calendar
+  #353 = NameAndType        #497:#498     // getTime:()Ljava/util/Date;
+  #354 = Utf8               java/lang/Number
+  #355 = Utf8               java/lang/Double
+  #356 = Utf8               java/lang/Float
+  #357 = Utf8               java/math/BigDecimal
+  #358 = Utf8               <real>
+  #359 = Class              #421          // java/lang/Object
+  #360 = Utf8               </real>
+  #361 = Utf8               <integer>
+  #362 = Utf8               </integer>
+  #363 = Utf8               java/lang/Boolean
+  #364 = NameAndType        #499:#486     // booleanValue:()Z
+  #365 = Utf8               <true/>
+  #366 = Utf8               <false/>
+  #367 = Utf8               <array>
+  #368 = Utf8               </array>
+  #369 = Utf8               org/apache/commons/configuration2/HierarchicalConfiguration
+  #370 = NameAndType        #454:#500     // getNodeModel:()Lorg/apache/commons/configuration2/tree/NodeModel;
+  #371 = Class              #501          // org/apache/commons/configuration2/tree/NodeModel
+  #372 = Utf8               org/apache/commons/configuration2/ImmutableConfiguration
+  #373 = NameAndType        #502:#488     // getKeys:()Ljava/util/Iterator;
+  #374 = Utf8               java/lang/String
+  #375 = Utf8               org/apache/commons/configuration2/tree/ImmutableNode$Builder
+  #376 = Utf8               Builder
+  #377 = NameAndType        #503:#504     // name:(Ljava/lang/String;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
+  #378 = NameAndType        #505:#506     // getProperty:(Ljava/lang/String;)Ljava/lang/Object;
+  #379 = NameAndType        #177:#507     // value:(Ljava/lang/Object;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
+  #380 = NameAndType        #508:#459     // create:()Lorg/apache/commons/configuration2/tree/ImmutableNode;
+  #381 = Utf8               java/util/Map
+  #382 = NameAndType        #241:#242     // transformMap:(Ljava/util/Map;)Ljava/util/Map;
+  #383 = Utf8               org/apache/commons/configuration2/MapConfiguration
+  #384 = NameAndType        #157:#509     // "<init>":(Ljava/util/Map;)V
+  #385 = Class              #510          // org/apache/commons/codec/binary/Base64
+  #386 = NameAndType        #511:#512     // encodeBase64:([B)[B
+  #387 = Utf8               UTF-8
+  #388 = NameAndType        #157:#513     // "<init>":([BLjava/lang/String;)V
+  #389 = Utf8               java/io/UnsupportedEncodingException
+  #390 = Utf8               java/lang/AssertionError
+  #391 = NameAndType        #157:#514     // "<init>":(Ljava/lang/Object;)V
+  #392 = Utf8               <data>
+  #393 = Utf8               </data>
+  #394 = Utf8               <string>
+  #395 = NameAndType        #515:#516     // valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+  #396 = Utf8               </string>
+  #397 = Utf8               <string/>
+  #398 = Utf8               java/util/HashMap
+  #399 = NameAndType        #517:#518     // entrySet:()Ljava/util/Set;
+  #400 = Class              #519          // java/util/Set
+  #401 = Utf8               java/util/Map$Entry
+  #402 = NameAndType        #520:#474     // getKey:()Ljava/lang/Object;
+  #403 = NameAndType        #521:#522     // put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #404 = NameAndType        #523:#524     // getClass:()Ljava/lang/Class;
+  #405 = Class              #525          // java/lang/Class
+  #406 = NameAndType        #526:#527     // getClassLoader:()Ljava/lang/ClassLoader;
+  #407 = Utf8               PropertyList-1.0.dtd
+  #408 = Class              #528          // java/lang/ClassLoader
+  #409 = NameAndType        #529:#530     // getResourceAsStream:(Ljava/lang/String;)Ljava/io/InputStream;
+  #410 = NameAndType        #157:#531     // "<init>":(Ljava/io/InputStream;)V
+  #411 = Utf8               org/apache/commons/configuration2/BaseHierarchicalConfiguration
+  #412 = Utf8               org/apache/commons/configuration2/FileBasedConfiguration
+  #413 = Utf8               org/apache/commons/configuration2/io/FileLocatorAware
+  #414 = Utf8               org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$1
+  #415 = Utf8               org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$ArrayNodeBuilder
+  #416 = Utf8               org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder
+  #417 = Utf8               java/lang/Throwable
+  #418 = Utf8               java/io/Reader
+  #419 = Utf8               org/xml/sax/EntityResolver
+  #420 = Utf8               java/util/Iterator
+  #421 = Utf8               java/lang/Object
+  #422 = Utf8               org/xml/sax/SAXException
+  #423 = Utf8               java/io/IOException
+  #424 = Utf8               (Lorg/apache/commons/configuration2/tree/NodeModel;)V
+  #425 = Utf8               setDetailEvents
+  #426 = Utf8               (Z)V
+  #427 = Utf8               clearProperty
+  #428 = Utf8               (Ljava/lang/String;)V
+  #429 = Utf8               addPropertyDirect
+  #430 = Utf8               java/util/Arrays
+  #431 = Utf8               asList
+  #432 = Utf8               ([Ljava/lang/Object;)Ljava/util/List;
+  #433 = Methodref          #532.#533     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #434 = Methodref          #59.#534      // org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.lambda$read$0:(Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;
+  #435 = Utf8               resolveEntity
+  #436 = Utf8               (Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;)Lorg/xml/sax/EntityResolver;
+  #437 = Utf8               (Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;)V
+  #438 = Utf8               javax/xml/parsers/SAXParserFactory
+  #439 = Utf8               newInstance
+  #440 = Utf8               ()Ljavax/xml/parsers/SAXParserFactory;
+  #441 = Utf8               setValidating
+  #442 = Utf8               newSAXParser
+  #443 = Utf8               ()Ljavax/xml/parsers/SAXParser;
+  #444 = Utf8               javax/xml/parsers/SAXParser
+  #445 = Utf8               getXMLReader
+  #446 = Utf8               ()Lorg/xml/sax/XMLReader;
+  #447 = Utf8               org/xml/sax/XMLReader
+  #448 = Utf8               setEntityResolver
+  #449 = Utf8               (Lorg/xml/sax/EntityResolver;)V
+  #450 = Utf8               setContentHandler
+  #451 = Utf8               (Lorg/xml/sax/ContentHandler;)V
+  #452 = Utf8               parse
+  #453 = Utf8               (Lorg/xml/sax/InputSource;)V
+  #454 = Utf8               getNodeModel
+  #455 = Utf8               ()Lorg/apache/commons/configuration2/tree/InMemoryNodeModel;
+  #456 = Utf8               getResultBuilder
+  #457 = Utf8               ()Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder;
+  #458 = Utf8               createNode
+  #459 = Utf8               ()Lorg/apache/commons/configuration2/tree/ImmutableNode;
+  #460 = Utf8               mergeRoot
+  #461 = Utf8               (Lorg/apache/commons/configuration2/tree/ImmutableNode;Ljava/lang/String;Ljava/util/Map;Ljava/lang/Object;Lorg/apache/commons/configuration2/tree/NodeKeyResolver;)V
+  #462 = Utf8               (Ljava/lang/String;Ljava/lang/Throwable;)V
+  #463 = Utf8               org/apache/commons/configuration2/io/FileLocator
+  #464 = Utf8               getEncoding
+  #465 = Utf8               ()Ljava/lang/String;
+  #466 = Utf8               append
+  #467 = Utf8               (Ljava/lang/String;)Ljava/lang/StringBuilder;
+  #468 = Utf8               toString
+  #469 = Utf8               println
+  #470 = Utf8               getNodeHandler
+  #471 = Utf8               ()Lorg/apache/commons/configuration2/tree/NodeHandler;
+  #472 = Utf8               org/apache/commons/configuration2/tree/NodeHandler
+  #473 = Utf8               getRootNode
+  #474 = Utf8               ()Ljava/lang/Object;
+  #475 = Utf8               flush
+  #476 = Utf8               org/apache/commons/lang3/StringUtils
+  #477 = Utf8               repeat
+  #478 = Utf8               (Ljava/lang/String;I)Ljava/lang/String;
+  #479 = Utf8               getNodeName
+  #480 = Utf8               org/apache/commons/text/StringEscapeUtils
+  #481 = Utf8               escapeXml10
+  #482 = Utf8               (Ljava/lang/String;)Ljava/lang/String;
+  #483 = Utf8               getChildren
+  #484 = Utf8               ()Ljava/util/List;
+  #485 = Utf8               isEmpty
+  #486 = Utf8               ()Z
+  #487 = Utf8               iterator
+  #488 = Utf8               ()Ljava/util/Iterator;
+  #489 = Utf8               hasNext
+  #490 = Utf8               next
+  #491 = Utf8               getValue
+  #492 = Utf8               access$000
+  #493 = Utf8               ()Ljava/text/DateFormat;
+  #494 = Utf8               java/text/DateFormat
+  #495 = Utf8               format
+  #496 = Utf8               (Ljava/util/Date;)Ljava/lang/String;
+  #497 = Utf8               getTime
+  #498 = Utf8               ()Ljava/util/Date;
+  #499 = Utf8               booleanValue
+  #500 = Utf8               ()Lorg/apache/commons/configuration2/tree/NodeModel;
+  #501 = Utf8               org/apache/commons/configuration2/tree/NodeModel
+  #502 = Utf8               getKeys
+  #503 = Utf8               name
+  #504 = Utf8               (Ljava/lang/String;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
+  #505 = Utf8               getProperty
+  #506 = Utf8               (Ljava/lang/String;)Ljava/lang/Object;
+  #507 = Utf8               (Ljava/lang/Object;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
+  #508 = Utf8               create
+  #509 = Utf8               (Ljava/util/Map;)V
+  #510 = Utf8               org/apache/commons/codec/binary/Base64
+  #511 = Utf8               encodeBase64
+  #512 = Utf8               ([B)[B
+  #513 = Utf8               ([BLjava/lang/String;)V
+  #514 = Utf8               (Ljava/lang/Object;)V
+  #515 = Utf8               valueOf
+  #516 = Utf8               (Ljava/lang/Object;)Ljava/lang/String;
+  #517 = Utf8               entrySet
+  #518 = Utf8               ()Ljava/util/Set;
+  #519 = Utf8               java/util/Set
+  #520 = Utf8               getKey
+  #521 = Utf8               put
+  #522 = Utf8               (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #523 = Utf8               getClass
+  #524 = Utf8               ()Ljava/lang/Class;
+  #525 = Utf8               java/lang/Class
+  #526 = Utf8               getClassLoader
+  #527 = Utf8               ()Ljava/lang/ClassLoader;
+  #528 = Utf8               java/lang/ClassLoader
+  #529 = Utf8               getResourceAsStream
+  #530 = Utf8               (Ljava/lang/String;)Ljava/io/InputStream;
+  #531 = Utf8               (Ljava/io/InputStream;)V
+  #532 = Class              #535          // java/lang/invoke/LambdaMetafactory
+  #533 = NameAndType        #536:#539     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #534 = NameAndType        #251:#252     // lambda$read$0:(Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;
+  #535 = Utf8               java/lang/invoke/LambdaMetafactory
+  #536 = Utf8               metafactory
+  #537 = Class              #541          // java/lang/invoke/MethodHandles$Lookup
+  #538 = Utf8               Lookup
+  #539 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #540 = Class              #542          // java/lang/invoke/MethodHandles
+  #541 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #542 = Utf8               java/lang/invoke/MethodHandles
+{
   public org.apache.commons.configuration2.plist.XMLPropertyListConfiguration();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
     Code:
-       0: aload_0
-       1: invokespecial #1                  // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":()V
-       4: return
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":()V
+         4: return
+      LineNumberTable:
+        line 146: 0
+        line 147: 4
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;
 
   public org.apache.commons.configuration2.plist.XMLPropertyListConfiguration(org.apache.commons.configuration2.HierarchicalConfiguration<org.apache.commons.configuration2.tree.ImmutableNode>);
+    descriptor: (Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V
+    flags: (0x0001) ACC_PUBLIC
     Code:
-       0: aload_0
-       1: aload_1
-       2: invokespecial #2                  // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":(Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V
-       5: return
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: invokespecial #2                  // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":(Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V
+         5: return
+      LineNumberTable:
+        line 158: 0
+        line 159: 5
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;
+            0       6     1 configuration   Lorg/apache/commons/configuration2/HierarchicalConfiguration;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     1 configuration   Lorg/apache/commons/configuration2/HierarchicalConfiguration<Lorg/apache/commons/configuration2/tree/ImmutableNode;>;
+    Signature: #170                         // (Lorg/apache/commons/configuration2/HierarchicalConfiguration<Lorg/apache/commons/configuration2/tree/ImmutableNode;>;)V
 
   org.apache.commons.configuration2.plist.XMLPropertyListConfiguration(org.apache.commons.configuration2.tree.ImmutableNode);
+    descriptor: (Lorg/apache/commons/configuration2/tree/ImmutableNode;)V
+    flags: (0x0000)
     Code:
-       0: aload_0
-       1: new           #3                  // class org/apache/commons/configuration2/tree/InMemoryNodeModel
-       4: dup
-       5: aload_1
-       6: invokespecial #4                  // Method org/apache/commons/configuration2/tree/InMemoryNodeModel."<init>":(Lorg/apache/commons/configuration2/tree/ImmutableNode;)V
-       9: invokespecial #5                  // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":(Lorg/apache/commons/configuration2/tree/NodeModel;)V
-      12: return
-
-  private void setPropertyDirect(java.lang.String, java.lang.Object);
-    Code:
-       0: aload_0
-       1: iconst_0
-       2: invokevirtual #6                  // Method setDetailEvents:(Z)V
-       5: aload_0
-       6: aload_1
-       7: invokevirtual #7                  // Method clearProperty:(Ljava/lang/String;)V
-      10: aload_0
-      11: aload_1
-      12: aload_2
-      13: invokevirtual #8                  // Method addPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
-      16: aload_0
-      17: iconst_1
-      18: invokevirtual #6                  // Method setDetailEvents:(Z)V
-      21: goto          32
-      24: astore_3
-      25: aload_0
-      26: iconst_1
-      27: invokevirtual #6                  // Method setDetailEvents:(Z)V
-      30: aload_3
-      31: athrow
-      32: return
-    Exception table:
-       from    to  target type
-           5    16    24   any
+      stack=4, locals=2, args_size=2
+         0: aload_0
+         1: new           #3                  // class org/apache/commons/configuration2/tree/InMemoryNodeModel
+         4: dup
+         5: aload_1
+         6: invokespecial #4                  // Method org/apache/commons/configuration2/tree/InMemoryNodeModel."<init>":(Lorg/apache/commons/configuration2/tree/ImmutableNode;)V
+         9: invokespecial #5                  // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":(Lorg/apache/commons/configuration2/tree/NodeModel;)V
+        12: return
+      LineNumberTable:
+        line 169: 0
+        line 170: 12
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      13     0  this   Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;
+            0      13     1  root   Lorg/apache/commons/configuration2/tree/ImmutableNode;
 
   protected void setPropertyInternal(java.lang.String, java.lang.Object);
+    descriptor: (Ljava/lang/String;Ljava/lang/Object;)V
+    flags: (0x0004) ACC_PROTECTED
     Code:
-       0: aload_2
-       1: instanceof    #9                  // class "[B"
-       4: ifne          14
-       7: aload_2
-       8: instanceof    #10                 // class java/util/List
-      11: ifeq          23
-      14: aload_0
-      15: aload_1
-      16: aload_2
-      17: invokespecial #11                 // Method setPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
-      20: goto          54
-      23: aload_2
-      24: instanceof    #12                 // class "[Ljava/lang/Object;"
-      27: ifeq          48
-      30: aload_0
-      31: aload_1
-      32: aload_2
-      33: checkcast     #12                 // class "[Ljava/lang/Object;"
-      36: checkcast     #12                 // class "[Ljava/lang/Object;"
-      39: invokestatic  #13                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
-      42: invokespecial #11                 // Method setPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
-      45: goto          54
-      48: aload_0
-      49: aload_1
-      50: aload_2
-      51: invokespecial #14                 // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration.setPropertyInternal:(Ljava/lang/String;Ljava/lang/Object;)V
-      54: return
+      stack=3, locals=3, args_size=3
+         0: aload_2
+         1: instanceof    #9                  // class "[B"
+         4: ifne          14
+         7: aload_2
+         8: instanceof    #10                 // class java/util/List
+        11: ifeq          23
+        14: aload_0
+        15: aload_1
+        16: aload_2
+        17: invokespecial #11                 // Method setPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
+        20: goto          54
+        23: aload_2
+        24: instanceof    #12                 // class "[Ljava/lang/Object;"
+        27: ifeq          48
+        30: aload_0
+        31: aload_1
+        32: aload_2
+        33: checkcast     #12                 // class "[Ljava/lang/Object;"
+        36: checkcast     #12                 // class "[Ljava/lang/Object;"
+        39: invokestatic  #13                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+        42: invokespecial #11                 // Method setPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
+        45: goto          54
+        48: aload_0
+        49: aload_1
+        50: aload_2
+        51: invokespecial #14                 // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration.setPropertyInternal:(Ljava/lang/String;Ljava/lang/Object;)V
+        54: return
+      LineNumberTable:
+        line 189: 0
+        line 191: 14
+        line 193: 23
+        line 195: 30
+        line 199: 48
+        line 201: 54
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      55     0  this   Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;
+            0      55     1   key   Ljava/lang/String;
+            0      55     2 value   Ljava/lang/Object;
+      StackMapTable: number_of_entries = 4
+        frame_type = 14 /* same */
+        frame_type = 8 /* same */
+        frame_type = 24 /* same */
+        frame_type = 5 /* same */
 
   protected void addPropertyInternal(java.lang.String, java.lang.Object);
+    descriptor: (Ljava/lang/String;Ljava/lang/Object;)V
+    flags: (0x0004) ACC_PROTECTED
     Code:
-       0: aload_2
-       1: instanceof    #9                  // class "[B"
-       4: ifne          14
-       7: aload_2
-       8: instanceof    #10                 // class java/util/List
-      11: ifeq          23
-      14: aload_0
-      15: aload_1
-      16: aload_2
-      17: invokevirtual #8                  // Method addPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
-      20: goto          54
-      23: aload_2
-      24: instanceof    #12                 // class "[Ljava/lang/Object;"
-      27: ifeq          48
-      30: aload_0
-      31: aload_1
-      32: aload_2
-      33: checkcast     #12                 // class "[Ljava/lang/Object;"
-      36: checkcast     #12                 // class "[Ljava/lang/Object;"
-      39: invokestatic  #13                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
-      42: invokevirtual #8                  // Method addPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
-      45: goto          54
-      48: aload_0
-      49: aload_1
-      50: aload_2
-      51: invokespecial #15                 // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration.addPropertyInternal:(Ljava/lang/String;Ljava/lang/Object;)V
-      54: return
+      stack=3, locals=3, args_size=3
+         0: aload_2
+         1: instanceof    #9                  // class "[B"
+         4: ifne          14
+         7: aload_2
+         8: instanceof    #10                 // class java/util/List
+        11: ifeq          23
+        14: aload_0
+        15: aload_1
+        16: aload_2
+        17: invokevirtual #8                  // Method addPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
+        20: goto          54
+        23: aload_2
+        24: instanceof    #12                 // class "[Ljava/lang/Object;"
+        27: ifeq          48
+        30: aload_0
+        31: aload_1
+        32: aload_2
+        33: checkcast     #12                 // class "[Ljava/lang/Object;"
+        36: checkcast     #12                 // class "[Ljava/lang/Object;"
+        39: invokestatic  #13                 // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+        42: invokevirtual #8                  // Method addPropertyDirect:(Ljava/lang/String;Ljava/lang/Object;)V
+        45: goto          54
+        48: aload_0
+        49: aload_1
+        50: aload_2
+        51: invokespecial #15                 // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration.addPropertyInternal:(Ljava/lang/String;Ljava/lang/Object;)V
+        54: return
+      LineNumberTable:
+        line 206: 0
+        line 208: 14
+        line 210: 23
+        line 212: 30
+        line 216: 48
+        line 218: 54
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      55     0  this   Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;
+            0      55     1   key   Ljava/lang/String;
+            0      55     2 value   Ljava/lang/Object;
+      StackMapTable: number_of_entries = 4
+        frame_type = 14 /* same */
+        frame_type = 8 /* same */
+        frame_type = 24 /* same */
+        frame_type = 5 /* same */
 
   public void initFileLocator(org.apache.commons.configuration2.io.FileLocator);
+    descriptor: (Lorg/apache/commons/configuration2/io/FileLocator;)V
+    flags: (0x0001) ACC_PUBLIC
     Code:
-       0: aload_0
-       1: aload_1
-       2: putfield      #16                 // Field locator:Lorg/apache/commons/configuration2/io/FileLocator;
-       5: return
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #16                 // Field locator:Lorg/apache/commons/configuration2/io/FileLocator;
+         5: return
+      LineNumberTable:
+        line 229: 0
+        line 230: 5
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;
+            0       6     1 locator   Lorg/apache/commons/configuration2/io/FileLocator;
 
   public void read(java.io.Reader) throws org.apache.commons.configuration2.ex.ConfigurationException;
+    descriptor: (Ljava/io/Reader;)V
+    flags: (0x0001) ACC_PUBLIC
     Code:
-       0: aload_0
-       1: invokedynamic #17,  0             // InvokeDynamic #0:resolveEntity:(Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;)Lorg/xml/sax/EntityResolver;
-       6: astore_2
-       7: new           #18                 // class org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler
-      10: dup
-      11: aload_0
-      12: invokespecial #19                 // Method org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler."<init>":(Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;)V
-      15: astore_3
-      16: invokestatic  #20                 // Method javax/xml/parsers/SAXParserFactory.newInstance:()Ljavax/xml/parsers/SAXParserFactory;
-      19: astore        4
-      21: aload         4
-      23: iconst_1
-      24: invokevirtual #21                 // Method javax/xml/parsers/SAXParserFactory.setValidating:(Z)V
-      27: aload         4
-      29: invokevirtual #22                 // Method javax/xml/parsers/SAXParserFactory.newSAXParser:()Ljavax/xml/parsers/SAXParser;
-      32: astore        5
-      34: aload         5
-      36: invokevirtual #23                 // Method javax/xml/parsers/SAXParser.getXMLReader:()Lorg/xml/sax/XMLReader;
-      39: aload_2
-      40: invokeinterface #24,  2           // InterfaceMethod org/xml/sax/XMLReader.setEntityResolver:(Lorg/xml/sax/EntityResolver;)V
-      45: aload         5
-      47: invokevirtual #23                 // Method javax/xml/parsers/SAXParser.getXMLReader:()Lorg/xml/sax/XMLReader;
-      50: aload_3
-      51: invokeinterface #25,  2           // InterfaceMethod org/xml/sax/XMLReader.setContentHandler:(Lorg/xml/sax/ContentHandler;)V
-      56: aload         5
-      58: invokevirtual #23                 // Method javax/xml/parsers/SAXParser.getXMLReader:()Lorg/xml/sax/XMLReader;
-      61: new           #26                 // class org/xml/sax/InputSource
-      64: dup
-      65: aload_1
-      66: invokespecial #27                 // Method org/xml/sax/InputSource."<init>":(Ljava/io/Reader;)V
-      69: invokeinterface #28,  2           // InterfaceMethod org/xml/sax/XMLReader.parse:(Lorg/xml/sax/InputSource;)V
-      74: aload_0
-      75: invokevirtual #29                 // Method getNodeModel:()Lorg/apache/commons/configuration2/tree/InMemoryNodeModel;
-      78: aload_3
-      79: invokevirtual #30                 // Method org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler.getResultBuilder:()Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder;
-      82: invokevirtual #31                 // Method org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder.createNode:()Lorg/apache/commons/configuration2/tree/ImmutableNode;
-      85: aconst_null
-      86: aconst_null
-      87: aconst_null
-      88: aload_0
-      89: invokevirtual #32                 // Method org/apache/commons/configuration2/tree/InMemoryNodeModel.mergeRoot:(Lorg/apache/commons/configuration2/tree/ImmutableNode;Ljava/lang/String;Ljava/util/Map;Ljava/lang/Object;Lorg/apache/commons/configuration2/tree/NodeKeyResolver;)V
-      92: goto          109
-      95: astore        4
-      97: new           #34                 // class org/apache/commons/configuration2/ex/ConfigurationException
-     100: dup
-     101: ldc           #35                 // String Unable to parse the configuration file
-     103: aload         4
-     105: invokespecial #36                 // Method org/apache/commons/configuration2/ex/ConfigurationException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
-     108: athrow
-     109: return
-    Exception table:
-       from    to  target type
-          16    92    95   Class java/lang/Exception
+      stack=6, locals=6, args_size=2
+         0: aload_0
+         1: invokedynamic #17,  0             // InvokeDynamic #0:resolveEntity:(Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;)Lorg/xml/sax/EntityResolver;
+         6: astore_2
+         7: new           #18                 // class org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler
+        10: dup
+        11: aload_0
+        12: invokespecial #19                 // Method org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler."<init>":(Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;)V
+        15: astore_3
+        16: invokestatic  #20                 // Method javax/xml/parsers/SAXParserFactory.newInstance:()Ljavax/xml/parsers/SAXParserFactory;
+        19: astore        4
+        21: aload         4
+        23: iconst_1
+        24: invokevirtual #21                 // Method javax/xml/parsers/SAXParserFactory.setValidating:(Z)V
+        27: aload         4
+        29: invokevirtual #22                 // Method javax/xml/parsers/SAXParserFactory.newSAXParser:()Ljavax/xml/parsers/SAXParser;
+        32: astore        5
+        34: aload         5
+        36: invokevirtual #23                 // Method javax/xml/parsers/SAXParser.getXMLReader:()Lorg/xml/sax/XMLReader;
+        39: aload_2
+        40: invokeinterface #24,  2           // InterfaceMethod org/xml/sax/XMLReader.setEntityResolver:(Lorg/xml/sax/EntityResolver;)V
+        45: aload         5
+        47: invokevirtual #23                 // Method javax/xml/parsers/SAXParser.getXMLReader:()Lorg/xml/sax/XMLReader;
+        50: aload_3
+        51: invokeinterface #25,  2           // InterfaceMethod org/xml/sax/XMLReader.setContentHandler:(Lorg/xml/sax/ContentHandler;)V
+        56: aload         5
+        58: invokevirtual #23                 // Method javax/xml/parsers/SAXParser.getXMLReader:()Lorg/xml/sax/XMLReader;
+        61: new           #26                 // class org/xml/sax/InputSource
+        64: dup
+        65: aload_1
+        66: invokespecial #27                 // Method org/xml/sax/InputSource."<init>":(Ljava/io/Reader;)V
+        69: invokeinterface #28,  2           // InterfaceMethod org/xml/sax/XMLReader.parse:(Lorg/xml/sax/InputSource;)V
+        74: aload_0
+        75: invokevirtual #29                 // Method getNodeModel:()Lorg/apache/commons/configuration2/tree/InMemoryNodeModel;
+        78: aload_3
+        79: invokevirtual #30                 // Method org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler.getResultBuilder:()Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder;
+        82: invokevirtual #31                 // Method org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder.createNode:()Lorg/apache/commons/configuration2/tree/ImmutableNode;
+        85: aconst_null
+        86: aconst_null
+        87: aconst_null
+        88: aload_0
+        89: invokevirtual #32                 // Method org/apache/commons/configuration2/tree/InMemoryNodeModel.mergeRoot:(Lorg/apache/commons/configuration2/tree/ImmutableNode;Ljava/lang/String;Ljava/util/Map;Ljava/lang/Object;Lorg/apache/commons/configuration2/tree/NodeKeyResolver;)V
+        92: goto          109
+        95: astore        4
+        97: new           #34                 // class org/apache/commons/configuration2/ex/ConfigurationException
+       100: dup
+       101: ldc           #35                 // String Unable to parse the configuration file
+       103: aload         4
+       105: invokespecial #36                 // Method org/apache/commons/configuration2/ex/ConfigurationException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+       108: athrow
+       109: return
+      Exception table:
+         from    to  target type
+            16    92    95   Class java/lang/Exception
+      LineNumberTable:
+        line 236: 0
+        line 240: 7
+        line 243: 16
+        line 244: 21
+        line 246: 27
+        line 247: 34
+        line 248: 45
+        line 249: 56
+        line 251: 74
+        line 258: 92
+        line 254: 95
+        line 256: 97
+        line 259: 109
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           21      71     4 factory   Ljavax/xml/parsers/SAXParserFactory;
+           34      58     5 parser   Ljavax/xml/parsers/SAXParser;
+           97      12     4     e   Ljava/lang/Exception;
+            0     110     0  this   Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;
+            0     110     1    in   Ljava/io/Reader;
+            7     103     2 resolver   Lorg/xml/sax/EntityResolver;
+           16      94     3 handler   Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler;
+      StackMapTable: number_of_entries = 2
+        frame_type = 255 /* full_frame */
+          offset_delta = 95
+          locals = [ class org/apache/commons/configuration2/plist/XMLPropertyListConfiguration, class java/io/Reader, class org/xml/sax/EntityResolver, class org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$XMLPropertyListHandler ]
+          stack = [ class java/lang/Exception ]
+        frame_type = 13 /* same */
+    Exceptions:
+      throws org.apache.commons.configuration2.ex.ConfigurationException
 
   public void write(java.io.Writer) throws org.apache.commons.configuration2.ex.ConfigurationException;
+    descriptor: (Ljava/io/Writer;)V
+    flags: (0x0001) ACC_PUBLIC
     Code:
-       0: aload_0
-       1: getfield      #16                 // Field locator:Lorg/apache/commons/configuration2/io/FileLocator;
-       4: ifnonnull     17
-       7: new           #34                 // class org/apache/commons/configuration2/ex/ConfigurationException
-      10: dup
-      11: ldc           #37                 // String Save operation not properly initialized! Do not call write(Writer) directly, but use a FileHandler to save a configuration.
-      13: invokespecial #38                 // Method org/apache/commons/configuration2/ex/ConfigurationException."<init>":(Ljava/lang/String;)V
-      16: athrow
-      17: new           #39                 // class java/io/PrintWriter
-      20: dup
-      21: aload_1
-      22: invokespecial #40                 // Method java/io/PrintWriter."<init>":(Ljava/io/Writer;)V
-      25: astore_2
-      26: aload_0
-      27: getfield      #16                 // Field locator:Lorg/apache/commons/configuration2/io/FileLocator;
-      30: invokevirtual #41                 // Method org/apache/commons/configuration2/io/FileLocator.getEncoding:()Ljava/lang/String;
-      33: ifnull        73
-      36: aload_2
-      37: new           #42                 // class java/lang/StringBuilder
-      40: dup
-      41: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-      44: ldc           #44                 // String <?xml version=\"1.0\" encoding=\"
-      46: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      49: aload_0
-      50: getfield      #16                 // Field locator:Lorg/apache/commons/configuration2/io/FileLocator;
-      53: invokevirtual #41                 // Method org/apache/commons/configuration2/io/FileLocator.getEncoding:()Ljava/lang/String;
-      56: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      59: ldc           #46                 // String \"?>
-      61: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      64: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-      67: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-      70: goto          79
-      73: aload_2
-      74: ldc           #49                 // String <?xml version=\"1.0\"?>
-      76: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-      79: aload_2
-      80: ldc           #50                 // String <!DOCTYPE plist SYSTEM \"file://localhost/System/Library/DTDs/PropertyList.dtd\">
-      82: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-      85: aload_2
-      86: ldc           #51                 // String <plist version=\"1.0\">
-      88: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-      91: aload_0
-      92: aload_2
-      93: iconst_1
-      94: aload_0
-      95: invokevirtual #29                 // Method getNodeModel:()Lorg/apache/commons/configuration2/tree/InMemoryNodeModel;
-      98: invokevirtual #52                 // Method org/apache/commons/configuration2/tree/InMemoryNodeModel.getNodeHandler:()Lorg/apache/commons/configuration2/tree/NodeHandler;
-     101: invokeinterface #53,  1           // InterfaceMethod org/apache/commons/configuration2/tree/NodeHandler.getRootNode:()Ljava/lang/Object;
-     106: checkcast     #54                 // class org/apache/commons/configuration2/tree/ImmutableNode
-     109: invokespecial #55                 // Method printNode:(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V
-     112: aload_2
-     113: ldc           #56                 // String </plist>
-     115: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     118: aload_2
-     119: invokevirtual #57                 // Method java/io/PrintWriter.flush:()V
-     122: return
-
-  private void printNode(java.io.PrintWriter, int, org.apache.commons.configuration2.tree.ImmutableNode);
-    Code:
-       0: ldc           #58                 // String
-       2: iload_2
-       3: iconst_4
-       4: imul
-       5: invokestatic  #60                 // Method org/apache/commons/lang3/StringUtils.repeat:(Ljava/lang/String;I)Ljava/lang/String;
-       8: astore        4
-      10: aload_3
-      11: invokevirtual #61                 // Method org/apache/commons/configuration2/tree/ImmutableNode.getNodeName:()Ljava/lang/String;
-      14: ifnull        56
-      17: aload_1
-      18: new           #42                 // class java/lang/StringBuilder
-      21: dup
-      22: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-      25: aload         4
-      27: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      30: ldc           #62                 // String <key>
-      32: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      35: aload_3
-      36: invokevirtual #61                 // Method org/apache/commons/configuration2/tree/ImmutableNode.getNodeName:()Ljava/lang/String;
-      39: invokestatic  #63                 // Method org/apache/commons/text/StringEscapeUtils.escapeXml10:(Ljava/lang/String;)Ljava/lang/String;
-      42: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      45: ldc           #64                 // String </key>
-      47: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      50: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-      53: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-      56: aload_3
-      57: invokevirtual #65                 // Method org/apache/commons/configuration2/tree/ImmutableNode.getChildren:()Ljava/util/List;
-      60: astore        5
-      62: aload         5
-      64: invokeinterface #66,  1           // InterfaceMethod java/util/List.isEmpty:()Z
-      69: ifne          181
-      72: aload_1
-      73: new           #42                 // class java/lang/StringBuilder
-      76: dup
-      77: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-      80: aload         4
-      82: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      85: ldc           #67                 // String <dict>
-      87: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      90: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-      93: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-      96: aload         5
-      98: invokeinterface #68,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
-     103: astore        6
-     105: aload         6
-     107: invokeinterface #69,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
-     112: ifeq          154
-     115: aload         6
-     117: invokeinterface #70,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
-     122: checkcast     #54                 // class org/apache/commons/configuration2/tree/ImmutableNode
-     125: astore        7
-     127: aload_0
-     128: aload_1
-     129: iload_2
-     130: iconst_1
-     131: iadd
-     132: aload         7
-     134: invokespecial #55                 // Method printNode:(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V
-     137: aload         6
-     139: invokeinterface #69,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
-     144: ifeq          151
-     147: aload_1
-     148: invokevirtual #71                 // Method java/io/PrintWriter.println:()V
-     151: goto          105
-     154: aload_1
-     155: new           #42                 // class java/lang/StringBuilder
-     158: dup
-     159: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     162: aload         4
-     164: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     167: ldc           #72                 // String </dict>
-     169: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     172: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     175: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     178: goto          229
-     181: aload_3
-     182: invokevirtual #73                 // Method org/apache/commons/configuration2/tree/ImmutableNode.getValue:()Ljava/lang/Object;
-     185: ifnonnull     215
-     188: aload_1
-     189: new           #42                 // class java/lang/StringBuilder
-     192: dup
-     193: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     196: aload         4
-     198: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     201: ldc           #74                 // String <dict/>
-     203: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     206: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     209: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     212: goto          229
-     215: aload_3
-     216: invokevirtual #73                 // Method org/apache/commons/configuration2/tree/ImmutableNode.getValue:()Ljava/lang/Object;
-     219: astore        6
-     221: aload_0
-     222: aload_1
-     223: iload_2
-     224: aload         6
-     226: invokespecial #75                 // Method printValue:(Ljava/io/PrintWriter;ILjava/lang/Object;)V
-     229: return
-
-  private void printValue(java.io.PrintWriter, int, java.lang.Object);
-    Code:
-       0: ldc           #58                 // String
-       2: iload_2
-       3: iconst_4
-       4: imul
-       5: invokestatic  #60                 // Method org/apache/commons/lang3/StringUtils.repeat:(Ljava/lang/String;I)Ljava/lang/String;
-       8: astore        4
-      10: aload_3
-      11: instanceof    #76                 // class java/util/Date
-      14: ifeq          83
-      17: invokestatic  #77                 // Method org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder.access$000:()Ljava/text/DateFormat;
-      20: dup
-      21: astore        5
-      23: monitorenter
-      24: aload_1
-      25: new           #42                 // class java/lang/StringBuilder
-      28: dup
-      29: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-      32: aload         4
-      34: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      37: ldc           #78                 // String <date>
-      39: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      42: invokestatic  #77                 // Method org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$PListNodeBuilder.access$000:()Ljava/text/DateFormat;
-      45: aload_3
-      46: checkcast     #76                 // class java/util/Date
-      49: invokevirtual #79                 // Method java/text/DateFormat.format:(Ljava/util/Date;)Ljava/lang/String;
-      52: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      55: ldc           #80                 // String </date>
-      57: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-      60: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-      63: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-      66: aload         5
-      68: monitorexit
-      69: goto          80
-      72: astore        6
-      74: aload         5
-      76: monitorexit
-      77: aload         6
-      79: athrow
-      80: goto          764
-      83: aload_3
-      84: instanceof    #81                 // class java/util/Calendar
-      87: ifeq          106
-      90: aload_0
-      91: aload_1
-      92: iload_2
-      93: aload_3
-      94: checkcast     #81                 // class java/util/Calendar
-      97: invokevirtual #82                 // Method java/util/Calendar.getTime:()Ljava/util/Date;
-     100: invokespecial #75                 // Method printValue:(Ljava/io/PrintWriter;ILjava/lang/Object;)V
-     103: goto          764
-     106: aload_3
-     107: instanceof    #83                 // class java/lang/Number
-     110: ifeq          212
-     113: aload_3
-     114: instanceof    #84                 // class java/lang/Double
-     117: ifne          134
-     120: aload_3
-     121: instanceof    #85                 // class java/lang/Float
-     124: ifne          134
-     127: aload_3
-     128: instanceof    #86                 // class java/math/BigDecimal
-     131: ifeq          173
-     134: aload_1
-     135: new           #42                 // class java/lang/StringBuilder
-     138: dup
-     139: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     142: aload         4
-     144: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     147: ldc           #87                 // String <real>
-     149: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     152: aload_3
-     153: invokevirtual #88                 // Method java/lang/Object.toString:()Ljava/lang/String;
-     156: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     159: ldc           #89                 // String </real>
-     161: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     164: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     167: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     170: goto          764
-     173: aload_1
-     174: new           #42                 // class java/lang/StringBuilder
-     177: dup
-     178: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     181: aload         4
-     183: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     186: ldc           #90                 // String <integer>
-     188: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     191: aload_3
-     192: invokevirtual #88                 // Method java/lang/Object.toString:()Ljava/lang/String;
-     195: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     198: ldc           #91                 // String </integer>
-     200: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     203: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     206: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     209: goto          764
-     212: aload_3
-     213: instanceof    #92                 // class java/lang/Boolean
-     216: ifeq          283
-     219: aload_3
-     220: checkcast     #92                 // class java/lang/Boolean
-     223: invokevirtual #93                 // Method java/lang/Boolean.booleanValue:()Z
-     226: ifeq          256
-     229: aload_1
-     230: new           #42                 // class java/lang/StringBuilder
-     233: dup
-     234: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     237: aload         4
-     239: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     242: ldc           #94                 // String <true/>
-     244: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     247: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     250: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     253: goto          764
-     256: aload_1
-     257: new           #42                 // class java/lang/StringBuilder
-     260: dup
-     261: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     264: aload         4
-     266: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     269: ldc           #95                 // String <false/>
-     271: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     274: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     277: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     280: goto          764
-     283: aload_3
-     284: instanceof    #10                 // class java/util/List
-     287: ifeq          384
-     290: aload_1
-     291: new           #42                 // class java/lang/StringBuilder
-     294: dup
-     295: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     298: aload         4
-     300: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     303: ldc           #96                 // String <array>
-     305: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     308: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     311: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     314: aload_3
-     315: checkcast     #10                 // class java/util/List
-     318: invokeinterface #68,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
-     323: astore        5
-     325: aload         5
-     327: invokeinterface #69,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
-     332: ifeq          357
-     335: aload         5
-     337: invokeinterface #70,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
-     342: astore        6
-     344: aload_0
-     345: aload_1
-     346: iload_2
-     347: iconst_1
-     348: iadd
-     349: aload         6
-     351: invokespecial #75                 // Method printValue:(Ljava/io/PrintWriter;ILjava/lang/Object;)V
-     354: goto          325
-     357: aload_1
-     358: new           #42                 // class java/lang/StringBuilder
-     361: dup
-     362: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     365: aload         4
-     367: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     370: ldc           #97                 // String </array>
-     372: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     375: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     378: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     381: goto          764
-     384: aload_3
-     385: instanceof    #98                 // class org/apache/commons/configuration2/HierarchicalConfiguration
-     388: ifeq          426
-     391: aload_3
-     392: checkcast     #98                 // class org/apache/commons/configuration2/HierarchicalConfiguration
-     395: astore        5
-     397: aload_0
-     398: aload_1
-     399: iload_2
-     400: aload         5
-     402: invokeinterface #99,  1           // InterfaceMethod org/apache/commons/configuration2/HierarchicalConfiguration.getNodeModel:()Lorg/apache/commons/configuration2/tree/NodeModel;
-     407: invokeinterface #100,  1          // InterfaceMethod org/apache/commons/configuration2/tree/NodeModel.getNodeHandler:()Lorg/apache/commons/configuration2/tree/NodeHandler;
-     412: invokeinterface #53,  1           // InterfaceMethod org/apache/commons/configuration2/tree/NodeHandler.getRootNode:()Ljava/lang/Object;
-     417: checkcast     #54                 // class org/apache/commons/configuration2/tree/ImmutableNode
-     420: invokespecial #55                 // Method printNode:(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V
-     423: goto          764
-     426: aload_3
-     427: instanceof    #101                // class org/apache/commons/configuration2/ImmutableConfiguration
-     430: ifeq          577
-     433: aload_1
-     434: new           #42                 // class java/lang/StringBuilder
-     437: dup
-     438: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     441: aload         4
-     443: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     446: ldc           #67                 // String <dict>
-     448: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     451: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     454: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     457: aload_3
-     458: checkcast     #101                // class org/apache/commons/configuration2/ImmutableConfiguration
-     461: astore        5
-     463: aload         5
-     465: invokeinterface #102,  1          // InterfaceMethod org/apache/commons/configuration2/ImmutableConfiguration.getKeys:()Ljava/util/Iterator;
-     470: astore        6
-     472: aload         6
-     474: invokeinterface #69,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
-     479: ifeq          550
-     482: aload         6
-     484: invokeinterface #70,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
-     489: checkcast     #103                // class java/lang/String
-     492: astore        7
-     494: new           #104                // class org/apache/commons/configuration2/tree/ImmutableNode$Builder
-     497: dup
-     498: invokespecial #105                // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder."<init>":()V
-     501: aload         7
-     503: invokevirtual #106                // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder.name:(Ljava/lang/String;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
-     506: aload         5
-     508: aload         7
-     510: invokeinterface #107,  2          // InterfaceMethod org/apache/commons/configuration2/ImmutableConfiguration.getProperty:(Ljava/lang/String;)Ljava/lang/Object;
-     515: invokevirtual #108                // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder.value:(Ljava/lang/Object;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
-     518: invokevirtual #109                // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder.create:()Lorg/apache/commons/configuration2/tree/ImmutableNode;
-     521: astore        8
-     523: aload_0
-     524: aload_1
-     525: iload_2
-     526: iconst_1
-     527: iadd
-     528: aload         8
-     530: invokespecial #55                 // Method printNode:(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V
-     533: aload         6
-     535: invokeinterface #69,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
-     540: ifeq          547
-     543: aload_1
-     544: invokevirtual #71                 // Method java/io/PrintWriter.println:()V
-     547: goto          472
-     550: aload_1
-     551: new           #42                 // class java/lang/StringBuilder
-     554: dup
-     555: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     558: aload         4
-     560: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     563: ldc           #72                 // String </dict>
-     565: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     568: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     571: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     574: goto          764
-     577: aload_3
-     578: instanceof    #110                // class java/util/Map
-     581: ifeq          611
-     584: aload_3
-     585: checkcast     #110                // class java/util/Map
-     588: invokestatic  #111                // Method transformMap:(Ljava/util/Map;)Ljava/util/Map;
-     591: astore        5
-     593: aload_0
-     594: aload_1
-     595: iload_2
-     596: new           #112                // class org/apache/commons/configuration2/MapConfiguration
-     599: dup
-     600: aload         5
-     602: invokespecial #113                // Method org/apache/commons/configuration2/MapConfiguration."<init>":(Ljava/util/Map;)V
-     605: invokespecial #75                 // Method printValue:(Ljava/io/PrintWriter;ILjava/lang/Object;)V
-     608: goto          764
-     611: aload_3
-     612: instanceof    #9                  // class "[B"
-     615: ifeq          694
-     618: new           #103                // class java/lang/String
-     621: dup
-     622: aload_3
-     623: checkcast     #9                  // class "[B"
-     626: checkcast     #9                  // class "[B"
-     629: invokestatic  #114                // Method org/apache/commons/codec/binary/Base64.encodeBase64:([B)[B
-     632: ldc           #115                // String UTF-8
-     634: invokespecial #116                // Method java/lang/String."<init>":([BLjava/lang/String;)V
-     637: astore        5
-     639: goto          654
-     642: astore        6
-     644: new           #118                // class java/lang/AssertionError
-     647: dup
-     648: aload         6
-     650: invokespecial #119                // Method java/lang/AssertionError."<init>":(Ljava/lang/Object;)V
-     653: athrow
-     654: aload_1
-     655: new           #42                 // class java/lang/StringBuilder
-     658: dup
-     659: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     662: aload         4
-     664: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     667: ldc           #120                // String <data>
-     669: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     672: aload         5
-     674: invokestatic  #63                 // Method org/apache/commons/text/StringEscapeUtils.escapeXml10:(Ljava/lang/String;)Ljava/lang/String;
-     677: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     680: ldc           #121                // String </data>
-     682: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     685: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     688: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     691: goto          764
-     694: aload_3
-     695: ifnull        740
-     698: aload_1
-     699: new           #42                 // class java/lang/StringBuilder
-     702: dup
-     703: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     706: aload         4
-     708: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     711: ldc           #122                // String <string>
-     713: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     716: aload_3
-     717: invokestatic  #123                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
-     720: invokestatic  #63                 // Method org/apache/commons/text/StringEscapeUtils.escapeXml10:(Ljava/lang/String;)Ljava/lang/String;
-     723: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     726: ldc           #124                // String </string>
-     728: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     731: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     734: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     737: goto          764
-     740: aload_1
-     741: new           #42                 // class java/lang/StringBuilder
-     744: dup
-     745: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
-     748: aload         4
-     750: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     753: ldc           #125                // String <string/>
-     755: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-     758: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
-     761: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
-     764: return
-    Exception table:
-       from    to  target type
-          24    69    72   any
-          72    77    72   any
-         618   639   642   Class java/io/UnsupportedEncodingException
-
-  private static java.util.Map<java.lang.String, java.lang.Object> transformMap(java.util.Map<?, ?>);
-    Code:
-       0: new           #126                // class java/util/HashMap
-       3: dup
-       4: invokespecial #127                // Method java/util/HashMap."<init>":()V
-       7: astore_1
-       8: aload_0
-       9: invokeinterface #128,  1          // InterfaceMethod java/util/Map.entrySet:()Ljava/util/Set;
-      14: invokeinterface #129,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
-      19: astore_2
-      20: aload_2
-      21: invokeinterface #69,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
-      26: ifeq          76
-      29: aload_2
-      30: invokeinterface #70,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
-      35: checkcast     #130                // class java/util/Map$Entry
-      38: astore_3
-      39: aload_3
-      40: invokeinterface #131,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
-      45: instanceof    #103                // class java/lang/String
-      48: ifeq          73
-      51: aload_1
-      52: aload_3
-      53: invokeinterface #131,  1          // InterfaceMethod java/util/Map$Entry.getKey:()Ljava/lang/Object;
-      58: checkcast     #103                // class java/lang/String
-      61: aload_3
-      62: invokeinterface #132,  1          // InterfaceMethod java/util/Map$Entry.getValue:()Ljava/lang/Object;
-      67: invokeinterface #133,  3          // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-      72: pop
-      73: goto          20
-      76: aload_1
-      77: areturn
-
-  private org.xml.sax.InputSource lambda$read$0(java.lang.String, java.lang.String) throws org.xml.sax.SAXException, java.io.IOException;
-    Code:
-       0: new           #26                 // class org/xml/sax/InputSource
-       3: dup
-       4: aload_0
-       5: invokevirtual #134                // Method java/lang/Object.getClass:()Ljava/lang/Class;
-       8: invokevirtual #135                // Method java/lang/Class.getClassLoader:()Ljava/lang/ClassLoader;
-      11: ldc           #136                // String PropertyList-1.0.dtd
-      13: invokevirtual #137                // Method java/lang/ClassLoader.getResourceAsStream:(Ljava/lang/String;)Ljava/io/InputStream;
-      16: invokespecial #138                // Method org/xml/sax/InputSource."<init>":(Ljava/io/InputStream;)V
-      19: areturn
+      stack=4, locals=3, args_size=2
+         0: aload_0
+         1: getfield      #16                 // Field locator:Lorg/apache/commons/configuration2/io/FileLocator;
+         4: ifnonnull     17
+         7: new           #34                 // class org/apache/commons/configuration2/ex/ConfigurationException
+        10: dup
+        11: ldc           #37                 // String Save operation not properly initialized! Do not call write(Writer) directly, but use a FileHandler to save a configuration.
+        13: invokespecial #38                 // Method org/apache/commons/configuration2/ex/ConfigurationException."<init>":(Ljava/lang/String;)V
+        16: athrow
+        17: new           #39                 // class java/io/PrintWriter
+        20: dup
+        21: aload_1
+        22: invokespecial #40                 // Method java/io/PrintWriter."<init>":(Ljava/io/Writer;)V
+        25: astore_2
+        26: aload_0
+        27: getfield      #16                 // Field locator:Lorg/apache/commons/configuration2/io/FileLocator;
+        30: invokevirtual #41                 // Method org/apache/commons/configuration2/io/FileLocator.getEncoding:()Ljava/lang/String;
+        33: ifnull        73
+        36: aload_2
+        37: new           #42                 // class java/lang/StringBuilder
+        40: dup
+        41: invokespecial #43                 // Method java/lang/StringBuilder."<init>":()V
+        44: ldc           #44                 // String <?xml version=\"1.0\" encoding=\"
+        46: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        49: aload_0
+        50: getfield      #16                 // Field locator:Lorg/apache/commons/configuration2/io/FileLocator;
+        53: invokevirtual #41                 // Method org/apache/commons/configuration2/io/FileLocator.getEncoding:()Ljava/lang/String;
+        56: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        59: ldc           #46                 // String \"?>
+        61: invokevirtual #45                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+        64: invokevirtual #47                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+        67: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
+        70: goto          79
+        73: aload_2
+        74: ldc           #49                 // String <?xml version=\"1.0\"?>
+        76: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
+        79: aload_2
+        80: ldc           #50                 // String <!DOCTYPE plist SYSTEM \"file://localhost/System/Library/DTDs/PropertyList.dtd\">
+        82: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
+        85: aload_2
+        86: ldc           #51                 // String <plist version=\"1.0\">
+        88: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
+        91: aload_0
+        92: aload_2
+        93: iconst_1
+        94: aload_0
+        95: invokevirtual #29                 // Method getNodeModel:()Lorg/apache/commons/configuration2/tree/InMemoryNodeModel;
+        98: invokevirtual #52                 // Method org/apache/commons/configuration2/tree/InMemoryNodeModel.getNodeHandler:()Lorg/apache/commons/configuration2/tree/NodeHandler;
+       101: invokeinterface #53,  1           // InterfaceMethod org/apache/commons/configuration2/tree/NodeHandler.getRootNode:()Ljava/lang/Object;
+       106: checkcast     #54                 // class org/apache/commons/configuration2/tree/ImmutableNode
+       109: invokespecial #55                 // Method printNode:(Ljava/io/PrintWriter;ILorg/apache/commons/configuration2/tree/ImmutableNode;)V
+       112: aload_2
+       113: ldc           #56                 // String </plist>
+       115: invokevirtual #48                 // Method java/io/PrintWriter.println:(Ljava/lang/String;)V
+       118: aload_2
+       119: invokevirtual #57                 // Method java/io/PrintWriter.flush:()V
+       122: return
+      LineNumberTable:
+        line 264: 0
+        line 266: 7
+        line 270: 17
+        line 272: 26
+        line 274: 36
+        line 278: 73
+        line 281: 79
+        line 282: 85
+        line 284: 91
+        line 286: 112
+        line 287: 118
+        line 288: 122
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0     123     0  this   Lorg/apache/commons/configuration2/plist/XMLPropertyListConfiguration;
+            0     123     1   out   Ljava/io/Writer;
+           26      97     2 writer   Ljava/io/PrintWriter;
+      StackMapTable: number_of_entries = 3
+        frame_type = 17 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 55
+          locals = [ class java/io/PrintWriter ]
+        frame_type = 5 /* same */
+    Exceptions:
+      throws org.apache.commons.configuration2.ex.ConfigurationException
 }
+SourceFile: "XMLPropertyListConfiguration.java"
+InnerClasses:
+  static #142;                            // class org/apache/commons/configuration2/plist/XMLPropertyListConfiguration$1
+  public static #243= #130 of #110;       // Entry=class java/util/Map$Entry of class java/util/Map
+  public static final #376= #104 of #54;  // Builder=class org/apache/commons/configuration2/tree/ImmutableNode$Builder of class org/apache/commons/configuration2/tree/ImmutableNode
+  public static final #538= #537 of #540; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
+BootstrapMethods:
+  0: #277 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #278 (Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;
+      #279 REF_invokeSpecial org/apache/commons/configuration2/plist/XMLPropertyListConfiguration.lambda$read$0:(Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;
+      #278 (Ljava/lang/String;Ljava/lang/String;)Lorg/xml/sax/InputSource;
