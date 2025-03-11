@@ -5,14 +5,12 @@ import io.github.bineq.daleq.*;
 import io.github.bineq.daleq.edb.EBDAdditionalPredicates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
 
 /**
  * Utility to read all facts from an IDB folder.
@@ -51,7 +49,8 @@ public class IDBReader {
             assert IDBPredicateRegistry.ALL.values().contains(predicate);
             if (predicate.isInstructionPredicate()) {
                 String methodId = getMethodId(fact);
-                List<Fact> instructionFacts = idb.methodInstructionFacts.computeIfAbsent(methodId,mId -> new ArrayList<>());
+                Comparator<Fact> SORT_BY_POSITION = Comparator.comparingInt(f -> ((Integer) f.values()[2]));
+                Set<Fact> instructionFacts = idb.methodInstructionFacts.computeIfAbsent(methodId,mId -> new TreeSet<>(SORT_BY_POSITION));
                 instructionFacts.add(fact);
             }
             else {
@@ -89,12 +88,11 @@ public class IDBReader {
                         idb.classRawAccessFact = fact;
                     }
                     else if (type==Type.FIELD) {
-                        Set<Fact> facts2 = idb.fieldAccessFacts.computeIfAbsent(classOrMethodOrFieldId, mId -> new HashSet<>());
-                        facts2.add(fact);
+                        idb.fieldRawAccessFacts.put(classOrMethodOrFieldId,fact);
                     }
                     else if (type==Type.METHOD) {
-                        Set<Fact> facts2 = idb.methodAccessFacts.computeIfAbsent(classOrMethodOrFieldId,mId -> new HashSet<>());
-                        facts2.add(fact);                    }
+                        idb.methodRawAccessFacts.put(classOrMethodOrFieldId,fact);
+                    }
                 }
 
                 else if (IDBAccessPredicates.ALL.contains(predicate)) {
@@ -104,10 +102,12 @@ public class IDBReader {
                         idb.classAccessFacts.add(fact);
                     }
                     else if (type==Type.FIELD) {
-
+                        Set<Fact> facts2 = idb.fieldAccessFacts.computeIfAbsent(classOrMethodOrFieldId, mId -> new HashSet<>());
+                        facts2.add(fact);
                     }
                     else if (type==Type.METHOD) {
-
+                        Set<Fact> facts2 = idb.methodAccessFacts.computeIfAbsent(classOrMethodOrFieldId, mId -> new HashSet<>());
+                        facts2.add(fact);
                     }
                 }
 
@@ -173,17 +173,20 @@ public class IDBReader {
     private enum Type {CLASS,METHOD,FIELD};
 
     private static Type classify(String id) {
+        Type type = null;
         if (id.contains("::")) {
             if (id.contains("(") && id.contains(")")) {
-                return Type.METHOD;
+                type = Type.METHOD;
             }
             else {
-                return Type.FIELD;
+                type = Type.FIELD;
             }
         }
         else {
-            return Type.CLASS;
+            type = Type.CLASS;
         }
+        assert type != null;
+        return type;
     }
 
     private static boolean isIDBVersionOf(Predicate idbPredicate,Predicate edbPredicate) {

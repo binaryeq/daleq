@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
@@ -90,7 +91,6 @@ public class TestIDBReader {
         assertTrue(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"SUPER"));
     }
 
-
     @Test
     public void testFields() {
         // from src/test/resources/idb/idb1/XMLPropertyListConfiguration.javap
@@ -121,7 +121,88 @@ public class TestIDBReader {
         assertTrue(methodIds.contains(METHOD11));
         assertTrue(methodIds.contains(METHOD12));
         assertTrue(methodIds.contains(METHOD13));
+    }
 
+    @Test
+    public void testMethodRawAccess() {
+        // flags: (0x0004) ACC_PROTECTED
+        Fact fact = idb.methodRawAccessFacts.get(METHOD11);
+        assertNotNull(fact);
+        assertEquals(IDBPredicates.convertPredicateNameToIDB(EBDAdditionalPredicates.ACCESS.getName()),fact.predicate().getName());
+        assertEquals(0x0004,fact.values()[2]);
+    }
+
+    @Test
+    public void testMethodAccess1() {
+        // flags: (0x0004) ACC_PROTECTED
+        Set<Fact> facts = idb.methodAccessFacts.get(METHOD11);
+        assertNotNull(facts);
+        assertTrue(facts.size()>0);
+        Set<String> predicateNames = facts.stream().map(fact -> fact.predicate().getName()).collect(Collectors.toSet());
+        assertTrue(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"PROTECTED"));
+        assertFalse(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"SYNTHETIC"));
+        assertFalse(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"STATIC"));
+        assertFalse(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"PUBLIC"));
+        assertFalse(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"PRIVATE"));
+        assertFalse(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"ABSTRACT"));
+        assertFalse(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"FINAL"));
+    }
+
+    // test for synthetic method
+    @Test
+    public void testMethodAccess2() {
+        //   private org.xml.sax.InputSource lambda$read$0(java.lang.String, java.lang.String) throws org.xml.sax.SAXException, java.io.IOException;
+        Set<Fact> facts = idb.methodAccessFacts.get(METHOD6);
+        assertNotNull(facts);
+        assertTrue(facts.size()>0);
+        Set<String> predicateNames = facts.stream().map(fact -> fact.predicate().getName()).collect(Collectors.toSet());
+        assertTrue(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"PRIVATE"));
+        assertTrue(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"SYNTHETIC"));
+    }
+
+    @Test
+    public void testFieldRawAccess() {
+        Fact fact = idb.fieldRawAccessFacts.get(FIELD3);
+        assertNotNull(fact);
+        assertEquals(IDBPredicates.convertPredicateNameToIDB(EBDAdditionalPredicates.ACCESS.getName()),fact.predicate().getName());
+        assertEquals(2,fact.values()[2]);
+    }
+
+    @Test
+    public void testFieldAccess() {
+        // see src/test/resources/idb/idb1/XMLPropertyListConfiguration.javapc
+        //   private static final java.lang.String DATA_ENCODING;
+        Set<Fact> facts = idb.fieldAccessFacts.get(FIELD1);
+        assertNotNull(facts);
+        assertTrue(facts.size()>0);
+        Set<String> predicateNames = facts.stream().map(fact -> fact.predicate().getName()).collect(Collectors.toSet());
+        assertTrue(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"PRIVATE"));
+        assertTrue(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"STATIC"));
+        assertFalse(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"SYNTHETIC"));
+        assertFalse(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"PUBLIC"));
+        assertFalse(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"PROTECTED"));
+        assertFalse(predicateNames.contains(IDBAccessPredicates.ACCESS_PREDICATE_PREFIX+"ABSTRACT"));
+    }
+
+    @Test
+    public void testInstructions() {
+        // see src/test/resources/idb/idb1/XMLPropertyListConfiguration.javapc
+        // default constructor
+
+        //  public org.apache.commons.configuration2.plist.XMLPropertyListConfiguration();
+        //        Code:
+        //        0: aload_0
+        //        1: invokespecial #1                  // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":()V
+        //        4: return
+
+        Set<Fact> facts = idb.methodInstructionFacts.get(METHOD1);
+        assertNotNull(facts);
+        assertEquals(3,facts.size());
+
+        List<Fact> factList = facts.stream().collect(Collectors.toList());
+        assertEquals(IDBPredicates.convertPredicateNameToIDB("ALOAD"),factList.get(0).predicate().getName());
+        assertEquals(IDBPredicates.convertPredicateNameToIDB("INVOKESPECIAL"),factList.get(1).predicate().getName());
+        assertEquals(IDBPredicates.convertPredicateNameToIDB("RETURN"),factList.get(2).predicate().getName());
     }
 
 

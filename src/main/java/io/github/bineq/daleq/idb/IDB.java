@@ -25,7 +25,7 @@ public class IDB {
     Map<String,Fact> methodRawAccessFacts = new LinkedHashMap<>(); // raw, value is single fact for all int-encoded access flags
     Map<String,Set<Fact>> methodAccessFacts = new LinkedHashMap<>();
     Map<String,Fact> methodSignatureFacts = new LinkedHashMap<>();
-    Map<String,List<Fact>> methodInstructionFacts = new LinkedHashMap<>();
+    Map<String,Set<Fact>> methodInstructionFacts = new LinkedHashMap<>();
 
     Map<String,Set<Fact>> fieldAccessFacts = new LinkedHashMap<>();
     Map<String,Fact> fieldRawAccessFacts = new LinkedHashMap<>(); // raw, value is single fact for all int-encoded access flags
