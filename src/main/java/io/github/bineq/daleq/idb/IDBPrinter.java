@@ -1,9 +1,7 @@
 package io.github.bineq.daleq.idb;
 
 import com.google.common.base.Preconditions;
-import io.github.bineq.daleq.DBCompare;
 import io.github.bineq.daleq.Fact;
-import io.github.bineq.daleq.Predicate;
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
 import org.apache.commons.cli.*;
@@ -29,6 +27,15 @@ public class IDBPrinter {
 
     public static final Logger LOG = LoggerFactory.getLogger(IDBPrinter.class);
     public static final Path DEFAULT_RULES = Path.of(IDBPrinter.class.getResource("/rules/vanilla.souffle").getPath());
+    public static final Path TMP_DIR_ROOT = Path.of(".tmp/"+IDBPrinter.class.getName());
+
+    static {
+        try {
+            Files.createDirectories(TMP_DIR_ROOT);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static Option OPT_IDB = Option.builder()
         .argName("idb")
@@ -92,7 +99,7 @@ public class IDBPrinter {
                     LOG.info("Using default rules from {}", rules);
                 }
                 Preconditions.checkState(Files.exists(rules));
-                Path dir = Files.createTempDirectory("idb");
+                Path dir = Files.createTempDirectory(TMP_DIR_ROOT,null);
                 Path idbDir = dir.resolve("idb");
                 Path edbDir = dir.resolve("edb");
                 Path edbDefFile = dir.resolve("db.souffle");
