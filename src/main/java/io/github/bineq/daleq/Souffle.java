@@ -98,7 +98,7 @@ public class Souffle {
     public static boolean checkSouffleExe() {
         String souffleExe = System.getProperty(SOUFFLE);
         if (souffleExe == null) {
-            LOG.warn(souffleExe, SOUFFLE + " property not set, must point to the souffle binary, pass to JVM as follows: \"-DSOUFFLE=<dir>\"");
+            LOG.warn(SOUFFLE + " property not set, must point to the souffle binary, pass to JVM as follows: \"-DSOUFFLE=<dir>\"");
             return false;
         }
         Path souffle = Path.of(souffleExe);

@@ -28,7 +28,6 @@ public class RunBenchmark {
     public static final String EDB = "EDB";
     public static final String IDB = "IDB";
     public static final String MERGED = "merged-facts-and-rules1.souffle";
-
     public static final String RULES = "/rules/vanilla.souffle";
 
     public static void main(String[] args) throws IOException {
