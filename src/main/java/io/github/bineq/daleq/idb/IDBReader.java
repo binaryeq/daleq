@@ -12,6 +12,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static io.github.bineq.daleq.idb.IDB.COMPARE_INSTRUCTION_FACTS_BY_POSITION;
+
 /**
  * Utility to read all facts from an IDB folder.
  * @author jens dietrich
@@ -49,8 +51,7 @@ public class IDBReader {
             assert IDBPredicateRegistry.ALL.values().contains(predicate);
             if (predicate.isInstructionPredicate()) {
                 String methodId = getMethodId(fact);
-                Comparator<Fact> SORT_BY_POSITION = Comparator.comparingInt(f -> ((Integer) f.values()[2]));
-                Set<Fact> instructionFacts = idb.methodInstructionFacts.computeIfAbsent(methodId,mId -> new TreeSet<>(SORT_BY_POSITION));
+                Set<Fact> instructionFacts = idb.methodInstructionFacts.computeIfAbsent(methodId,mId -> new TreeSet<>(COMPARE_INSTRUCTION_FACTS_BY_POSITION));
                 instructionFacts.add(fact);
             }
             else {
@@ -102,11 +103,11 @@ public class IDBReader {
                         idb.classAccessFacts.add(fact);
                     }
                     else if (type==Type.FIELD) {
-                        Set<Fact> facts2 = idb.fieldAccessFacts.computeIfAbsent(classOrMethodOrFieldId, mId -> new HashSet<>());
+                        Set<Fact> facts2 = idb.fieldAccessFacts.computeIfAbsent(classOrMethodOrFieldId, mId -> new TreeSet<>(IDB.COMPARE_BY_PREDICATE_NAME));
                         facts2.add(fact);
                     }
                     else if (type==Type.METHOD) {
-                        Set<Fact> facts2 = idb.methodAccessFacts.computeIfAbsent(classOrMethodOrFieldId, mId -> new HashSet<>());
+                        Set<Fact> facts2 = idb.methodAccessFacts.computeIfAbsent(classOrMethodOrFieldId, mId -> new TreeSet<>(IDB.COMPARE_BY_PREDICATE_NAME));
                         facts2.add(fact);
                     }
                 }

@@ -11,24 +11,28 @@ import java.util.*;
  */
 class IDB {
 
+    static final Comparator<Fact> COMPARE_BY_SLOT_1 = Comparator.comparing(f -> f.values()[1].toString());
+    static final Comparator<Fact> COMPARE_BY_PREDICATE_NAME = Comparator.comparing(f -> f.predicate().getName());
+    static final Comparator<Fact> COMPARE_INSTRUCTION_FACTS_BY_POSITION = Comparator.comparingInt(f -> ((Integer) f.values()[2]));
+
     Fact classSuperclassFact = null;
     Fact classSignatureFact = null;
     Fact bytecodeVersionFact = null;
     List<Fact> classInterfaceFacts = new ArrayList<>();
     Fact classRawAccessFact = null; // raw, value is single fact for all int-encoded access flags
-    Set<Fact> classAccessFacts = new HashSet<>();
+    Set<Fact> classAccessFacts = new TreeSet<>(COMPARE_BY_PREDICATE_NAME);
 
-    Set<Fact> methodFacts = new TreeSet<>(Comparator.comparing(f -> f.values()[1].toString()));
-    Set<Fact> fieldFacts = new TreeSet<>(Comparator.comparing(f -> f.values()[1].toString()));
+    Set<Fact> methodFacts = new TreeSet<>(COMPARE_BY_SLOT_1);
+    Set<Fact> fieldFacts = new TreeSet<>(COMPARE_BY_SLOT_1);
 
-    Map<String,Fact> methodRawAccessFacts = new LinkedHashMap<>(); // raw, value is single fact for all int-encoded access flags
-    Map<String,Set<Fact>> methodAccessFacts = new LinkedHashMap<>();
-    Map<String,Fact> methodSignatureFacts = new LinkedHashMap<>();
-    Map<String,Set<Fact>> methodInstructionFacts = new LinkedHashMap<>();
+    Map<String,Fact> methodRawAccessFacts = new HashMap<>(); // raw, value is single fact for all int-encoded access flags
+    Map<String,Set<Fact>> methodAccessFacts = new HashMap<>();
+    Map<String,Fact> methodSignatureFacts = new HashMap<>();
+    Map<String,Set<Fact>> methodInstructionFacts = new HashMap<>();
 
-    Map<String,Set<Fact>> fieldAccessFacts = new LinkedHashMap<>();
-    Map<String,Fact> fieldRawAccessFacts = new LinkedHashMap<>(); // raw, value is single fact for all int-encoded access flags
-    Map<String,Fact> fieldSignatureFacts = new LinkedHashMap<>();
+    Map<String,Set<Fact>> fieldAccessFacts = new HashMap<>();
+    Map<String,Fact> fieldRawAccessFacts = new HashMap<>(); // raw, value is single fact for all int-encoded access flags
+    Map<String,Fact> fieldSignatureFacts = new HashMap<>();
 
     @Override
     public boolean equals(Object o) {
