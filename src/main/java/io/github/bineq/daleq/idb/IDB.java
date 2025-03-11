@@ -1,16 +1,15 @@
 package io.github.bineq.daleq.idb;
 
 import io.github.bineq.daleq.Fact;
-
 import java.util.*;
 
 /**
- * A representation of the IDB itself generated for a given method.
+ * An internal representation of the IDB itself generated for a given method.
  * This is organised by a set of global facts, and instruction facts organised by method.
  * This is an utility to compare generated IDBs for equivalence.
  * @author jens dietrich
  */
-public class IDB {
+class IDB {
 
     Fact classSuperclassFact = null;
     Fact classSignatureFact = null;
@@ -31,4 +30,16 @@ public class IDB {
     Map<String,Fact> fieldRawAccessFacts = new LinkedHashMap<>(); // raw, value is single fact for all int-encoded access flags
     Map<String,Fact> fieldSignatureFacts = new LinkedHashMap<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IDB idb = (IDB) o;
+        return Objects.equals(classSuperclassFact, idb.classSuperclassFact) && Objects.equals(classSignatureFact, idb.classSignatureFact) && Objects.equals(bytecodeVersionFact, idb.bytecodeVersionFact) && Objects.equals(classInterfaceFacts, idb.classInterfaceFacts) && Objects.equals(classRawAccessFact, idb.classRawAccessFact) && Objects.equals(classAccessFacts, idb.classAccessFacts) && Objects.equals(methodFacts, idb.methodFacts) && Objects.equals(fieldFacts, idb.fieldFacts) && Objects.equals(methodRawAccessFacts, idb.methodRawAccessFacts) && Objects.equals(methodAccessFacts, idb.methodAccessFacts) && Objects.equals(methodSignatureFacts, idb.methodSignatureFacts) && Objects.equals(methodInstructionFacts, idb.methodInstructionFacts) && Objects.equals(fieldAccessFacts, idb.fieldAccessFacts) && Objects.equals(fieldRawAccessFacts, idb.fieldRawAccessFacts) && Objects.equals(fieldSignatureFacts, idb.fieldSignatureFacts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(classSuperclassFact, classSignatureFact, bytecodeVersionFact, classInterfaceFacts, classRawAccessFact, classAccessFacts, methodFacts, fieldFacts, methodRawAccessFacts, methodAccessFacts, methodSignatureFacts, methodInstructionFacts, fieldAccessFacts, fieldRawAccessFacts, fieldSignatureFacts);
+    }
 }

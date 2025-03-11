@@ -205,6 +205,4 @@ public class TestIDBReader {
         assertEquals(IDBPredicates.convertPredicateNameToIDB("RETURN"),factList.get(2).predicate().getName());
     }
 
-
-
 }
