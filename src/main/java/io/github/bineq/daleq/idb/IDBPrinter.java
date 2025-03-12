@@ -61,12 +61,21 @@ public class IDBPrinter {
         .desc("the location of the output file (a text file)")
         .build();
 
+    public static Option OPT_SKIP_PROVENANCE = Option.builder()
+        .argName("skipprovenance")
+        .option("sp")
+        .hasArg(false)
+        .required(false)
+        .desc("whether to skip provenance terms as they are only metadata (default is not to skip)")
+        .build();
+
     public static void main(String[] args) throws Exception {
 
         Options options = new Options();
         options.addOption(OPT_IDB);
         options.addOption(OPT_OUTPUT);
         options.addOption(OPT_RULES);
+        options.addOption(OPT_SKIP_PROVENANCE);
         CommandLine cli = null;
         CommandLineParser parser = new DefaultParser();
 
@@ -76,11 +85,12 @@ public class IDBPrinter {
             String outputFileName = cli.getOptionValue(OPT_OUTPUT);
             String rulesFileName = cli.getOptionValue(OPT_RULES);
             Path out = Path.of(outputFileName);
+            boolean skipProvenance = cli.hasOption(OPT_SKIP_PROVENANCE);
 
             Path input = Path.of(inputName);
             if (Files.isDirectory(input)) {
                 LOG.info("Loading existing IDB from {}", input);
-                printIDB(input, out);
+                printIDB(input, out,skipProvenance);
             }
             else if (Files.isRegularFile(input) && input.toString().endsWith(".class") ) {
 
@@ -116,7 +126,7 @@ public class IDBPrinter {
                 Souffle.createIDB(edbDefFile,rules,edbDir,idbDir,mergedFactsAndRulesFile);
                 LOG.info("EDB facts extracted to {}" , idbDir);
 
-                printIDB(idbDir, out);
+                printIDB(idbDir, out,skipProvenance);
             }
 
         } catch (ParseException e) {
@@ -128,32 +138,32 @@ public class IDBPrinter {
     }
 
 
-    static void printIDB(Path idbDir, Path out) throws IOException {
+    static void printIDB(Path idbDir, Path out,boolean skipProvenance) throws IOException {
         Preconditions.checkState(Files.exists(idbDir));
         Preconditions.checkState(Files.isDirectory(idbDir));
         IDB idb = IDBReader.read(idbDir);
-        printIDB(idb, out);
+        printIDB(idb, out,skipProvenance);
     }
 
-    static void printIDB(IDB idb, Path out) throws IOException {
+    static void printIDB(IDB idb, Path out, boolean skipProvenance) throws IOException {
 
         List<String> lines = new ArrayList<>();
 
         lines.addAll(comment1("class facts"));
-        lines.add(stringify(idb.bytecodeVersionFact));
-        lines.add(stringify(idb.classSuperclassFact));
+        lines.add(stringify(idb.bytecodeVersionFact,skipProvenance));
+        lines.add(stringify(idb.classSuperclassFact,skipProvenance));
         for (Fact interfaceFact:idb.classInterfaceFacts) {
-            lines.add(stringify(interfaceFact));
+            lines.add(stringify(interfaceFact,skipProvenance));
         }
-        lines.add(stringify(idb.classRawAccessFact));
-        lines.add(idb.classSignatureFact==null?missingFact("class signature"):stringify(idb.classSignatureFact));
+        lines.add(stringify(idb.classRawAccessFact,skipProvenance));
+        lines.add(idb.classSignatureFact==null?missingFact("class signature"):stringify(idb.classSignatureFact,skipProvenance));
         for (Fact accessFact:idb.classAccessFacts) {
-            lines.add(stringify(accessFact));
+            lines.add(stringify(accessFact,skipProvenance));
         }
 
         lines.addAll(comment1("list of fields"));
         for (Fact fieldFact:idb.fieldFacts) {
-            lines.add(stringify(fieldFact));
+            lines.add(stringify(fieldFact,skipProvenance));
         }
 
         lines.addAll(comment1("field details"));
@@ -161,17 +171,17 @@ public class IDBPrinter {
         for (String fieldId:fieldIds) {
             lines.addAll(comment2("details for field " + fieldId));
             Fact fieldSignatureFact = idb.fieldSignatureFacts.get(fieldId);
-            lines.add(stringify(fieldSignatureFact));
+            lines.add(stringify(fieldSignatureFact,skipProvenance));
             Fact fieldRawAccessFact = idb.fieldRawAccessFacts.get(fieldId);
-            lines.add(stringify(fieldRawAccessFact));
+            lines.add(stringify(fieldRawAccessFact,skipProvenance));
             for (Fact fieldAccessFact:idb.fieldAccessFacts.getOrDefault(fieldId,Set.of())) {
-                lines.add(stringify(fieldAccessFact));
+                lines.add(stringify(fieldAccessFact,skipProvenance));
             }
         }
 
         lines.addAll(comment1("list of methods"));
         for (Fact methodFact:idb.methodFacts) {
-            lines.add(stringify(methodFact));
+            lines.add(stringify(methodFact,skipProvenance));
         }
 
         lines.addAll(comment1("methods details"));
@@ -179,16 +189,16 @@ public class IDBPrinter {
         for (String methodId:methodIds) {
             lines.addAll(comment2("details for method " + methodId));
             Fact methodSignatureFact = idb.methodSignatureFacts.get(methodId);
-            lines.add(stringify(methodSignatureFact));
+            lines.add(stringify(methodSignatureFact,skipProvenance));
             Fact methodRawAccessFact = idb.methodRawAccessFacts.get(methodId);
-            lines.add(stringify(methodRawAccessFact));
+            lines.add(stringify(methodRawAccessFact,skipProvenance));
             for (Fact methodAccessFact:idb.methodAccessFacts.getOrDefault(methodId, Set.of())) {
-                lines.add(stringify(methodAccessFact));
+                lines.add(stringify(methodAccessFact,skipProvenance));
             }
 
             lines.addAll(comment2("\tinstructions for method " + methodId));
             for (Fact methodInstructionFact:idb.methodInstructionFacts.getOrDefault(methodId, Set.of())) {
-                lines.add(stringify(methodInstructionFact));
+                lines.add(stringify(methodInstructionFact,skipProvenance));
             }
         }
 
@@ -197,11 +207,15 @@ public class IDBPrinter {
 
     }
 
-    private static String stringify(Fact fact) {
+    private static String stringify(Fact fact,boolean skipProvenance) {
         if (fact==null) {
             return "null";
         }
-        return fact.predicate().getName() + "\t" + Arrays.stream(fact.values()).map(v -> String.valueOf(v)).collect(Collectors.joining("\t", "\t", ""));
+        String values = skipProvenance ?
+            Arrays.stream(fact.values()).skip(1)    .map(v -> String.valueOf(v)).collect(Collectors.joining("\t", "\t", "")):
+            Arrays.stream(fact.values())               .map(v -> String.valueOf(v)).collect(Collectors.joining("\t", "\t", ""));
+
+        return fact.predicate().getName() + "\t" + values;
     }
 
     // top level comment (header)
@@ -214,8 +228,8 @@ public class IDBPrinter {
         return List.of("","// " + text ,"");
     }
 
-    private static String missingFact(String text) {
-        return "// no fact found:" + text;
+    private static String missingFact(String kind) {
+        return "// no fact found:" + kind;
     }
 
 }
