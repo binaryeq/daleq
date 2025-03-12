@@ -4,6 +4,7 @@ package io.github.bineq.daleq.edb;
 import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.Predicate;
 import io.github.bineq.daleq.Slot;
+import org.objectweb.asm.tree.LabelNode;
 
 import java.util.Set;
 
@@ -31,8 +32,15 @@ public enum EBDAdditionalPredicates implements Predicate {
 
     // property of classes, interfaces and methods
     // the id is the unique name of this class, method or field
-    ACCESS(symslot(Fact.ID_SLOT_NAME),symslot("id"),numslot("access",Integer.TYPE.getName()))
+    ACCESS(symslot(Fact.ID_SLOT_NAME),symslot("id"),numslot("access",Integer.TYPE.getName())),
 
+    // labels are represented by instruction-type facts
+    LABEL(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),numslot("instructioncounter",Integer.TYPE.getName()),symslot("labelid")) {
+        @Override
+        public boolean isInstructionPredicate() {
+            return true;
+        }
+    },
     ;
 
 

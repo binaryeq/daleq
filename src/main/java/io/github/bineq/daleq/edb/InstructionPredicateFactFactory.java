@@ -22,7 +22,7 @@ public interface InstructionPredicateFactFactory<NT extends AbstractInsnNode> {
 
     EBDInstructionPredicate getPredicate();
 
-    Fact createFact(String id, NT node, String methodRef, int instructionCounter, Map<LabelNode,Integer> labelMap);
+    Fact createFact(String id, NT node, String methodRef, int instructionCounter, Map<LabelNode, String> labelMap);
 
     default void verify() throws VerificationException {
         if (!Objects.equals(getVersion(), getPredicate().getId())) {

@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test fact extraction for a class containing conditionals.
@@ -78,26 +79,32 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
         String methodRef = FactExtractor.getMethodReference("mypck/ClassWithConditionals", "foo","(II)I");
         List<Fact> instructionFacts = getInstructionFacts(methodRef);
 
-        assertEquals(12,instructionFacts.size());
+        assertEquals(14,instructionFacts.size());
 
         assertEquals("ILOAD",instructionFacts.get(0).predicate().getName());
         assertEquals("ILOAD",instructionFacts.get(1).predicate().getName());
         assertEquals("IF_ICMPGE",instructionFacts.get(2).predicate().getName());
         assertEquals("ICONST_1",instructionFacts.get(3).predicate().getName());
         assertEquals("IRETURN",instructionFacts.get(4).predicate().getName());
-        assertEquals("ILOAD",instructionFacts.get(5).predicate().getName());
+
+        assertEquals("LABEL",instructionFacts.get(5).predicate().getName());
+
         assertEquals("ILOAD",instructionFacts.get(6).predicate().getName());
-        assertEquals("IF_ICMPLE",instructionFacts.get(7).predicate().getName());
-        assertEquals("ICONST_M1",instructionFacts.get(8).predicate().getName());
-        assertEquals("IRETURN",instructionFacts.get(9).predicate().getName());
-        assertEquals("ICONST_0",instructionFacts.get(10).predicate().getName());
-        assertEquals("IRETURN",instructionFacts.get(11).predicate().getName());
+        assertEquals("ILOAD",instructionFacts.get(7).predicate().getName());
+        assertEquals("IF_ICMPLE",instructionFacts.get(8).predicate().getName());
+        assertEquals("ICONST_M1",instructionFacts.get(9).predicate().getName());
+        assertEquals("IRETURN",instructionFacts.get(10).predicate().getName());
+
+        assertEquals("LABEL",instructionFacts.get(11).predicate().getName());
+
+        assertEquals("ICONST_0",instructionFacts.get(12).predicate().getName());
+        assertEquals("IRETURN",instructionFacts.get(13).predicate().getName());
 
 
     }
 
     @Test
-    public void testMethod2Jumps() {
+    public void testMethod2Jumps1() {
 
         String methodRef = FactExtractor.getMethodReference("mypck/ClassWithConditionals", "foo","(II)I");
         List<Fact> instructionFacts = getInstructionFacts(methodRef);
@@ -106,10 +113,14 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
             .filter(fact -> isJump(fact))
             .collect(Collectors.toSet());
 
-        // inspect src/test/resources/conditional/mypck/ClassWithConditionals.javap for oracle
         assertEquals(2,jumpFacts.size());
-        containsJump(jumpFacts,3,6);
-        containsJump(jumpFacts,8,11);
+        assertTrue(jumpFacts.contains(instructionFacts.get(2)));
+        assertTrue(jumpFacts.contains(instructionFacts.get(8)));
+
+        // inspect src/test/resources/conditional/mypck/ClassWithConditionals.javap for oracle
+        containsJump(instructionFacts.get(2),"L2");
+        containsJump(instructionFacts.get(8),"L4");
+
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import io.github.bineq.daleq.SimpleFact;
 import io.github.bineq.daleq.edb.EBDInstructionPredicate;
 import io.github.bineq.daleq.edb.EDBPredicateRegistry;
+import org.objectweb.asm.tree.JumpInsnNode;
 import org.objectweb.asm.tree.LabelNode;
 import io.github.bineq.daleq.Fact;
 
@@ -21,7 +22,7 @@ public class InstructionFactFactory__IFLT implements io.github.bineq.daleq.edb.I
         return EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(155);
     }
 
-    @Override public Fact createFact(String factId,org.objectweb.asm.tree.JumpInsnNode node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {
+    @Override public Fact createFact(String factId, JumpInsnNode node, String methodRef, int instructionCounter, Map<LabelNode, String> labelMap) {
         return new SimpleFact(EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(155),new Object[]{factId,methodRef,instructionCounter,labelMap.get(node.label)});
     }
 

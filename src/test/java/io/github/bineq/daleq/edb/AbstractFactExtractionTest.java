@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Abstract fact abstraction test.
@@ -72,12 +73,15 @@ public abstract class AbstractFactExtractionTest {
     }
 
 
-    protected void containsJump(Collection<Fact> facts, int from, int to) {
-        int count = (int)facts.stream()
-            .filter(f -> f.values()[2].equals(from))
-            .filter(f -> f.values()[3].equals(to))
-            .count();
-        assertEquals(1,count);
+    protected void containsJump(Fact fact, String label) {
+        Predicate predicate = fact.predicate();
+        for (int i = 0; i < predicate.getSlots().length; i++) {
+            if (predicate.getSlots()[i].name().equals("label")) {
+                assertEquals(label,fact.values()[i].toString());
+                return;
+            }
+        }
+        assertTrue(false);
     }
 
     protected boolean isJump(Fact fact) {

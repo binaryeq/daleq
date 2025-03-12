@@ -306,3 +306,7 @@ IDB_IFNULL(cat("R_IFNULL","[",factid,"]"),methodid,instructioncounter,label) :- 
 IDB_IFNONNULL(cat("R_IFNONNULL","[",factid,"]"),methodid,instructioncounter,label) :- IFNONNULL(factid,methodid,instructioncounter,label).
 .output IDB_IFNONNULL
 
+.decl IDB_LABEL(factid: symbol,methodid: symbol,instructioncounter: number,labelid: symbol)
+IDB_LABEL(cat("R_LABEL","[",factid,"]"),methodid,instructioncounter,labelid) :- LABEL(factid,methodid,instructioncounter,labelid).
+.output IDB_LABEL
+
