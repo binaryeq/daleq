@@ -28,7 +28,6 @@ public class AccessRuleGeneration {
         .desc("a file where to create the souffle program (.souffle file) containing rules")
         .build();
 
-
     public static void main(String[] args) throws Exception {
 
         Options options = new Options();

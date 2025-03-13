@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  * Print the IDB in a format suitable for text-based diffing.
  * I.e. all facts are combined and arranged in a predictable order.
- * The output is simular to tools like javap.
+ * The output is similar to tools like javap.
  * Comments and spaces are inserted to group/organise facts.
  * @author jens dietrich
  */
