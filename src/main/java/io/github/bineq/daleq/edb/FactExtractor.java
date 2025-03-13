@@ -34,6 +34,22 @@ public class FactExtractor   {
 
     public static final Map<Integer,InstructionPredicateFactFactory> FACT_FACTORIES = new HashMap<>();
 
+    private static class HashMapWthKeyAccessRecording<K,V> extends HashMap<K,V> {
+        Set<K> accessedKeys = new HashSet<>();
+
+        @Override
+        public V get(Object key) {
+            accessedKeys.add((K) key);
+            return super.get(key);
+        }
+
+        @Override
+        public V getOrDefault(Object key, V defaultValue) {
+            accessedKeys.add((K) key);
+            return super.getOrDefault(key, defaultValue);
+        }
+    }
+
     static {
 
         LOG.info("Loading instruction predicate fact factories");
@@ -180,7 +196,6 @@ public class FactExtractor   {
             dbMain.add("");
         }
 
-        String dbName = "database.souffle";
         Files.write(dbDef,dbMain);
         LOG.info("database definition written to: {}",dbDef.toFile().getAbsolutePath());
 
@@ -225,44 +240,61 @@ public class FactExtractor   {
             facts.add(new SimpleFact(EBDAdditionalPredicates.METHOD_SIGNATURE,FactIdGenerator.nextId(EBDAdditionalPredicates.METHOD_SIGNATURE),methodId, methodNode.signature));
             facts.add(new SimpleFact(EBDAdditionalPredicates.ACCESS,FactIdGenerator.nextId(EBDAdditionalPredicates.ACCESS),methodId,methodNode.access));
 
-            //AtomicInteger line = new AtomicInteger(-1);
+            AtomicInteger labelCounter = new AtomicInteger(-1);
 
             // first iteration to collect labels
-            LabelNode lastLabel = null;
-            final Map<LabelNode,Integer> labelMap = new HashMap<>();
+            final HashMapWthKeyAccessRecording<LabelNode,String> labelMap = new HashMapWthKeyAccessRecording<>();
             for (AbstractInsnNode instructionNode:methodNode.instructions) {
                 // TODO: label nodes, frame nodes, line NUMBER nodes
                 int opCode = instructionNode.getOpcode();
                 String instr = InstructionTable.getInstruction(opCode);
                 if (instr == null) {
-                    LOG.warn("unknown instruction type found, opcode is {}", opCode);
                     if (instructionNode instanceof LabelNode labelNode) {
                         LOG.debug("label: " + labelNode);
-                        lastLabel = labelNode;
-                    }
-                }
-                else {
-                    int instCounter = instructionCounter.incrementAndGet();
-                    if (lastLabel != null) {
-                        labelMap.put(lastLabel, instCounter);
-                        lastLabel = null;
+                        labelMap.put(labelNode, "L" + labelCounter.incrementAndGet());
                     }
                 }
             }
 
-            // second iteration to build facts
+            // second iteration to simulate building facts and check which labels are used
             instructionCounter.set(0); // reset !
             for (AbstractInsnNode instructionNode:methodNode.instructions) {
                 // TODO deal with pseudo nodes
-                //  if (instructionNode instanceof LineNumberNode) {
-                //      line.set(((LineNumberNode) instructionNode).line);
-                //  }
+                int opCode = instructionNode.getOpcode();
+                String instr = InstructionTable.getInstruction(opCode);
+                if (instr != null) {
+                    int instCounter = instructionCounter.incrementAndGet();
 
-                // TODO: label nodes, frame nodes, line NUMBER nodes
+                    EBDInstructionPredicate predicate = findPredicate(opCode,instr,instructionNode.getClass());
+                    assert predicate != null;
+                    try {
+                        createFact(predicate, instCounter, methodId, instructionNode,labelMap);
+                        // do not add fact, this is only to see which labels are used by factories !
+                    }
+                    catch (Exception x) {
+                        LOG.error("Fact generation has failed",x);
+                    }
+                }
+            };
+
+            // third iteration to actually build and collect facts
+            instructionCounter.set(0); // reset !
+            for (AbstractInsnNode instructionNode:methodNode.instructions) {
+                // TODO deal with pseudo nodes
                 int opCode = instructionNode.getOpcode();
                 String instr = InstructionTable.getInstruction(opCode);
                 if (instr == null) {
-                    LOG.warn("unknown instruction type found, opcode is {}", opCode);
+                    if (instructionNode instanceof LabelNode labelNode && labelMap.accessedKeys.contains(labelNode)) {
+                        Predicate predicate = EBDAdditionalPredicates.LABEL;
+                        String factId = FactIdGenerator.nextId(predicate);
+                        int instCounter = instructionCounter.incrementAndGet();
+                        //new Object[]{factId,methodRef,instructionCounter,labelMap.get(node.label)});
+                        Fact fact = new SimpleFact(predicate,factId,methodId,instCounter,labelMap.get(labelNode));
+                        facts.add(fact);
+                    }
+                    else {
+                        LOG.debug("unknown instruction type found, opcode is {}", opCode);
+                    }
                 }
                 else {
                     int instCounter = instructionCounter.incrementAndGet();
@@ -275,7 +307,6 @@ public class FactExtractor   {
                     try {
                         Fact fact = createFact(predicate, instCounter, methodId, instructionNode,labelMap);
                         //assert fact != null;
-
                         facts.add(fact);
                     }
                     catch (Exception x) {
@@ -285,7 +316,6 @@ public class FactExtractor   {
             };
 
             // TODO annotations
-
 
         });
 
@@ -299,7 +329,7 @@ public class FactExtractor   {
         return facts;
     }
 
-    private static Fact createFact(EBDInstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode, Map<LabelNode,Integer> labelMap) {
+    private static Fact createFact(EBDInstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode, Map<LabelNode,String> labelMap) {
         InstructionPredicateFactFactory factory = FACT_FACTORIES.get(predicate.getOpCode());
         Preconditions.checkNotNull(factory,"no fact factory found for instruction " + predicate.getName());
         String factId = FactIdGenerator.nextId(predicate);

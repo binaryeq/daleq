@@ -8,6 +8,7 @@ import io.github.bineq.daleq.edb.EBDInstructionPredicate;
 import io.github.bineq.daleq.edb.EDBPredicateRegistry;
 import org.objectweb.asm.tree.LabelNode;
 import io.github.bineq.daleq.Fact;
+import org.objectweb.asm.tree.MethodInsnNode;
 
 @Generated(value="io.github.bineq.daleq.factextraction.InstructionFactFactoryCodeGenerator", date= "2025-02-13T10:40Z",
       comments= "factory generated from ASM tree API nodes")
@@ -21,7 +22,7 @@ public class InstructionFactFactory__INVOKESPECIAL implements io.github.bineq.da
         return EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(183);
     }
 
-    @Override public Fact createFact(String factId,org.objectweb.asm.tree.MethodInsnNode node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {
+    @Override public Fact createFact(String factId, MethodInsnNode node, String methodRef, int instructionCounter, Map<LabelNode, String> labelMap) {
         return new SimpleFact(EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(183),new Object[]{factId,methodRef,instructionCounter,node.owner,node.name,node.desc,node.itf});
     }
 

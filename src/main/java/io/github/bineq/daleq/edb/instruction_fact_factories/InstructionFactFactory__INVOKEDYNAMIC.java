@@ -6,6 +6,7 @@ import java.util.Map;
 import io.github.bineq.daleq.SimpleFact;
 import io.github.bineq.daleq.edb.EBDInstructionPredicate;
 import io.github.bineq.daleq.edb.EDBPredicateRegistry;
+import org.objectweb.asm.tree.InvokeDynamicInsnNode;
 import org.objectweb.asm.tree.LabelNode;
 import io.github.bineq.daleq.Fact;
 
@@ -21,7 +22,7 @@ public class InstructionFactFactory__INVOKEDYNAMIC implements io.github.bineq.da
         return EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(186);
     }
 
-    @Override public Fact createFact(String factId,org.objectweb.asm.tree.InvokeDynamicInsnNode node,String methodRef,int instructionCounter,Map<LabelNode,Integer> labelMap) {
+    @Override public Fact createFact(String factId, InvokeDynamicInsnNode node, String methodRef, int instructionCounter, Map<LabelNode, String> labelMap) {
         return new SimpleFact(EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(186),new Object[]{factId,methodRef,instructionCounter,node.name,node.desc,node.bsmArgs,node.bsm.getOwner(),node.bsm.getName(),node.bsm.getDesc(),node.bsm.getTag(),node.bsm.isInterface()});
     }
 
