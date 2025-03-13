@@ -26,8 +26,12 @@ public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
         int instructionCounterSlotPosition = 2;
 
         Predicate<String[]> methodContext = line -> line[methodIdSlotPosition].equals("org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::addPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V");
-        Predicate<String[]> firstInstructionId = line -> line[instructionCounterSlotPosition].equals("18");
-        Predicate<String[]> secondInstructionId = line -> line[instructionCounterSlotPosition].equals("19");
+
+        // note: when inspecting javap the checkcasts are in lines 18/19
+        // there are additional facts representing labels being inserted
+
+        Predicate<String[]> firstInstructionId = line -> line[instructionCounterSlotPosition].equals("20");
+        Predicate<String[]> secondInstructionId = line -> line[instructionCounterSlotPosition].equals("21");
 
         assertEquals(1,this.getEDBFacts("CHECKCAST",methodContext.and(firstInstructionId)).size());
         assertEquals(1,this.getEDBFacts("CHECKCAST",methodContext.and(secondInstructionId)).size());
@@ -43,8 +47,12 @@ public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
         int instructionCounterSlotPosition = 2;
 
         Predicate<String[]> methodContext = line -> line[methodIdSlotPosition].equals("org/apache/commons/configuration2/plist/XMLPropertyListConfiguration::addPropertyInternal(Ljava/lang/String;Ljava/lang/Object;)V");
-        Predicate<String[]> firstInstructionId = line -> line[instructionCounterSlotPosition].equals("18");
-        Predicate<String[]> secondInstructionId = line -> line[instructionCounterSlotPosition].equals("19");
+
+        // note: when inspecting javap the checkcasts are in lines 18/19
+        // there are additional facts representing labels being inserted
+
+        Predicate<String[]> firstInstructionId = line -> line[instructionCounterSlotPosition].equals("20");
+        Predicate<String[]> secondInstructionId = line -> line[instructionCounterSlotPosition].equals("21");
 
         assertEquals(1,this.getIDBFacts("IDB_CHECKCAST",methodContext.and(firstInstructionId)).size());
         assertEquals(1,this.getIDBFacts("NOPE",methodContext.and(secondInstructionId)).size());
