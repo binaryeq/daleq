@@ -1,0 +1,70 @@
+Compiled from "NoopCallback.java"
+public final class org.flywaydb.core.internal.callback.NoopCallback extends java.lang.Enum<org.flywaydb.core.internal.callback.NoopCallback> implements org.flywaydb.core.api.callback.Callback {
+  public static final org.flywaydb.core.internal.callback.NoopCallback INSTANCE;
+
+  private static final org.flywaydb.core.internal.callback.NoopCallback[] $VALUES;
+
+  public static org.flywaydb.core.internal.callback.NoopCallback[] values();
+    Code:
+       0: getstatic     #7                  // Field $VALUES:[Lorg/flywaydb/core/internal/callback/NoopCallback;
+       3: invokevirtual #11                 // Method "[Lorg/flywaydb/core/internal/callback/NoopCallback;".clone:()Ljava/lang/Object;
+       6: checkcast     #12                 // class "[Lorg/flywaydb/core/internal/callback/NoopCallback;"
+       9: areturn
+
+  public static org.flywaydb.core.internal.callback.NoopCallback valueOf(java.lang.String);
+    Code:
+       0: ldc           #1                  // class org/flywaydb/core/internal/callback/NoopCallback
+       2: aload_0
+       3: invokestatic  #16                 // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+       6: checkcast     #1                  // class org/flywaydb/core/internal/callback/NoopCallback
+       9: areturn
+
+  private org.flywaydb.core.internal.callback.NoopCallback();
+    Code:
+       0: aload_0
+       1: aload_1
+       2: iload_2
+       3: invokespecial #22                 // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+       6: return
+
+  public boolean supports(org.flywaydb.core.api.callback.Event, org.flywaydb.core.api.callback.Context);
+    Code:
+       0: iconst_0
+       1: ireturn
+
+  public boolean canHandleInTransaction(org.flywaydb.core.api.callback.Event, org.flywaydb.core.api.callback.Context);
+    Code:
+       0: iconst_1
+       1: ireturn
+
+  public void handle(org.flywaydb.core.api.callback.Event, org.flywaydb.core.api.callback.Context);
+    Code:
+       0: return
+
+  public java.lang.String getCallbackName();
+    Code:
+       0: ldc           #26                 // String NOOP
+       2: areturn
+
+  private static org.flywaydb.core.internal.callback.NoopCallback[] $values();
+    Code:
+       0: iconst_1
+       1: anewarray     #1                  // class org/flywaydb/core/internal/callback/NoopCallback
+       4: dup
+       5: iconst_0
+       6: getstatic     #3                  // Field INSTANCE:Lorg/flywaydb/core/internal/callback/NoopCallback;
+       9: aastore
+      10: areturn
+
+  static {};
+    Code:
+       0: new           #1                  // class org/flywaydb/core/internal/callback/NoopCallback
+       3: dup
+       4: ldc           #28                 // String INSTANCE
+       6: iconst_0
+       7: invokespecial #29                 // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #3                  // Field INSTANCE:Lorg/flywaydb/core/internal/callback/NoopCallback;
+      13: invokestatic  #30                 // Method $values:()[Lorg/flywaydb/core/internal/callback/NoopCallback;
+      16: putstatic     #7                  // Field $VALUES:[Lorg/flywaydb/core/internal/callback/NoopCallback;
+      19: return
+}

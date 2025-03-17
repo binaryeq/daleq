@@ -1,0 +1,7 @@
+{
+  "name": "different synthetic methods 1",
+  "class1": "version1/NoopCallback.class",
+  "class2": "version2/NoopCallback.class",
+  "categories": ["SYNTHETIC_METHODS"],
+  "description": "Two versions of `org.flywaydb.core.internal.callback.NoopCallback` in `org.flywaydb:flyway-core:9.20.1` built by by Google (GAOSS) and the developer (Maven-Central) respectively. Corresponds to N10 in Schott et al ECOOP'24 paper."
+}

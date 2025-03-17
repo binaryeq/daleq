@@ -10,16 +10,13 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Print the IDB in a format suitable for text-based diffing.
  * I.e. all facts are combined and arranged in a predictable order.
- * The output is similar to tools like javap.
+ * The output is simular to tools like javap.
  * Comments and spaces are inserted to group/organise facts.
  * @author jens dietrich
  */
@@ -28,6 +25,11 @@ public class IDBPrinter {
     public static final Logger LOG = LoggerFactory.getLogger(IDBPrinter.class);
     public static final Path DEFAULT_RULES = Path.of(IDBPrinter.class.getResource("/rules/vanilla.souffle").getPath());
     public static final Path TMP_DIR_ROOT = Path.of(".tmp/"+IDBPrinter.class.getName());
+
+    public static final boolean DEFAULT_INCLUDE_PROVENANCE = false;
+    public static final boolean DEFAULT_INCLUDE_INSTRUCTION_COUNTERS = false;
+    public static final boolean DEFAULT_INCLUDE_CLASS_METHOD_FIELD_IDS = false;
+
 
     static {
         try {
@@ -61,12 +63,28 @@ public class IDBPrinter {
         .desc("the location of the output file (a text file)")
         .build();
 
-    public static Option OPT_SKIP_PROVENANCE = Option.builder()
-        .argName("skipprovenance")
-        .option("sp")
-        .hasArg(false)
+    public static Option OPT_INCLUDE_PROVENANCE_SLOT = Option.builder()
+        .argName("includeprovenance")
+        .option("ip")
+        .hasArg(true)
         .required(false)
-        .desc("whether to skip provenance terms as they are only metadata (default is not to skip)")
+        .desc("whether to include provenance terms as they are only metadata (true or false, default is " + DEFAULT_INCLUDE_PROVENANCE + ")")
+        .build();
+
+    public static Option OPT_INCLUDE_INSTRUCTIONCOUNTER_SLOT = Option.builder()
+        .argName("includeinstructioncounter")
+        .option("ic")
+        .hasArg(true)
+        .required(false)
+        .desc("whether to include instruction counters as they are only used for ordering facts (true or false, default is " + DEFAULT_INCLUDE_INSTRUCTION_COUNTERS + ")")
+        .build();
+
+    public static Option OPT_INCLUDE_IDS_IN_INSTRUCTIONS_SLOT = Option.builder()
+        .argName("includeids")
+        .option("ii")
+        .hasArg(true)
+        .required(false)
+        .desc("whether to include class/method/field ids in instruction facts as those facts are grouped by class/method/field anyway (true or false, default is " + DEFAULT_INCLUDE_CLASS_METHOD_FIELD_IDS + ")")
         .build();
 
     public static void main(String[] args) throws Exception {
@@ -75,7 +93,10 @@ public class IDBPrinter {
         options.addOption(OPT_IDB);
         options.addOption(OPT_OUTPUT);
         options.addOption(OPT_RULES);
-        options.addOption(OPT_SKIP_PROVENANCE);
+        options.addOption(OPT_INCLUDE_PROVENANCE_SLOT);
+        options.addOption(OPT_INCLUDE_INSTRUCTIONCOUNTER_SLOT);
+        options.addOption(OPT_INCLUDE_IDS_IN_INSTRUCTIONS_SLOT);
+
         CommandLine cli = null;
         CommandLineParser parser = new DefaultParser();
 
@@ -85,12 +106,15 @@ public class IDBPrinter {
             String outputFileName = cli.getOptionValue(OPT_OUTPUT);
             String rulesFileName = cli.getOptionValue(OPT_RULES);
             Path out = Path.of(outputFileName);
-            boolean skipProvenance = cli.hasOption(OPT_SKIP_PROVENANCE);
+
+            boolean includeProvenance =  getBooleanOptValue(cli,OPT_INCLUDE_PROVENANCE_SLOT,DEFAULT_INCLUDE_PROVENANCE);
+            boolean includeInstructionCounters =  getBooleanOptValue(cli,OPT_INCLUDE_INSTRUCTIONCOUNTER_SLOT,DEFAULT_INCLUDE_INSTRUCTION_COUNTERS);
+            boolean includeClassOrMethodOrFieldIds =  getBooleanOptValue(cli,OPT_INCLUDE_IDS_IN_INSTRUCTIONS_SLOT, DEFAULT_INCLUDE_CLASS_METHOD_FIELD_IDS);
 
             Path input = Path.of(inputName);
             if (Files.isDirectory(input)) {
                 LOG.info("Loading existing IDB from {}", input);
-                printIDB(input, out,skipProvenance);
+                printIDB(input, out,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds);
             }
             else if (Files.isRegularFile(input) && input.toString().endsWith(".class") ) {
 
@@ -126,7 +150,7 @@ public class IDBPrinter {
                 Souffle.createIDB(edbDefFile,rules,edbDir,idbDir,mergedFactsAndRulesFile);
                 LOG.info("EDB facts extracted to {}" , idbDir);
 
-                printIDB(idbDir, out,skipProvenance);
+                printIDB(idbDir, out,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds);
             }
 
         } catch (ParseException e) {
@@ -137,33 +161,42 @@ public class IDBPrinter {
         }
     }
 
+    private static boolean getBooleanOptValue(CommandLine cli, Option option, boolean defaultValue) {
+        if (!cli.hasOption(option)) {
+            return defaultValue;
+        }
+        String valueAsString = cli.getOptionValue(option);
+        Preconditions.checkArgument("true".equals(valueAsString) || "false".equals(valueAsString));
+        return Boolean.parseBoolean(valueAsString);
+    }
 
-    static void printIDB(Path idbDir, Path out,boolean skipProvenance) throws IOException {
+
+    static void printIDB(Path idbDir, Path out,boolean includeProvenance,boolean includeInstructionCounters,boolean includeClassOrMethodOrFieldIds) throws IOException {
         Preconditions.checkState(Files.exists(idbDir));
         Preconditions.checkState(Files.isDirectory(idbDir));
         IDB idb = IDBReader.read(idbDir);
-        printIDB(idb, out,skipProvenance);
+        printIDB(idb, out,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds);
     }
 
-    static void printIDB(IDB idb, Path out, boolean skipProvenance) throws IOException {
+    static void printIDB(IDB idb, Path out, boolean includeProvenance,boolean includeInstructionCounters,boolean includeClassOrMethodOrFieldIds) throws IOException {
 
         List<String> lines = new ArrayList<>();
 
         lines.addAll(comment1("class facts"));
-        lines.add(stringify(idb.bytecodeVersionFact,skipProvenance));
-        lines.add(stringify(idb.classSuperclassFact,skipProvenance));
+        lines.add(stringifyMemberFact(idb.bytecodeVersionFact,includeProvenance,includeClassOrMethodOrFieldIds));
+        lines.add(stringifyMemberFact(idb.classSuperclassFact,includeProvenance,includeClassOrMethodOrFieldIds));
         for (Fact interfaceFact:idb.classInterfaceFacts) {
-            lines.add(stringify(interfaceFact,skipProvenance));
+            lines.add(stringifyMemberFact(interfaceFact,includeProvenance,includeClassOrMethodOrFieldIds));
         }
-        lines.add(stringify(idb.classRawAccessFact,skipProvenance));
-        lines.add(idb.classSignatureFact==null?missingFact("class signature"):stringify(idb.classSignatureFact,skipProvenance));
+        lines.add(stringifyMemberFact(idb.classRawAccessFact,includeProvenance,includeClassOrMethodOrFieldIds));
+        lines.add(idb.classSignatureFact==null?missingFact("class signature"):stringifyOtherFact(idb.classSignatureFact,includeProvenance));
         for (Fact accessFact:idb.classAccessFacts) {
-            lines.add(stringify(accessFact,skipProvenance));
+            lines.add(stringifyMemberFact(accessFact,includeProvenance,includeClassOrMethodOrFieldIds));
         }
 
         lines.addAll(comment1("list of fields"));
         for (Fact fieldFact:idb.fieldFacts) {
-            lines.add(stringify(fieldFact,skipProvenance));
+            lines.add(stringifyOtherFact(fieldFact,includeProvenance));
         }
 
         lines.addAll(comment1("field details"));
@@ -171,17 +204,17 @@ public class IDBPrinter {
         for (String fieldId:fieldIds) {
             lines.addAll(comment2("details for field " + fieldId));
             Fact fieldSignatureFact = idb.fieldSignatureFacts.get(fieldId);
-            lines.add(stringify(fieldSignatureFact,skipProvenance));
+            lines.add(stringifyMemberFact(fieldSignatureFact,includeProvenance,includeClassOrMethodOrFieldIds));
             Fact fieldRawAccessFact = idb.fieldRawAccessFacts.get(fieldId);
-            lines.add(stringify(fieldRawAccessFact,skipProvenance));
+            lines.add(stringifyMemberFact(fieldRawAccessFact,includeProvenance,includeClassOrMethodOrFieldIds));
             for (Fact fieldAccessFact:idb.fieldAccessFacts.getOrDefault(fieldId,Set.of())) {
-                lines.add(stringify(fieldAccessFact,skipProvenance));
+                lines.add(stringifyMemberFact(fieldAccessFact,includeProvenance,includeClassOrMethodOrFieldIds));
             }
         }
 
         lines.addAll(comment1("list of methods"));
         for (Fact methodFact:idb.methodFacts) {
-            lines.add(stringify(methodFact,skipProvenance));
+            lines.add(stringifyOtherFact(methodFact,includeProvenance));
         }
 
         lines.addAll(comment1("methods details"));
@@ -189,16 +222,16 @@ public class IDBPrinter {
         for (String methodId:methodIds) {
             lines.addAll(comment2("details for method " + methodId));
             Fact methodSignatureFact = idb.methodSignatureFacts.get(methodId);
-            lines.add(stringify(methodSignatureFact,skipProvenance));
+            lines.add(stringifyMemberFact(methodSignatureFact,includeProvenance,includeClassOrMethodOrFieldIds));
             Fact methodRawAccessFact = idb.methodRawAccessFacts.get(methodId);
-            lines.add(stringify(methodRawAccessFact,skipProvenance));
+            lines.add(stringifyMemberFact(methodRawAccessFact,includeProvenance,includeClassOrMethodOrFieldIds));
             for (Fact methodAccessFact:idb.methodAccessFacts.getOrDefault(methodId, Set.of())) {
-                lines.add(stringify(methodAccessFact,skipProvenance));
+                lines.add(stringifyMemberFact(methodAccessFact,includeProvenance,includeClassOrMethodOrFieldIds));
             }
 
             lines.addAll(comment2("\tinstructions for method " + methodId));
             for (Fact methodInstructionFact:idb.methodInstructionFacts.getOrDefault(methodId, Set.of())) {
-                lines.add(stringify(methodInstructionFact,skipProvenance));
+                lines.add(stringifyBytecodeInstructionFact(methodInstructionFact,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds));
             }
         }
 
@@ -207,15 +240,38 @@ public class IDBPrinter {
 
     }
 
-    private static String stringify(Fact fact,boolean skipProvenance) {
-        if (fact==null) {
-            return "null";
-        }
-        String values = skipProvenance ?
-            Arrays.stream(fact.values()).skip(1)    .map(v -> String.valueOf(v)).collect(Collectors.joining("\t", "\t", "")):
-            Arrays.stream(fact.values())               .map(v -> String.valueOf(v)).collect(Collectors.joining("\t", "\t", ""));
+    private static String stringifyOtherFact(Fact fact,boolean includeProvenance) {
+        Set slotsToSkip = new HashSet();
+        if (!includeProvenance) slotsToSkip.add(0);
+        return stringify(fact,slotsToSkip);
+    }
 
-        return fact.predicate().getName() + "\t" + values;
+    private static String stringifyMemberFact(Fact fact,boolean includeProvenance,boolean includeClassOrMethodOrFieldIds) {
+        Set slotsToSkip = new HashSet();
+        if (!includeProvenance) slotsToSkip.add(0);
+        if (!includeClassOrMethodOrFieldIds) slotsToSkip.add(1);
+        return stringify(fact,slotsToSkip);
+    }
+
+    private static String stringifyBytecodeInstructionFact(Fact fact,boolean includeProvenance,boolean includeInstructionCounters,boolean includeClassOrMethodOrFieldIds) {
+        Set slotsToSkip = new HashSet();
+        if (!includeProvenance) slotsToSkip.add(0);
+        if (!includeClassOrMethodOrFieldIds) slotsToSkip.add(1);
+        if (!includeInstructionCounters) slotsToSkip.add(2);
+        return stringify(fact,slotsToSkip);
+    }
+
+    private static String stringify(Fact fact,Set<Integer> slotsToSkip) {
+
+        List<String> values = new ArrayList<>(fact.values().length);
+        for (int i = 0; i < fact.values().length; i++) {
+            String value = String.valueOf(fact.values()[i]);
+            if (!slotsToSkip.contains(i)) {
+                values.add(value);
+            }
+        }
+        return fact.predicate().getName() + "\t" + values.stream().collect(Collectors.joining("\t", "\t", ""));
+
     }
 
     // top level comment (header)

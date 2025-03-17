@@ -1,0 +1,206 @@
+Classfile /Users/jens/Development/binaryeq/daleq/src/test/resources/test-scenarios/scenario3/version1/NoopCallback.class
+  Last modified 18/03/2025; size 1805 bytes
+  SHA-256 checksum 5c664f5d5e7e5581bd14b962c149736891b67c5828965e88eea1f59cd785b621
+  Compiled from "NoopCallback.java"
+public final class org.flywaydb.core.internal.callback.NoopCallback extends java.lang.Enum<org.flywaydb.core.internal.callback.NoopCallback> implements org.flywaydb.core.api.callback.Callback
+  minor version: 0
+  major version: 52
+  flags: (0x4031) ACC_PUBLIC, ACC_FINAL, ACC_SUPER, ACC_ENUM
+  this_class: #4                          // org/flywaydb/core/internal/callback/NoopCallback
+  super_class: #11                        // java/lang/Enum
+  interfaces: 1, fields: 2, methods: 8, attributes: 2
+Constant pool:
+   #1 = Fieldref           #4.#46         // org/flywaydb/core/internal/callback/NoopCallback.$VALUES:[Lorg/flywaydb/core/internal/callback/NoopCallback;
+   #2 = Methodref          #47.#48        // "[Lorg/flywaydb/core/internal/callback/NoopCallback;".clone:()Ljava/lang/Object;
+   #3 = Class              #16            // "[Lorg/flywaydb/core/internal/callback/NoopCallback;"
+   #4 = Class              #49            // org/flywaydb/core/internal/callback/NoopCallback
+   #5 = Methodref          #11.#50        // java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+   #6 = Methodref          #11.#51        // java/lang/Enum."<init>":(Ljava/lang/String;I)V
+   #7 = String             #52            // NOOP
+   #8 = String             #13            // INSTANCE
+   #9 = Methodref          #4.#51         // org/flywaydb/core/internal/callback/NoopCallback."<init>":(Ljava/lang/String;I)V
+  #10 = Fieldref           #4.#53         // org/flywaydb/core/internal/callback/NoopCallback.INSTANCE:Lorg/flywaydb/core/internal/callback/NoopCallback;
+  #11 = Class              #54            // java/lang/Enum
+  #12 = Class              #55            // org/flywaydb/core/api/callback/Callback
+  #13 = Utf8               INSTANCE
+  #14 = Utf8               Lorg/flywaydb/core/internal/callback/NoopCallback;
+  #15 = Utf8               $VALUES
+  #16 = Utf8               [Lorg/flywaydb/core/internal/callback/NoopCallback;
+  #17 = Utf8               values
+  #18 = Utf8               ()[Lorg/flywaydb/core/internal/callback/NoopCallback;
+  #19 = Utf8               Code
+  #20 = Utf8               LineNumberTable
+  #21 = Utf8               valueOf
+  #22 = Utf8               (Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;
+  #23 = Utf8               LocalVariableTable
+  #24 = Utf8               name
+  #25 = Utf8               Ljava/lang/String;
+  #26 = Utf8               <init>
+  #27 = Utf8               (Ljava/lang/String;I)V
+  #28 = Utf8               this
+  #29 = Utf8               Signature
+  #30 = Utf8               ()V
+  #31 = Utf8               supports
+  #32 = Utf8               (Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+  #33 = Utf8               event
+  #34 = Utf8               Lorg/flywaydb/core/api/callback/Event;
+  #35 = Utf8               context
+  #36 = Utf8               Lorg/flywaydb/core/api/callback/Context;
+  #37 = Utf8               canHandleInTransaction
+  #38 = Utf8               handle
+  #39 = Utf8               (Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)V
+  #40 = Utf8               getCallbackName
+  #41 = Utf8               ()Ljava/lang/String;
+  #42 = Utf8               <clinit>
+  #43 = Utf8               Ljava/lang/Enum<Lorg/flywaydb/core/internal/callback/NoopCallback;>;Lorg/flywaydb/core/api/callback/Callback;
+  #44 = Utf8               SourceFile
+  #45 = Utf8               NoopCallback.java
+  #46 = NameAndType        #15:#16        // $VALUES:[Lorg/flywaydb/core/internal/callback/NoopCallback;
+  #47 = Class              #16            // "[Lorg/flywaydb/core/internal/callback/NoopCallback;"
+  #48 = NameAndType        #56:#57        // clone:()Ljava/lang/Object;
+  #49 = Utf8               org/flywaydb/core/internal/callback/NoopCallback
+  #50 = NameAndType        #21:#58        // valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+  #51 = NameAndType        #26:#27        // "<init>":(Ljava/lang/String;I)V
+  #52 = Utf8               NOOP
+  #53 = NameAndType        #13:#14        // INSTANCE:Lorg/flywaydb/core/internal/callback/NoopCallback;
+  #54 = Utf8               java/lang/Enum
+  #55 = Utf8               org/flywaydb/core/api/callback/Callback
+  #56 = Utf8               clone
+  #57 = Utf8               ()Ljava/lang/Object;
+  #58 = Utf8               (Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+{
+  public static final org.flywaydb.core.internal.callback.NoopCallback INSTANCE;
+    descriptor: Lorg/flywaydb/core/internal/callback/NoopCallback;
+    flags: (0x4019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  private static final org.flywaydb.core.internal.callback.NoopCallback[] $VALUES;
+    descriptor: [Lorg/flywaydb/core/internal/callback/NoopCallback;
+    flags: (0x101a) ACC_PRIVATE, ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  public static org.flywaydb.core.internal.callback.NoopCallback[] values();
+    descriptor: ()[Lorg/flywaydb/core/internal/callback/NoopCallback;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: getstatic     #1                  // Field $VALUES:[Lorg/flywaydb/core/internal/callback/NoopCallback;
+         3: invokevirtual #2                  // Method "[Lorg/flywaydb/core/internal/callback/NoopCallback;".clone:()Ljava/lang/Object;
+         6: checkcast     #3                  // class "[Lorg/flywaydb/core/internal/callback/NoopCallback;"
+         9: areturn
+      LineNumberTable:
+        line 25: 0
+
+  public static org.flywaydb.core.internal.callback.NoopCallback valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: ldc           #4                  // class org/flywaydb/core/internal/callback/NoopCallback
+         2: aload_0
+         3: invokestatic  #5                  // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+         6: checkcast     #4                  // class org/flywaydb/core/internal/callback/NoopCallback
+         9: areturn
+      LineNumberTable:
+        line 25: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  name   Ljava/lang/String;
+
+  private org.flywaydb.core.internal.callback.NoopCallback();
+    descriptor: (Ljava/lang/String;I)V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: iload_2
+         3: invokespecial #6                  // Method java/lang/Enum."<init>":(Ljava/lang/String;I)V
+         6: return
+      LineNumberTable:
+        line 25: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0  this   Lorg/flywaydb/core/internal/callback/NoopCallback;
+    Signature: #30                          // ()V
+
+  public boolean supports(org.flywaydb.core.api.callback.Event, org.flywaydb.core.api.callback.Context);
+    descriptor: (Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=3, args_size=3
+         0: iconst_0
+         1: ireturn
+      LineNumberTable:
+        line 30: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       2     0  this   Lorg/flywaydb/core/internal/callback/NoopCallback;
+            0       2     1 event   Lorg/flywaydb/core/api/callback/Event;
+            0       2     2 context   Lorg/flywaydb/core/api/callback/Context;
+
+  public boolean canHandleInTransaction(org.flywaydb.core.api.callback.Event, org.flywaydb.core.api.callback.Context);
+    descriptor: (Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=3, args_size=3
+         0: iconst_1
+         1: ireturn
+      LineNumberTable:
+        line 35: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       2     0  this   Lorg/flywaydb/core/internal/callback/NoopCallback;
+            0       2     1 event   Lorg/flywaydb/core/api/callback/Event;
+            0       2     2 context   Lorg/flywaydb/core/api/callback/Context;
+
+  public void handle(org.flywaydb.core.api.callback.Event, org.flywaydb.core.api.callback.Context);
+    descriptor: (Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=0, locals=3, args_size=3
+         0: return
+      LineNumberTable:
+        line 40: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       1     0  this   Lorg/flywaydb/core/internal/callback/NoopCallback;
+            0       1     1 event   Lorg/flywaydb/core/api/callback/Event;
+            0       1     2 context   Lorg/flywaydb/core/api/callback/Context;
+
+  public java.lang.String getCallbackName();
+    descriptor: ()Ljava/lang/String;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: ldc           #7                  // String NOOP
+         2: areturn
+      LineNumberTable:
+        line 44: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       3     0  this   Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: new           #4                  // class org/flywaydb/core/internal/callback/NoopCallback
+         3: dup
+         4: ldc           #8                  // String INSTANCE
+         6: iconst_0
+         7: invokespecial #9                  // Method "<init>":(Ljava/lang/String;I)V
+        10: putstatic     #10                 // Field INSTANCE:Lorg/flywaydb/core/internal/callback/NoopCallback;
+        13: iconst_1
+        14: anewarray     #4                  // class org/flywaydb/core/internal/callback/NoopCallback
+        17: dup
+        18: iconst_0
+        19: getstatic     #10                 // Field INSTANCE:Lorg/flywaydb/core/internal/callback/NoopCallback;
+        22: aastore
+        23: putstatic     #1                  // Field $VALUES:[Lorg/flywaydb/core/internal/callback/NoopCallback;
+        26: return
+      LineNumberTable:
+        line 26: 0
+        line 25: 13
+}
+Signature: #43                          // Ljava/lang/Enum<Lorg/flywaydb/core/internal/callback/NoopCallback;>;Lorg/flywaydb/core/api/callback/Callback;
+SourceFile: "NoopCallback.java"
