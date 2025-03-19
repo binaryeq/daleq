@@ -1,0 +1,17 @@
+  static {};
+    Code:
+       0: new           #4                  // class org/flywaydb/core/internal/callback/NoopCallback
+       3: dup
+       4: ldc           #8                  // String INSTANCE
+       6: iconst_0
+       7: invokespecial #9                  // Method "<init>":(Ljava/lang/String;I)V
+      10: putstatic     #10                 // Field INSTANCE:Lorg/flywaydb/core/internal/callback/NoopCallback;
+      13: iconst_1
+      14: anewarray     #4                  // class org/flywaydb/core/internal/callback/NoopCallback
+      17: dup
+      18: iconst_0
+      19: getstatic     #10                 // Field INSTANCE:Lorg/flywaydb/core/internal/callback/NoopCallback;
+      22: aastore
+      23: putstatic     #1                  // Field $VALUES:[Lorg/flywaydb/core/internal/callback/NoopCallback;
+      26: return
+

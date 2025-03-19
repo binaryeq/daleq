@@ -3,6 +3,7 @@ package io.github.bineq.daleq.idb.rulegeneration;
 import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.Predicate;
 import io.github.bineq.daleq.edb.*;
+import io.github.bineq.daleq.idb.IDBRemovalPredicates;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,6 @@ public class BaselineRuleGeneration {
         .required(true)
         .desc("a file where to create the souffle program (.souffle file) containing rules")
         .build();
-
 
     public static void main(String[] args) throws Exception {
 
@@ -59,11 +59,6 @@ public class BaselineRuleGeneration {
     }
 
     static List<String> generateRule(Predicate predicate) {
-        // .decl SUBCLASS(id:symbol,name: symbol,supername: symbol)
-        //SUBCLASS(cat("R1","[",id,"]"),x,y) :- SUPERCLASS(id,y,x).
-        //.output SUBCLASS
-
-        // R1[F1]
 
         String idbPredicateName = "IDB_" + predicate.getName();
 
@@ -93,6 +88,31 @@ public class BaselineRuleGeneration {
             .map(slot -> slot.encodeName())
             .collect(Collectors.joining(",",pre, post));
 
+        // TODO construct guards
+        String guard = null;
+//        if (predicate.isInstructionPredicate()) {
+//            pre = "!"+ IDBRemovalPredicates.REMOVED_INSTRUCTION.getName() + '(';
+//            String body2 = List.of("_",predicate.getSlots()[1].name(),predicate.getSlots()[2].name()).stream()
+//                .collect(Collectors.joining(",",pre, post));
+//            guard = ","+body2;
+//        }
+//        else
+        if (predicate==EBDAdditionalPredicates.METHOD) {
+            pre = "!"+ IDBRemovalPredicates.REMOVED_METHOD.getName() + '(';
+            String body2 = List.of("_",predicate.getSlots()[1].name()).stream()
+                .collect(Collectors.joining(",",pre, post));
+            guard = ","+body2;
+        }
+        else if (predicate==EBDAdditionalPredicates.FIELD) {
+            pre = "!"+ IDBRemovalPredicates.REMOVED_FIELD.getName() + '(';
+            String body2 = List.of("_",predicate.getSlots()[1].name()).stream()
+                .collect(Collectors.joining(",",pre, post));
+            guard = ","+body2;
+        }
+
+        if (guard != null) {
+            body  = body + guard;
+        }
         String rule = head +  " :- " + body + ".";
         String outDecl = ".output " + idbPredicateName;
         return List.of(declaration,rule,outDecl,"");
