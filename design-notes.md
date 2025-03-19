@@ -209,7 +209,7 @@ Then checkcast rule becomes:
 .output REMOVED_INSTRUCTION
 
 .decl IDB_CHECKCAST(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
-IDB_CHECKCAST(cat("R_CHECKCAST","[",factid1,"]"),methodid,instructioncounter,desc) :- CHECKCAST(factid1,methodid,instructioncounter,desc), !REMOVED_INSTRUCTION(factid,methodid,instructioncounter,desc).
+IDB_CHECKCAST(cat("R_CHECKCAST","[",factid1,"]"),methodid,instructioncounter,desc) :- CHECKCAST(factid1,methodid,instructioncounter,desc), !REMOVED_INSTRUCTION(factid,methodid,instructioncounter).
 .output IDB_CHECKCAST
 
 // in custom rule set
@@ -224,7 +224,7 @@ Problem: will souffle handle the negation?
 Similar predicates: 
 
 ```
-REMOVED_METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+REMOVED_METHOD(factid: symbol,id: symbol)
 .output REMOVED_METHOD
 ```
 
@@ -263,6 +263,8 @@ The `instructioncounter` is the callsite (`INVOKE*` instruction) in the host met
 
 #### Part 2: addition
 
-requires a rule for each instruction predicate !! 
-can this be generated ?
+
+- requires a rule for each instruction predicate !! 
+- can this be generated ?
+- could mess up labels ! a global label counter could fix this !
 

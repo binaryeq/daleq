@@ -1,10 +1,34 @@
-.decl NOPE(factid: symbol,methodid: symbol,instructioncounter: number)
-NOPE(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"]"),methodid,instructioncounter+1) :- CHECKCAST(factid1,methodid,instructioncounter+1,desc),CHECKCAST(factid2,methodid,instructioncounter,desc).
-.output NOPE
 
+// INLINE $values() method in enumerations
+// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
+
+//.decl IDB_METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+//IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor),!SKIP_METHOD(_,id,classname,name,descriptor).
+//.output IDB_METHOD
+
+// .decl SKIP_METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+// .output SKIP_METHOD
+// TODO consider whether to write out predicate
+// SKIP_METHOD(cat("R_SKIP_VALUES_SYNTH_METYHOD_IN_ENUMS","[",factid1,",",factid2,",",factid3,"]"),id,classname,name,descriptor) :- METHOD(factid1,id,classname,name,descriptor),IDB_IS_ENUM(factid2,classname),IDB_IS_SYNTHETIC(factid3,id),name!="$values".
+
+// Remove Redundant Checkcasts
+// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
 .decl IDB_CHECKCAST(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
-IDB_CHECKCAST(cat("R_CHECKCAST","[",factid1,"]"),methodid,instructioncounter,desc) :- CHECKCAST(factid1,methodid,instructioncounter,desc), !CHECKCAST(_,methodid,instructioncounter-1,desc).
+IDB_CHECKCAST(cat("R_CHECKCAST","[",factid1,"]"),methodid,instructioncounter,desc) :- CHECKCAST(factid1,methodid,instructioncounter,desc), !CHECKCAST(_,methodid,instructioncounter+100,desc).
 .output IDB_CHECKCAST
+
+.decl REMOVED_INSTRUCTION(factid: symbol,methodid: symbol,instructioncounter: number)
+REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"]"),methodid,instructioncounter+100) :- CHECKCAST(factid1,methodid,instructioncounter,desc),CHECKCAST(factid2,methodid,instructioncounter-100,desc).
+.output REMOVED_INSTRUCTION
+
+// declaration of removed items
+.decl REMOVED_FIELD(factid: symbol,id: symbol)
+.output REMOVED_FIELD
+
+.decl REMOVED_METHOD(factid: symbol,id: symbol)
+.output REMOVED_METHOD
+
+// standard rules
 
 .decl IDB_SUPERCLASS(factid: symbol,name: symbol,supername: symbol)
 IDB_SUPERCLASS(cat("R_SUPERCLASS","[",factid,"]"),name,supername) :- SUPERCLASS(factid,name,supername).
@@ -14,21 +38,23 @@ IDB_SUPERCLASS(cat("R_SUPERCLASS","[",factid,"]"),name,supername) :- SUPERCLASS(
 IDB_INTERFACE(cat("R_INTERFACE","[",factid,"]"),name,interface) :- INTERFACE(factid,name,interface).
 .output IDB_INTERFACE
 
-.decl IDB_ACCESS(factid: symbol,id: symbol,access: number)
-IDB_ACCESS(cat("R_ACCESS","[",factid,"]"),id,access) :- ACCESS(factid,id,access).
-.output IDB_ACCESS
-
 .decl IDB_FIELD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+// IDB_FIELD(cat("R_FIELD","[",factid,"]"),id,classname,name,descriptor) :- FIELD(factid,id,classname,name,descriptor),!REMOVED_FIELD(_,id).
 IDB_FIELD(cat("R_FIELD","[",factid,"]"),id,classname,name,descriptor) :- FIELD(factid,id,classname,name,descriptor).
 .output IDB_FIELD
 
 .decl IDB_METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+// IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor),!REMOVED_METHOD(_,id).
 IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor).
 .output IDB_METHOD
 
 .decl IDB_VERSION(factid: symbol,classname: symbol,version: number)
 IDB_VERSION(cat("R_VERSION","[",factid,"]"),classname,version) :- VERSION(factid,classname,version).
 .output IDB_VERSION
+
+.decl IDB_CLASS_SIGNATURE(factid: symbol,classname: symbol,signature: symbol)
+IDB_CLASS_SIGNATURE(cat("R_CLASS_SIGNATURE","[",factid,"]"),classname,signature) :- CLASS_SIGNATURE(factid,classname,signature).
+.output IDB_CLASS_SIGNATURE
 
 .decl IDB_FIELD_SIGNATURE(factid: symbol,fieldid: symbol,signature: symbol)
 IDB_FIELD_SIGNATURE(cat("R_FIELD_SIGNATURE","[",factid,"]"),fieldid,signature) :- FIELD_SIGNATURE(factid,fieldid,signature).
@@ -37,6 +63,14 @@ IDB_FIELD_SIGNATURE(cat("R_FIELD_SIGNATURE","[",factid,"]"),fieldid,signature) :
 .decl IDB_METHOD_SIGNATURE(factid: symbol,methodid: symbol,signature: symbol)
 IDB_METHOD_SIGNATURE(cat("R_METHOD_SIGNATURE","[",factid,"]"),methodid,signature) :- METHOD_SIGNATURE(factid,methodid,signature).
 .output IDB_METHOD_SIGNATURE
+
+.decl IDB_ACCESS(factid: symbol,id: symbol,access: number)
+IDB_ACCESS(cat("R_ACCESS","[",factid,"]"),id,access) :- ACCESS(factid,id,access).
+.output IDB_ACCESS
+
+.decl IDB_LABEL(factid: symbol,methodid: symbol,instructioncounter: number,labelid: symbol)
+IDB_LABEL(cat("R_LABEL","[",factid,"]"),methodid,instructioncounter,labelid) :- LABEL(factid,methodid,instructioncounter,labelid).
+.output IDB_LABEL
 
 .decl IDB_ACONST_NULL(factid: symbol,methodid: symbol,instructioncounter: number)
 IDB_ACONST_NULL(cat("R_ACONST_NULL","[",factid,"]"),methodid,instructioncounter) :- ACONST_NULL(factid,methodid,instructioncounter).
@@ -310,6 +344,3 @@ IDB_IFNULL(cat("R_IFNULL","[",factid,"]"),methodid,instructioncounter,label) :- 
 IDB_IFNONNULL(cat("R_IFNONNULL","[",factid,"]"),methodid,instructioncounter,label) :- IFNONNULL(factid,methodid,instructioncounter,label).
 .output IDB_IFNONNULL
 
-.decl IDB_LABEL(factid: symbol,methodid: symbol,instructioncounter: number,labelid: symbol)
-IDB_LABEL(cat("R_LABEL","[",factid,"]"),methodid,instructioncounter,labelid) :- LABEL(factid,methodid,instructioncounter,labelid).
-.output IDB_LABEL

@@ -1,3 +1,4 @@
+
 .decl NOPE(factid: symbol,methodid: symbol,instructioncounter: number)
 NOPE(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"]"),methodid,instructioncounter+1) :- CHECKCAST(factid1,methodid,instructioncounter+1,desc),CHECKCAST(factid2,methodid,instructioncounter,desc).
 .output NOPE

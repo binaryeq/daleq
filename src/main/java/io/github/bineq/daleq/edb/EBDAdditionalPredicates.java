@@ -40,9 +40,7 @@ public enum EBDAdditionalPredicates implements Predicate {
         public boolean isInstructionPredicate() {
             return true;
         }
-    },
-    ;
-
+    };
 
     public static Set<EBDAdditionalPredicates> valuesAsSet() {
         return Set.of(values());

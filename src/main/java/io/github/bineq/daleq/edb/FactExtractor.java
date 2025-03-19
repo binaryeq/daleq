@@ -34,6 +34,9 @@ public class FactExtractor   {
 
     public static final Map<Integer,InstructionPredicateFactFactory> FACT_FACTORIES = new HashMap<>();
 
+    // by inserting gaps, rules can insert additional instructions
+    public static final int INSTRUCTION_COUNTER_STEP_SIZE = 100;
+
     private static class HashMapWthKeyAccessRecording<K,V> extends HashMap<K,V> {
         Set<K> accessedKeys = new HashSet<>();
 
@@ -268,7 +271,7 @@ public class FactExtractor   {
                     EBDInstructionPredicate predicate = findPredicate(opCode,instr,instructionNode.getClass());
                     assert predicate != null;
                     try {
-                        createFact(predicate, instCounter, methodId, instructionNode,labelMap);
+                        createFact(predicate, INSTRUCTION_COUNTER_STEP_SIZE*instCounter, methodId, instructionNode,labelMap);
                         // do not add fact, this is only to see which labels are used by factories !
                     }
                     catch (Exception x) {
@@ -289,7 +292,7 @@ public class FactExtractor   {
                         String factId = FactIdGenerator.nextId(predicate);
                         int instCounter = instructionCounter.incrementAndGet();
                         //new Object[]{factId,methodRef,instructionCounter,labelMap.get(node.label)});
-                        Fact fact = new SimpleFact(predicate,factId,methodId,instCounter,labelMap.get(labelNode));
+                        Fact fact = new SimpleFact(predicate,factId,methodId,INSTRUCTION_COUNTER_STEP_SIZE*instCounter,labelMap.get(labelNode));
                         facts.add(fact);
                     }
                     else {
@@ -305,7 +308,7 @@ public class FactExtractor   {
 
                     // create fact
                     try {
-                        Fact fact = createFact(predicate, instCounter, methodId, instructionNode,labelMap);
+                        Fact fact = createFact(predicate, INSTRUCTION_COUNTER_STEP_SIZE*instCounter, methodId, instructionNode,labelMap);
                         //assert fact != null;
                         facts.add(fact);
                     }

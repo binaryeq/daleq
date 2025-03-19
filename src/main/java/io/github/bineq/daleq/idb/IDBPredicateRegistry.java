@@ -33,6 +33,11 @@ public class IDBPredicateRegistry {
         }
         LOG.info(""+ IDBAccessPredicates.ALL.size() + " access predicates added");
 
+        for (Predicate predicate : IDBRemovalPredicates.values()) {
+            ALL.put(predicate.getName(),predicate);
+        }
+        LOG.info(""+ IDBRemovalPredicates.values().length + " removal predicates added");
+
         for (IDBAdditionalPredicates additionalPredicate : IDBAdditionalPredicates.values()) {
             Predicate previous = ALL.put(additionalPredicate.getName(),additionalPredicate);
             assert previous == null : "two predicates with the same name exists";
