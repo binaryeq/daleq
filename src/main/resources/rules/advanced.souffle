@@ -1,27 +1,32 @@
 
-// INLINE $values() method in enumerations
+// Inline $values() method in enumerations
 // see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
 
 //.decl IDB_METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
 //IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor),!SKIP_METHOD(_,id,classname,name,descriptor).
 //.output IDB_METHOD
 
-// .decl SKIP_METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
-// .output SKIP_METHOD
-// TODO consider whether to write out predicate
-// SKIP_METHOD(cat("R_SKIP_VALUES_SYNTH_METYHOD_IN_ENUMS","[",factid1,",",factid2,",",factid3,"]"),id,classname,name,descriptor) :- METHOD(factid1,id,classname,name,descriptor),IDB_IS_ENUM(factid2,classname),IDB_IS_SYNTHETIC(factid3,id),name!="$values".
+.decl IS_ENUM_VALUE_SYNTH_METHOD(factid: symbol,id: symbol)
+IS_ENUM_VALUE_SYNTH_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,",",factid2,",",factid3,"]"),id) :- METHOD(factid1,id,classname,name,descriptor),IDB_IS_ENUM(factid2,classname),IDB_IS_SYNTHETIC(factid3,id),name="$values".
+// .output IS_ENUM_VALUE_SYNTH_METHOD
+
+REMOVED_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,",",factid2,",",factid3,"]"),id) :- METHOD(factid1,id,classname,name,descriptor),IDB_IS_ENUM(factid2,classname),IDB_IS_SYNTHETIC(factid3,id),name="$values".
+
 
 // Remove Redundant Checkcasts
 // see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
+
 .decl IDB_CHECKCAST(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
 IDB_CHECKCAST(cat("R_CHECKCAST","[",factid1,"]"),methodid,instructioncounter,desc) :- CHECKCAST(factid1,methodid,instructioncounter,desc), !CHECKCAST(_,methodid,instructioncounter+100,desc).
 .output IDB_CHECKCAST
 
-.decl REMOVED_INSTRUCTION(factid: symbol,methodid: symbol,instructioncounter: number)
 REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"]"),methodid,instructioncounter+100) :- CHECKCAST(factid1,methodid,instructioncounter,desc),CHECKCAST(factid2,methodid,instructioncounter-100,desc).
-.output REMOVED_INSTRUCTION
 
 // declaration of removed items
+
+.decl REMOVED_INSTRUCTION(factid: symbol,methodid: symbol,instructioncounter: number)
+.output REMOVED_INSTRUCTION
+
 .decl REMOVED_FIELD(factid: symbol,id: symbol)
 .output REMOVED_FIELD
 
@@ -39,13 +44,13 @@ IDB_INTERFACE(cat("R_INTERFACE","[",factid,"]"),name,interface) :- INTERFACE(fac
 .output IDB_INTERFACE
 
 .decl IDB_FIELD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
-// IDB_FIELD(cat("R_FIELD","[",factid,"]"),id,classname,name,descriptor) :- FIELD(factid,id,classname,name,descriptor),!REMOVED_FIELD(_,id).
-IDB_FIELD(cat("R_FIELD","[",factid,"]"),id,classname,name,descriptor) :- FIELD(factid,id,classname,name,descriptor).
+IDB_FIELD(cat("R_FIELD","[",factid,"]"),id,classname,name,descriptor) :- FIELD(factid,id,classname,name,descriptor),!REMOVED_FIELD(_,id).
+// IDB_FIELD(cat("R_FIELD","[",factid,"]"),id,classname,name,descriptor) :- FIELD(factid,id,classname,name,descriptor).
 .output IDB_FIELD
 
 .decl IDB_METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
-// IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor),!REMOVED_METHOD(_,id).
-IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor).
+IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor),!REMOVED_METHOD(_,id).
+// IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor).
 .output IDB_METHOD
 
 .decl IDB_VERSION(factid: symbol,classname: symbol,version: number)

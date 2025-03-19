@@ -70,6 +70,12 @@ public class IDBReader {
                 else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.METHOD)) {
                     idb.methodFacts.add(fact);
                 }
+                else if (predicate==IDBRemovalPredicates.REMOVED_METHOD) {
+                    idb.removedMethodFacts.add(fact);
+                }
+                else if (predicate==IDBRemovalPredicates.REMOVED_FIELD) {
+                    idb.removedFieldFacts.add(fact);
+                }
                 else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.FIELD)) {
                     idb.fieldFacts.add(fact);
                 }

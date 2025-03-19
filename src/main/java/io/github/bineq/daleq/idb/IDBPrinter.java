@@ -199,6 +199,11 @@ public class IDBPrinter {
             lines.add(stringifyOtherFact(fieldFact,includeProvenance));
         }
 
+        lines.addAll(comment1("list of removed fields"));
+        for (Fact removedFieldFact:idb.removedFieldFacts) {
+            lines.add(stringifyOtherFact(removedFieldFact,includeProvenance));
+        }
+
         lines.addAll(comment1("field details"));
         List<String> fieldIds = idb.fieldFacts.stream().map(fact -> fact.values()[1].toString()).collect(Collectors.toList());
         for (String fieldId:fieldIds) {
@@ -215,6 +220,11 @@ public class IDBPrinter {
         lines.addAll(comment1("list of methods"));
         for (Fact methodFact:idb.methodFacts) {
             lines.add(stringifyOtherFact(methodFact,includeProvenance));
+        }
+
+        lines.addAll(comment1("list of removed methods"));
+        for (Fact removedMethodFact:idb.removedMethodFacts) {
+            lines.add(stringifyOtherFact(removedMethodFact,includeProvenance));
         }
 
         lines.addAll(comment1("methods details"));
