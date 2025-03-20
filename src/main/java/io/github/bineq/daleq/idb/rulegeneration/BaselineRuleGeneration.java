@@ -90,13 +90,13 @@ public class BaselineRuleGeneration {
 
         // TODO construct guards
         String guard = null;
-//        if (predicate.isInstructionPredicate()) {
-//            pre = "!"+ IDBRemovalPredicates.REMOVED_INSTRUCTION.getName() + '(';
-//            String body2 = List.of("_",predicate.getSlots()[1].name(),predicate.getSlots()[2].name()).stream()
-//                .collect(Collectors.joining(",",pre, post));
-//            guard = ","+body2;
-//        }
-//        else
+        if (predicate.isInstructionPredicate()) {
+            pre = "!"+ IDBRemovalPredicates.REMOVED_INSTRUCTION.getName() + '(';
+            String body2 = List.of("_",predicate.getSlots()[1].name(),predicate.getSlots()[2].name()).stream()
+                .collect(Collectors.joining(",",pre, post));
+            guard = ","+body2;
+        }
+        else
         if (predicate==EBDAdditionalPredicates.METHOD) {
             pre = "!"+ IDBRemovalPredicates.REMOVED_METHOD.getName() + '(';
             String body2 = List.of("_",predicate.getSlots()[1].name()).stream()
