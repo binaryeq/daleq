@@ -8,13 +8,25 @@ import static io.github.bineq.daleq.Slot.numslot;
 import static io.github.bineq.daleq.Slot.symslot;
 
 /**
- * Predicates related to the removal of facts (i.e. facts not being copied from the EDB to the IDB).
+ * Predicates related to the removal of facts (i.e. facts not being copied from the EDB to the IDB) or the moving of instructions
+ * (into other methods).
  * Present in the IDB to provide provenance.
  * @author jens dietrich
  */
 public enum IDBRemovalPredicates implements Predicate {
 
     REMOVED_INSTRUCTION(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),numslot("instructioncounter",Integer.TYPE.getName())) {
+        @Override
+        public boolean isInstructionPredicate() {
+            return true;
+        }
+    },
+    MOVED_INSTRUCTION(
+        symslot(Fact.ID_SLOT_NAME),
+        symslot("methodid1"), numslot("instructioncounter1",Integer.TYPE.getName()),
+        symslot("methodid2"), numslot("instructioncounter2",Integer.TYPE.getName()),
+        symslot("instructionname")
+    ) {
         @Override
         public boolean isInstructionPredicate() {
             return true;

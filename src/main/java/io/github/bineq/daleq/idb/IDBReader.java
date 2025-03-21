@@ -159,7 +159,7 @@ public class IDBReader {
 
     private static String getMethodId(Fact fact) {
         assert fact.predicate().getSlots().length > 1;
-        assert fact.predicate().getSlots()[1].name().equals("methodid");
+        // assert fact.predicate().getSlots()[1].name().equals("methodid");
         assert fact.predicate().getSlots()[1].type()==SlotType.SYMBOL;
         return (String)fact.values()[1];
     }

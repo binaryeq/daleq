@@ -115,7 +115,30 @@ public class BaselineRuleGeneration {
         }
         String rule = head +  " :- " + body + ".";
         String outDecl = ".output " + idbPredicateName;
-        return List.of(declaration,rule,outDecl,"");
+
+        if (predicate.isInstructionPredicate()) {
+            // add additional rule to map specific instruction to generic instruction
+            pre = "IDB_INSTRUCTION(";
+            provenanceTerm = String.format("cat(\"%s\",\"[\",%s,\"]\")", ruleId,Fact.ID_SLOT_NAME);
+            headTerms = Arrays.stream(predicate.getSlots())
+                .skip(1)
+                .limit(2)
+                .map(slot -> slot.encodeName())
+                .collect(Collectors.toList());
+            headTerms.add(0,provenanceTerm);
+            headTerms.add("\""+predicate.getName()+"\"");
+            head = headTerms.stream().collect(Collectors.joining(",",pre, post));
+
+            pre =  predicate.getName() + '(';
+            body = Arrays.stream(predicate.getSlots())
+                .map(slot -> slot.encodeName())
+                .collect(Collectors.joining(",",pre, post));
+            String rule2 = head +  " :- " + body + ".";
+            return List.of(declaration, rule, outDecl, rule2,"");
+        }
+        else {
+            return List.of(declaration, rule, outDecl, "");
+        }
 
     }
 }
