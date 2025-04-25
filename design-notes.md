@@ -268,3 +268,12 @@ The `instructioncounter` is the callsite (`INVOKE*` instruction) in the host met
 - can this be generated ?
 - could mess up labels ! a global label counter could fix this !
 
+
+```
+IDB_IALOAD(..,methodid,instructioncounter) :- IALOAD(factid,methodid,instructioncounter),
+!REMOVED_INSTRUCTION(factid2,instructioncounter2).
+IDB_IALOAD(..,methodid2,instructioncounter2) :- IALOAD(factid1,methodid1,instructioncounter1),
+MOVED_INSTRUCTION(factid2,method1,instructioncounter1,method2,instructioncounter2,"IALOAD").
+.
+.output IDB_IALOAD
+```

@@ -90,13 +90,13 @@ public class BaselineRuleGeneration {
 
         // TODO construct guards
         String guard = null;
-//        if (predicate.isInstructionPredicate()) {
-//            pre = "!"+ IDBRemovalPredicates.REMOVED_INSTRUCTION.getName() + '(';
-//            String body2 = List.of("_",predicate.getSlots()[1].name(),predicate.getSlots()[2].name()).stream()
-//                .collect(Collectors.joining(",",pre, post));
-//            guard = ","+body2;
-//        }
-//        else
+        if (predicate.isInstructionPredicate()) {
+            pre = "!"+ IDBRemovalPredicates.REMOVED_INSTRUCTION.getName() + '(';
+            String body2 = List.of("_",predicate.getSlots()[1].name(),predicate.getSlots()[2].name()).stream()
+                .collect(Collectors.joining(",",pre, post));
+            guard = ","+body2;
+        }
+        else
         if (predicate==EBDAdditionalPredicates.METHOD) {
             pre = "!"+ IDBRemovalPredicates.REMOVED_METHOD.getName() + '(';
             String body2 = List.of("_",predicate.getSlots()[1].name()).stream()
@@ -115,7 +115,30 @@ public class BaselineRuleGeneration {
         }
         String rule = head +  " :- " + body + ".";
         String outDecl = ".output " + idbPredicateName;
-        return List.of(declaration,rule,outDecl,"");
+
+        if (predicate.isInstructionPredicate()) {
+            // add additional rule to map specific instruction to generic instruction
+            pre = "IDB_INSTRUCTION(";
+            provenanceTerm = String.format("cat(\"%s\",\"[\",%s,\"]\")", ruleId,Fact.ID_SLOT_NAME);
+            headTerms = Arrays.stream(predicate.getSlots())
+                .skip(1)
+                .limit(2)
+                .map(slot -> slot.encodeName())
+                .collect(Collectors.toList());
+            headTerms.add(0,provenanceTerm);
+            headTerms.add("\""+predicate.getName()+"\"");
+            head = headTerms.stream().collect(Collectors.joining(",",pre, post));
+
+            pre =  predicate.getName() + '(';
+            body = Arrays.stream(predicate.getSlots())
+                .map(slot -> slot.encodeName())
+                .collect(Collectors.joining(",",pre, post));
+            String rule2 = head +  " :- " + body + ".";
+            return List.of(declaration, rule, outDecl, rule2,"");
+        }
+        else {
+            return List.of(declaration, rule, outDecl, "");
+        }
 
     }
 }
