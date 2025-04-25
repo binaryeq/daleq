@@ -52,7 +52,8 @@ public class IDBReader {
             if (predicate.isInstructionPredicate()) {
                 String methodId = getMethodId(fact);
                 Set<Fact> instructionFacts = idb.methodInstructionFacts.computeIfAbsent(methodId,mId -> new TreeSet<>(COMPARE_INSTRUCTION_FACTS_BY_POSITION));
-                instructionFacts.add(fact);
+                boolean added = instructionFacts.add(fact);
+                // assert added;
             }
             else {
                 if (isIDBVersionOf(predicate,EBDAdditionalPredicates.SUPERCLASS)) {

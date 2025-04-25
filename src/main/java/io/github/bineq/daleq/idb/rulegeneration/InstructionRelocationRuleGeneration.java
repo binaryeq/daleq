@@ -80,7 +80,8 @@ public class InstructionRelocationRuleGeneration {
         String ruleId = "R_"+predicate.getName()+"_MOVED"; // there is only one rule for each predicate, so this is a unique identifier !
         String provenanceTerm = String.format("cat(\"%s\",\"[\",%s,%s,\"]\")", ruleId,"factid1","factid2");
         List<String> terms = Streams.concat(
-            List.of(provenanceTerm,"destMethodId","destInstructionCounter").stream(),
+            // warning: instructioncounter must match term, in prereq !!
+            List.of(provenanceTerm,"destMethodId","destInstructionCounter+instructioncounter/100").stream(),
             Arrays.stream(predicate.getSlots())
                 .skip(3)
                 .map(slot -> slot.encodeName()))

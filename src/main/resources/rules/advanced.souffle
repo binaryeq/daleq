@@ -14,12 +14,20 @@ REMOVED_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,"]"),method
 .decl IS_ENUM_STATIC_BLOCK(factid: symbol,id: symbol)
 IS_ENUM_STATIC_BLOCK(cat("R_IS_ENUM_STATIC_BLOCK","[",factid1,",",factid2,"]"),id) :- METHOD(factid1,id,classname,name,descriptor),IDB_IS_ENUM(factid2,classname),name="<clinit>",descriptor="()V".
 
-MOVED_INSTRUCTION("R-TODO",sourceMethodid,sourceInstructionCounter,destMethodId,42,instructionName) :-
+MOVED_INSTRUCTION("TODO_MVD_INSTR",sourceMethodid,sourceInstructionCounter,destMethodId,destInstructionCounter,instructionName) :-
    IS_ENUM_VALUE_SYNTH_METHOD(factid1,sourceMethodid),
    IS_ENUM_STATIC_BLOCK(factid2,destMethodId),
-   IDB_INSTRUCTION(factid3,sourceMethodid,sourceInstructionCounter,instructionName),
-   !instructionName="ARETURN",
-   INVOKESPECIAL(factid4,destMethodId,instructioncounter,owner,"<clinit>",_,_).
+   INVOKESTATIC(factid3,destMethodId,destInstructionCounter,owner,name,desc,itf),
+   IDB_INSTRUCTION(factid4,sourceMethodid,sourceInstructionCounter,instructionName),
+   !instructionName="ARETURN".
+
+// remove invocation of now inlined method
+REMOVED_INSTRUCTION("TODO_RMVD_INSTR",methodid,instructioncounter) :-
+    IS_ENUM_STATIC_BLOCK(factid1,methodid),
+    INVOKESTATIC(factid2,methodid,instructioncounter,owner,name,desc,itf),
+    name="$values".
+
+
 // (2) move instructions *****************************************
 
 // Remove Redundant Checkcasts
@@ -439,143 +447,143 @@ IDB_INSTRUCTION(cat("R_IFNONNULL","[",factid,"]"),methodid,instructioncounter,"I
 // rules to move instructions
 // @generated io.github.bineq.daleq.idb.rulegeneration.InstructionRelocationRuleGeneration
 
-IDB_LABEL(cat("R_LABEL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,labelid) :- LABEL(factid1,methodid,instructioncounter,labelid) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LABEL").
+IDB_LABEL(cat("R_LABEL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,labelid) :- LABEL(factid1,methodid,instructioncounter,labelid) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LABEL").
 
-IDB_ACONST_NULL(cat("R_ACONST_NULL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ACONST_NULL(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ACONST_NULL").
+IDB_ACONST_NULL(cat("R_ACONST_NULL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ACONST_NULL(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ACONST_NULL").
 
-IDB_ICONST_M1(cat("R_ICONST_M1_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ICONST_M1(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_M1").
+IDB_ICONST_M1(cat("R_ICONST_M1_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ICONST_M1(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_M1").
 
-IDB_ICONST_0(cat("R_ICONST_0_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ICONST_0(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_0").
+IDB_ICONST_0(cat("R_ICONST_0_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ICONST_0(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_0").
 
-IDB_ICONST_1(cat("R_ICONST_1_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ICONST_1(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_1").
+IDB_ICONST_1(cat("R_ICONST_1_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ICONST_1(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_1").
 
-IDB_ICONST_2(cat("R_ICONST_2_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ICONST_2(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_2").
+IDB_ICONST_2(cat("R_ICONST_2_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ICONST_2(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_2").
 
-IDB_ICONST_3(cat("R_ICONST_3_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ICONST_3(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_3").
+IDB_ICONST_3(cat("R_ICONST_3_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ICONST_3(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_3").
 
-IDB_ICONST_4(cat("R_ICONST_4_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ICONST_4(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_4").
+IDB_ICONST_4(cat("R_ICONST_4_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ICONST_4(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_4").
 
-IDB_ICONST_5(cat("R_ICONST_5_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ICONST_5(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_5").
+IDB_ICONST_5(cat("R_ICONST_5_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ICONST_5(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ICONST_5").
 
-IDB_LCONST_0(cat("R_LCONST_0_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- LCONST_0(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LCONST_0").
+IDB_LCONST_0(cat("R_LCONST_0_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- LCONST_0(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LCONST_0").
 
-IDB_LCONST_1(cat("R_LCONST_1_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- LCONST_1(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LCONST_1").
+IDB_LCONST_1(cat("R_LCONST_1_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- LCONST_1(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LCONST_1").
 
-IDB_BIPUSH(cat("R_BIPUSH_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,operand) :- BIPUSH(factid1,methodid,instructioncounter,operand) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"BIPUSH").
+IDB_BIPUSH(cat("R_BIPUSH_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,operand) :- BIPUSH(factid1,methodid,instructioncounter,operand) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"BIPUSH").
 
-IDB_SIPUSH(cat("R_SIPUSH_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,operand) :- SIPUSH(factid1,methodid,instructioncounter,operand) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"SIPUSH").
+IDB_SIPUSH(cat("R_SIPUSH_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,operand) :- SIPUSH(factid1,methodid,instructioncounter,operand) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"SIPUSH").
 
-IDB_LDC(cat("R_LDC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,cst) :- LDC(factid1,methodid,instructioncounter,cst) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LDC").
+IDB_LDC(cat("R_LDC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,cst) :- LDC(factid1,methodid,instructioncounter,cst) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LDC").
 
-IDB_ILOAD(cat("R_ILOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,var) :- ILOAD(factid1,methodid,instructioncounter,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ILOAD").
+IDB_ILOAD(cat("R_ILOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,var) :- ILOAD(factid1,methodid,instructioncounter,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ILOAD").
 
-IDB_LLOAD(cat("R_LLOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,var) :- LLOAD(factid1,methodid,instructioncounter,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LLOAD").
+IDB_LLOAD(cat("R_LLOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,var) :- LLOAD(factid1,methodid,instructioncounter,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LLOAD").
 
-IDB_ALOAD(cat("R_ALOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,var) :- ALOAD(factid1,methodid,instructioncounter,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ALOAD").
+IDB_ALOAD(cat("R_ALOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,var) :- ALOAD(factid1,methodid,instructioncounter,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ALOAD").
 
-IDB_IALOAD(cat("R_IALOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- IALOAD(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IALOAD").
+IDB_IALOAD(cat("R_IALOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- IALOAD(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IALOAD").
 
-IDB_AALOAD(cat("R_AALOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- AALOAD(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"AALOAD").
+IDB_AALOAD(cat("R_AALOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- AALOAD(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"AALOAD").
 
-IDB_CALOAD(cat("R_CALOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- CALOAD(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"CALOAD").
+IDB_CALOAD(cat("R_CALOAD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- CALOAD(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"CALOAD").
 
-IDB_ISTORE(cat("R_ISTORE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,var) :- ISTORE(factid1,methodid,instructioncounter,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ISTORE").
+IDB_ISTORE(cat("R_ISTORE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,var) :- ISTORE(factid1,methodid,instructioncounter,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ISTORE").
 
-IDB_ASTORE(cat("R_ASTORE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,var) :- ASTORE(factid1,methodid,instructioncounter,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ASTORE").
+IDB_ASTORE(cat("R_ASTORE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,var) :- ASTORE(factid1,methodid,instructioncounter,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ASTORE").
 
-IDB_IASTORE(cat("R_IASTORE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- IASTORE(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IASTORE").
+IDB_IASTORE(cat("R_IASTORE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- IASTORE(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IASTORE").
 
-IDB_AASTORE(cat("R_AASTORE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- AASTORE(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"AASTORE").
+IDB_AASTORE(cat("R_AASTORE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- AASTORE(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"AASTORE").
 
-IDB_CASTORE(cat("R_CASTORE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- CASTORE(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"CASTORE").
+IDB_CASTORE(cat("R_CASTORE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- CASTORE(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"CASTORE").
 
-IDB_POP(cat("R_POP_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- POP(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"POP").
+IDB_POP(cat("R_POP_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- POP(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"POP").
 
-IDB_DUP(cat("R_DUP_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- DUP(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"DUP").
+IDB_DUP(cat("R_DUP_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- DUP(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"DUP").
 
-IDB_IADD(cat("R_IADD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- IADD(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IADD").
+IDB_IADD(cat("R_IADD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- IADD(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IADD").
 
-IDB_ISUB(cat("R_ISUB_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ISUB(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ISUB").
+IDB_ISUB(cat("R_ISUB_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ISUB(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ISUB").
 
-IDB_IMUL(cat("R_IMUL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- IMUL(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IMUL").
+IDB_IMUL(cat("R_IMUL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- IMUL(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IMUL").
 
-IDB_IDIV(cat("R_IDIV_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- IDIV(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IDIV").
+IDB_IDIV(cat("R_IDIV_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- IDIV(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IDIV").
 
-IDB_IREM(cat("R_IREM_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- IREM(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IREM").
+IDB_IREM(cat("R_IREM_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- IREM(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IREM").
 
-IDB_IINC(cat("R_IINC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,incr,var) :- IINC(factid1,methodid,instructioncounter,incr,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IINC").
+IDB_IINC(cat("R_IINC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,incr,var) :- IINC(factid1,methodid,instructioncounter,incr,var) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IINC").
 
-IDB_I2C(cat("R_I2C_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- I2C(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"I2C").
+IDB_I2C(cat("R_I2C_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- I2C(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"I2C").
 
-IDB_IFEQ(cat("R_IFEQ_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IFEQ(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFEQ").
+IDB_IFEQ(cat("R_IFEQ_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IFEQ(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFEQ").
 
-IDB_IFNE(cat("R_IFNE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IFNE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFNE").
+IDB_IFNE(cat("R_IFNE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IFNE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFNE").
 
-IDB_IFLT(cat("R_IFLT_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IFLT(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFLT").
+IDB_IFLT(cat("R_IFLT_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IFLT(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFLT").
 
-IDB_IFLE(cat("R_IFLE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IFLE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFLE").
+IDB_IFLE(cat("R_IFLE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IFLE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFLE").
 
-IDB_IF_ICMPEQ(cat("R_IF_ICMPEQ_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IF_ICMPEQ(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPEQ").
+IDB_IF_ICMPEQ(cat("R_IF_ICMPEQ_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IF_ICMPEQ(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPEQ").
 
-IDB_IF_ICMPNE(cat("R_IF_ICMPNE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IF_ICMPNE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPNE").
+IDB_IF_ICMPNE(cat("R_IF_ICMPNE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IF_ICMPNE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPNE").
 
-IDB_IF_ICMPLT(cat("R_IF_ICMPLT_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IF_ICMPLT(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPLT").
+IDB_IF_ICMPLT(cat("R_IF_ICMPLT_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IF_ICMPLT(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPLT").
 
-IDB_IF_ICMPGE(cat("R_IF_ICMPGE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IF_ICMPGE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPGE").
+IDB_IF_ICMPGE(cat("R_IF_ICMPGE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IF_ICMPGE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPGE").
 
-IDB_IF_ICMPGT(cat("R_IF_ICMPGT_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IF_ICMPGT(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPGT").
+IDB_IF_ICMPGT(cat("R_IF_ICMPGT_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IF_ICMPGT(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPGT").
 
-IDB_IF_ICMPLE(cat("R_IF_ICMPLE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IF_ICMPLE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPLE").
+IDB_IF_ICMPLE(cat("R_IF_ICMPLE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IF_ICMPLE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ICMPLE").
 
-IDB_IF_ACMPEQ(cat("R_IF_ACMPEQ_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IF_ACMPEQ(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ACMPEQ").
+IDB_IF_ACMPEQ(cat("R_IF_ACMPEQ_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IF_ACMPEQ(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ACMPEQ").
 
-IDB_IF_ACMPNE(cat("R_IF_ACMPNE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IF_ACMPNE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ACMPNE").
+IDB_IF_ACMPNE(cat("R_IF_ACMPNE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IF_ACMPNE(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IF_ACMPNE").
 
-IDB_GOTO(cat("R_GOTO_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- GOTO(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"GOTO").
+IDB_GOTO(cat("R_GOTO_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- GOTO(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"GOTO").
 
-IDB_TABLESWITCH(cat("R_TABLESWITCH_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,dflt,labels,max_,min_) :- TABLESWITCH(factid1,methodid,instructioncounter,dflt,labels,max_,min_) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"TABLESWITCH").
+IDB_TABLESWITCH(cat("R_TABLESWITCH_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,dflt,labels,max_,min_) :- TABLESWITCH(factid1,methodid,instructioncounter,dflt,labels,max_,min_) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"TABLESWITCH").
 
-IDB_LOOKUPSWITCH(cat("R_LOOKUPSWITCH_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,dflt,keys,labels) :- LOOKUPSWITCH(factid1,methodid,instructioncounter,dflt,keys,labels) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LOOKUPSWITCH").
+IDB_LOOKUPSWITCH(cat("R_LOOKUPSWITCH_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,dflt,keys,labels) :- LOOKUPSWITCH(factid1,methodid,instructioncounter,dflt,keys,labels) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"LOOKUPSWITCH").
 
-IDB_IRETURN(cat("R_IRETURN_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- IRETURN(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IRETURN").
+IDB_IRETURN(cat("R_IRETURN_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- IRETURN(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IRETURN").
 
-IDB_ARETURN(cat("R_ARETURN_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ARETURN(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ARETURN").
+IDB_ARETURN(cat("R_ARETURN_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ARETURN(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ARETURN").
 
-IDB_RETURN(cat("R_RETURN_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- RETURN(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"RETURN").
+IDB_RETURN(cat("R_RETURN_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- RETURN(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"RETURN").
 
-IDB_GETSTATIC(cat("R_GETSTATIC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,owner,name,desc) :- GETSTATIC(factid1,methodid,instructioncounter,owner,name,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"GETSTATIC").
+IDB_GETSTATIC(cat("R_GETSTATIC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,owner,name,desc) :- GETSTATIC(factid1,methodid,instructioncounter,owner,name,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"GETSTATIC").
 
-IDB_PUTSTATIC(cat("R_PUTSTATIC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,owner,name,desc) :- PUTSTATIC(factid1,methodid,instructioncounter,owner,name,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"PUTSTATIC").
+IDB_PUTSTATIC(cat("R_PUTSTATIC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,owner,name,desc) :- PUTSTATIC(factid1,methodid,instructioncounter,owner,name,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"PUTSTATIC").
 
-IDB_GETFIELD(cat("R_GETFIELD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,owner,name,desc) :- GETFIELD(factid1,methodid,instructioncounter,owner,name,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"GETFIELD").
+IDB_GETFIELD(cat("R_GETFIELD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,owner,name,desc) :- GETFIELD(factid1,methodid,instructioncounter,owner,name,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"GETFIELD").
 
-IDB_PUTFIELD(cat("R_PUTFIELD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,owner,name,desc) :- PUTFIELD(factid1,methodid,instructioncounter,owner,name,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"PUTFIELD").
+IDB_PUTFIELD(cat("R_PUTFIELD_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,owner,name,desc) :- PUTFIELD(factid1,methodid,instructioncounter,owner,name,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"PUTFIELD").
 
-IDB_INVOKEVIRTUAL(cat("R_INVOKEVIRTUAL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,owner,name,desc,itf) :- INVOKEVIRTUAL(factid1,methodid,instructioncounter,owner,name,desc,itf) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INVOKEVIRTUAL").
+IDB_INVOKEVIRTUAL(cat("R_INVOKEVIRTUAL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,owner,name,desc,itf) :- INVOKEVIRTUAL(factid1,methodid,instructioncounter,owner,name,desc,itf) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INVOKEVIRTUAL").
 
-IDB_INVOKESPECIAL(cat("R_INVOKESPECIAL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,owner,name,desc,itf) :- INVOKESPECIAL(factid1,methodid,instructioncounter,owner,name,desc,itf) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INVOKESPECIAL").
+IDB_INVOKESPECIAL(cat("R_INVOKESPECIAL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,owner,name,desc,itf) :- INVOKESPECIAL(factid1,methodid,instructioncounter,owner,name,desc,itf) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INVOKESPECIAL").
 
-IDB_INVOKESTATIC(cat("R_INVOKESTATIC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,owner,name,desc,itf) :- INVOKESTATIC(factid1,methodid,instructioncounter,owner,name,desc,itf) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INVOKESTATIC").
+IDB_INVOKESTATIC(cat("R_INVOKESTATIC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,owner,name,desc,itf) :- INVOKESTATIC(factid1,methodid,instructioncounter,owner,name,desc,itf) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INVOKESTATIC").
 
-IDB_INVOKEINTERFACE(cat("R_INVOKEINTERFACE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,owner,name,desc,itf) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,owner,name,desc,itf) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INVOKEINTERFACE").
+IDB_INVOKEINTERFACE(cat("R_INVOKEINTERFACE_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,owner,name,desc,itf) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,owner,name,desc,itf) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INVOKEINTERFACE").
 
-IDB_INVOKEDYNAMIC(cat("R_INVOKEDYNAMIC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,name,desc,bsmArgs,bsm_getOwner,bsm_getName,bsm_getDesc,bsm_getTag,bsm_isInterface) :- INVOKEDYNAMIC(factid1,methodid,instructioncounter,name,desc,bsmArgs,bsm_getOwner,bsm_getName,bsm_getDesc,bsm_getTag,bsm_isInterface) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INVOKEDYNAMIC").
+IDB_INVOKEDYNAMIC(cat("R_INVOKEDYNAMIC_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,name,desc,bsmArgs,bsm_getOwner,bsm_getName,bsm_getDesc,bsm_getTag,bsm_isInterface) :- INVOKEDYNAMIC(factid1,methodid,instructioncounter,name,desc,bsmArgs,bsm_getOwner,bsm_getName,bsm_getDesc,bsm_getTag,bsm_isInterface) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INVOKEDYNAMIC").
 
-IDB_NEW(cat("R_NEW_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,desc) :- NEW(factid1,methodid,instructioncounter,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"NEW").
+IDB_NEW(cat("R_NEW_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,desc) :- NEW(factid1,methodid,instructioncounter,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"NEW").
 
-IDB_NEWARRAY(cat("R_NEWARRAY_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,operand) :- NEWARRAY(factid1,methodid,instructioncounter,operand) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"NEWARRAY").
+IDB_NEWARRAY(cat("R_NEWARRAY_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,operand) :- NEWARRAY(factid1,methodid,instructioncounter,operand) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"NEWARRAY").
 
-IDB_ANEWARRAY(cat("R_ANEWARRAY_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,desc) :- ANEWARRAY(factid1,methodid,instructioncounter,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ANEWARRAY").
+IDB_ANEWARRAY(cat("R_ANEWARRAY_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,desc) :- ANEWARRAY(factid1,methodid,instructioncounter,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ANEWARRAY").
 
-IDB_ARRAYLENGTH(cat("R_ARRAYLENGTH_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ARRAYLENGTH(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ARRAYLENGTH").
+IDB_ARRAYLENGTH(cat("R_ARRAYLENGTH_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ARRAYLENGTH(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ARRAYLENGTH").
 
-IDB_ATHROW(cat("R_ATHROW_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter) :- ATHROW(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ATHROW").
+IDB_ATHROW(cat("R_ATHROW_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100) :- ATHROW(factid1,methodid,instructioncounter) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"ATHROW").
 
-IDB_CHECKCAST(cat("R_CHECKCAST_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,desc) :- CHECKCAST(factid1,methodid,instructioncounter,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"CHECKCAST").
+IDB_CHECKCAST(cat("R_CHECKCAST_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,desc) :- CHECKCAST(factid1,methodid,instructioncounter,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"CHECKCAST").
 
-IDB_INSTANCEOF(cat("R_INSTANCEOF_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,desc) :- INSTANCEOF(factid1,methodid,instructioncounter,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INSTANCEOF").
+IDB_INSTANCEOF(cat("R_INSTANCEOF_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,desc) :- INSTANCEOF(factid1,methodid,instructioncounter,desc) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"INSTANCEOF").
 
-IDB_IFNULL(cat("R_IFNULL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IFNULL(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFNULL").
+IDB_IFNULL(cat("R_IFNULL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IFNULL(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFNULL").
 
-IDB_IFNONNULL(cat("R_IFNONNULL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter,label) :- IFNONNULL(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFNONNULL").
+IDB_IFNONNULL(cat("R_IFNONNULL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IFNONNULL(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFNONNULL").
 
