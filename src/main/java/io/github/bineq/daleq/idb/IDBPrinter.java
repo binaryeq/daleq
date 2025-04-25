@@ -29,7 +29,7 @@ public class IDBPrinter {
     public static final boolean DEFAULT_INCLUDE_PROVENANCE = false;
     public static final boolean DEFAULT_INCLUDE_INSTRUCTION_COUNTERS = false;
     public static final boolean DEFAULT_INCLUDE_CLASS_METHOD_FIELD_IDS = false;
-
+    public static final boolean DEFAULT_INCLUDE_REMOVED = false;
 
     static {
         try {
@@ -87,6 +87,14 @@ public class IDBPrinter {
         .desc("whether to include class/method/field ids in instruction facts as those facts are grouped by class/method/field anyway (true or false, default is " + DEFAULT_INCLUDE_CLASS_METHOD_FIELD_IDS + ")")
         .build();
 
+    public static Option OPT_INCLUDE_REMOVED_ITEMS = Option.builder()
+        .argName("includeremoved")
+        .option("ir")
+        .hasArg(true)
+        .required(false)
+        .desc("whether to include methods, fields or instructions that have been removed (true or false, default is " + DEFAULT_INCLUDE_REMOVED + ")")
+        .build();
+
     public static void main(String[] args) throws Exception {
 
         Options options = new Options();
@@ -96,6 +104,7 @@ public class IDBPrinter {
         options.addOption(OPT_INCLUDE_PROVENANCE_SLOT);
         options.addOption(OPT_INCLUDE_INSTRUCTIONCOUNTER_SLOT);
         options.addOption(OPT_INCLUDE_IDS_IN_INSTRUCTIONS_SLOT);
+        options.addOption(OPT_INCLUDE_REMOVED_ITEMS);
 
         CommandLine cli = null;
         CommandLineParser parser = new DefaultParser();
@@ -110,11 +119,12 @@ public class IDBPrinter {
             boolean includeProvenance =  getBooleanOptValue(cli,OPT_INCLUDE_PROVENANCE_SLOT,DEFAULT_INCLUDE_PROVENANCE);
             boolean includeInstructionCounters =  getBooleanOptValue(cli,OPT_INCLUDE_INSTRUCTIONCOUNTER_SLOT,DEFAULT_INCLUDE_INSTRUCTION_COUNTERS);
             boolean includeClassOrMethodOrFieldIds =  getBooleanOptValue(cli,OPT_INCLUDE_IDS_IN_INSTRUCTIONS_SLOT, DEFAULT_INCLUDE_CLASS_METHOD_FIELD_IDS);
+            boolean includeRemoved =  getBooleanOptValue(cli,OPT_INCLUDE_REMOVED_ITEMS, DEFAULT_INCLUDE_REMOVED);
 
             Path input = Path.of(inputName);
             if (Files.isDirectory(input)) {
                 LOG.info("Loading existing IDB from {}", input);
-                printIDB(input, out,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds);
+                printIDB(input, out,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds,includeRemoved);
             }
             else if (Files.isRegularFile(input) && input.toString().endsWith(".class") ) {
 
@@ -150,7 +160,7 @@ public class IDBPrinter {
                 Souffle.createIDB(edbDefFile,rules,edbDir,idbDir,mergedFactsAndRulesFile);
                 LOG.info("EDB facts extracted to {}" , idbDir);
 
-                printIDB(idbDir, out,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds);
+                printIDB(idbDir, out,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds,includeRemoved);
             }
 
         } catch (ParseException e) {
@@ -171,14 +181,14 @@ public class IDBPrinter {
     }
 
 
-    static void printIDB(Path idbDir, Path out,boolean includeProvenance,boolean includeInstructionCounters,boolean includeClassOrMethodOrFieldIds) throws IOException {
+    static void printIDB(Path idbDir, Path out,boolean includeProvenance,boolean includeInstructionCounters,boolean includeClassOrMethodOrFieldIds,boolean includeRemoved) throws IOException {
         Preconditions.checkState(Files.exists(idbDir));
         Preconditions.checkState(Files.isDirectory(idbDir));
         IDB idb = IDBReader.read(idbDir);
-        printIDB(idb, out,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds);
+        printIDB(idb, out,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds,includeRemoved);
     }
 
-    static void printIDB(IDB idb, Path out, boolean includeProvenance,boolean includeInstructionCounters,boolean includeClassOrMethodOrFieldIds) throws IOException {
+    static void printIDB(IDB idb, Path out, boolean includeProvenance,boolean includeInstructionCounters,boolean includeClassOrMethodOrFieldIds,boolean includeRemoved) throws IOException {
 
         List<String> lines = new ArrayList<>();
 
@@ -199,9 +209,11 @@ public class IDBPrinter {
             lines.add(stringifyOtherFact(fieldFact,includeProvenance));
         }
 
-        lines.addAll(comment1("list of removed fields"));
-        for (Fact removedFieldFact:idb.removedFieldFacts) {
-            lines.add(stringifyOtherFact(removedFieldFact,includeProvenance));
+        if (includeRemoved) {
+            lines.addAll(comment1("list of removed fields"));
+            for (Fact removedFieldFact : idb.removedFieldFacts) {
+                lines.add(stringifyOtherFact(removedFieldFact, includeProvenance));
+            }
         }
 
         lines.addAll(comment1("field details"));
@@ -222,9 +234,11 @@ public class IDBPrinter {
             lines.add(stringifyOtherFact(methodFact,includeProvenance));
         }
 
-        lines.addAll(comment1("list of removed methods"));
-        for (Fact removedMethodFact:idb.removedMethodFacts) {
-            lines.add(stringifyOtherFact(removedMethodFact,includeProvenance));
+        if (includeRemoved) {
+            lines.addAll(comment1("list of removed methods"));
+            for (Fact removedMethodFact : idb.removedMethodFacts) {
+                lines.add(stringifyOtherFact(removedMethodFact, includeProvenance));
+            }
         }
 
         lines.addAll(comment1("methods details"));
@@ -241,7 +255,11 @@ public class IDBPrinter {
 
             lines.addAll(comment2("\tinstructions for method " + methodId));
             for (Fact methodInstructionFact:idb.methodInstructionFacts.getOrDefault(methodId, Set.of())) {
-                lines.add(stringifyBytecodeInstructionFact(methodInstructionFact,includeProvenance,includeInstructionCounters,includeClassOrMethodOrFieldIds));
+                boolean isRemovedInstruction = methodInstructionFact.predicate().getName().equals("REMOVED_INSTRUCTION");
+                boolean skip = isRemovedInstruction && !includeRemoved;
+                if (!skip) {
+                    lines.add(stringifyBytecodeInstructionFact(methodInstructionFact, includeProvenance, includeInstructionCounters, includeClassOrMethodOrFieldIds));
+                }
             }
         }
 
