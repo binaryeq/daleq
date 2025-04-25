@@ -253,7 +253,7 @@ public class IDBPrinter {
                 lines.add(stringifyMemberFact(methodAccessFact,includeProvenance,includeClassOrMethodOrFieldIds));
             }
 
-            lines.addAll(comment2("\tinstructions for method " + methodId));
+            lines.addAll(comment2("instructions for method " + methodId));
             for (Fact methodInstructionFact:idb.methodInstructionFacts.getOrDefault(methodId, Set.of())) {
                 boolean isRemovedInstruction = methodInstructionFact.predicate().getName().equals("REMOVED_INSTRUCTION");
                 boolean skip = isRemovedInstruction && !includeRemoved;
