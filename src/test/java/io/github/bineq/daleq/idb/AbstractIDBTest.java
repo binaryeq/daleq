@@ -53,7 +53,7 @@ public abstract class AbstractIDBTest {
     }
 
 
-    private Path createOrEmpty (Path dir) throws IOException {
+    static Path createOrEmpty (Path dir) throws IOException {
         if (Files.exists(dir)) {
             Files.walk(dir)
                 .filter(file -> !Files.isDirectory(file))

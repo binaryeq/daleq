@@ -44,70 +44,70 @@ class IDB {
     Map<String,Fact> fieldRawAccessFacts = new HashMap<>(); // raw, value is single fact for all int-encoded access flags
     Map<String,Fact> fieldSignatureFacts = new HashMap<>();
 
-    public IDB normalise() {
+    public IDB project() {
         IDB idb = new IDB();
-        idb.classSuperclassFact = normalise(this.classSuperclassFact);
-        idb.classSignatureFact = normalise(this.classSignatureFact);
-        idb.bytecodeVersionFact = normalise(this.bytecodeVersionFact);
-        idb.classInterfaceFacts = normalise(this.classInterfaceFacts);
-        idb.classRawAccessFact = normalise(this.classRawAccessFact);
-        idb.classAccessFacts = normalise(this.classAccessFacts);
-        idb.methodFacts = normalise(this.methodFacts);
-        idb.fieldFacts = normalise(this.fieldFacts);
+        idb.classSuperclassFact = project(this.classSuperclassFact);
+        idb.classSignatureFact = project(this.classSignatureFact);
+        idb.bytecodeVersionFact = project(this.bytecodeVersionFact);
+        idb.classInterfaceFacts = project(this.classInterfaceFacts);
+        idb.classRawAccessFact = project(this.classRawAccessFact);
+        idb.classAccessFacts = project(this.classAccessFacts);
+        idb.methodFacts = project(this.methodFacts);
+        idb.fieldFacts = project(this.fieldFacts);
         idb.removedMethodFacts = Set.of();  // removed facts are only for provenance, ignore
         idb.removedFieldFacts = Set.of();  // removed facts are only for provenance, ignore
-        idb.methodRawAccessFacts = normalise(this.methodRawAccessFacts);
-        idb.methodAccessFacts = normalise2(this.methodAccessFacts);
-        idb.methodSignatureFacts = normalise(this.methodSignatureFacts);
-        idb.fieldAccessFacts = normalise2(this.fieldAccessFacts);
-        idb.fieldRawAccessFacts = normalise(this.fieldRawAccessFacts);
-        idb.fieldSignatureFacts = normalise(this.fieldSignatureFacts);
+        idb.methodRawAccessFacts = project(this.methodRawAccessFacts);
+        idb.methodAccessFacts = project2(this.methodAccessFacts);
+        idb.methodSignatureFacts = project(this.methodSignatureFacts);
+        idb.fieldAccessFacts = project2(this.fieldAccessFacts);
+        idb.fieldRawAccessFacts = project(this.fieldRawAccessFacts);
+        idb.fieldSignatureFacts = project(this.fieldSignatureFacts);
         idb.methodInstructionFacts = new HashMap<>();
         for (String method:methodInstructionFacts.keySet()) {
             Collection<Fact> facts = new ArrayList<>();
             idb.methodInstructionFacts.put(method,facts);
             for (Fact fact : methodInstructionFacts.get(method)) {
-                facts.add(normaliseInstructionFact(fact));
+                facts.add(projectInstructionFact(fact));
             }
         }
 
         return idb;
     }
 
-    private static List<Fact> normalise(List<Fact> facts) {
+    private static List<Fact> project(List<Fact> facts) {
         return facts.stream()
-            .map(fact -> normalise(fact))
+            .map(fact -> project(fact))
             .collect(Collectors.toUnmodifiableList());
     }
 
-    private static Map<String,Fact> normalise(Map<String,Fact> facts) {
+    private static Map<String,Fact> project(Map<String,Fact> facts) {
         Map<String,Fact> map = new HashMap<>();
         facts.keySet().stream()
             .forEach(k -> {
-                map.put(k, normalise(facts.get(k)));
+                map.put(k, project(facts.get(k)));
             });
         return map;
     }
 
-    private static Map<String,Set<Fact>> normalise2(Map<String,Set<Fact>> facts) {
+    private static Map<String,Set<Fact>> project2(Map<String,Set<Fact>> facts) {
         Map<String,Set<Fact>> map = new HashMap<>();
         facts.keySet().stream()
             .forEach(k -> {
-                map.put(k, normalise(facts.get(k)));
+                map.put(k, project(facts.get(k)));
             });
         return map;
     }
 
-    private static Set<Fact> normalise(Set<Fact> facts) {
+    private static Set<Fact> project(Set<Fact> facts) {
         // retain the order of facts -- this might be sorted
         Set<Fact> set = new LinkedHashSet<>();
         facts.stream()
-            .map(fact -> normalise(fact))
+            .map(fact -> project(fact))
             .forEach(set::add);
         return set;
     }
 
-    private static Fact normalise(Fact fact) {
+    private static Fact project(Fact fact) {
         Slot[] slots = fact.predicate().getSlots();
         assert slots[0].name().equals("factid");
         Object[] values = new Object[fact.values().length];
@@ -122,7 +122,7 @@ class IDB {
         return new SimpleFact(fact.predicate(), values);
     }
 
-    private static Fact normaliseInstructionFact(Fact fact) {
+    private static Fact projectInstructionFact(Fact fact) {
 
         // checks
         assert fact.predicate().isInstructionPredicate();
@@ -151,7 +151,23 @@ class IDB {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         IDB idb = (IDB) o;
-        return Objects.equals(classSuperclassFact, idb.classSuperclassFact) && Objects.equals(classSignatureFact, idb.classSignatureFact) && Objects.equals(bytecodeVersionFact, idb.bytecodeVersionFact) && Objects.equals(classInterfaceFacts, idb.classInterfaceFacts) && Objects.equals(classRawAccessFact, idb.classRawAccessFact) && Objects.equals(classAccessFacts, idb.classAccessFacts) && Objects.equals(methodFacts, idb.methodFacts) && Objects.equals(fieldFacts, idb.fieldFacts) && Objects.equals(removedMethodFacts, idb.removedMethodFacts) && Objects.equals(removedFieldFacts, idb.removedFieldFacts) && Objects.equals(methodRawAccessFacts, idb.methodRawAccessFacts) && Objects.equals(methodAccessFacts, idb.methodAccessFacts) && Objects.equals(methodSignatureFacts, idb.methodSignatureFacts) && Objects.equals(methodInstructionFacts, idb.methodInstructionFacts) && Objects.equals(fieldAccessFacts, idb.fieldAccessFacts) && Objects.equals(fieldRawAccessFacts, idb.fieldRawAccessFacts) && Objects.equals(fieldSignatureFacts, idb.fieldSignatureFacts);
+        return Objects.equals(classSuperclassFact, idb.classSuperclassFact) &&
+            Objects.equals(classSignatureFact, idb.classSignatureFact) &&
+            Objects.equals(bytecodeVersionFact, idb.bytecodeVersionFact) &&
+            Objects.equals(classInterfaceFacts, idb.classInterfaceFacts) &&
+            Objects.equals(classRawAccessFact, idb.classRawAccessFact) &&
+            Objects.equals(classAccessFacts, idb.classAccessFacts) &&
+            Objects.equals(methodFacts, idb.methodFacts) &&
+            Objects.equals(fieldFacts, idb.fieldFacts) &&
+            Objects.equals(removedMethodFacts, idb.removedMethodFacts) &&
+            Objects.equals(removedFieldFacts, idb.removedFieldFacts) &&
+            Objects.equals(methodRawAccessFacts, idb.methodRawAccessFacts) &&
+            Objects.equals(methodAccessFacts, idb.methodAccessFacts) &&
+            Objects.equals(methodSignatureFacts, idb.methodSignatureFacts) &&
+            Objects.equals(methodInstructionFacts, idb.methodInstructionFacts) &&
+            Objects.equals(fieldAccessFacts, idb.fieldAccessFacts) &&
+            Objects.equals(fieldRawAccessFacts, idb.fieldRawAccessFacts) &&
+            Objects.equals(fieldSignatureFacts, idb.fieldSignatureFacts);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package io.github.bineq.daleq;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -56,5 +58,19 @@ public record SimpleFact(Predicate predicate, Object... values) implements Fact 
         return IntStream.range(0, predicate.getSlots().length)
             .mapToObj(i -> predicate.getSlots()[i].name() + "=" + this.values[i])
             .collect(Collectors.joining(", ",this.predicate.getName()+"[","]"));
+    }
+
+    // custom equals to assure content of arrays is compared
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SimpleFact that = (SimpleFact) o;
+        return Objects.deepEquals(values, that.values) && Objects.equals(predicate, that.predicate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(predicate, Arrays.hashCode(values));
     }
 }
