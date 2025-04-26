@@ -4,6 +4,7 @@ import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.SimpleFact;
 import io.github.bineq.daleq.Slot;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * An internal representation of the IDB itself generated for a given method.
@@ -12,6 +13,10 @@ import java.util.*;
  * @author jens dietrich
  */
 class IDB {
+
+    // used during normalisation
+    public static final String REMOVED_ID_VALUE = "id-removed-by-normalisation";
+    public static final int REMOVED_INSTRUCTION_COUNTER_VALUE = -1;
 
     static final Comparator<Fact> COMPARE_BY_SLOT_1 = Comparator.comparing(f -> f.values()[1].toString());
     static final Comparator<Fact> COMPARE_BY_PREDICATE_NAME = Comparator.comparing(f -> f.predicate().getName());
@@ -41,23 +46,22 @@ class IDB {
 
     public IDB normalise() {
         IDB idb = new IDB();
-        idb.classSuperclassFact = this.classSuperclassFact;
-        idb.classSignatureFact = this.classSignatureFact;
-        idb.bytecodeVersionFact = this.bytecodeVersionFact;
-        idb.classInterfaceFacts = this.classInterfaceFacts;
-        idb.classRawAccessFact = this.classRawAccessFact;
-        idb.classAccessFacts = this.classAccessFacts;
-        idb.methodFacts = this.methodFacts;
-        idb.fieldFacts = this.fieldFacts;
+        idb.classSuperclassFact = normalise(this.classSuperclassFact);
+        idb.classSignatureFact = normalise(this.classSignatureFact);
+        idb.bytecodeVersionFact = normalise(this.bytecodeVersionFact);
+        idb.classInterfaceFacts = normalise(this.classInterfaceFacts);
+        idb.classRawAccessFact = normalise(this.classRawAccessFact);
+        idb.classAccessFacts = normalise(this.classAccessFacts);
+        idb.methodFacts = normalise(this.methodFacts);
+        idb.fieldFacts = normalise(this.fieldFacts);
         idb.removedMethodFacts = Set.of();  // removed facts are only for provenance, ignore
         idb.removedFieldFacts = Set.of();  // removed facts are only for provenance, ignore
-        idb.methodRawAccessFacts = this.methodRawAccessFacts;
-        idb.methodAccessFacts = this.methodAccessFacts;
-        idb.methodSignatureFacts = this.methodSignatureFacts;
-        idb.fieldAccessFacts = this.fieldAccessFacts;
-        idb.fieldRawAccessFacts = this.fieldRawAccessFacts;
-        idb.fieldSignatureFacts = this.fieldSignatureFacts;
-
+        idb.methodRawAccessFacts = normalise(this.methodRawAccessFacts);
+        idb.methodAccessFacts = normalise2(this.methodAccessFacts);
+        idb.methodSignatureFacts = normalise(this.methodSignatureFacts);
+        idb.fieldAccessFacts = normalise2(this.fieldAccessFacts);
+        idb.fieldRawAccessFacts = normalise(this.fieldRawAccessFacts);
+        idb.fieldSignatureFacts = normalise(this.fieldSignatureFacts);
         idb.methodInstructionFacts = new HashMap<>();
         for (String method:methodInstructionFacts.keySet()) {
             Collection<Fact> facts = new ArrayList<>();
@@ -68,6 +72,54 @@ class IDB {
         }
 
         return idb;
+    }
+
+    private static List<Fact> normalise(List<Fact> facts) {
+        return facts.stream()
+            .map(fact -> normalise(fact))
+            .collect(Collectors.toUnmodifiableList());
+    }
+
+    private static Map<String,Fact> normalise(Map<String,Fact> facts) {
+        Map<String,Fact> map = new HashMap<>();
+        facts.keySet().stream()
+            .forEach(k -> {
+                map.put(k, normalise(facts.get(k)));
+            });
+        return map;
+    }
+
+    private static Map<String,Set<Fact>> normalise2(Map<String,Set<Fact>> facts) {
+        Map<String,Set<Fact>> map = new HashMap<>();
+        facts.keySet().stream()
+            .forEach(k -> {
+                map.put(k, normalise(facts.get(k)));
+            });
+        return map;
+    }
+
+    private static Set<Fact> normalise(Set<Fact> facts) {
+        // retain the order of facts -- this might be sorted
+        Set<Fact> set = new LinkedHashSet<>();
+        facts.stream()
+            .map(fact -> normalise(fact))
+            .forEach(set::add);
+        return set;
+    }
+
+    private static Fact normalise(Fact fact) {
+        Slot[] slots = fact.predicate().getSlots();
+        assert slots[0].name().equals("factid");
+        Object[] values = new Object[fact.values().length];
+        for (int i = 0; i < fact.values().length; i++) {
+            if (i==0) {
+                values[i] = REMOVED_ID_VALUE;  // set to standard
+            }
+            else {
+                values[i] = fact.values()[i];
+            }
+        }
+        return new SimpleFact(fact.predicate(), values);
     }
 
     private static Fact normaliseInstructionFact(Fact fact) {
@@ -81,10 +133,10 @@ class IDB {
         Object[] values = new Object[fact.values().length];
         for (int i = 0; i < fact.values().length; i++) {
             if (i==0) {
-                values[i] = "factid-removed";  // set to standard
+                values[i] = REMOVED_ID_VALUE;  // set to standard
             }
             else if (i==2) {
-                values[i] = -1;
+                values[i] = REMOVED_INSTRUCTION_COUNTER_VALUE;
             }
             else {
                 values[i] = fact.values()[i];
@@ -93,7 +145,6 @@ class IDB {
 
         return new SimpleFact(fact.predicate(), values);
     }
-
 
     @Override
     public boolean equals(Object o) {
