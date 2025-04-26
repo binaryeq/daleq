@@ -1,6 +1,8 @@
 package io.github.bineq.daleq.idb;
 
 import io.github.bineq.daleq.Fact;
+import io.github.bineq.daleq.SimpleFact;
+import io.github.bineq.daleq.Slot;
 import java.util.*;
 
 /**
@@ -31,11 +33,67 @@ class IDB {
     Map<String,Fact> methodRawAccessFacts = new HashMap<>(); // raw, value is single fact for all int-encoded access flags
     Map<String,Set<Fact>> methodAccessFacts = new HashMap<>();
     Map<String,Fact> methodSignatureFacts = new HashMap<>();
-    Map<String,Set<Fact>> methodInstructionFacts = new HashMap<>();
+    Map<String,Collection<Fact>> methodInstructionFacts = new HashMap<>();
 
     Map<String,Set<Fact>> fieldAccessFacts = new HashMap<>();
     Map<String,Fact> fieldRawAccessFacts = new HashMap<>(); // raw, value is single fact for all int-encoded access flags
     Map<String,Fact> fieldSignatureFacts = new HashMap<>();
+
+    public IDB normalise() {
+        IDB idb = new IDB();
+        idb.classSuperclassFact = this.classSuperclassFact;
+        idb.classSignatureFact = this.classSignatureFact;
+        idb.bytecodeVersionFact = this.bytecodeVersionFact;
+        idb.classInterfaceFacts = this.classInterfaceFacts;
+        idb.classRawAccessFact = this.classRawAccessFact;
+        idb.classAccessFacts = this.classAccessFacts;
+        idb.methodFacts = this.methodFacts;
+        idb.fieldFacts = this.fieldFacts;
+        idb.removedMethodFacts = Set.of();  // removed facts are only for provenance, ignore
+        idb.removedFieldFacts = Set.of();  // removed facts are only for provenance, ignore
+        idb.methodRawAccessFacts = this.methodRawAccessFacts;
+        idb.methodAccessFacts = this.methodAccessFacts;
+        idb.methodSignatureFacts = this.methodSignatureFacts;
+        idb.fieldAccessFacts = this.fieldAccessFacts;
+        idb.fieldRawAccessFacts = this.fieldRawAccessFacts;
+        idb.fieldSignatureFacts = this.fieldSignatureFacts;
+
+        idb.methodInstructionFacts = new HashMap<>();
+        for (String method:methodInstructionFacts.keySet()) {
+            Collection<Fact> facts = new ArrayList<>();
+            idb.methodInstructionFacts.put(method,facts);
+            for (Fact fact : methodInstructionFacts.get(method)) {
+                facts.add(normaliseInstructionFact(fact));
+            }
+        }
+
+        return idb;
+    }
+
+    private static Fact normaliseInstructionFact(Fact fact) {
+
+        // checks
+        assert fact.predicate().isInstructionPredicate();
+        Slot[] slots = fact.predicate().getSlots();
+        assert slots[0].name().equals("factid");
+        assert slots[2].name().equals("instructioncounter");
+
+        Object[] values = new Object[fact.values().length];
+        for (int i = 0; i < fact.values().length; i++) {
+            if (i==0) {
+                values[i] = "factid-removed";  // set to standard
+            }
+            else if (i==2) {
+                values[i] = -1;
+            }
+            else {
+                values[i] = fact.values()[i];
+            }
+        }
+
+        return new SimpleFact(fact.predicate(), values);
+    }
+
 
     @Override
     public boolean equals(Object o) {

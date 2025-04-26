@@ -40,5 +40,4 @@ public interface Predicate {
 
     boolean isIDBPredicate();
 
-
 }
