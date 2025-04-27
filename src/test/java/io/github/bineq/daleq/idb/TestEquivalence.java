@@ -54,8 +54,10 @@ public class TestEquivalence {
 
     private void testEquivalence(String class1, String class2) throws Exception {
         IDB idb1 = computeAndProjectIDB(class1);
+        String printed1 = IDBPrinter.print(idb1);
         IDB idb2 = computeAndProjectIDB(class2);
-        assertEquals(idb1,idb2);
+        String printed2 = IDBPrinter.print(idb2);
+        assertEquals(printed1,printed2);
     }
 
     @Test

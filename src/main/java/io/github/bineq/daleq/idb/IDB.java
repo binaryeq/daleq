@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 class IDB {
 
     // used during normalisation
-    public static final String REMOVED_ID_VALUE = "id-removed-by-normalisation";
+    public static final String REMOVED_ID_VALUE = "projected";
     public static final int REMOVED_INSTRUCTION_COUNTER_VALUE = -1;
 
     static final Comparator<Fact> COMPARE_BY_SLOT_1 = Comparator.comparing(f -> f.values()[1].toString());
@@ -67,7 +67,9 @@ class IDB {
             Collection<Fact> facts = new ArrayList<>();
             idb.methodInstructionFacts.put(method,facts);
             for (Fact fact : methodInstructionFacts.get(method)) {
-                facts.add(projectInstructionFact(fact));
+                if (!fact.predicate().getName().startsWith("REMOVED_INSTRUCTION")) {
+                    facts.add(projectInstructionFact(fact));
+                }
             }
         }
 
