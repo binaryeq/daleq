@@ -1,0 +1,23 @@
+{
+  "name": "NOP",
+  "opCode": 0,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "a0d63094-c0a5-4337-ac31-e1cb9ca55d94",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

@@ -133,6 +133,7 @@ public class FactExtractor   {
         }
     }
 
+
     public static void extractAndExport (Path classPath, Path dbDef, Path factDir, boolean verify) throws Exception {
 
         LOG.info("extracting classes from {}", classPath);

@@ -1,0 +1,23 @@
+{
+  "name": "LREM",
+  "opCode": 113,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "31cef193-14ea-47a5-8d8b-a57f0bb719a1",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

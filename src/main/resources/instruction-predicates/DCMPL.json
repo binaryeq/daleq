@@ -1,0 +1,23 @@
+{
+  "name": "DCMPL",
+  "opCode": 151,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "ea84c5d6-2f50-4f4a-b937-4dc6504c5d55",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

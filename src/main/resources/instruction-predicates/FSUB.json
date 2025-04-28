@@ -1,0 +1,23 @@
+{
+  "name": "FSUB",
+  "opCode": 102,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "e8b273e8-c0f5-44a7-84c3-1c7e8b3ea191",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "LSHR",
+  "opCode": 123,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "d80e6369-ce33-4c24-b549-195840bc0628",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

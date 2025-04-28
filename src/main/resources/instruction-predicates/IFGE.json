@@ -1,0 +1,28 @@
+{
+  "name": "IFGE",
+  "opCode": 156,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    }
+  ],
+  "id": "ecaf6fe3-dd97-4d6d-bce3-ab31927bae5d",
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}

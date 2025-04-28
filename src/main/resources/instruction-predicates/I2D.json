@@ -1,0 +1,23 @@
+{
+  "name": "I2D",
+  "opCode": 135,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "e6972756-4b03-4dfe-b9ac-97ba07ca2e26",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

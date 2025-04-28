@@ -1,0 +1,23 @@
+{
+  "name": "LMUL",
+  "opCode": 105,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "08932a43-48ab-4f99-be54-0ba1ee5a609f",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

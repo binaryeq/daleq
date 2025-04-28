@@ -1,0 +1,23 @@
+{
+  "name": "DCONST_1",
+  "opCode": 15,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "f3c4815a-1e04-4db2-945c-653dbca490ad",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

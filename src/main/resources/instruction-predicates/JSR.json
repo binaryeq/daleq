@@ -1,0 +1,28 @@
+{
+  "name": "JSR",
+  "opCode": 168,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    }
+  ],
+  "id": "68427162-087f-433a-a366-a9870451bfda",
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}

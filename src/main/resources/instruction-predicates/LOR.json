@@ -1,0 +1,23 @@
+{
+  "name": "LOR",
+  "opCode": 129,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "cec2ebcd-388d-4e3b-9bd7-9e67a415374f",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

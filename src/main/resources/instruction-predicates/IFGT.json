@@ -1,0 +1,28 @@
+{
+  "name": "IFGT",
+  "opCode": 157,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "label",
+      "type": "SYMBOL",
+      "jtype": "org.objectweb.asm.tree.LabelNode"
+    }
+  ],
+  "id": "4cbe00a2-a6b0-41c5-bb40-d2879c68de2b",
+  "asmNodeType": "org.objectweb.asm.tree.JumpInsnNode"
+}

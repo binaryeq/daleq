@@ -1,0 +1,23 @@
+{
+  "name": "ISHR",
+  "opCode": 122,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "8c4ed605-f504-474d-bdd6-58a83a5ca063",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

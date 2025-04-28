@@ -1,0 +1,23 @@
+{
+  "name": "SALOAD",
+  "opCode": 53,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "827a7e9e-68ab-46d1-8aad-cbe0624bc61a",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

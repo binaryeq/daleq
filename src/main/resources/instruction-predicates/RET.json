@@ -1,0 +1,28 @@
+{
+  "name": "RET",
+  "opCode": 169,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "var",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "f4e0fcf4-1214-4321-8b96-0251a5d30549",
+  "asmNodeType": "org.objectweb.asm.tree.VarInsnNode"
+}

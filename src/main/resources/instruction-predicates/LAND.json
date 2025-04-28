@@ -1,0 +1,23 @@
+{
+  "name": "LAND",
+  "opCode": 127,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "6adbedce-a608-4812-bd43-54c11f6d6fe3",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

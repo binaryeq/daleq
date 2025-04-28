@@ -1,0 +1,23 @@
+{
+  "name": "BALOAD",
+  "opCode": 51,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "ffc0a5f0-9f16-464c-b1bc-6fbd8de4e0ba",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

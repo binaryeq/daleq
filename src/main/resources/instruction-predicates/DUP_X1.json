@@ -1,0 +1,23 @@
+{
+  "name": "DUP_X1",
+  "opCode": 90,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "8af3f1b8-3d3d-4304-9ff7-646a966ff12e",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

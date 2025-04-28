@@ -1,0 +1,23 @@
+{
+  "name": "LXOR",
+  "opCode": 131,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "c225deda-1784-4b4f-95a8-b9951802ed07",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

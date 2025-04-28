@@ -1,0 +1,23 @@
+{
+  "name": "DMUL",
+  "opCode": 107,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "04fd8451-9238-4181-a744-be7d176ee2f3",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

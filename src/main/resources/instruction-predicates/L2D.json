@@ -1,0 +1,23 @@
+{
+  "name": "L2D",
+  "opCode": 138,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "ad2c1637-2f4e-4936-8e87-102bc163be03",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "BASTORE",
+  "opCode": 84,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "d3a9e49a-27d6-4858-b1a8-2075624a73a9",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "SASTORE",
+  "opCode": 86,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "281a3911-f2e6-4bfa-a54e-a2af13c5ffa2",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

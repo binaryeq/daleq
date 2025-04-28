@@ -1,0 +1,23 @@
+{
+  "name": "LADD",
+  "opCode": 97,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "15ea42a0-734a-4a55-90e1-dc1166d4f85c",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

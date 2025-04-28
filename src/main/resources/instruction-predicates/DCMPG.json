@@ -1,0 +1,23 @@
+{
+  "name": "DCMPG",
+  "opCode": 152,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "ed33cd2d-f9eb-4c36-bb8e-abc1725bf974",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

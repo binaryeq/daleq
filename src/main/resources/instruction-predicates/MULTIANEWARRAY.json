@@ -1,0 +1,33 @@
+{
+  "name": "MULTIANEWARRAY",
+  "opCode": 197,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "desc",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "dims",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "79583451-b9cd-4093-820c-226df3bde882",
+  "asmNodeType": "org.objectweb.asm.tree.MultiANewArrayInsnNode"
+}

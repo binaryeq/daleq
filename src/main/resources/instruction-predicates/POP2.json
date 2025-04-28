@@ -1,0 +1,23 @@
+{
+  "name": "POP2",
+  "opCode": 88,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "db72433f-9dbb-4476-b682-5c56ba39ce01",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}
