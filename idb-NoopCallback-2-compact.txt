@@ -1,0 +1,172 @@
+
+// CLASS FACTS
+
+IDB_VERSION	R_VERSION[F4]	org/flywaydb/core/internal/callback/NoopCallback	52
+IDB_SUPERCLASS	R_SUPERCLASS[F1]	org/flywaydb/core/internal/callback/NoopCallback	java/lang/Enum
+IDB_INTERFACE	R_INTERFACE[F2]	org/flywaydb/core/internal/callback/NoopCallback	org/flywaydb/core/api/callback/Callback
+IDB_ACCESS	R_ACCESS[F5]	org/flywaydb/core/internal/callback/NoopCallback	16433
+IDB_CLASS_SIGNATURE	R_CLASS_SIGNATURE[F3]	org/flywaydb/core/internal/callback/NoopCallback	Ljava/lang/Enum<Lorg/flywaydb/core/internal/callback/NoopCallback;>;Lorg/flywaydb/core/api/callback/Callback;
+IDB_IS_ENUM	R_IS_ENUM[F5]	org/flywaydb/core/internal/callback/NoopCallback
+IDB_IS_FINAL	R_IS_FINAL[F5]	org/flywaydb/core/internal/callback/NoopCallback
+IDB_IS_OPEN	R_IS_OPEN[F5]	org/flywaydb/core/internal/callback/NoopCallback
+IDB_IS_PUBLIC	R_IS_PUBLIC[F5]	org/flywaydb/core/internal/callback/NoopCallback
+IDB_IS_SUPER	R_IS_SUPER[F5]	org/flywaydb/core/internal/callback/NoopCallback
+IDB_IS_SYNCHRONIZED	R_IS_SYNCHRONIZED[F5]	org/flywaydb/core/internal/callback/NoopCallback
+IDB_IS_TRANSITIVE	R_IS_TRANSITIVE[F5]	org/flywaydb/core/internal/callback/NoopCallback
+
+// LIST OF FIELDS
+
+IDB_FIELD	R_FIELD[F6]	org/flywaydb/core/internal/callback/NoopCallback::$VALUES([Lorg/flywaydb/core/internal/callback/NoopCallback;	org/flywaydb/core/internal/callback/NoopCallback	$VALUES	[Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_FIELD	R_FIELD[F9]	org/flywaydb/core/internal/callback/NoopCallback::INSTANCE(Lorg/flywaydb/core/internal/callback/NoopCallback;	org/flywaydb/core/internal/callback/NoopCallback	INSTANCE	Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+// LIST OF REMOVED FIELDS
+
+
+// FIELD DETAILS
+
+
+// details for field org/flywaydb/core/internal/callback/NoopCallback::$VALUES([Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F7]	org/flywaydb/core/internal/callback/NoopCallback::$VALUES([Lorg/flywaydb/core/internal/callback/NoopCallback;	null
+IDB_ACCESS	R_ACCESS[F8]	org/flywaydb/core/internal/callback/NoopCallback::$VALUES([Lorg/flywaydb/core/internal/callback/NoopCallback;	4122
+IDB_IS_FINAL	R_IS_FINAL[F8]	org/flywaydb/core/internal/callback/NoopCallback::$VALUES([Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_IS_PRIVATE	R_IS_PRIVATE[F8]	org/flywaydb/core/internal/callback/NoopCallback::$VALUES([Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_IS_STATIC	R_IS_STATIC[F8]	org/flywaydb/core/internal/callback/NoopCallback::$VALUES([Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_IS_SYNTHETIC	R_IS_SYNTHETIC[F8]	org/flywaydb/core/internal/callback/NoopCallback::$VALUES([Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+// details for field org/flywaydb/core/internal/callback/NoopCallback::INSTANCE(Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F10]	org/flywaydb/core/internal/callback/NoopCallback::INSTANCE(Lorg/flywaydb/core/internal/callback/NoopCallback;	null
+IDB_ACCESS	R_ACCESS[F11]	org/flywaydb/core/internal/callback/NoopCallback::INSTANCE(Lorg/flywaydb/core/internal/callback/NoopCallback;	16409
+IDB_IS_ENUM	R_IS_ENUM[F11]	org/flywaydb/core/internal/callback/NoopCallback::INSTANCE(Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_IS_FINAL	R_IS_FINAL[F11]	org/flywaydb/core/internal/callback/NoopCallback::INSTANCE(Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_IS_PUBLIC	R_IS_PUBLIC[F11]	org/flywaydb/core/internal/callback/NoopCallback::INSTANCE(Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_IS_STATIC	R_IS_STATIC[F11]	org/flywaydb/core/internal/callback/NoopCallback::INSTANCE(Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+// LIST OF METHODS
+
+IDB_METHOD	R_METHOD[F29]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	org/flywaydb/core/internal/callback/NoopCallback	<clinit>	()V
+IDB_METHOD	R_METHOD[F50]	org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V	org/flywaydb/core/internal/callback/NoopCallback	<init>	(Ljava/lang/String;I)V
+IDB_METHOD	R_METHOD[F63]	org/flywaydb/core/internal/callback/NoopCallback::canHandleInTransaction(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z	org/flywaydb/core/internal/callback/NoopCallback	canHandleInTransaction	(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+IDB_METHOD	R_METHOD[F70]	org/flywaydb/core/internal/callback/NoopCallback::getCallbackName()Ljava/lang/String;	org/flywaydb/core/internal/callback/NoopCallback	getCallbackName	()Ljava/lang/String;
+IDB_METHOD	R_METHOD[F77]	org/flywaydb/core/internal/callback/NoopCallback::handle(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)V	org/flywaydb/core/internal/callback/NoopCallback	handle	(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)V
+IDB_METHOD	R_METHOD[F82]	org/flywaydb/core/internal/callback/NoopCallback::supports(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z	org/flywaydb/core/internal/callback/NoopCallback	supports	(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+IDB_METHOD	R_METHOD[F89]	org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;	org/flywaydb/core/internal/callback/NoopCallback	valueOf	(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_METHOD	R_METHOD[F102]	org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;	org/flywaydb/core/internal/callback/NoopCallback	values	()[Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+// LIST OF REMOVED METHODS
+
+REMOVED_METHOD	R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS[R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS[F12,R_IS_ENUM[F5],R_IS_SYNTHETIC[F14]]]	org/flywaydb/core/internal/callback/NoopCallback::$values()[Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+// METHODS DETAILS
+
+
+// details for method org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F30]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	null
+IDB_ACCESS	R_ACCESS[F31]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	8
+IDB_IS_STATIC	R_IS_STATIC[F31]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V
+
+// instructions for method org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V
+
+IDB_NEW	R_NEW[F41]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	100	org/flywaydb/core/internal/callback/NoopCallback
+IDB_DUP	R_DUP[F42]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	200
+IDB_LDC	R_LDC[F43]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	300	INSTANCE
+IDB_ICONST_0	R_ICONST_0[F44]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	400
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F45]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	500	org/flywaydb/core/internal/callback/NoopCallback	<init>	(Ljava/lang/String;I)V	false
+IDB_PUTSTATIC	R_PUTSTATIC[F46]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	600	org/flywaydb/core/internal/callback/NoopCallback	INSTANCE	Lorg/flywaydb/core/internal/callback/NoopCallback;
+REMOVED_INSTRUCTION	R_REMOVE_INSTRUCTIONS[R_IS_ENUM_STATIC_BLOCK[F29,R_IS_ENUM[F5]],F47]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	700
+IDB_ICONST_1	R_ICONST_1_MOVED[F22R_MOVE_INSTRUCTIONS[R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS[F12,R_IS_ENUM[F5],R_IS_SYNTHETIC[F14]],R_IS_ENUM_STATIC_BLOCK[F29,R_IS_ENUM[F5]],F47,R_ICONST_1[F22]]]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	701
+IDB_ANEWARRAY	R_ANEWARRAY_MOVED[F23R_MOVE_INSTRUCTIONS[R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS[F12,R_IS_ENUM[F5],R_IS_SYNTHETIC[F14]],R_IS_ENUM_STATIC_BLOCK[F29,R_IS_ENUM[F5]],F47,R_ANEWARRAY[F23]]]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	702	org/flywaydb/core/internal/callback/NoopCallback
+IDB_DUP	R_DUP_MOVED[F24R_MOVE_INSTRUCTIONS[R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS[F12,R_IS_ENUM[F5],R_IS_SYNTHETIC[F14]],R_IS_ENUM_STATIC_BLOCK[F29,R_IS_ENUM[F5]],F47,R_DUP[F24]]]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	703
+IDB_ICONST_0	R_ICONST_0_MOVED[F25R_MOVE_INSTRUCTIONS[R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS[F12,R_IS_ENUM[F5],R_IS_SYNTHETIC[F14]],R_IS_ENUM_STATIC_BLOCK[F29,R_IS_ENUM[F5]],F47,R_ICONST_0[F25]]]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	704
+IDB_GETSTATIC	R_GETSTATIC_MOVED[F26R_MOVE_INSTRUCTIONS[R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS[F12,R_IS_ENUM[F5],R_IS_SYNTHETIC[F14]],R_IS_ENUM_STATIC_BLOCK[F29,R_IS_ENUM[F5]],F47,R_GETSTATIC[F26]]]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	705	org/flywaydb/core/internal/callback/NoopCallback	INSTANCE	Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_AASTORE	R_AASTORE_MOVED[F27R_MOVE_INSTRUCTIONS[R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS[F12,R_IS_ENUM[F5],R_IS_SYNTHETIC[F14]],R_IS_ENUM_STATIC_BLOCK[F29,R_IS_ENUM[F5]],F47,R_AASTORE[F27]]]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	706
+IDB_PUTSTATIC	R_PUTSTATIC[F48]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	800	org/flywaydb/core/internal/callback/NoopCallback	$VALUES	[Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_RETURN	R_RETURN[F49]	org/flywaydb/core/internal/callback/NoopCallback::<clinit>()V	900
+
+// details for method org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F51]	org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V	()V
+IDB_ACCESS	R_ACCESS[F52]	org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V	2
+IDB_IS_PRIVATE	R_IS_PRIVATE[F52]	org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V
+
+// instructions for method org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V
+
+IDB_ALOAD	R_ALOAD[F58]	org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V	100	0
+IDB_ALOAD	R_ALOAD[F59]	org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V	200	1
+IDB_ILOAD	R_ILOAD[F60]	org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V	300	2
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F61]	org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V	400	java/lang/Enum	<init>	(Ljava/lang/String;I)V	false
+IDB_RETURN	R_RETURN[F62]	org/flywaydb/core/internal/callback/NoopCallback::<init>(Ljava/lang/String;I)V	500
+
+// details for method org/flywaydb/core/internal/callback/NoopCallback::canHandleInTransaction(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F64]	org/flywaydb/core/internal/callback/NoopCallback::canHandleInTransaction(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z	null
+IDB_ACCESS	R_ACCESS[F65]	org/flywaydb/core/internal/callback/NoopCallback::canHandleInTransaction(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F65]	org/flywaydb/core/internal/callback/NoopCallback::canHandleInTransaction(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+
+// instructions for method org/flywaydb/core/internal/callback/NoopCallback::canHandleInTransaction(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+
+IDB_ICONST_1	R_ICONST_1[F68]	org/flywaydb/core/internal/callback/NoopCallback::canHandleInTransaction(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z	100
+IDB_IRETURN	R_IRETURN[F69]	org/flywaydb/core/internal/callback/NoopCallback::canHandleInTransaction(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z	200
+
+// details for method org/flywaydb/core/internal/callback/NoopCallback::getCallbackName()Ljava/lang/String;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F71]	org/flywaydb/core/internal/callback/NoopCallback::getCallbackName()Ljava/lang/String;	null
+IDB_ACCESS	R_ACCESS[F72]	org/flywaydb/core/internal/callback/NoopCallback::getCallbackName()Ljava/lang/String;	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F72]	org/flywaydb/core/internal/callback/NoopCallback::getCallbackName()Ljava/lang/String;
+
+// instructions for method org/flywaydb/core/internal/callback/NoopCallback::getCallbackName()Ljava/lang/String;
+
+IDB_LDC	R_LDC[F75]	org/flywaydb/core/internal/callback/NoopCallback::getCallbackName()Ljava/lang/String;	100	NOOP
+IDB_ARETURN	R_ARETURN[F76]	org/flywaydb/core/internal/callback/NoopCallback::getCallbackName()Ljava/lang/String;	200
+
+// details for method org/flywaydb/core/internal/callback/NoopCallback::handle(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F78]	org/flywaydb/core/internal/callback/NoopCallback::handle(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)V	null
+IDB_ACCESS	R_ACCESS[F79]	org/flywaydb/core/internal/callback/NoopCallback::handle(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)V	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F79]	org/flywaydb/core/internal/callback/NoopCallback::handle(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)V
+
+// instructions for method org/flywaydb/core/internal/callback/NoopCallback::handle(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)V
+
+IDB_RETURN	R_RETURN[F81]	org/flywaydb/core/internal/callback/NoopCallback::handle(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)V	100
+
+// details for method org/flywaydb/core/internal/callback/NoopCallback::supports(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F83]	org/flywaydb/core/internal/callback/NoopCallback::supports(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z	null
+IDB_ACCESS	R_ACCESS[F84]	org/flywaydb/core/internal/callback/NoopCallback::supports(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F84]	org/flywaydb/core/internal/callback/NoopCallback::supports(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+
+// instructions for method org/flywaydb/core/internal/callback/NoopCallback::supports(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z
+
+IDB_ICONST_0	R_ICONST_0[F87]	org/flywaydb/core/internal/callback/NoopCallback::supports(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z	100
+IDB_IRETURN	R_IRETURN[F88]	org/flywaydb/core/internal/callback/NoopCallback::supports(Lorg/flywaydb/core/api/callback/Event;Lorg/flywaydb/core/api/callback/Context;)Z	200
+
+// details for method org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F90]	org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;	null
+IDB_ACCESS	R_ACCESS[F91]	org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;	9
+IDB_IS_PUBLIC	R_IS_PUBLIC[F91]	org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_IS_STATIC	R_IS_STATIC[F91]	org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+// instructions for method org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+IDB_LDC	R_LDC[F97]	org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;	100	Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_ALOAD	R_ALOAD[F98]	org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;	200	0
+IDB_INVOKESTATIC	R_INVOKESTATIC[F99]	org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;	300	java/lang/Enum	valueOf	(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;	false
+IDB_CHECKCAST	R_CHECKCAST[F100]	org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;	400	org/flywaydb/core/internal/callback/NoopCallback
+IDB_ARETURN	R_ARETURN[F101]	org/flywaydb/core/internal/callback/NoopCallback::valueOf(Ljava/lang/String;)Lorg/flywaydb/core/internal/callback/NoopCallback;	500
+
+// details for method org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F103]	org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;	null
+IDB_ACCESS	R_ACCESS[F104]	org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;	9
+IDB_IS_PUBLIC	R_IS_PUBLIC[F104]	org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_IS_STATIC	R_IS_STATIC[F104]	org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+// instructions for method org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;
+
+IDB_GETSTATIC	R_GETSTATIC[F109]	org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;	100	org/flywaydb/core/internal/callback/NoopCallback	$VALUES	[Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F110]	org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;	200	[Lorg/flywaydb/core/internal/callback/NoopCallback;	clone	()Ljava/lang/Object;	false
+IDB_CHECKCAST	R_CHECKCAST[F111]	org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;	300	[Lorg/flywaydb/core/internal/callback/NoopCallback;
+IDB_ARETURN	R_ARETURN[F112]	org/flywaydb/core/internal/callback/NoopCallback::values()[Lorg/flywaydb/core/internal/callback/NoopCallback;	400

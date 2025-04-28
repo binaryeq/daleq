@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
 
 public class InstructionFactFactoryCodeGenerator {
 
-    public static final String PACKAGE_NAME = "io.github.bineq.daleq.factextraction.instruction_fact_factories";
+    public static final String PACKAGE_NAME = "io.github.bineq.daleq.edb.instruction_fact_factories";
     public static final Path DESTINATION = Path.of("inferred-instructions-fact-factories");
     public static final Logger LOG = LoggerFactory.getLogger(InstructionFactFactoryCodeGenerator.class);
     public static final String FACTORY_INTERFACE = InstructionPredicateFactFactory.class.getName();
@@ -76,7 +76,7 @@ public class InstructionFactFactoryCodeGenerator {
 
             lines.add("");
             lines.add("    @Override public " + INSTRUCTION_PREDICATE + " getPredicate() {");
-            lines.add("        return " + FactExtractor.class.getName() +".INSTRUCTION_PREDICATES.get("+ opCode + ");");
+            lines.add("        return io.github.bineq.daleq.edb.EDBPredicateRegistry.INSTRUCTION_PREDICATES.get("+ opCode + ");");
             lines.add("    }");
 
             lines.add("");
@@ -105,7 +105,7 @@ public class InstructionFactFactoryCodeGenerator {
     private static String generateCode(int i, Slot s) {
         if (i==0) {
             assert s.name().equals("factid");
-            return "factId";
+            return "factid";
         }
         if (i==1) {
             assert s.name().equals("methodref");
