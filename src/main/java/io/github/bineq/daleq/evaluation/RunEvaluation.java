@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
 import io.github.bineq.daleq.idb.IDB;
+import io.github.bineq.daleq.idb.IDBPrinter;
 import io.github.bineq.daleq.idb.IDBReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -198,13 +199,21 @@ public class RunEvaluation {
             return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.SAME_BIN);
         }
 
-        IDB idb1 = computeIDB(gav,provider1,commonClass,bytecode1);
-        IDB idb2 = computeIDB(gav,provider2,commonClass,bytecode2);
+        String idb1 = computeAndSerializeIDB(gav,provider1,commonClass,bytecode1);
+        assert idb1!=null;
+        String idb2 = computeAndSerializeIDB(gav,provider2,commonClass,bytecode2);
+        assert idb2!=null;
 
-        return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.DIFFERENT);
+        if (idb1.equals(idb2)) {
+            return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.SAME_IDB);
+        }
+        else {
+            return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.DIFFERENT);
+        }
+        
     }
 
-    private static IDB computeIDB (String gav, String provider, String className, byte[] bytecode) throws Exception {
+    private static String computeAndSerializeIDB (String gav, String provider, String className, byte[] bytecode) throws Exception {
         String nClassName = className.replace("/",".").replace(".class","");
         Path root = VALIDATION_DB.resolve(gav);
         root = root.resolve(nClassName);
@@ -213,39 +222,52 @@ public class RunEvaluation {
         Path edbRoot = root.resolve("edb");
         Path edbFactDir = edbRoot.resolve( "facts");
         Path edbDef = edbRoot.resolve("db.souffle");
-        Files.createDirectories(edbFactDir);
-
-        // copy bytecode to file as fact extraction used files as input
-        Path classFile = root.resolve(className.substring(className.lastIndexOf("/")+1));
-        Files.write(classFile,bytecode);
-
-        // build EDB
-        if (Files.exists(edbDef)) {
-            LOG.info("EBD already extracted and will be reused for {} in {} provided by {} in dir {}",nClassName,gav,provider,edbRoot);
-        }
-        else {
-            FactExtractor.extractAndExport(classFile, edbDef, edbFactDir, true);
-            LOG.info("EBD extracted for {} in {} provided by {} in dir {}", nClassName, gav, provider, edbRoot);
-        }
-
         Path idbRoot = root.resolve("idb");
         Path idbFactDir = idbRoot.resolve( "facts");
         Path mergedEDBAndRules = root.resolve("mergedEDBAndRules.souffle");
-        Files.createDirectories(edbFactDir);
-        Path rulesPath = Path.of(Souffle.class.getResource(RULES).getPath());
+        Path idbPrintout = root.resolve("idb-full.txt");
+        Path idbProjectedPrintout = root.resolve("idb-projected.txt");
 
-        if (Files.exists(idbFactDir)) {
-            LOG.info("IBD already computed and will be reused for {} in {} provided by {} in dir {}",nClassName,gav,provider,idbFactDir);
+        if (Files.exists(idbProjectedPrintout)) {
+            LOG.info("Using already computed IDB (projected printout) {}", idbProjectedPrintout);
         }
         else {
-            Souffle.createIDB(edbDef, rulesPath, edbFactDir, idbFactDir, mergedEDBAndRules);
-            LOG.info("IBD computed for {} in {} provided by {} in dir {}",nClassName,gav,provider,idbFactDir);
+
+            Files.createDirectories(edbFactDir);
+
+            // copy bytecode to file as fact extraction used files as input
+            Path classFile = root.resolve(className.substring(className.lastIndexOf("/") + 1));
+            Files.write(classFile, bytecode);
+
+            // build EDB
+            if (Files.exists(edbDef)) {
+                LOG.info("EBD already extracted and will be reused for {} in {} provided by {} in dir {}", nClassName, gav, provider, edbRoot);
+            } else {
+                FactExtractor.extractAndExport(classFile, edbDef, edbFactDir, true);
+                LOG.info("EBD extracted for {} in {} provided by {} in dir {}", nClassName, gav, provider, edbRoot);
+            }
+
+            Files.createDirectories(edbFactDir);
+            Path rulesPath = Path.of(Souffle.class.getResource(RULES).getPath());
+
+            if (Files.exists(idbFactDir)) {
+                LOG.info("IBD already computed and will be reused for {} in {} provided by {} in dir {}", nClassName, gav, provider, idbFactDir);
+            } else {
+                Souffle.createIDB(edbDef, rulesPath, edbFactDir, idbFactDir, mergedEDBAndRules);
+                LOG.info("IBD computed for {} in {} provided by {} in dir {}", nClassName, gav, provider, idbFactDir);
+            }
+
+            // load IDB
+            IDB idb = IDBReader.read(idbFactDir);
+
+            String idbOut = IDBPrinter.print(idb);
+            String idbProjectedOut = IDBPrinter.print(idb.project());
+
+            Files.write(idbPrintout, idbOut.getBytes());
+            Files.write(idbProjectedPrintout, idbProjectedOut.getBytes());
+
+            return idbProjectedOut;
         }
-
-        // load IDB
-        IDB idb = IDBReader.read(idbFactDir);
-
-        return idb;
     }
 
 
