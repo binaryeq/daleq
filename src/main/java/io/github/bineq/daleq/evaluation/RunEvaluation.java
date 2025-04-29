@@ -210,7 +210,7 @@ public class RunEvaluation {
         else {
             return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.DIFFERENT);
         }
-        
+
     }
 
     private static String computeAndSerializeIDB (String gav, String provider, String className, byte[] bytecode) throws Exception {
@@ -230,6 +230,8 @@ public class RunEvaluation {
 
         if (Files.exists(idbProjectedPrintout)) {
             LOG.info("Using already computed IDB (projected printout) {}", idbProjectedPrintout);
+            String report = Files.readAllLines(idbProjectedPrintout).stream().collect(Collectors.joining(System.lineSeparator()));
+            return report;
         }
         else {
 
