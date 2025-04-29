@@ -3,9 +3,10 @@ package io.github.bineq.daleq.evaluation;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
-import io.github.bineq.daleq.Fact;
+import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
-import io.github.bineq.daleq.edb.VerificationException;
+import io.github.bineq.daleq.idb.IDB;
+import io.github.bineq.daleq.idb.IDBReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.*;
@@ -31,12 +32,16 @@ public class RunEvaluation {
     final static Logger LOG = LoggerFactory.getLogger(RunEvaluation.class);
     final static Path SAME_SOURCE_CACHE = Path.of("evaluation/same_sources.json");
 
-    private static Map<String,Map<String,Set<String>>> GAVS_WITH_SAME_RESOURCES = loadSameSourcesCache();
-    private static Path VALIDATION_DB = Path.of("evaluation/db");
+    private static final Map<String,Map<String,Set<String>>> GAVS_WITH_SAME_RESOURCES = loadSameSourcesCache();
+    private static final Path VALIDATION_DB = Path.of("evaluation/db");
+
+    public static final String RULES = "/rules/advanced.souffle";
+
+    private static final boolean REUSE_IDB = true;
 
     static {
         // delete db folder if it exists
-        if (Files.exists(VALIDATION_DB)) {
+        if (Files.exists(VALIDATION_DB) && !REUSE_IDB) {
             try (Stream<Path> walk = Files.walk(VALIDATION_DB)) {
                 walk.sorted(Comparator.reverseOrder())
                     .map(Path::toFile)
@@ -145,7 +150,7 @@ public class RunEvaluation {
                                 Content clazz1 = classes1.get(commonClass);
                                 Content clazz2 = classes2.get(commonClass);
 
-                                LOG.info("TODO: compare classes {}",commonClass);
+                                // LOG.info("TODO: compare classes {}",commonClass);
                                 ResultRecord resultRecord = null;
                                 recordAdded.set(true);
                                 try {
@@ -188,28 +193,59 @@ public class RunEvaluation {
 
     }
 
-    private static ResultRecord compare(String gav, String provider1, String provider2, String commonClass, byte[] bytecode1, byte[] bytecode2) throws VerificationException {
+    private static ResultRecord compare(String gav, String provider1, String provider2, String commonClass, byte[] bytecode1, byte[] bytecode2) throws Exception {
         if (Arrays.equals(bytecode1, bytecode2)) {
             return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.SAME_BIN);
         }
 
-        // compare EDB only -- no reasoning !
-        List<Fact> facts1 = FactExtractor.extract(bytecode1,true);
-        List<Fact> facts2 = FactExtractor.extract(bytecode2,true);
-        if (facts1.equals(facts2)) {
-            return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.SAME_EDB);
-        }
-
-//        Path edbRoot = root.resolve( "edb");
-//        Path edbFactDir = edbRoot.resolve( "facts");
-//        Path edbDef = edbRoot.resolve("db.souffle");
-//
-//        Path idbRoot = root.resolve( "idb");
-//        Path idbFactDir = idbRoot.resolve( "facts");
-//
-//        Path mergedEDBAndRules = root.resolve("mergedEDBAndRules.souffle");
+        IDB idb1 = computeIDB(gav,provider1,commonClass,bytecode1);
+        IDB idb2 = computeIDB(gav,provider2,commonClass,bytecode2);
 
         return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.DIFFERENT);
+    }
+
+    private static IDB computeIDB (String gav, String provider, String className, byte[] bytecode) throws Exception {
+        String nClassName = className.replace("/",".").replace(".class","");
+        Path root = VALIDATION_DB.resolve(gav);
+        root = root.resolve(nClassName);
+        root = root.resolve(provider);
+
+        Path edbRoot = root.resolve("edb");
+        Path edbFactDir = edbRoot.resolve( "facts");
+        Path edbDef = edbRoot.resolve("db.souffle");
+        Files.createDirectories(edbFactDir);
+
+        // copy bytecode to file as fact extraction used files as input
+        Path classFile = root.resolve(className.substring(className.lastIndexOf("/")+1));
+        Files.write(classFile,bytecode);
+
+        // build EDB
+        if (Files.exists(edbDef)) {
+            LOG.info("EBD already extracted and will be reused for {} in {} provided by {} in dir {}",nClassName,gav,provider,edbRoot);
+        }
+        else {
+            FactExtractor.extractAndExport(classFile, edbDef, edbFactDir, true);
+            LOG.info("EBD extracted for {} in {} provided by {} in dir {}", nClassName, gav, provider, edbRoot);
+        }
+
+        Path idbRoot = root.resolve("idb");
+        Path idbFactDir = idbRoot.resolve( "facts");
+        Path mergedEDBAndRules = root.resolve("mergedEDBAndRules.souffle");
+        Files.createDirectories(edbFactDir);
+        Path rulesPath = Path.of(Souffle.class.getResource(RULES).getPath());
+
+        if (Files.exists(idbFactDir)) {
+            LOG.info("IBD already computed and will be reused for {} in {} provided by {} in dir {}",nClassName,gav,provider,idbFactDir);
+        }
+        else {
+            Souffle.createIDB(edbDef, rulesPath, edbFactDir, idbFactDir, mergedEDBAndRules);
+            LOG.info("IBD computed for {} in {} provided by {} in dir {}",nClassName,gav,provider,idbFactDir);
+        }
+
+        // load IDB
+        IDB idb = IDBReader.read(idbFactDir);
+
+        return idb;
     }
 
 

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * This is an utility to compare generated IDBs for equivalence.
  * @author jens dietrich
  */
-class IDB {
+public class IDB {
 
     // used during normalisation
     public static final String REMOVED_ID_VALUE = "projected";

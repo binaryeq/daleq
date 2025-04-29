@@ -27,13 +27,16 @@ public class IDBReader {
         Preconditions.checkArgument(Files.exists(idbFolder));
         Preconditions.checkArgument(Files.isDirectory(idbFolder));
         IDB idb = new IDB();
+        boolean DEBUG = LOG.isDebugEnabled();
         Collection<Path> files = Files.walk(idbFolder)
             .filter(file -> !Files.isDirectory(file))
             .filter(file -> Files.isRegularFile(file))
             .filter(file -> file.getFileName().toString().endsWith(EXTENSION))
             .collect(Collectors.toUnmodifiableList());
         for (Path file : files) {
-            LOG.info("Reading IDB file {}", file);
+            if (DEBUG) {
+                LOG.debug("Reading IDB file {}", file);
+            }
             readFacts(file,idb);
         }
         return idb;
@@ -133,10 +136,22 @@ public class IDBReader {
         // we should allow predicates introduced in rules sets not known at this stage, perhaps just
         // creating them "on-the-fly" here. Downside: make all slots symbol typed
         Preconditions.checkState(predicate != null,"unknown predicate " + predicateName);
-        assert tokens.length==predicate.getSlots().length;
 
+        // tsv ignores the lqst slot of it is empty -- we augment this for ldc instructions
+        if (tokens.length==3 && predicate.getSlots().length>3 && (predicateName.equals("IDB_LDC") || predicateName.equals("IDB_LDC_W") || predicateName.equals("IDB_LDC2_W"))) {
+            String[] tokens2 = new String[4];
+            tokens2[0] = tokens[0];
+            tokens2[1] = tokens[1];
+            tokens2[2] = tokens[2];
+            tokens2[3] = "";  // set empty string constant
+            tokens = tokens2;
+        }
+
+        assert tokens.length==predicate.getSlots().length:"token length was " + tokens.length + " but predicate " + predicateName + " has " + predicate.getSlots().length + " slots";
+
+        String[] tokens3 = tokens; // alias for use in lambda
         List<Object> values = IntStream.range(0, tokens.length)
-            .mapToObj(i -> readValue(predicate.getSlots()[i],tokens[i]))
+            .mapToObj(i -> readValue(predicate.getSlots()[i],tokens3[i]))
             .collect(Collectors.toList());
 
         return new SimpleFact(predicate,values.toArray(new Object[values.size()]));

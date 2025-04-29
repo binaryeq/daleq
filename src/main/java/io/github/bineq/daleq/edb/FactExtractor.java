@@ -188,8 +188,9 @@ public class FactExtractor   {
 
             Path factFile = factDir.resolve(predicate.asSouffleFactFileNameWithExtension());
             Files.write(factFile, factRecords);
-            LOG.info("facts written to: {}",factFile.toFile().getAbsolutePath());
+            LOG.debug("facts written to: {}",factFile.toFile().getAbsolutePath());
         }
+        LOG.info("facts written to: {}",factDir.toFile().getAbsolutePath());
 
         // generate imports for the predicates where we have facts
         // generate declarations for all predicates available (as they are used in rule sets)
