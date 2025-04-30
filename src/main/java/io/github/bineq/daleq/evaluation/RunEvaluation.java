@@ -215,6 +215,10 @@ public class RunEvaluation {
 
     private static String computeAndSerializeIDB (String gav, String provider, String className, byte[] bytecode) throws Exception {
         String nClassName = className.replace("/",".").replace(".class","");
+
+        // also replace $ char -- this creates issue with souffle
+        nClassName = escapeDollarChar(nClassName);
+
         Path root = VALIDATION_DB.resolve(gav);
         root = root.resolve(nClassName);
         root = root.resolve(provider);
@@ -270,6 +274,11 @@ public class RunEvaluation {
 
             return idbProjectedOut;
         }
+    }
+
+    private static String escapeDollarChar(String s) {
+        // some change of collision here !
+        return s.replace("$","_____");
     }
 
 

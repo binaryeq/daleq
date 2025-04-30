@@ -67,7 +67,7 @@ public class IDB {
             Collection<Fact> facts = new ArrayList<>();
             idb.methodInstructionFacts.put(method,facts);
             for (Fact fact : methodInstructionFacts.get(method)) {
-                if (!fact.predicate().getName().startsWith("REMOVED_INSTRUCTION")) {
+                if (!fact.predicate().getName().startsWith("REMOVED_INSTRUCTION") && !fact.predicate().getName().startsWith("MOVED_INSTRUCTION")) {
                     facts.add(projectInstructionFact(fact));
                 }
             }

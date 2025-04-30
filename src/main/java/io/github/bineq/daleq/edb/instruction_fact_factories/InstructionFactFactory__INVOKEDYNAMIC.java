@@ -23,7 +23,15 @@ public class InstructionFactFactory__INVOKEDYNAMIC implements io.github.bineq.da
     }
 
     @Override public Fact createFact(String factId, InvokeDynamicInsnNode node, String methodRef, int instructionCounter, Map<LabelNode, String> labelMap) {
-        return new SimpleFact(EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(186),new Object[]{factId,methodRef,instructionCounter,node.name,node.desc,node.bsmArgs,node.bsm.getOwner(),node.bsm.getName(),node.bsm.getDesc(),node.bsm.getTag(),node.bsm.isInterface()});
+        return new SimpleFact(EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(186),new Object[]{factId,methodRef,instructionCounter,node.name,node.desc,encodeBsmArgs(node.bsmArgs),node.bsm.getOwner(),node.bsm.getName(),node.bsm.getDesc(),node.bsm.getTag(),node.bsm.isInterface()});
+    }
+
+    private Object[] encodeBsmArgs(Object[] args) {
+        String[] encoded = new String[args.length];
+        for (int i = 0; i < args.length; i++) {
+            encoded[i] = String.valueOf(args[i]);
+        }
+        return encoded;
     }
 
 };
