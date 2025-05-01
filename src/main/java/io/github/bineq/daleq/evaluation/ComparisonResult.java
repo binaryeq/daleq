@@ -5,5 +5,5 @@ package io.github.bineq.daleq.evaluation;
  * @author jens dietrich
  */
 public enum ComparisonResult {
-    SAME_BIN, SAME_EDB, SAME_IDB, DIFFERENT
+    SAME_BIN, ERROR, SAME_IDB, DIFFERENT
 }

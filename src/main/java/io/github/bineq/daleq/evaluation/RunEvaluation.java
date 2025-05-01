@@ -179,11 +179,11 @@ public class RunEvaluation {
                 LOG.info("classes compared: {}",classesComparedCounter.get());
 
                 int sameBytecodeCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.SAME_BIN).count();
-                int sameEDBCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.SAME_EDB).count();
+                int errorCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.ERROR).count();
                 int diffCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.DIFFERENT).count();
-                LOG.info("classes with same bytecode: {}",sameBytecodeCount);
-                LOG.info("classes with diff bytecode but same EDB: {}",sameEDBCount);
-                LOG.info("classes that are diff: {}",diffCount);
+                LOG.info("pairs of classes with same bytecode: {}",sameBytecodeCount);
+                LOG.info("pairs of classes with error during evaluation: {}",errorCount);
+                LOG.info("pairs of classes that are diff: {}",diffCount);
 
             }
 
@@ -199,16 +199,20 @@ public class RunEvaluation {
             return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.SAME_BIN);
         }
 
-        String idb1 = computeAndSerializeIDB(gav,provider1,commonClass,bytecode1);
-        assert idb1!=null;
-        String idb2 = computeAndSerializeIDB(gav,provider2,commonClass,bytecode2);
-        assert idb2!=null;
+        try {
+            String idb1 = computeAndSerializeIDB(gav, provider1, commonClass, bytecode1);
+            assert idb1 != null;
+            String idb2 = computeAndSerializeIDB(gav, provider2, commonClass, bytecode2);
+            assert idb2 != null;
 
-        if (idb1.equals(idb2)) {
-            return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.SAME_IDB);
+            if (idb1.equals(idb2)) {
+                return new ResultRecord(gav, provider1, provider2, commonClass, ComparisonResult.SAME_IDB);
+            } else {
+                return new ResultRecord(gav, provider1, provider2, commonClass, ComparisonResult.DIFFERENT);
+            }
         }
-        else {
-            return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.DIFFERENT);
+        catch (Exception e) {
+            return new ResultRecord(gav, provider1, provider2, commonClass, ComparisonResult.ERROR);
         }
 
     }
@@ -262,6 +266,8 @@ public class RunEvaluation {
                 Souffle.createIDB(edbDef, rulesPath, edbFactDir, idbFactDir, mergedEDBAndRules);
                 LOG.info("IBD computed for {} in {} provided by {} in dir {}", nClassName, gav, provider, idbFactDir);
             }
+
+            Thread.sleep(1_000);
 
             // load IDB
             IDB idb = IDBReader.read(idbFactDir);
