@@ -1,0 +1,23 @@
+{
+  "name": "D2L",
+  "opCode": 143,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "b2a4b6a5-63de-4fc2-8347-86f782f619ee",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

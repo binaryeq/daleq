@@ -43,7 +43,7 @@ public class AccessRuleGeneration {
 
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp("java -cp <path-to-built-jar> " + BaselineRuleGeneration.class.getName(), options);
+            formatter.printHelp("java -cp <path-to-built-jar> " + AccessRuleGeneration.class.getName(), options);
             e.printStackTrace();
             System.exit(1);
         }

@@ -1,0 +1,23 @@
+{
+  "name": "I2F",
+  "opCode": 134,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "259d4b5d-42b9-4929-b5f6-b25283bcb0aa",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

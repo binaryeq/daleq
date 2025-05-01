@@ -1,0 +1,23 @@
+{
+  "name": "DREM",
+  "opCode": 115,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "351e871a-3779-47b6-8657-e3733e6b87dc",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

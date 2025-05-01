@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -195,7 +196,7 @@ public class TestIDBReader {
         //        1: invokespecial #1                  // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":()V
         //        4: return
 
-        Set<Fact> facts = idb.methodInstructionFacts.get(METHOD1);
+        Collection<Fact> facts = idb.methodInstructionFacts.get(METHOD1);
         assertNotNull(facts);
         assertEquals(3,facts.size());
 

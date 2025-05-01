@@ -1,0 +1,23 @@
+{
+  "name": "LRETURN",
+  "opCode": 173,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "406cc40f-ae69-4281-b4a4-6c2bd039d561",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

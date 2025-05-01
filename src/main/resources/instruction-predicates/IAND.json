@@ -1,0 +1,23 @@
+{
+  "name": "IAND",
+  "opCode": 126,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "504d48c1-08b7-46ad-8883-a66a19e7f8a4",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

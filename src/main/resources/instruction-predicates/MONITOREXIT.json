@@ -1,0 +1,23 @@
+{
+  "name": "MONITOREXIT",
+  "opCode": 195,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "1aa4c27c-aa9a-4ebb-a71a-acaba1f7383c",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

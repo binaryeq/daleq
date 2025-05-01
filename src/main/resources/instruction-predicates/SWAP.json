@@ -1,0 +1,23 @@
+{
+  "name": "SWAP",
+  "opCode": 95,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "ea7fb629-7209-4ed4-b8a5-39be8e93de11",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

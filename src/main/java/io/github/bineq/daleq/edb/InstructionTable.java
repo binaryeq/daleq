@@ -21,7 +21,7 @@ public class InstructionTable {
 
     static String getInstruction(int opcode) {
         String instr = OPCODE_MAP.get(opcode);
-        if (instr == null) {
+        if (instr == null && opcode > -1) {
             LOG.warn("no instruction found for opcode {}", opcode);
         }
         return instr;

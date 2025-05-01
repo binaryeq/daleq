@@ -1,0 +1,23 @@
+{
+  "name": "FMUL",
+  "opCode": 106,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "8f5ba236-1909-4796-9c94-cf415c6ca7cc",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "DRETURN",
+  "opCode": 175,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "ec9535f2-1de6-47ea-b22e-45f55cba1b84",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

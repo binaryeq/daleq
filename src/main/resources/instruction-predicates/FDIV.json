@@ -1,0 +1,23 @@
+{
+  "name": "FDIV",
+  "opCode": 110,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "9bb9a00b-c2d5-4395-add6-b63e3332d9cc",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

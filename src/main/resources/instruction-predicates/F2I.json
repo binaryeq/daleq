@@ -1,0 +1,23 @@
+{
+  "name": "F2I",
+  "opCode": 139,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "e9ca29f8-4184-4809-bcd5-73cc8513ab99",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

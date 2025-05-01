@@ -1,0 +1,23 @@
+{
+  "name": "FCMPG",
+  "opCode": 150,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "959bbfa5-2b4b-46b4-bcf0-138b62d3fb3e",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

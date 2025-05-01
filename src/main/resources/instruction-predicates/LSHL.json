@@ -1,0 +1,23 @@
+{
+  "name": "LSHL",
+  "opCode": 121,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "74efa17b-ab45-4565-87b8-805a4e13d7a4",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "IXOR",
+  "opCode": 130,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "c8cdbcca-bad4-47be-bcf9-c8e91e887b62",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "LSTORE",
+  "opCode": 55,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    },
+    {
+      "name": "var",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "ecb911ac-9c84-4362-9d66-159e06925609",
+  "asmNodeType": "org.objectweb.asm.tree.VarInsnNode"
+}

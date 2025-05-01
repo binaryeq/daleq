@@ -1,0 +1,23 @@
+{
+  "name": "D2F",
+  "opCode": 144,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "0dc574d1-c469-405b-bfab-c1997deb2663",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

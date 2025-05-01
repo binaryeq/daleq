@@ -130,9 +130,16 @@ public class BaselineRuleGeneration {
             head = headTerms.stream().collect(Collectors.joining(",",pre, post));
 
             pre =  predicate.getName() + '(';
-            body = Arrays.stream(predicate.getSlots())
+
+            // use _ instead of slot names for additional slots to prevent souffle warnings re unused variables
+            List<String> terms = Arrays.stream(predicate.getSlots())
                 .map(slot -> slot.encodeName())
-                .collect(Collectors.joining(",",pre, post));
+                .limit(3)
+                .collect(Collectors.toList());
+            for (int i=3;i<predicate.getSlots().length;i++) {
+                terms.add("_");
+            }
+            body = terms.stream().collect(Collectors.joining(",",pre, post));
             String rule2 = head +  " :- " + body + ".";
             return List.of(declaration, rule, outDecl, rule2,"");
         }

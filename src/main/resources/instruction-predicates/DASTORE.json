@@ -1,0 +1,23 @@
+{
+  "name": "DASTORE",
+  "opCode": 82,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "4e3f510a-6cae-4d3f-a867-84825b9b1c0b",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

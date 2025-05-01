@@ -1,0 +1,23 @@
+{
+  "name": "LNEG",
+  "opCode": 117,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "1c7ffeb3-875c-450b-8f50-eb97165f199a",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "ISHL",
+  "opCode": 120,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "eee68d6a-6304-44d4-8d10-d0650b847041",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

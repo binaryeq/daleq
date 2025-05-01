@@ -1,0 +1,23 @@
+{
+  "name": "I2S",
+  "opCode": 147,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "428ea731-bd23-4320-92ed-169480d91592",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

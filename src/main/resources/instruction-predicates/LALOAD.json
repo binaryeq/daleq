@@ -1,0 +1,23 @@
+{
+  "name": "LALOAD",
+  "opCode": 47,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "62281490-4f42-4aea-b031-0a4e7de4a9d1",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "MONITORENTER",
+  "opCode": 194,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "67b2ea6e-5d09-49e5-84df-12c586e694ce",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}

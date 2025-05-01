@@ -1,0 +1,23 @@
+{
+  "name": "DDIV",
+  "opCode": 111,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "7ed4296c-da48-48c1-9351-7ff4505f8319",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}
