@@ -18,7 +18,6 @@ public class CheckEvaluationResults {
 
         int sameIDBCounter = 0;
         int diffIDBCounter = 0;
-        int sameBytecodeCounter = 0;
 
         for (File gavDir : ROOT.listFiles(f -> f.isDirectory() && !f.isHidden())) {
 
@@ -62,9 +61,7 @@ public class CheckEvaluationResults {
             }
         }
 
-
-        System.out.println("same bytecode: " + sameBytecodeCounter);
-        System.out.println("diff bytecode: " + diffIDBCounter);
+        System.out.println("diff idb: " + diffIDBCounter);
         System.out.println("same idb: " + sameIDBCounter);
     }
 }
