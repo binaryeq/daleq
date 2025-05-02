@@ -3,6 +3,7 @@ package io.github.bineq.daleq.evaluation;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
+import io.github.bineq.daleq.IOUtil;
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
 import io.github.bineq.daleq.idb.IDB;
@@ -34,20 +35,21 @@ public class RunEvaluation {
     final static Path SAME_SOURCE_CACHE = Path.of("evaluation/same_sources.json");
 
     private static final Map<String,Map<String,Set<String>>> GAVS_WITH_SAME_RESOURCES = loadSameSourcesCache();
-    private static final Path VALIDATION_DB = Path.of("evaluation/db");
+    private static Path VALIDATION_DB = Path.of("evaluation/db");
 
     public static final String RULES = "/rules/advanced.souffle";
 
     private static final boolean REUSE_IDB = true;
 
+    enum DB_RETENTION_POLICY {DELETE,KEEP,ZIP};
+    private static DB_RETENTION_POLICY EDB_RETENTION_POLICY = DB_RETENTION_POLICY.ZIP;
+    private static DB_RETENTION_POLICY IDB_RETENTION_POLICY = DB_RETENTION_POLICY.ZIP;
+
     static {
         // delete db folder if it exists
         if (Files.exists(VALIDATION_DB) && !REUSE_IDB) {
-            try (Stream<Path> walk = Files.walk(VALIDATION_DB)) {
-                walk.sorted(Comparator.reverseOrder())
-                    .map(Path::toFile)
-                    .peek(System.out::println)
-                    .forEach(File::delete);
+            try {
+                IOUtil.deleteDir(VALIDATION_DB);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -251,23 +253,32 @@ public class RunEvaluation {
 
             // build EDB
             if (Files.exists(edbDef)) {
-                LOG.info("EBD already extracted and will be reused for {} in {} provided by {} in dir {}", nClassName, gav, provider, edbRoot);
-            } else {
-                FactExtractor.extractAndExport(classFile, edbDef, edbFactDir, true);
-                LOG.info("EBD extracted for {} in {} provided by {} in dir {}", nClassName, gav, provider, edbRoot);
+                IOUtil.deleteDir(edbFactDir);
             }
+            else {
+                Files.createDirectories(edbFactDir);
+            }
+            FactExtractor.extractAndExport(classFile, edbDef, edbFactDir, true);
+            LOG.info("EBD extracted for {} in {} provided by {} in dir {}", nClassName, gav, provider, edbRoot);
 
-            Files.createDirectories(edbFactDir);
+
             Path rulesPath = Path.of(Souffle.class.getResource(RULES).getPath());
 
             if (Files.exists(idbFactDir)) {
-                LOG.info("IBD already computed and will be reused for {} in {} provided by {} in dir {}", nClassName, gav, provider, idbFactDir);
-            } else {
-                Souffle.createIDB(edbDef, rulesPath, edbFactDir, idbFactDir, mergedEDBAndRules);
-                LOG.info("IBD computed for {} in {} provided by {} in dir {}", nClassName, gav, provider, idbFactDir);
+                IOUtil.deleteDir(idbFactDir);
+            }
+            else {
+                Files.createDirectories(idbFactDir);
             }
 
-            Thread.sleep(1_000);
+            Souffle.createIDB(edbDef, rulesPath, edbFactDir, idbFactDir, mergedEDBAndRules);
+            LOG.info("IBD computed for {} in {} provided by {} in dir {}", nClassName, gav, provider, idbFactDir);
+
+            // there might be a race condition is souffle that some background thread is still writing the IDB when createIDB returns
+            // there have been cased when facts where missing, leading to NPEs when printing the IDB
+            // but upon inspection, those facts where there
+            // try to mitigate with this for now
+            Thread.sleep(500);
 
             // load IDB
             IDB idb = IDBReader.read(idbFactDir);
@@ -278,8 +289,24 @@ public class RunEvaluation {
             Files.write(idbPrintout, idbOut.getBytes());
             Files.write(idbProjectedPrintout, idbProjectedOut.getBytes());
 
+            // cleanup !
+            cleanupDBDir(edbRoot,EDB_RETENTION_POLICY);
+            cleanupDBDir(idbRoot,IDB_RETENTION_POLICY);
+
             return idbProjectedOut;
         }
+    }
+
+    private static void cleanupDBDir(Path dir, DB_RETENTION_POLICY retentionPolicy) throws IOException {
+        if (retentionPolicy==DB_RETENTION_POLICY.DELETE) {
+            IOUtil.deleteDir(dir);
+            LOG.debug("deleted fact db {}",dir);
+        }
+        else if (retentionPolicy==DB_RETENTION_POLICY.ZIP) {
+            IOUtil.zipAndDeleteDir(dir);
+            LOG.debug("zipped and deleted fact db {}",dir);
+        }
+        // nothing to do for DB_RETENTION_POLICY.KEEP
     }
 
     private static String escapeDollarChar(String s) {
