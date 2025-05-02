@@ -89,8 +89,16 @@ public abstract class AbstractIDBTest {
         return getFacts(predicate,this.edbFactDir,".facts",filter);
     }
 
+    protected List<String[]> getEDBFacts(String predicate) throws IOException {
+        return getEDBFacts(predicate,f -> true);
+    }
+
     protected List<String[]> getIDBFacts(String predicate,Predicate<String[]> filter) throws IOException {
         return getFacts(predicate,this.idbFactDir,".csv",filter);
+    }
+
+    protected List<String[]> getIDBFacts(String predicate) throws IOException {
+        return getIDBFacts(predicate,f -> true);
     }
 
     protected List<String[]> getFacts(String predicate, Path dir, String extension, Predicate<String[]> filter) throws IOException {

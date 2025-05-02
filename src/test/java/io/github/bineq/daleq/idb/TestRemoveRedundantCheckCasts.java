@@ -21,7 +21,6 @@ public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
     public void testEDB() throws Exception {
 
         // slot positions in both CHECKCAST and NOP facts
-        int idSlotPosition = 0;
         int methodIdSlotPosition = 1;
         int instructionCounterSlotPosition = 2;
 
