@@ -33,47 +33,45 @@ public class RunEvaluation {
 
     final static Logger LOG = LoggerFactory.getLogger(RunEvaluation.class);
     final static Path SAME_SOURCE_CACHE = Path.of("evaluation/same_sources.json");
-
     private static final Map<String,Map<String,Set<String>>> GAVS_WITH_SAME_RESOURCES = loadSameSourcesCache();
-    private static Path VALIDATION_DB = Path.of("evaluation/db");
-
+    private static Path VALIDATION_DB = null;
     public static final String RULES = "/rules/advanced.souffle";
-
     private static final boolean REUSE_IDB = true;
 
     enum DB_RETENTION_POLICY {DELETE,KEEP,ZIP};
-    private static DB_RETENTION_POLICY EDB_RETENTION_POLICY = DB_RETENTION_POLICY.ZIP;
-    private static DB_RETENTION_POLICY IDB_RETENTION_POLICY = DB_RETENTION_POLICY.ZIP;
+    private static final  DB_RETENTION_POLICY RETENTION_POLICY = DB_RETENTION_POLICY.ZIP;
 
-    static {
-        // delete db folder if it exists
-        if (Files.exists(VALIDATION_DB) && !REUSE_IDB) {
-            try {
-                IOUtil.deleteDir(VALIDATION_DB);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+    private static final boolean COUNT_ONLY = false;
 
-        // create new folder
-        if (!Files.exists(VALIDATION_DB)) {
-            try {
-                Files.createDirectories(VALIDATION_DB);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
 
     public static void main (String[] args) throws Exception {
 
         try {
 
-            Preconditions.checkArgument(args.length > 1, "at least two datasets (index files *.tsv) are required");
+            Preconditions.checkArgument(args.length > 1, "at least the output folder and two datasets (index files *.tsv) are required");
 
             int sourceEquivalenceMode = 1;
 
-            List<Path> datasets = Stream.of(args)
+            VALIDATION_DB = Path.of(args[0]);
+            // delete db folder if it exists
+            if (Files.exists(VALIDATION_DB) && !REUSE_IDB) {
+                try {
+                    IOUtil.deleteDir(VALIDATION_DB);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            // create new folder
+            if (!Files.exists(VALIDATION_DB)) {
+                try {
+                    Files.createDirectories(VALIDATION_DB);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+
+            List<Path> datasets = Stream.of(args).skip(1)
                     .map(arg -> {
                         Path path = Path.of(arg);
                         Preconditions.checkArgument(Files.exists(path));
@@ -105,17 +103,16 @@ public class RunEvaluation {
             Map<Path,Map<String,Content>> cache = new ConcurrentHashMap<>();
 
             int N = datasets.size()*(datasets.size()-1)/2;
-            AtomicInteger counter = new AtomicInteger(0);
+            AtomicInteger pairsOfJarsRecordCounter = new AtomicInteger(0);
             AtomicInteger classesComparedCounter = new AtomicInteger(0);
             AtomicInteger pairOfRecordsCounter = new AtomicInteger(0);
-            AtomicInteger noAddedRecordsCounter = new AtomicInteger(0);
             AtomicInteger bothJarsEmptyCounter = new AtomicInteger(0);
 
             for (int i = 0; i < datasets.size(); i++) {
                 String provider1 = providers.get(i);
                 Set<Record> records1 = setsOfRecords.get(i);
                 for (int j = 0; j < i; j++) {
-                    counter.incrementAndGet();
+                    pairsOfJarsRecordCounter.incrementAndGet();
 
                     String provider2 = providers.get(j);
                     Set<Record> records2 = setsOfRecords.get(j);
@@ -124,7 +121,7 @@ public class RunEvaluation {
                     Set<PairOfRecords> pairsOfRecords = findMatchingRecordsWithSameSources(provider1, provider2, records1, records2, sourceEquivalenceMode);
 
                     LOG.info("Matching records (GAVs with equivalent sources for both providers): " + pairsOfRecords.size());
-                    LOG.info("\tprogress: " + counter + " / " + N);
+                    LOG.info("\tprogress: " + pairsOfJarsRecordCounter + " / " + N);
                     LOG.info("\tprovider1: " + provider1);
                     LOG.info("\tprovider2: " + provider2);
 
@@ -135,7 +132,7 @@ public class RunEvaluation {
                         pairOfRecordsCounter.incrementAndGet();
                         counter2.incrementAndGet();
                         if (counter2.get()%10==0) {
-                            LOG.info("\tprogress dataset pair " + counter.get() + "/" + N + " , jar(s) " + counter2.get() + "/" + pairsOfRecords.size());
+                            LOG.info("\tprogress dataset pair " + pairsOfJarsRecordCounter.get() + "/" + N + " , jar(s) " + counter2.get() + "/" + pairsOfRecords.size());
                         }
                         LOG.debug("Loading classes for {} with providers {} and {}",pairOfRecords.left().gav(),provider1,provider2);
                         try {
@@ -148,44 +145,41 @@ public class RunEvaluation {
                             assert gav.equals(pairOfRecords.right().gav());
                             Set<String> commonClasses = Sets.intersection(classes1.keySet(), classes2.keySet());
 
-                            AtomicBoolean recordAdded = new AtomicBoolean(false);
                             commonClasses.stream().forEach(commonClass -> {
                                 Content clazz1 = classes1.get(commonClass);
                                 Content clazz2 = classes2.get(commonClass);
 
                                 // LOG.info("TODO: compare classes {}",commonClass);
-                                ResultRecord resultRecord = null;
-                                recordAdded.set(true);
-                                try {
-                                    resultRecord = compare(pairOfRecords.left().gav(),provider1,provider2,commonClass, clazz1.load(),clazz2.load());
-                                } catch (Exception e) {
-                                    recordAdded.set(false);
-                                    throw new RuntimeException(e);
+                                if (!COUNT_ONLY) {
+                                    ResultRecord resultRecord = null;
+                                    try {
+                                        resultRecord = compare(pairOfRecords.left().gav(), provider1, provider2, commonClass, clazz1.load(), clazz2.load());
+                                    } catch (Exception e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                    results.add(resultRecord);
                                 }
-                                results.add(resultRecord);
                                 classesComparedCounter.incrementAndGet();
                             });
-                            if (!recordAdded.get()) {
-                                LOG.warn("No record added for gav {}, providers {} and {}",gav,provider1,provider2);
-                                noAddedRecordsCounter.incrementAndGet();
-                            }
                         }
                         catch (Exception e) {
                             throw new RuntimeException(e);
                         }
                     });
                 }
+
                 LOG.info("pairs of records processed: {}",pairOfRecordsCounter.get());
-                LOG.info("no records added for {} pairs",noAddedRecordsCounter.get());
                 LOG.info("pairs where both jars have no .class files: {}",bothJarsEmptyCounter.get());
                 LOG.info("classes compared: {}",classesComparedCounter.get());
 
                 int sameBytecodeCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.SAME_BIN).count();
+                int sameIDB = (int)results.stream().filter(r -> r.result()==ComparisonResult.SAME_IDB).count();
                 int errorCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.ERROR).count();
                 int diffCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.DIFFERENT).count();
                 LOG.info("pairs of classes with same bytecode: {}",sameBytecodeCount);
                 LOG.info("pairs of classes with error during evaluation: {}",errorCount);
                 LOG.info("pairs of classes that are diff: {}",diffCount);
+                LOG.info("pairs of classes are equivalent (same IDB but diff bytecode): {}",sameIDB);
 
             }
 
@@ -245,6 +239,7 @@ public class RunEvaluation {
         }
         else {
 
+            long time = System.currentTimeMillis();
             Files.createDirectories(edbFactDir);
 
             // copy bytecode to file as fact extraction used files as input
@@ -290,8 +285,14 @@ public class RunEvaluation {
             Files.write(idbProjectedPrintout, idbProjectedOut.getBytes());
 
             // cleanup !
-            cleanupDBDir(edbRoot,EDB_RETENTION_POLICY);
-            cleanupDBDir(idbRoot,IDB_RETENTION_POLICY);
+            cleanupDBDir(edbRoot,RETENTION_POLICY);
+            cleanupDBDir(idbRoot,RETENTION_POLICY);
+            cleanupFile(mergedEDBAndRules,RETENTION_POLICY);
+            cleanupFile(idbPrintout,RETENTION_POLICY);
+
+            long duration = System.currentTimeMillis() - time;
+            Path timeTaken = root.resolve("computation-time-in-ms.txt");
+            Files.write(timeTaken, String.valueOf(duration).getBytes());
 
             return idbProjectedOut;
         }
@@ -305,6 +306,19 @@ public class RunEvaluation {
         else if (retentionPolicy==DB_RETENTION_POLICY.ZIP) {
             IOUtil.zipAndDeleteDir(dir);
             LOG.debug("zipped and deleted fact db {}",dir);
+        }
+        // nothing to do for DB_RETENTION_POLICY.KEEP
+    }
+
+    private static void cleanupFile(Path file, DB_RETENTION_POLICY retentionPolicy) throws IOException {
+        if (retentionPolicy==DB_RETENTION_POLICY.DELETE) {
+            Files.delete(file);
+            LOG.debug("deleted file {}",file);
+        }
+        else if (retentionPolicy==DB_RETENTION_POLICY.ZIP) {
+            IOUtil.zipFile(file.toFile(),file.getParent().resolve(file.getFileName().toString()+".zip").toFile());
+            Files.delete(file);
+            LOG.debug("zipped and deleted {}",file);
         }
         // nothing to do for DB_RETENTION_POLICY.KEEP
     }
@@ -360,7 +374,7 @@ public class RunEvaluation {
             .filter(p -> gavsWithSameSources.contains(p.left().gav()))
             .collect(Collectors.toSet());
 
-        return Sets.difference(commonRecords, pairsOfRecords);
+        return pairsOfRecords;
 
     }
 

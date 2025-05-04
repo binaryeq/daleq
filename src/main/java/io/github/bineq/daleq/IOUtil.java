@@ -24,7 +24,7 @@ public class IOUtil {
         try (Stream<Path> walk = Files.walk(dir)) {
             walk.sorted(Comparator.reverseOrder())
                 .map(Path::toFile)
-                .peek(System.out::println)
+                //.peek(System.out::println)
                 .forEach(File::delete);
         } catch (IOException e) {
             throw new IOException(e);
@@ -48,6 +48,24 @@ public class IOUtil {
         Path parent = dir.getParent();
         Path zip = parent.resolve(name+".zip");
         zipDir(dir,zip);
+    }
+
+    public static void zipFile(File fileToZip, File zip) throws IOException {
+        Preconditions.checkArgument(Files.exists(fileToZip.toPath()));
+        FileOutputStream fos = new FileOutputStream(zip);
+        ZipOutputStream zipOut = new ZipOutputStream(fos);
+        FileInputStream fis = new FileInputStream(fileToZip);
+        ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+        zipOut.putNextEntry(zipEntry);
+        byte[] bytes = new byte[1024];
+        int length;
+        while ((length = fis.read(bytes)) >= 0) {
+            zipOut.write(bytes, 0, length);
+        }
+        fis.close();
+        zipOut.closeEntry();
+        zipOut.close();
+        fos.close();
     }
 
     // from https://www.baeldung.com/java-compress-and-uncompress

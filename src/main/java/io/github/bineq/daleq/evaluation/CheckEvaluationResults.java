@@ -1,5 +1,7 @@
 package io.github.bineq.daleq.evaluation;
 
+import com.google.common.base.Preconditions;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.util.*;
@@ -14,7 +16,9 @@ public class CheckEvaluationResults {
     public static final Set<String> PROVIDERS = Set.of("gaoss","mvnc","obfs");
 
     public static void main(String[] args) throws Exception {
-        File ROOT = new File("evaluation/db");
+
+        Preconditions.checkArgument(args.length > 0,"one argument required - the evaluation db folder");
+        File ROOT = new File(args[0]);
 
         int sameIDBCounter = 0;
         int diffIDBCounter = 0;

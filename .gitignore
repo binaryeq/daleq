@@ -9,3 +9,5 @@ trainingdata
 .tests
 .tmp
 idb.txt
+evaluation/db-mvnc-vs-gaoss
+evaluation/db-mvnc-vs-obfs
