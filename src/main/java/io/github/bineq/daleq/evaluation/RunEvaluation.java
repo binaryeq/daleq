@@ -17,7 +17,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -374,9 +373,39 @@ public class RunEvaluation {
             .filter(p -> gavsWithSameSources.contains(p.left().gav()))
             .collect(Collectors.toSet());
 
-        return pairsOfRecords;
+        LOG.info("Found {} matching gavs for providers {} and {}", pairsOfRecords.size(), provider1, provider2);
+
+        Set<PairOfRecords> selectedPairsOfRecords = select(pairsOfRecords);
+        LOG.info("Selected {} matching gavs for providers {} and {}", selectedPairsOfRecords.size(), provider1, provider2);
+
+        return selectedPairsOfRecords;
 
     }
+
+    // select pairs for analysis
+    public static Set<PairOfRecords> select(Set<PairOfRecords> set) {
+        // strategy -- pick only the first version (GAV) for each artifact (GA)
+
+        Set<PairOfRecords> selected = new HashSet<>();
+
+        // index by GA
+        Map<String,Set<PairOfRecords>> index = new HashMap<>();
+        for (PairOfRecords p : set) {
+            String k = p.left().groupId()+":"+p.right().artifactId();
+            Set<PairOfRecords> records = index.computeIfAbsent(k,(k2-> new TreeSet<>((p1, p2) -> p1.left().version().compareTo(p2.left().version()))));
+            records.add(p);
+        }
+
+        for (String key:index.keySet()) {
+            List<PairOfRecords> records = index.get(key).stream().collect(Collectors.toUnmodifiableList());
+            assert records.size()>0;
+            selected.add(records.get(0));  // add first
+            selected.add(records.get(records.size()-1));  // add last
+        }
+
+        return selected;
+    }
+
 
     static Map<String,Map<String,Set<String>>>  loadSameSourcesCache() {
         Preconditions.checkArgument(Files.exists(SAME_SOURCE_CACHE));
