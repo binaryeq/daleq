@@ -70,9 +70,9 @@ public class TestFactExtraction1 extends AbstractFactExtractionTest {
         assertEquals(methodRef,instructionFacts.get(1).values()[1]);
         assertEquals(methodRef,instructionFacts.get(2).values()[1]);
 
-        assertEquals(1,instructionFacts.get(0).values()[2]);
-        assertEquals(2,instructionFacts.get(1).values()[2]);
-        assertEquals(3,instructionFacts.get(2).values()[2]);
+        assertEquals(100,instructionFacts.get(0).values()[2]);
+        assertEquals(200,instructionFacts.get(1).values()[2]);
+        assertEquals(300,instructionFacts.get(2).values()[2]);
 
         // arguments
         assertEquals("java/lang/Object",instructionFacts.get(1).values()[3]);
@@ -100,10 +100,10 @@ public class TestFactExtraction1 extends AbstractFactExtractionTest {
         assertEquals(methodRef,instructionFacts.get(2).values()[1]);
         assertEquals(methodRef,instructionFacts.get(3).values()[1]);
 
-        assertEquals(1,instructionFacts.get(0).values()[2]);
-        assertEquals(2,instructionFacts.get(1).values()[2]);
-        assertEquals(3,instructionFacts.get(2).values()[2]);
-        assertEquals(4,instructionFacts.get(3).values()[2]);
+        assertEquals(100,instructionFacts.get(0).values()[2]);
+        assertEquals(200,instructionFacts.get(1).values()[2]);
+        assertEquals(300,instructionFacts.get(2).values()[2]);
+        assertEquals(400,instructionFacts.get(3).values()[2]);
 
         // arguments
 
