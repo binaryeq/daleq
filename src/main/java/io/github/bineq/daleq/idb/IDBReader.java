@@ -138,13 +138,14 @@ public class IDBReader {
         Preconditions.checkState(predicate != null,"unknown predicate " + predicateName);
 
         // tsv ignores the lqst slot of it is empty -- we augment this for ldc instructions
-        if (tokens.length==3 && predicate.getSlots().length>3 && (predicateName.equals("IDB_LDC") || predicateName.equals("IDB_LDC_W") || predicateName.equals("IDB_LDC2_W"))) {
-            String[] tokens2 = new String[4];
-            tokens2[0] = tokens[0];
-            tokens2[1] = tokens[1];
-            tokens2[2] = tokens[2];
-            tokens2[3] = "";  // set empty string constant
-            tokens = tokens2;
+        // this was observed for IDB_LDC, IDB_LDC_W, IDB_LDC2_W, IDB_LOOKUPSWITCH, IDB_TABLESWITCH
+        if (tokens.length==predicate.getSlots().length-1) {
+            String[] tokens2 = new String[predicate.getSlots().length];
+            for (int i=0;i<tokens.length;i++) {
+                tokens2[i] = tokens[i];
+            }
+            tokens2[tokens2.length-1] = "";
+            tokens=tokens2;
         }
 
         assert tokens.length==predicate.getSlots().length:"token length was " + tokens.length + " but predicate " + predicateName + " has " + predicate.getSlots().length + " slots";

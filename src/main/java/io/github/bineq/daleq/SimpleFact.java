@@ -19,7 +19,15 @@ public record SimpleFact(Predicate predicate, Object... values) implements Fact 
             .mapToObj(i -> {
                 Slot slot = predicate.getSlots()[i];
                 //  do we need to sanitise string literals for CSV ?
-                boolean sanitizeValue4CSV = predicate.getName().equals("LDC") && slot.name().equals("cst");
+                boolean sanitizeValue4CSV = false;
+
+                // sanitisation rules for constants
+                if (predicate.getName().equals("LDC") && slot.name().equals("cst")) {
+                    sanitizeValue4CSV = true;
+                }
+                else if (predicate.getName().equals("INVOKEDYNAMIC") && slot.name().equals("bsmArgs")) {
+                    sanitizeValue4CSV = true;
+                }
                 return stringify(values[i],slot,sanitizeValue4CSV);
             })
             .collect(Collectors.joining("\t"));
@@ -27,10 +35,13 @@ public record SimpleFact(Predicate predicate, Object... values) implements Fact 
 
     private String stringify(Object obj,Slot slot,boolean sanitizeValue4CSV) {
         if (sanitizeValue4CSV) {
-            return String.valueOf(obj)
-                .replace("\t","\\t")
-                .replace("\n","\\n")
-                .replace("\r","\\r");
+            if (obj.getClass().isArray()) {
+                Object[] array = (Object[]) obj;
+                return Stream.of(array).map(v -> sanitizeString4TSV(String.valueOf(v))).collect(Collectors.joining(","));
+            }
+            else {
+                return sanitizeString4TSV(String.valueOf(obj));
+            }
         }
         else if (slot.jtype().endsWith("]")) {
             assert obj.getClass().isArray();
@@ -51,6 +62,12 @@ public record SimpleFact(Predicate predicate, Object... values) implements Fact 
         else {
             return String.valueOf(obj);
         }
+    }
+
+    private String sanitizeString4TSV(String s) {
+        return s.replace("\t","\\t")
+            .replace("\n","\\n")
+            .replace("\r","\\r");
     }
 
     @Override

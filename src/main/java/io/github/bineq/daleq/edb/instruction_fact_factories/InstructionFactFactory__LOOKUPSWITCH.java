@@ -1,7 +1,9 @@
 package io.github.bineq.daleq.edb.instruction_fact_factories;
 
 import javax.annotation.processing.Generated;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import io.github.bineq.daleq.SimpleFact;
 import io.github.bineq.daleq.edb.EBDInstructionPredicate;
@@ -12,6 +14,10 @@ import org.objectweb.asm.tree.LookupSwitchInsnNode;
 
 @Generated(value="io.github.bineq.daleq.factextraction.InstructionFactFactoryCodeGenerator", date= "2025-02-13T10:40Z",
       comments= "factory generated from ASM tree API nodes")
+
+// WARNING: manually added code to serialise labels !
+
+
 public class InstructionFactFactory__LOOKUPSWITCH implements io.github.bineq.daleq.edb.InstructionPredicateFactFactory<org.objectweb.asm.tree.LookupSwitchInsnNode> {
 
     @Override public String getVersion() {
@@ -23,7 +29,14 @@ public class InstructionFactFactory__LOOKUPSWITCH implements io.github.bineq.dal
     }
 
     @Override public Fact createFact(String factId, LookupSwitchInsnNode node, String methodRef, int instructionCounter, Map<LabelNode, String> labelMap) {
-        return new SimpleFact(EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(171),new Object[]{factId,methodRef,instructionCounter,labelMap.get(node.dflt),node.keys,node.labels});
+        return new SimpleFact(EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(171),new Object[]{factId,methodRef,instructionCounter,labelMap.get(node.dflt),node.keys,serializeLabels(labelMap,node.labels)});
     }
 
+
+    // manually inserted code !
+    private String serializeLabels(Map<LabelNode, String> labelMap, List<LabelNode> labelNodes) {
+        return labelNodes.stream()
+            .map(node -> labelMap.get(node))
+            .collect(Collectors.joining(","));
+    }
 };
