@@ -6,12 +6,15 @@
 *Daleq* takes Java bytecode as input an produces a relational database.
 This is done in two steps.
 
+
+### Step 1 - EDB Extraction
+
 ```mermaid
 flowchart LR
     bytecode["bytecode (.class)"] --> asm(("asm")) --> edb["EDB"] --> souffle(("souffle")) --> idb["IDB"]
 ```
 
-### Step 1 - EDB Extraction
+
 
 A database representing the bytecode is extracted. An [asm-based](https://asm.ow2.io/) static analysis is used for this purpose. 
 The result is the EDB (extensional database), a folder with tsv files, each tsv file corresponding to a predicate.
@@ -180,3 +183,9 @@ IDB_INSTRUCTION(cat("R_AALOAD","[",factid,"]"),methodid,instructioncounter,"AALO
 
 For a new predicate, such a block must be added. 
 The rule generator `io.github.bineq.daleq.idb.rulegeneration.BaselineRuleGeneration` can be used for this purpose.
+
+## Building the Project
+
+Building with tests requires souffle to be set up (see also **IDB Computation** section).
+This has to be done locally at the moment, see also [issue 11](https://github.com/binaryeq/daleq/issues/11).
+Tests that require souffle will not fail but will be skipped if souffle is not available.
