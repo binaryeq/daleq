@@ -147,7 +147,7 @@ public class IDBReader {
             tokens2[tokens2.length-1] = "";
             tokens=tokens2;
         }
-        
+
         assert tokens.length==predicate.getSlots().length:"token length was " + tokens.length + " but predicate " + predicateName + " has " + predicate.getSlots().length + " slots";
 
         String[] tokens3 = tokens; // alias for use in lambda

@@ -31,6 +31,7 @@ import java.util.zip.ZipFile;
 public class RunEvaluation {
 
     final static Logger LOG = LoggerFactory.getLogger(RunEvaluation.class);
+
     final static Path SAME_SOURCE_CACHE = Path.of("evaluation/same_sources.json");
     private static final Map<String,Map<String,Set<String>>> GAVS_WITH_SAME_RESOURCES = loadSameSourcesCache();
     private static Path VALIDATION_DB = null;
@@ -252,48 +253,57 @@ public class RunEvaluation {
             else {
                 Files.createDirectories(edbFactDir);
             }
-            FactExtractor.extractAndExport(classFile, edbDef, edbFactDir, true);
-            LOG.info("EBD extracted for {} in {} provided by {} in dir {}", nClassName, gav, provider, edbRoot);
+
+            try {
+                FactExtractor.extractAndExport(classFile, edbDef, edbFactDir, true);
+                LOG.info("EBD extracted for {} in {} provided by {} in dir {}", nClassName, gav, provider, edbRoot);
 
 
-            Path rulesPath = Path.of(Souffle.class.getResource(RULES).getPath());
+                Path rulesPath = Path.of(Souffle.class.getResource(RULES).getPath());
 
-            if (Files.exists(idbFactDir)) {
-                IOUtil.deleteDir(idbFactDir);
+                if (Files.exists(idbFactDir)) {
+                    IOUtil.deleteDir(idbFactDir);
+                } else {
+                    Files.createDirectories(idbFactDir);
+                }
+
+                Souffle.createIDB(edbDef, rulesPath, edbFactDir, idbFactDir, mergedEDBAndRules);
+                LOG.info("IBD computed for {} in {} provided by {} in dir {}", nClassName, gav, provider, idbFactDir);
+
+                // there might be a race condition is souffle that some background thread is still writing the IDB when createIDB returns
+                // there have been cased when facts where missing, leading to NPEs when printing the IDB
+                // but upon inspection, those facts where there
+                // try to mitigate with this for now
+                Thread.sleep(500);
+
+                // load IDB
+                IDB idb = IDBReader.read(idbFactDir);
+
+                String idbOut = IDBPrinter.print(idb);
+                String idbProjectedOut = IDBPrinter.print(idb.project());
+
+                Files.write(idbPrintout, idbOut.getBytes());
+                Files.write(idbProjectedPrintout, idbProjectedOut.getBytes());
+
+                // cleanup !
+                cleanupDBDir(edbRoot, RETENTION_POLICY);
+                cleanupDBDir(idbRoot, RETENTION_POLICY);
+                cleanupFile(mergedEDBAndRules, RETENTION_POLICY);
+                cleanupFile(idbPrintout, RETENTION_POLICY);
+
+                long duration = System.currentTimeMillis() - time;
+                Path timeTaken = root.resolve("computation-time-in-ms.txt");
+                Files.write(timeTaken, String.valueOf(duration).getBytes());
+
+                return idbProjectedOut;
             }
-            else {
-                Files.createDirectories(idbFactDir);
+            catch (Exception e) {
+                Path errorLog = root.resolve("error.txt");
+                try (PrintWriter out = new PrintWriter(errorLog.toFile())) {
+                    e.printStackTrace(out);
+                }
+                throw e;
             }
-
-            Souffle.createIDB(edbDef, rulesPath, edbFactDir, idbFactDir, mergedEDBAndRules);
-            LOG.info("IBD computed for {} in {} provided by {} in dir {}", nClassName, gav, provider, idbFactDir);
-
-            // there might be a race condition is souffle that some background thread is still writing the IDB when createIDB returns
-            // there have been cased when facts where missing, leading to NPEs when printing the IDB
-            // but upon inspection, those facts where there
-            // try to mitigate with this for now
-            Thread.sleep(500);
-
-            // load IDB
-            IDB idb = IDBReader.read(idbFactDir);
-
-            String idbOut = IDBPrinter.print(idb);
-            String idbProjectedOut = IDBPrinter.print(idb.project());
-
-            Files.write(idbPrintout, idbOut.getBytes());
-            Files.write(idbProjectedPrintout, idbProjectedOut.getBytes());
-
-            // cleanup !
-            cleanupDBDir(edbRoot,RETENTION_POLICY);
-            cleanupDBDir(idbRoot,RETENTION_POLICY);
-            cleanupFile(mergedEDBAndRules,RETENTION_POLICY);
-            cleanupFile(idbPrintout,RETENTION_POLICY);
-
-            long duration = System.currentTimeMillis() - time;
-            Path timeTaken = root.resolve("computation-time-in-ms.txt");
-            Files.write(timeTaken, String.valueOf(duration).getBytes());
-
-            return idbProjectedOut;
         }
     }
 
