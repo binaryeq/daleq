@@ -1,7 +1,6 @@
 package io.github.bineq.daleq.evaluation;
 
 import com.google.common.base.Preconditions;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;

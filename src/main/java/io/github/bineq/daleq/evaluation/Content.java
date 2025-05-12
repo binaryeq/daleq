@@ -2,7 +2,6 @@ package io.github.bineq.daleq.evaluation;
 
 import com.google.common.base.Preconditions;
 import com.google.common.io.ByteStreams;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;

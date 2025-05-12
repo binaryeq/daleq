@@ -1,34 +1,12 @@
 package io.github.bineq.daleq.evaluation;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Sets;
 import com.google.common.math.Stats;
-import com.google.gson.Gson;
-import io.github.bineq.daleq.IOUtil;
-import io.github.bineq.daleq.Souffle;
-import io.github.bineq.daleq.edb.FactExtractor;
-import io.github.bineq.daleq.idb.IDB;
-import io.github.bineq.daleq.idb.IDBPrinter;
-import io.github.bineq.daleq.idb.IDBReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 /**
  * Compute stats about the runtime of building the EDBs/IDBs.

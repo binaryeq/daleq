@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.github.bineq.daleq.Predicate;
 import io.github.bineq.daleq.Slot;
-
 import java.io.*;
 import java.util.Arrays;
 import java.util.Objects;

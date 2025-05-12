@@ -1,13 +1,9 @@
 package io.github.bineq.daleq.edb;
 
-
 import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.Predicate;
 import io.github.bineq.daleq.Slot;
-import org.objectweb.asm.tree.LabelNode;
-
 import java.util.Set;
-
 import static io.github.bineq.daleq.Slot.*;
 
 /**

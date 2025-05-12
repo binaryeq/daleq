@@ -1,7 +1,6 @@
 package io.github.bineq.daleq.edb;
 
 import io.github.bineq.daleq.Predicate;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**

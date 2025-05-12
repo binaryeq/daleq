@@ -3,7 +3,6 @@ package io.github.bineq.daleq.edb;
 import io.github.bineq.daleq.Fact;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.LabelNode;
-
 import javax.annotation.processing.Generated;
 import java.util.Map;
 import java.util.Objects;

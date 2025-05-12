@@ -4,15 +4,12 @@ import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.Predicate;
 import org.junit.jupiter.api.BeforeEach;
 import org.objectweb.asm.tree.JumpInsnNode;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
