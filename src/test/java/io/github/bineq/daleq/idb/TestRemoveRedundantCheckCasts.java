@@ -9,7 +9,7 @@ public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
 
     @Override
     public String getRulesPath() {
-        return "/rules/remove-redundant-checkcast.souffle";
+        return "/rules/advanced.souffle";
     }
 
     @Override
@@ -29,8 +29,8 @@ public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
         // note: when inspecting javap the checkcasts are in lines 18/19
         // there are additional facts representing labels being inserted
 
-        Predicate<String[]> firstInstructionId = line -> line[instructionCounterSlotPosition].equals("20");
-        Predicate<String[]> secondInstructionId = line -> line[instructionCounterSlotPosition].equals("21");
+        Predicate<String[]> firstInstructionId = line -> line[instructionCounterSlotPosition].equals("2000");
+        Predicate<String[]> secondInstructionId = line -> line[instructionCounterSlotPosition].equals("2100");
 
         assertEquals(1,this.getEDBFacts("CHECKCAST",methodContext.and(firstInstructionId)).size());
         assertEquals(1,this.getEDBFacts("CHECKCAST",methodContext.and(secondInstructionId)).size());
@@ -50,16 +50,15 @@ public class TestRemoveRedundantCheckCasts extends AbstractIDBTest {
         // note: when inspecting javap the checkcasts are in lines 18/19
         // there are additional facts representing labels being inserted
 
-        Predicate<String[]> firstInstructionId = line -> line[instructionCounterSlotPosition].equals("20");
-        Predicate<String[]> secondInstructionId = line -> line[instructionCounterSlotPosition].equals("21");
+        Predicate<String[]> firstInstructionId = line -> line[instructionCounterSlotPosition].equals("2000");
+        Predicate<String[]> secondInstructionId = line -> line[instructionCounterSlotPosition].equals("2100");
 
         assertEquals(1,this.getIDBFacts("IDB_CHECKCAST",methodContext.and(firstInstructionId)).size());
-        assertEquals(1,this.getIDBFacts("NOPE",methodContext.and(secondInstructionId)).size());
+        assertEquals(1,this.getIDBFacts("REMOVED_INSTRUCTION",methodContext.and(secondInstructionId)).size());
 
         // one instruction should have been removed !
         assertEquals(0,this.getIDBFacts("IDB_CHECKCAST",methodContext.and(secondInstructionId)).size());
 
     }
-
 
 }
