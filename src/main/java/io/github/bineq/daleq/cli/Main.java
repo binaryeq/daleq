@@ -1,4 +1,4 @@
-package io.github.bineq.daleq.ui;
+package io.github.bineq.daleq.cli;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,10 @@ public class Main {
         OUT.setRequired(true);
     }
 
-    public static final Analyser[] ANALYSERS = new Analyser[]{};
+    public static final Analyser[] ANALYSERS = new Analyser[]{
+        new ResourceIsPresentAnalyser(),
+        new SameContentAnalyser()
+    };
 
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
@@ -73,15 +77,12 @@ public class Main {
     }
 
     private static void analyse(Path jar1, Path jar2, Path outPath) throws IOException {
-        Set<String> content1 = IOUtil.entries(jar1);
-        Set<String> content2 = IOUtil.entries(jar2);
-        Set<String> sharedContent = Sets.intersection(content1, content2).stream().sorted().collect(Collectors.toSet());
-        Set<String> joinedContent = Sets.union(content1, content2).stream().sorted().collect(Collectors.toSet());
+        Set<String> content1 = IOUtil.nonDirEntries(jar1);
+        Set<String> content2 = IOUtil.nonDirEntries(jar2);
+        List<String> joinedContent = Sets.union(content1, content2).stream().sorted().collect(Collectors.toUnmodifiableList());
 
         String html = Files.readString(Path.of(TEMPLATE.getPath()));
         Document document = Parser.htmlParser().parseInput(html,"");
-
-        Element header = document.getElementsByTag("h1").get(0);
 
         Element eJar1 = document.getElementById("jar1");
         Element eJar2 = document.getElementById("jar2");
@@ -95,8 +96,26 @@ public class Main {
 
         Path report = outPath.resolve("report.html");
 
+        String headerRow = "<tr><th>resource</th>";
+        for (Analyser analyser:ANALYSERS) {
+            headerRow+="<th>";
+            headerRow+= analyser.name();
+            headerRow+="</th>";
+        }
+        headerRow+="</tr>";
+        table.append(headerRow);
+
         for (String resource:joinedContent) {
-           table.append("<tr><td>"+resource+"</td></tr>");
+            String row = "<tr><td>";
+            row+=resource;
+            row+="</td>";
+            for (Analyser analyser:ANALYSERS) {
+                AnalysisResult analyserResult = analyser.analyse(resource,jar1,jar2);
+                row+="<td>";
+                row+=analyserResult.state();
+                row+="</td>";
+            }
+            table.append(row);
         }
 
         Files.write(report, document.html().getBytes());

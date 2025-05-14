@@ -1,14 +1,17 @@
-package io.github.bineq.daleq.ui;
+package io.github.bineq.daleq.cli;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 /**
- * Abstract interface for an analyser.
+ * Interface for analysers.
  * @author jens dietrich
  */
-public class Analyser {
+public interface Analyser {
 
-    AnalysisResult analyse (String resource, Path jar1, Path jar2) {
-        return new AnalysisResult(AnalysisResultState.ERROR,"?");
-    }
+    AnalysisResult analyse (String resource, Path jar1, Path jar2) throws IOException ;
+
+    String name();
+
+    String description();
 }

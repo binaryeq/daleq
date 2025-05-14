@@ -1,4 +1,4 @@
-package io.github.bineq.daleq.ui;
+package io.github.bineq.daleq.cli;
 
 /**
  * Result of an analysis.

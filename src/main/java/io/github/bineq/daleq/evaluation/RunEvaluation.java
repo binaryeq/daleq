@@ -172,14 +172,28 @@ public class RunEvaluation {
                 LOG.info("pairs where both jars have no .class files: {}",bothJarsEmptyCounter.get());
                 LOG.info("classes compared: {}",classesComparedCounter.get());
 
-                int sameBytecodeCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.SAME_BIN).count();
-                int sameIDB = (int)results.stream().filter(r -> r.result()==ComparisonResult.SAME_IDB).count();
-                int errorCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.ERROR).count();
-                int diffCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.DIFFERENT).count();
-                LOG.info("pairs of classes with same bytecode: {}",sameBytecodeCount);
-                LOG.info("pairs of classes with error during evaluation: {}",errorCount);
-                LOG.info("pairs of classes that are diff: {}",diffCount);
-                LOG.info("pairs of classes are equivalent (same IDB but diff bytecode): {}",sameIDB);
+                int equalClassesCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.EQUAL).count();
+                int equivalentClassesCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.EQUIVALENT).count();
+                int classPairWithEvaluationErrorCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.ERROR).count();
+                int differentClassesCount = (int)results.stream().filter(r -> r.result()==ComparisonResult.NON_EQUIVALENT).count();
+
+                LOG.info("pairs of classes with same bytecode: {}",equalClassesCount);
+                LOG.info("pairs of classes are equivalent (same IDB but diff bytecode): {}",equivalentClassesCount);
+                LOG.info("pairs of classes that are different: {}",differentClassesCount);
+                LOG.info("pairs of classes with error during evaluation: {}",classPairWithEvaluationErrorCount);
+
+                List<ResultRecord> aggregatedResultRecordsForJars = aggregate(results);
+
+                int allClassesInJarEqualCount = (int)aggregatedResultRecordsForJars.stream().filter(r -> r.result()==ComparisonResult.EQUAL).count();
+                int allClassesInJarEquivalentCount = (int)aggregatedResultRecordsForJars.stream().filter(r -> r.result()==ComparisonResult.EQUIVALENT).count();
+                int someClassesInJarWithEvaluationErrorCount = (int)aggregatedResultRecordsForJars.stream().filter(r -> r.result()==ComparisonResult.ERROR).count();
+                int someClassesInJarNonEquivalentCount = (int)aggregatedResultRecordsForJars.stream().filter(r -> r.result()==ComparisonResult.NON_EQUIVALENT).count();
+
+                LOG.info("pairs of jars with all classes having the same bytecode: {}",allClassesInJarEqualCount);
+                LOG.info("pairs of jars with all classes being equivalent: {}",allClassesInJarEquivalentCount);
+                LOG.info("pairs of jars with some classes not being equivalent: {}",someClassesInJarNonEquivalentCount);
+                LOG.info("pairs of jars with some errors during evaluation: {}",someClassesInJarWithEvaluationErrorCount);
+
 
             }
 
@@ -190,9 +204,23 @@ public class RunEvaluation {
 
     }
 
+    private static List<ResultRecord> aggregate(List<ResultRecord> results) {
+        Map<String,ResultRecord> resultsByJar = new HashMap<>();
+        for (ResultRecord resultRecord : results) {
+            ResultRecord result1 = new ResultRecord(resultRecord.gav(),resultRecord.provider1(),resultRecord.provider2(),"any",resultRecord.result());
+            String gav = result1.gav();
+            ResultRecord result2 = resultsByJar.get(gav);
+            if (result2==null || result2.result().compareTo(result1.result())<0) {
+                // need to add or replace value
+                resultsByJar.put(gav,result1);
+            }
+        }
+        return resultsByJar.values().stream().collect(Collectors.toList());
+    }
+
     private static ResultRecord compare(String gav, String provider1, String provider2, String commonClass, byte[] bytecode1, byte[] bytecode2) throws Exception {
         if (Arrays.equals(bytecode1, bytecode2)) {
-            return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.SAME_BIN);
+            return new ResultRecord(gav,provider1,provider2,commonClass, ComparisonResult.EQUAL);
         }
 
         try {
@@ -202,9 +230,9 @@ public class RunEvaluation {
             assert idb2 != null;
 
             if (idb1.equals(idb2)) {
-                return new ResultRecord(gav, provider1, provider2, commonClass, ComparisonResult.SAME_IDB);
+                return new ResultRecord(gav, provider1, provider2, commonClass, ComparisonResult.EQUIVALENT);
             } else {
-                return new ResultRecord(gav, provider1, provider2, commonClass, ComparisonResult.DIFFERENT);
+                return new ResultRecord(gav, provider1, provider2, commonClass, ComparisonResult.NON_EQUIVALENT);
             }
         }
         catch (Exception e) {
