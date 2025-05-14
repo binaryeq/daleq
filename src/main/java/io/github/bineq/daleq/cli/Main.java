@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,6 +30,8 @@ public class Main {
     private static final Option OUT = new Option("o","out",true,"the output folder where the report will be generated");
 
     private static final URL TEMPLATE = Main.class.getClassLoader().getResource("cli/report-template.html");
+    private static final URL CSS = Main.class.getClassLoader().getResource("cli/daleq.css");
+
     static {
         OPT_JAR1.setRequired(true);
         OPT_JAR2.setRequired(true);
@@ -111,17 +114,33 @@ public class Main {
             row+="</td>";
             for (Analyser analyser:ANALYSERS) {
                 AnalysisResult analyserResult = analyser.analyse(resource,jar1,jar2);
-                row+="<td>";
+                row+="<td class=\"";
+                row+=getCSSClass(analyserResult);
+                row+="\">";
                 row+=analyserResult.state();
                 row+="</td>";
             }
             table.append(row);
         }
 
+
         Files.write(report, document.html().getBytes());
+        Path css = outPath.resolve("daleq.css");
+        Files.copy(Path.of(CSS.getPath()),css, StandardCopyOption.REPLACE_EXISTING);
+        LOG.info("report written to {}", report);
 
         new ProcessBuilder("open",report.toFile().getAbsolutePath())
             .inheritIO()
             .start();
+    }
+
+    private static String getCSSClass(AnalysisResult analyserResult) {
+        return switch (analyserResult.state()) {
+            case FAIL -> "fail";
+            case PASS -> "pass";
+            case SKIP -> "skip";
+            case ERROR -> "error";
+            default -> "unknown";
+        };
     }
 }

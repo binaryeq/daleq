@@ -1,0 +1,34 @@
+body {
+    background-color: lightsteelblue;
+    font-family: "Lucida Console", "Courier New", monospace;
+
+    .jar {
+    }
+
+    .fail {
+        background: red;
+        text-align: center;
+        font-weight: bold;
+    }
+    .pass {
+        background: #97f295;
+        text-align: center;
+        font-weight: bold;
+    }
+    .skip {
+        background: #dddddd;
+        text-align: center;
+        font-weight: bold;
+    }
+    .error {
+        background: coral;
+        text-align: center;
+        font-weight: bold;
+    }
+    .unknown {
+        background: #dddddd;
+        text-align: center;
+        font-weight: bold;
+    }
+
+}
