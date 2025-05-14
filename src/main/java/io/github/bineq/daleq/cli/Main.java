@@ -1,0 +1,108 @@
+package io.github.bineq.daleq.ui;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
+import io.github.bineq.daleq.IOUtil;
+import org.apache.commons.cli.*;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+/**
+ * CLI. Produces a html report.
+ * @author jens dieytrich
+ */
+public class Main {
+
+    private static final Option OPT_JAR1 = new Option("j1","jar1",true,"the first jar file to compare");
+    private static final Option OPT_JAR2 = new Option("j2","jar2",true,"the second jar file to compare");
+    private static final Option OUT = new Option("o","out",true,"the output folder where the report will be generated");
+
+    private static final URL TEMPLATE = Main.class.getClassLoader().getResource("cli/report-template.html");
+    static {
+        OPT_JAR1.setRequired(true);
+        OPT_JAR2.setRequired(true);
+        OUT.setRequired(true);
+    }
+
+    public static final Analyser[] ANALYSERS = new Analyser[]{};
+
+    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
+
+    public static void main(String[] args) throws IOException {
+
+        Options options = new Options();
+        options.addOption(OPT_JAR1);
+        options.addOption(OPT_JAR2);
+        options.addOption(OUT);
+
+        CommandLineParser parser = new DefaultParser();
+
+        try {
+            CommandLine cmd = parser.parse(options, args);
+
+            Path jar1 = Path.of(cmd.getOptionValue(OPT_JAR1));
+            Path jar2 = Path.of(cmd.getOptionValue(OPT_JAR2));
+            Path outPath = Path.of(cmd.getOptionValue(OUT));
+
+            Preconditions.checkState(Files.exists(jar1));
+            Preconditions.checkState(!Files.isDirectory(jar1));
+            Preconditions.checkState(Files.exists(jar2));
+            Preconditions.checkState(!Files.isDirectory(jar2));
+            Preconditions.checkState(Files.exists(outPath));
+            Preconditions.checkState(Files.isDirectory(outPath));
+
+            Preconditions.checkState(TEMPLATE!=null);
+
+            analyse(jar1,jar2,outPath);
+
+        } catch (ParseException e) {
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp("java -jar <built-jar>", options);
+            System.exit(1);
+        }
+    }
+
+    private static void analyse(Path jar1, Path jar2, Path outPath) throws IOException {
+        Set<String> content1 = IOUtil.entries(jar1);
+        Set<String> content2 = IOUtil.entries(jar2);
+        Set<String> sharedContent = Sets.intersection(content1, content2).stream().sorted().collect(Collectors.toSet());
+        Set<String> joinedContent = Sets.union(content1, content2).stream().sorted().collect(Collectors.toSet());
+
+        String html = Files.readString(Path.of(TEMPLATE.getPath()));
+        Document document = Parser.htmlParser().parseInput(html,"");
+
+        Element header = document.getElementsByTag("h1").get(0);
+
+        Element eJar1 = document.getElementById("jar1");
+        Element eJar2 = document.getElementById("jar2");
+        Element table = document.getElementById("result-table").getElementsByTag("tbody").get(0);
+        assert eJar1!=null;
+        assert eJar2!=null;
+        assert table!=null;
+
+        eJar1.append(jar1.toString());
+        eJar2.append(jar2.toString());
+
+        Path report = outPath.resolve("report.html");
+
+        for (String resource:joinedContent) {
+           table.append("<tr><td>"+resource+"</td></tr>");
+        }
+
+        Files.write(report, document.html().getBytes());
+
+        new ProcessBuilder("open",report.toFile().getAbsolutePath())
+            .inheritIO()
+            .start();
+    }
+}
