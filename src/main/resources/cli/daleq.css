@@ -3,8 +3,14 @@ body {
     font-family: "Lucida Console", "Courier New", monospace;
 
     .jar {
+        font-weight: bold;
+        padding-top: 10px;
     }
 
+    th {
+        background: #3572b0;
+        color: #e6edf3;
+    }
     .fail {
         background: red;
         text-align: center;
