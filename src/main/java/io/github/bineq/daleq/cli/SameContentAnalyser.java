@@ -21,13 +21,9 @@ public class SameContentAnalyser implements Analyser {
 
     @Override
     public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
-        Set<String> resources1 = IOUtil.nonDirEntries(jar1);
-        Set<String> resources2 = IOUtil.nonDirEntries(jar2);
-        if (!resources1.contains(resource)) {
-            return new AnalysisResult(AnalysisResultState.SKIP,"resource is missing in jar1");
-        }
-        else if (!resources2.contains(resource)) {
-            return new AnalysisResult(AnalysisResultState.SKIP,"resource is missing in jar2");
+        AnalysisResult analysisResult = checkResourceIsPresent(jar1,jar2,resource);
+        if (analysisResult!=null) {
+            return analysisResult;
         }
         else {
             try {
@@ -36,7 +32,7 @@ public class SameContentAnalyser implements Analyser {
 
                 boolean result = false;
                 if (ResourceUtil.isCharData(resource)) {
-                    // try to read lines to get around issues with new line encoding
+                    // try to read lines to get around issues with different new line encoding
                     List<String> lines1 = ResourceUtil.readLines(data1, StandardCharsets.UTF_8);
                     List<String> lines2 = ResourceUtil.readLines(data2, StandardCharsets.UTF_8);
                     result = lines1.containsAll(lines2) && lines2.containsAll(lines1);

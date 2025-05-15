@@ -73,11 +73,11 @@ public class ResourceUtil {
 //            .waitFor();
 
 
-        new ProcessBuilder("diff","-u",file1.toFile().getAbsolutePath(),file2.toFile().getAbsolutePath())
-            //.inheritIO()
-            .redirectOutput(ProcessBuilder.Redirect.to(diffFile.toFile()))
-            .start()
-            .waitFor();
+//        new ProcessBuilder("diff","-u",file1.toFile().getAbsolutePath(),file2.toFile().getAbsolutePath())
+//            //.inheritIO()
+//            .redirectOutput(ProcessBuilder.Redirect.to(diffFile.toFile()))
+//            .start()
+//            .waitFor();
 
         List<ProcessBuilder> pipeline = List.of(
             new ProcessBuilder("diff","-u",file1.toFile().getAbsolutePath(),file2.toFile().getAbsolutePath()),

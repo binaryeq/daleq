@@ -39,7 +39,8 @@ public class Main {
 
     public static final Analyser[] ANALYSERS = new Analyser[]{
         new ResourceIsPresentAnalyser(),
-        new SameContentAnalyser()
+        new SameContentAnalyser(),
+        new JavapAnalyser()
     };
 
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
