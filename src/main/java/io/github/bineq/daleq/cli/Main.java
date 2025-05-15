@@ -42,6 +42,7 @@ public class Main {
         new SameContentAnalyser(),
         new VerboseJavapAnalyser(),
         new CompactJavapAnalyser(),
+        new DaleqAnalyser()
     };
 
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
