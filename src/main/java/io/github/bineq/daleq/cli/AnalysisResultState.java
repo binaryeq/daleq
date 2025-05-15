@@ -9,5 +9,10 @@ public enum AnalysisResultState {
     PASS,  // check passes
     FAIL,  // check fails
     ERROR, // error during check
-    SKIP   // check preconditions not satisfied
+    SKIP   {
+        @Override
+        public String toString() {
+            return "N/A";
+        }
+    }// check preconditions not satisfied
 }

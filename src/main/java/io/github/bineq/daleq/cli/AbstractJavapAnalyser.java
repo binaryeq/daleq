@@ -3,21 +3,21 @@ package io.github.bineq.daleq.cli;
 import io.github.bineq.daleq.IOUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
 /**
- * Analyser based on comparing the output of javap -c -p
+ * Analyser based on comparing the output of javap , concrete subclasses decide in arguments passed to javap.
  * @author jens dietrich
  */
-public class JavapAnalyser implements Analyser {
+public abstract class AbstractJavapAnalyser implements Analyser {
 
-    public static String[] JAVAP_ARGS = new String[]{"-c","-p"};
-    private static final Logger LOG = LoggerFactory.getLogger(JavapAnalyser.class);
-    private static final String DIFF_REPORT_NAME = "diff.html";
+    public abstract String[] getJavapArgs();
+
+    protected static final Logger LOG = LoggerFactory.getLogger(AbstractJavapAnalyser.class);
+    protected static final String DIFF_REPORT_NAME = "diff.html";
 
 
     @Override
@@ -44,10 +44,11 @@ public class JavapAnalyser implements Analyser {
             Files.createDirectories(dir1);
             Files.createDirectories(dir2);
             String clazzFileName = resource.substring(resource.lastIndexOf('/')+1);
-
+            Files.write(dir1.resolve(clazzFileName), data1);
+            Files.write(dir2.resolve(clazzFileName), data2);
             try {
-                Path disassembled1 = javap(dir1,data1,clazzFileName,JAVAP_ARGS);
-                Path disassembled2 = javap(dir2,data2,clazzFileName,JAVAP_ARGS);
+                Path disassembled1 = javap(dir1,data1,clazzFileName,getJavapArgs());
+                Path disassembled2 = javap(dir2,data2,clazzFileName,getJavapArgs());
 
                 String code1 = Files.readString(disassembled1);
                 String code2 = Files.readString(disassembled2);
@@ -91,17 +92,8 @@ public class JavapAnalyser implements Analyser {
             .start()
             .waitFor();
 
-        LOG.info("Class {} disassmbled to {}", classFile,javapFile);
+        LOG.info("Class {} disassembled to {}", classFile,javapFile);
         return javapFile;
     }
 
-    @Override
-    public String name() {
-        return "javap -c -p";
-    }
-
-    @Override
-    public String description() {
-        return "using the standard java disassembler";
-    }
 }
