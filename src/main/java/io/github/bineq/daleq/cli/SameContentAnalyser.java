@@ -1,19 +1,26 @@
 package io.github.bineq.daleq.cli;
 
 import io.github.bineq.daleq.IOUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Checks whether a resource with a given name exists in both jars.
  * @author jens dietrich
  */
 public class SameContentAnalyser implements Analyser {
+
+    private static final String DIFF_REPORT_NAME = "diff.html";
+    private static final Logger LOG = LoggerFactory.getLogger(SameContentAnalyser.class);
+
     @Override
-    public AnalysisResult analyse(String resource, Path jar1, Path jar2) throws IOException {
+    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
         Set<String> resources1 = IOUtil.nonDirEntries(jar1);
         Set<String> resources2 = IOUtil.nonDirEntries(jar2);
         if (!resources1.contains(resource)) {
@@ -26,12 +33,44 @@ public class SameContentAnalyser implements Analyser {
             try {
                 byte[] data1 = IOUtil.readEntryFromZip(jar1, resource);
                 byte[] data2 = IOUtil.readEntryFromZip(jar2, resource);
-                boolean result = Arrays.equals(data1, data2);
-                if (result) {
-                    return new AnalysisResult(AnalysisResultState.PASS,"resources have same content (same sequence of bytes)");
+
+                boolean result = false;
+                if (ResourceUtil.isCharData(resource)) {
+                    // try to read lines to get around issues with new line encoding
+                    List<String> lines1 = ResourceUtil.readLines(data1, StandardCharsets.UTF_8);
+                    List<String> lines2 = ResourceUtil.readLines(data2, StandardCharsets.UTF_8);
+                    result = lines1.containsAll(lines2) && lines2.containsAll(lines1);
                 }
                 else {
-                    return new AnalysisResult(AnalysisResultState.FAIL,"resources have different content (different sequences of bytes)");
+                    result = Arrays.equals(data1, data2);
+                }
+
+                Map<String,String> attachments = new HashMap<>();
+
+                // diff is meaningless if files are the same
+                if (!result && ResourceUtil.isCharData(resource)) {
+                    // create diff !
+                    Path folder = ResourceUtil.createResourceFolder(contextDir,resource,this);
+                    Path file1 = folder.resolve(resource.replace("/",".")+"__1");
+                    Path file2 = folder.resolve(resource.replace("/",".")+"__2");
+                    Files.write(file1, data1);
+                    Files.write(file2, data2);
+                    Path diff = folder.resolve(DIFF_REPORT_NAME);
+                    try {
+                        ResourceUtil.diff(file1, file2, diff);
+                        String link = ResourceUtil.createLink(contextDir, resource, this, DIFF_REPORT_NAME);
+                        attachments.put("diff", link);
+                    }
+                    catch (Exception e) {
+                        LOG.error("error diffing content",e);
+                    }
+                }
+
+                if (result) {
+                    return new AnalysisResult(AnalysisResultState.PASS,"resources have same content (same sequence of bytes)",attachments);
+                }
+                else {
+                    return new AnalysisResult(AnalysisResultState.FAIL,"resources have different content (different sequences of bytes)",attachments);
                 }
             }
             catch (Exception x) {

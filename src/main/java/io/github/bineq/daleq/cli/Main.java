@@ -9,7 +9,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -101,9 +100,7 @@ public class Main {
 
         String headerRow = "<tr><th>resource</th>";
         for (Analyser analyser:ANALYSERS) {
-            headerRow+="<th>";
-            headerRow+= analyser.name();
-            headerRow+="</th>";
+            headerRow+=String.format("<th>%s</th>",analyser.name());
         }
         headerRow+="</tr>";
         table.append(headerRow);
@@ -113,11 +110,14 @@ public class Main {
             row+=resource;
             row+="</td>";
             for (Analyser analyser:ANALYSERS) {
-                AnalysisResult analyserResult = analyser.analyse(resource,jar1,jar2);
-                row+="<td class=\"";
-                row+=getCSSClass(analyserResult);
-                row+="\">";
+                AnalysisResult analyserResult = analyser.analyse(resource,jar1,jar2,outPath);
+                row+=String.format("<td class=\"%s\">",getCSSClass(analyserResult));
                 row+=analyserResult.state();
+
+                // create links for attachments
+                for (String linkName:analyserResult.attachments().keySet()) {
+                    row+=String.format("  <a href=\"%s\" target=\"_blank\">%s</a>", analyserResult.attachments().get(linkName),"&Delta;");
+                }
                 row+="</td>";
             }
             table.append(row);

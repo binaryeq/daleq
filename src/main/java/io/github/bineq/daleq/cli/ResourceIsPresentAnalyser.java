@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class ResourceIsPresentAnalyser implements Analyser {
     @Override
-    public AnalysisResult analyse(String resource, Path jar1, Path jar2) throws IOException {
+    public AnalysisResult analyse(String resource, Path jar1, Path jar2,Path contextDir) throws IOException {
         Set<String> resources1 = IOUtil.nonDirEntries(jar1);
         Set<String> resources2 = IOUtil.nonDirEntries(jar2);
         if (resources1.contains(resource) && resources2.contains(resource)) {

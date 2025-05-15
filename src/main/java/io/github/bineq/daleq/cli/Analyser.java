@@ -9,7 +9,9 @@ import java.nio.file.Path;
  */
 public interface Analyser {
 
-    AnalysisResult analyse (String resource, Path jar1, Path jar2) throws IOException ;
+    // contextDir is the folder where the report is being generated
+    // used to create resources that need to be linked
+    AnalysisResult analyse (String resource, Path jar1, Path jar2, Path contextDir) throws IOException ;
 
     String name();
 
