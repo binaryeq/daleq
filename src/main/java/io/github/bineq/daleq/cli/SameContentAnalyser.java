@@ -3,7 +3,6 @@ package io.github.bineq.daleq.cli;
 import io.github.bineq.daleq.IOUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -41,7 +40,7 @@ public class SameContentAnalyser implements Analyser {
                     result = Arrays.equals(data1, data2);
                 }
 
-                Map<String,String> attachments = new HashMap<>();
+                List<AnalysisResultAttachment> attachments = new ArrayList<>();
 
                 // diff is meaningless if files are the same
                 if (!result && ResourceUtil.isCharData(resource)) {
@@ -55,7 +54,7 @@ public class SameContentAnalyser implements Analyser {
                     try {
                         ResourceUtil.diff(file1, file2, diff);
                         String link = ResourceUtil.createLink(contextDir, resource, this, DIFF_REPORT_NAME);
-                        attachments.put("diff", link);
+                        attachments.add(new AnalysisResultAttachment("diff", link,AnalysisResultAttachment.Kind.DIFF));
                     }
                     catch (Exception e) {
                         LOG.error("error diffing content",e);

@@ -63,6 +63,14 @@ public class ResourceUtil {
         return lines;
     }
 
+    static void createErrorFile(Throwable x, String message, Path file) throws IOException {
+        try (PrintWriter out = new PrintWriter(new FileWriter(file.toFile()))) {
+            out.println(message);
+            out.println();
+            x.printStackTrace(out);
+        }
+    }
+
     static void diff(Path file1, Path file2, Path diffFile) throws Exception {
         // `diff -u idb-NoopCallback-1-full.txt idb-NoopCallback-2-full.txt | diff2html -i stdin -s side -F diff.html`
 

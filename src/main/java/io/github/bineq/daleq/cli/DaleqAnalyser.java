@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import static io.github.bineq.daleq.Souffle.checkSouffleExe;
 
@@ -35,7 +35,7 @@ public class DaleqAnalyser implements Analyser {
     public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
 
         AnalysisResult analysisResult = checkResourceIsPresent(jar1, jar2, resource);
-        Map<String, String> attachments = new HashMap<>();
+        List<AnalysisResultAttachment> attachments = new ArrayList<>();
         if (analysisResult != null) {
             return analysisResult;
         } else if (!SOUFFLE_AVAILABLE) {
@@ -85,8 +85,6 @@ public class DaleqAnalyser implements Analyser {
 
                 IDBPrinter.printIDB(idb1, idbFullFile1);
                 IDBPrinter.printIDB(idb2, idbFullFile2);
-                String idb1FullAsString = Files.readString(idbProjectedFile1);
-                String idb2FullAsString = Files.readString(idbProjectedFile2);
 
                 if (idb1ProjectedAsString.equals(idb2ProjectedAsString)) {
                     return new AnalysisResult(AnalysisResultState.PASS, "projected IDBs are identical", attachments);
@@ -95,17 +93,21 @@ public class DaleqAnalyser implements Analyser {
                     Path diffProjected = folder.resolve(DIFF_PROJECTED_REPORT_NAME);
                     ResourceUtil.diff(idbProjectedFile1, idbProjectedFile2, diffProjected);
                     String link = ResourceUtil.createLink(contextDir, resource, this, DIFF_PROJECTED_REPORT_NAME);
-                    attachments.put("diff-projected", link);
+                    attachments.add(new AnalysisResultAttachment("diff-projected",link,AnalysisResultAttachment.Kind.DIFF));
 
                     Path diffFull = folder.resolve(DIFF_FULL_REPORT_NAME);
                     ResourceUtil.diff(idbFullFile1, idbFullFile2, diffFull);
                     String link2 = ResourceUtil.createLink(contextDir, resource, this, DIFF_FULL_REPORT_NAME);
-                    attachments.put("diff-full", link2);
+                    attachments.add(new AnalysisResultAttachment("diff-full",link2,AnalysisResultAttachment.Kind.DIFF));
 
                     return new AnalysisResult(AnalysisResultState.FAIL, "projected IDBs are different", attachments);
                 }
             }
-            catch (Exception e) {
+            catch (Exception x) {
+                Path errorFile = folder.resolve("error.txt");
+                ResourceUtil.createErrorFile(x,"Exception running analysis: \"" + this.name()+"\"",errorFile);
+                String link = ResourceUtil.createLink(contextDir, resource, this, "error.txt");
+                attachments.add(new AnalysisResultAttachment("error",link,AnalysisResultAttachment.Kind.ERROR));
                 return new AnalysisResult(AnalysisResultState.ERROR, "Failed to compute and compare IDB", attachments);
             }
         }

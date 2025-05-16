@@ -118,8 +118,8 @@ public class Main {
                 row+=analyserResult.state();
 
                 // create links for attachments
-                for (String linkName:analyserResult.attachments().keySet()) {
-                    row+=String.format("  <a href=\"%s\" target=\"_blank\" title=\"%s\">%s</a>", analyserResult.attachments().get(linkName),linkName,"&Delta;");
+                for (AnalysisResultAttachment attachment:analyserResult.attachments()) {
+                    row+=String.format("  <a href=\"%s\" target=\"_blank\" title=\"%s\">%s</a>", attachment.link(),attachment.name(),getLinkSymbol(attachment.kind()));
                 }
                 row+="</td>";
             }
@@ -135,6 +135,15 @@ public class Main {
         new ProcessBuilder("open",report.toFile().getAbsolutePath())
             .inheritIO()
             .start();
+    }
+
+
+    private static String getLinkSymbol(AnalysisResultAttachment.Kind kind) {
+        return switch (kind) {
+            case ERROR -> "&#9888;"; // or &#x26A0;
+            case DIFF -> "&Delta;";
+            default -> "?";
+        };
     }
 
     private static String getCSSClass(AnalysisResult analyserResult) {

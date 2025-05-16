@@ -24,7 +24,7 @@ public abstract class AbstractJavapAnalyser implements Analyser {
     public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
 
         AnalysisResult analysisResult = checkResourceIsPresent(jar1,jar2,resource);
-        Map<String,String> attachments = new HashMap<>();
+        List<AnalysisResultAttachment> attachments = new ArrayList<>();
         if (analysisResult!=null) {
             return analysisResult;
         }
@@ -38,34 +38,49 @@ public abstract class AbstractJavapAnalyser implements Analyser {
                 return new AnalysisResult(AnalysisResultState.PASS, "disassemblies of .class files are identical",attachments);
             }
 
-            Path folder = ResourceUtil.createResourceFolder(contextDir,resource,this);
-            Path dir1 = folder.resolve("jar1");
-            Path dir2 = folder.resolve("jar2");
-            Files.createDirectories(dir1);
-            Files.createDirectories(dir2);
-            String clazzFileName = resource.substring(resource.lastIndexOf('/')+1);
-            Files.write(dir1.resolve(clazzFileName), data1);
-            Files.write(dir2.resolve(clazzFileName), data2);
-            try {
-                Path disassembled1 = javap(dir1,data1,clazzFileName,getJavapArgs());
-                Path disassembled2 = javap(dir2,data2,clazzFileName,getJavapArgs());
+            else {
+                Path folder = null;
+                try {
+                    folder = ResourceUtil.createResourceFolder(contextDir, resource, this);
+                    Path dir1 = folder.resolve("jar1");
+                    Path dir2 = folder.resolve("jar2");
+                    Files.createDirectories(dir1);
+                    Files.createDirectories(dir2);
+                    String clazzFileName = resource.substring(resource.lastIndexOf('/') + 1);
+                    Files.write(dir1.resolve(clazzFileName), data1);
+                    Files.write(dir2.resolve(clazzFileName), data2);
 
-                String code1 = Files.readString(disassembled1);
-                String code2 = Files.readString(disassembled2);
 
-                if (code1.equals(code2)) {
-                    return new AnalysisResult(AnalysisResultState.PASS, "disassemblies of .class files are identical",attachments);
-                } else {
-                    Path diff = folder.resolve(DIFF_REPORT_NAME);
-                    ResourceUtil.diff(disassembled1, disassembled2, diff);
-                    String link = ResourceUtil.createLink(contextDir, resource, this, DIFF_REPORT_NAME);
-                    attachments.put("diff", link);
-                    return new AnalysisResult(AnalysisResultState.FAIL, "disassemblies of .class files are different",attachments);
+                    Path disassembled1 = javap(dir1, data1, clazzFileName, getJavapArgs());
+                    Path disassembled2 = javap(dir2, data2, clazzFileName, getJavapArgs());
+
+                    String code1 = Files.readString(disassembled1);
+                    String code2 = Files.readString(disassembled2);
+
+                    if (code1.equals(code2)) {
+                        return new AnalysisResult(AnalysisResultState.PASS, "disassemblies of .class files are identical", attachments);
+                    } else {
+                        Path diff = folder.resolve(DIFF_REPORT_NAME);
+                        ResourceUtil.diff(disassembled1, disassembled2, diff);
+                        String link = ResourceUtil.createLink(contextDir, resource, this, DIFF_REPORT_NAME);
+                        attachments.add(new AnalysisResultAttachment("diff", link, AnalysisResultAttachment.Kind.DIFF));
+                        return new AnalysisResult(AnalysisResultState.FAIL, "disassemblies of .class files are different", attachments);
+                    }
+                } catch (Exception x) {
+                    LOG.error("Error disassembling and comparing .class files", x);
+
+                    try {
+                        Path errorFile = folder.resolve("error.txt");
+                        ResourceUtil.createErrorFile(x, "Exception running analysis: \"" + this.name() + "\"", errorFile);
+                        String link = ResourceUtil.createLink(contextDir, resource, this, "error.txt");
+                        attachments.add(new AnalysisResultAttachment("error", link, AnalysisResultAttachment.Kind.ERROR));
+                    }
+                    catch (Exception y) {
+                        // e.g. if folder==null
+                        LOG.error("Error creating error attachments", y);
+                    }
+                    return new AnalysisResult(AnalysisResultState.ERROR, "Error disassembling and comparing .class files", attachments);
                 }
-            }
-            catch (Exception e) {
-                LOG.error("Error disassembling and comparing .class files",e);
-                return new AnalysisResult(AnalysisResultState.ERROR, "Error disassembling and comparing .class files");
             }
         }
         else {
