@@ -101,7 +101,7 @@ public class DaleqAnalyser implements Analyser {
                     ResourceUtil.diff(idbFullFile1, idbFullFile2, diffFull);
                     String link2 = ResourceUtil.createLink(contextDir, resource, this, DIFF_FULL_REPORT_NAME);
                     attachments.put("diff-full", link2);
-                    
+
                     return new AnalysisResult(AnalysisResultState.FAIL, "projected IDBs are different", attachments);
                 }
             }

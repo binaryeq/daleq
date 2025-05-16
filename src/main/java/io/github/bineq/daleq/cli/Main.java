@@ -119,7 +119,7 @@ public class Main {
 
                 // create links for attachments
                 for (String linkName:analyserResult.attachments().keySet()) {
-                    row+=String.format("  <a href=\"%s\" target=\"_blank\">%s</a>", analyserResult.attachments().get(linkName),"&Delta;");
+                    row+=String.format("  <a href=\"%s\" target=\"_blank\" title=\"%s\">%s</a>", analyserResult.attachments().get(linkName),linkName,"&Delta;");
                 }
                 row+="</td>";
             }
