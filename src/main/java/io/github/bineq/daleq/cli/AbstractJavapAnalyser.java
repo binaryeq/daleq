@@ -1,11 +1,13 @@
 package io.github.bineq.daleq.cli;
 
+import com.google.common.base.Preconditions;
 import io.github.bineq.daleq.IOUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 /**
@@ -19,6 +21,18 @@ public abstract class AbstractJavapAnalyser implements Analyser {
     protected static final Logger LOG = LoggerFactory.getLogger(AbstractJavapAnalyser.class);
     protected static final String DIFF_REPORT_NAME = "diff.html";
 
+    private String equivalenceIsInferredFromEqualityLink = null;
+
+    @Override
+    public void init(Path outDir) throws IOException {
+        Analyser.super.init(outDir);
+        String equivalenceIsInferredFromEqualityResourceHtmlReportName = "equivalence-inferred-from-equality.html";
+        Path equivalenceIsInferredFromEqualityResource = Path.of(DaleqAnalyser.class.getClassLoader().getResource("cli/"+DaleqAnalyser.class.getName()+'/'+equivalenceIsInferredFromEqualityResourceHtmlReportName).getFile());
+        Preconditions.checkState(Files.exists(equivalenceIsInferredFromEqualityResource));
+        Path analysisFolder = ResourceUtil.createAnalysisFolder(outDir,this);
+        Files.copy(equivalenceIsInferredFromEqualityResource, analysisFolder.resolve(equivalenceIsInferredFromEqualityResourceHtmlReportName), StandardCopyOption.REPLACE_EXISTING);
+        equivalenceIsInferredFromEqualityLink = ResourceUtil.createLink(this,equivalenceIsInferredFromEqualityResourceHtmlReportName);
+    }
 
     @Override
     public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
@@ -35,7 +49,9 @@ public abstract class AbstractJavapAnalyser implements Analyser {
             // early intervention: if bytecodes are the same, there is no need to run javap, it will be the same
             // this is of course assuming that javap is deterministic
             if (Arrays.equals(data1,data2)) {
-                return new AnalysisResult(AnalysisResultState.PASS, "disassemblies of .class files are identical",attachments);
+                AnalysisResultAttachment attachment = new AnalysisResultAttachment("info",equivalenceIsInferredFromEqualityLink,AnalysisResultAttachment.Kind.INFO);
+                attachments.add(attachment);
+                return new AnalysisResult(AnalysisResultState.PASS, "disassemblies of identical .class files are identical",attachments);
             }
 
             else {
@@ -62,7 +78,7 @@ public abstract class AbstractJavapAnalyser implements Analyser {
                     } else {
                         Path diff = folder.resolve(DIFF_REPORT_NAME);
                         ResourceUtil.diff(disassembled1, disassembled2, diff);
-                        String link = ResourceUtil.createLink(contextDir, resource, this, DIFF_REPORT_NAME);
+                        String link = ResourceUtil.createLink(resource, this, DIFF_REPORT_NAME);
                         attachments.add(new AnalysisResultAttachment("diff", link, AnalysisResultAttachment.Kind.DIFF));
                         return new AnalysisResult(AnalysisResultState.FAIL, "disassemblies of .class files are different", attachments);
                     }
@@ -72,7 +88,7 @@ public abstract class AbstractJavapAnalyser implements Analyser {
                     try {
                         Path errorFile = folder.resolve("error.txt");
                         ResourceUtil.createErrorFile(x, "Exception running analysis: \"" + this.name() + "\"", errorFile);
-                        String link = ResourceUtil.createLink(contextDir, resource, this, "error.txt");
+                        String link = ResourceUtil.createLink(resource, this, "error.txt");
                         attachments.add(new AnalysisResultAttachment("error", link, AnalysisResultAttachment.Kind.ERROR));
                     }
                     catch (Exception y) {

@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.cli;
 
+import com.google.common.base.Preconditions;
 import io.github.bineq.daleq.IOUtil;
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +32,18 @@ public class DaleqAnalyser implements Analyser {
     private static final boolean SOUFFLE_AVAILABLE = checkSouffleExe();
     public static final String RULES = "/rules/advanced.souffle";
 
+    private String equivalenceIsInferredFromEqualityLink = null;
+
+    @Override
+    public void init(Path outDir) throws IOException {
+        Analyser.super.init(outDir);
+        String equivalenceIsInferredFromEqualityResourceHtmlReportName = "equivalence-inferred-from-equality.html";
+        Path equivalenceIsInferredFromEqualityResource = Path.of(DaleqAnalyser.class.getClassLoader().getResource("cli/"+DaleqAnalyser.class.getName()+'/'+equivalenceIsInferredFromEqualityResourceHtmlReportName).getFile());
+        Preconditions.checkState(Files.exists(equivalenceIsInferredFromEqualityResource));
+        Path analysisFolder = ResourceUtil.createAnalysisFolder(outDir,this);
+        Files.copy(equivalenceIsInferredFromEqualityResource, analysisFolder.resolve(equivalenceIsInferredFromEqualityResourceHtmlReportName), StandardCopyOption.REPLACE_EXISTING);
+        equivalenceIsInferredFromEqualityLink = ResourceUtil.createLink(this,equivalenceIsInferredFromEqualityResourceHtmlReportName);
+    }
 
     @Override
     public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
@@ -47,6 +61,8 @@ public class DaleqAnalyser implements Analyser {
             // early intervention: if bytecodes are the same, there is no need to run javap, it will be the same
             // this is of course assuming that javap is deterministic
             if (Arrays.equals(data1, data2)) {
+                AnalysisResultAttachment attachment = new AnalysisResultAttachment("info",equivalenceIsInferredFromEqualityLink,AnalysisResultAttachment.Kind.INFO);
+                attachments.add(attachment);
                 return new AnalysisResult(AnalysisResultState.PASS, ".class files are identical and will therefore be equivalent", attachments);
             }
 
@@ -92,12 +108,12 @@ public class DaleqAnalyser implements Analyser {
 
                     Path diffProjected = folder.resolve(DIFF_PROJECTED_REPORT_NAME);
                     ResourceUtil.diff(idbProjectedFile1, idbProjectedFile2, diffProjected);
-                    String link = ResourceUtil.createLink(contextDir, resource, this, DIFF_PROJECTED_REPORT_NAME);
+                    String link = ResourceUtil.createLink(resource, this, DIFF_PROJECTED_REPORT_NAME);
                     attachments.add(new AnalysisResultAttachment("diff-projected",link,AnalysisResultAttachment.Kind.DIFF));
 
                     Path diffFull = folder.resolve(DIFF_FULL_REPORT_NAME);
                     ResourceUtil.diff(idbFullFile1, idbFullFile2, diffFull);
-                    String link2 = ResourceUtil.createLink(contextDir, resource, this, DIFF_FULL_REPORT_NAME);
+                    String link2 = ResourceUtil.createLink(resource, this, DIFF_FULL_REPORT_NAME);
                     attachments.add(new AnalysisResultAttachment("diff-full",link2,AnalysisResultAttachment.Kind.DIFF));
 
                     return new AnalysisResult(AnalysisResultState.FAIL, "projected IDBs are different", attachments);
@@ -106,7 +122,7 @@ public class DaleqAnalyser implements Analyser {
             catch (Exception x) {
                 Path errorFile = folder.resolve("error.txt");
                 ResourceUtil.createErrorFile(x,"Exception running analysis: \"" + this.name()+"\"",errorFile);
-                String link = ResourceUtil.createLink(contextDir, resource, this, "error.txt");
+                String link = ResourceUtil.createLink(resource, this, "error.txt");
                 attachments.add(new AnalysisResultAttachment("error",link,AnalysisResultAttachment.Kind.ERROR));
                 return new AnalysisResult(AnalysisResultState.ERROR, "Failed to compute and compare IDB", attachments);
             }

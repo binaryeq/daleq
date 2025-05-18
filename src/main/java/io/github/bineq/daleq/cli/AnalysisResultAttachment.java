@@ -5,5 +5,5 @@ package io.github.bineq.daleq.cli;
  * @author jens dietrich
  */
 public record AnalysisResultAttachment (String name, String link, Kind kind) {
-    enum Kind {DIFF, ERROR, UNKNOWN}
+    enum Kind {DIFF, ERROR, INFO, UNKNOWN}
 }

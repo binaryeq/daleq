@@ -32,7 +32,7 @@ public class ResourceIsPresentAnalyser implements Analyser {
 
     @Override
     public String name() {
-        return "resource present?";
+        return "file present?";
     }
 
     @Override

@@ -19,6 +19,9 @@ public interface Analyser {
 
     String description();
 
+    // init the analyser, i.e. create an analysis folder and copy static resources into it
+    default void init(Path outDir) throws IOException {};
+
     default AnalysisResult checkResourceIsPresent(Path jar1, Path jar2, String resource) throws IOException {
         Set<String> resources1 = IOUtil.nonDirEntries(jar1);
         Set<String> resources2 = IOUtil.nonDirEntries(jar2);

@@ -82,6 +82,13 @@ public class Main {
     }
 
     private static void analyse(Path jar1, Path jar2, Path outPath) throws IOException {
+
+        LOG.info("Initialising analysers");
+        for (Analyser analyser:ANALYSERS) {
+            LOG.info("Initialising analyser {}", analyser.getClass().getSimpleName());
+            analyser.init(outPath);
+        }
+
         Set<String> content1 = IOUtil.nonDirEntries(jar1);
         Set<String> content2 = IOUtil.nonDirEntries(jar2);
         List<String> joinedContent = Sets.union(content1, content2).stream().sorted().collect(Collectors.toUnmodifiableList());
@@ -142,6 +149,7 @@ public class Main {
         return switch (kind) {
             case ERROR -> "&#9888;"; // or &#x26A0;
             case DIFF -> "&Delta;";
+            case INFO -> "&#8505;";
             default -> "?";
         };
     }

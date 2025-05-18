@@ -2,9 +2,9 @@ package io.github.bineq.daleq.cli;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,19 +36,34 @@ public class ResourceUtil {
             ;
     }
 
-    static Path createResourceFolder (Path outputDir,String resource, Analyser analyser) {
-        Path analysisSpecificDir = outputDir.resolve(analyser.getClass().getName());
-        Path resourceSpecificDir = analysisSpecificDir.resolve(resource);
-        resourceSpecificDir.toFile().mkdirs();
+    static Path createResourceFolder (Path outputDir,String resourceUnderAnalysis, Analyser analyser) throws IOException {
+        Path analysisSpecificDir = createAnalysisFolder(outputDir,analyser);
+        Path resourceSpecificDir = analysisSpecificDir.resolve(resourceUnderAnalysis);
+        if (!Files.exists(resourceSpecificDir)) {
+            Files.createDirectories(resourceSpecificDir);
+        }
         return resourceSpecificDir;
     }
 
-    // hyperlink to be used in report generated in outputDir
-    static String createLink (Path outputDir,String resource, Analyser analyser, String filename) {
-        // outputDir is context, can be ignored
-        return analyser.getClass().getName()+'/'+resource+'/'+filename;
+    // for "global" resources for a given analyser
+    static Path createAnalysisFolder (Path outputDir, Analyser analyser) throws IOException {
+        Path analysisSpecificDir = outputDir.resolve(analyser.getClass().getName());
+        if (!Files.exists(analysisSpecificDir)) {
+            Files.createDirectories(analysisSpecificDir);
+        }
+        return analysisSpecificDir;
     }
 
+    // hyperlink to be used in report generated in outputDir
+    static String createLink (String resourceUnderAnalysis, Analyser analyser, String filename) {
+        // outputDir is context, can be ignored
+        return analyser.getClass().getName()+'/'+resourceUnderAnalysis+'/'+filename;
+    }
+
+    static String createLink (Analyser analyser, String filename) {
+        // outputDir is context, can be ignored
+        return analyser.getClass().getName()+'/'+filename;
+    }
 
     static List<String> readLines(byte[] data, Charset charset) throws IOException {
         List<String> lines = new ArrayList<>();

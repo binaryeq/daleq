@@ -18,6 +18,7 @@ public class SameContentAnalyser implements Analyser {
     private static final String DIFF_REPORT_NAME = "diff.html";
     private static final Logger LOG = LoggerFactory.getLogger(SameContentAnalyser.class);
 
+
     @Override
     public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
         AnalysisResult analysisResult = checkResourceIsPresent(jar1,jar2,resource);
@@ -53,7 +54,7 @@ public class SameContentAnalyser implements Analyser {
                     Path diff = folder.resolve(DIFF_REPORT_NAME);
                     try {
                         ResourceUtil.diff(file1, file2, diff);
-                        String link = ResourceUtil.createLink(contextDir, resource, this, DIFF_REPORT_NAME);
+                        String link = ResourceUtil.createLink(resource, this, DIFF_REPORT_NAME);
                         attachments.add(new AnalysisResultAttachment("diff", link,AnalysisResultAttachment.Kind.DIFF));
                     }
                     catch (Exception e) {
@@ -78,7 +79,7 @@ public class SameContentAnalyser implements Analyser {
 
     @Override
     public String name() {
-        return "same data?";
+        return "same file?";
     }
 
     @Override
