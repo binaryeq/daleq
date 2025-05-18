@@ -1,15 +1,14 @@
 package io.github.bineq.daleq;
 
 import com.google.common.base.Preconditions;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
+import java.util.*;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -110,5 +109,53 @@ public class IOUtil {
         fis.close();
     }
 
+
+    // get the entries of a zip / jar as strings (paths within the zip)
+    // the returned set is sorted
+    public static Set<String> entries(Path file) throws IOException {
+        return entries(file,ze -> true);
+    }
+
+    // get the non-directory entries of a zip / jar as strings (paths within the zip)
+    // the returned set is sorted
+    public static Set<String> nonDirEntries(Path file) throws IOException {
+        return entries(file,ze -> !ze.isDirectory());
+    }
+
+    // get the entries of a zip / jar as strings (paths within the zip)
+    // the returned set is sorted
+    public static Set<String> entries(Path file,java.util.function.Predicate <ZipEntry> filter) throws IOException {
+        try (ZipFile zip = new ZipFile(file.toFile())) {
+            Set<String> entries = new TreeSet<>();
+            Enumeration<? extends ZipEntry> iter = zip.entries();
+            while (iter.hasMoreElements()) {
+                ZipEntry entry = iter.nextElement();
+                if (filter.test(entry)) {
+                    String s = entry.getName();
+                    entries.add(s);
+                }
+            }
+            return Collections.unmodifiableSet(entries);
+        }
+        catch (Exception x) {
+            throw new IOException("Error reading from zip file " + file,x);
+        }
+    }
+
+    // read a zip entry
+    public static byte[] readEntryFromZip(Path file,String entryName) throws IOException {
+        try (ZipFile zip = new ZipFile(file.toFile())) {
+            ZipEntry entry = zip.getEntry(entryName);
+            try (InputStream inputStream = zip.getInputStream(entry)) {
+                // Read and process the entry contents using the inputStream
+                byte[] data = new byte[inputStream.available()];
+                inputStream.read(data);
+                return data;
+            }
+        }
+        catch (Exception x) {
+            throw new IOException("Error reading from zip file " + file,x);
+        }
+    }
 
 }

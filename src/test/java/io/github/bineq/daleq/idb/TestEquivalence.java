@@ -2,6 +2,7 @@ package io.github.bineq.daleq.idb;
 
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -67,6 +68,7 @@ public class TestEquivalence {
         testEquivalence(class1,class2);
     }
 
+    @Disabled // need new oracles, as there are changes related to JEP280 in those classes
     @Test
     public void testRemoveDuplicatedCheckcast() throws Exception {
         String class1 = "/test-scenarios/scenario2/version1/XMLPropertyListConfiguration.class";

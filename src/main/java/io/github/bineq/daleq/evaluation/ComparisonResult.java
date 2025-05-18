@@ -1,9 +1,11 @@
 package io.github.bineq.daleq.evaluation;
 
 /**
- * The result of comparsing two binaries.
+ * The result of comparing two binaries.
  * @author jens dietrich
  */
 public enum ComparisonResult {
-    SAME_BIN, ERROR, SAME_IDB, DIFFERENT
+
+    // note that the order is used in comparisons based on compareTo, so this matters !
+    EQUAL, EQUIVALENT, NON_EQUIVALENT, ERROR
 }

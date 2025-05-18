@@ -156,7 +156,7 @@ public class IDBPrinter {
         printIDB(idb, out);
     }
 
-    private static void printIDB(IDB idb, Path out) throws IOException {
+    public static void printIDB(IDB idb, Path out) throws IOException {
         List<String> lines = printToLines(idb);
         Files.write(out, lines);
         LOG.info("output written to {}", out);
