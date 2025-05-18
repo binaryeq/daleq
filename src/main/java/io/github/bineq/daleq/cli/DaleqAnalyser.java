@@ -94,15 +94,25 @@ public class DaleqAnalyser implements Analyser {
                 Path idbFullFile1 = dir1.resolve("idb-full.txt");
                 Path idbFullFile2 = dir2.resolve("idb-full.txt");
 
+                IDBPrinter.printIDB(idb1, idbFullFile1);
+                IDBPrinter.printIDB(idb2, idbFullFile2);
                 IDBPrinter.printIDB(idb1.project(), idbProjectedFile1);
                 IDBPrinter.printIDB(idb2.project(), idbProjectedFile2);
+
+                String idb1FullAsString = Files.readString(idbFullFile1);
+                String idb2FullAsString = Files.readString(idbFullFile2);
                 String idb1ProjectedAsString = Files.readString(idbProjectedFile1);
                 String idb2ProjectedAsString = Files.readString(idbProjectedFile2);
 
-                IDBPrinter.printIDB(idb1, idbFullFile1);
-                IDBPrinter.printIDB(idb2, idbFullFile2);
 
                 if (idb1ProjectedAsString.equals(idb2ProjectedAsString)) {
+                    if (!idb1FullAsString.equals(idb2FullAsString)) {
+                        // still print diff
+                        Path diffFull = folder.resolve(DIFF_FULL_REPORT_NAME);
+                        ResourceUtil.diff(idbFullFile1, idbFullFile2, diffFull);
+                        String link2 = ResourceUtil.createLink(resource, this, DIFF_FULL_REPORT_NAME);
+                        attachments.add(new AnalysisResultAttachment("diff-full",link2,AnalysisResultAttachment.Kind.DIFF));
+                    }
                     return new AnalysisResult(AnalysisResultState.PASS, "projected IDBs are identical", attachments);
                 } else {
 
