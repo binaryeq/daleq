@@ -1,7 +1,6 @@
 package io.github.bineq.daleq.cli;
 
 import io.github.bineq.daleq.IOUtil;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;

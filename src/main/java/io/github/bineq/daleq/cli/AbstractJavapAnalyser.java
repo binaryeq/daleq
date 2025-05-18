@@ -27,7 +27,7 @@ public abstract class AbstractJavapAnalyser implements Analyser {
     public void init(Path outDir) throws IOException {
         Analyser.super.init(outDir);
         String equivalenceIsInferredFromEqualityResourceHtmlReportName = "equivalence-inferred-from-equality.html";
-        Path equivalenceIsInferredFromEqualityResource = Path.of(DaleqAnalyser.class.getClassLoader().getResource("cli/"+DaleqAnalyser.class.getName()+'/'+equivalenceIsInferredFromEqualityResourceHtmlReportName).getFile());
+        Path equivalenceIsInferredFromEqualityResource = Path.of(this.getClass().getClassLoader().getResource("cli/"+this.getClass().getName()+'/'+equivalenceIsInferredFromEqualityResourceHtmlReportName).getFile());
         Preconditions.checkState(Files.exists(equivalenceIsInferredFromEqualityResource));
         Path analysisFolder = ResourceUtil.createAnalysisFolder(outDir,this);
         Files.copy(equivalenceIsInferredFromEqualityResource, analysisFolder.resolve(equivalenceIsInferredFromEqualityResourceHtmlReportName), StandardCopyOption.REPLACE_EXISTING);
