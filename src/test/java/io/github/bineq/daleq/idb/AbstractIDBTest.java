@@ -4,10 +4,11 @@ import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -104,7 +105,7 @@ public abstract class AbstractIDBTest {
     protected List<String[]> getFacts(String predicate, Path dir, String extension, Predicate<String[]> filter) throws IOException {
         Path factFile = dir.resolve(predicate+extension);
         if (!Files.exists(factFile)) {
-            throw new FileNotFoundException(factFile.toString());
+            return Collections.EMPTY_LIST;
         }
         return Files.readAllLines(factFile).stream()
             .filter(line -> !line.isEmpty())
