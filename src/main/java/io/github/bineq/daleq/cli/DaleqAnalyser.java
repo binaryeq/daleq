@@ -9,7 +9,6 @@ import io.github.bineq.daleq.idb.IDBPrinter;
 import io.github.bineq.daleq.idb.IDBReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,6 +16,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.net.URL;
 
 import static io.github.bineq.daleq.Souffle.checkSouffleExe;
 
@@ -30,7 +31,9 @@ public class DaleqAnalyser implements Analyser {
     private static final String DIFF_PROJECTED_REPORT_NAME = "diff-projected.html";
     private static final String DIFF_FULL_REPORT_NAME = "diff-full.html";
     private static final boolean SOUFFLE_AVAILABLE = checkSouffleExe();
+    private static final URL PROJECTED_IDB_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/projected-idb.html");
     public static final String RULES = "/rules/advanced.souffle";
+
 
     private String equivalenceIsInferredFromEqualityLink = null;
 
@@ -113,6 +116,16 @@ public class DaleqAnalyser implements Analyser {
                         String link2 = ResourceUtil.createLink(resource, this, DIFF_FULL_REPORT_NAME);
                         attachments.add(new AnalysisResultAttachment("diff-full",link2,AnalysisResultAttachment.Kind.DIFF));
                     }
+
+                    // print projected IDBs
+                    Map<String,String> bindings = Map.of(
+                        "code",idb1ProjectedAsString,
+                        "header","Projected IDB",
+                        "details","The textual representations of the projected IDBs generated for the classes compared are the same. Projected means that some elements like ids and instruction counters that are influenced by normalisation rules are ignored. Please check the main report for links to the full IDBs."
+                    );
+                    String link = ResourceUtil.createReportFromTemplate(contextDir,this, resource, PROJECTED_IDB_TEMPLATE,"idb-projected.html", bindings);
+                    attachments.add(new AnalysisResultAttachment("diff-full",link,AnalysisResultAttachment.Kind.INFO));
+
                     return new AnalysisResult(AnalysisResultState.PASS, "projected IDBs are identical", attachments);
                 } else {
 

@@ -1,13 +1,20 @@
 package io.github.bineq.daleq.cli;
 
+import com.google.common.base.Preconditions;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.*;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Utility to create structures to resources like diff files created during analysis.
@@ -86,31 +93,44 @@ public class ResourceUtil {
         }
     }
 
+    /**
+     * Create a html page from a template and return the link.
+     * @param outputDir
+     * @param analyser
+     * @param resource - the resource (file) under analysis
+     * @param template - as resource reference (classpath)
+     * @param fileName - the local fileName
+     * @param bindings - binds ids if html elements in the template to values
+     * @return a link to the created resource (instantiated template)
+     */
+    static String createReportFromTemplate(Path outputDir, Analyser analyser, String resource, URL template, String fileName, Map<String,String> bindings) throws IOException {
+
+        Path templatePath = Path.of(template.getPath());
+        String templ = Files.readString(templatePath);
+        Document doc = Parser.htmlParser().parseInput(templ,"");
+
+        // instantiate template
+        for (String key: bindings.keySet()) {
+            Element element = doc.getElementById(key);
+            Preconditions.checkState(element!=null,"can't find element with id " + key + " in document " + templatePath);
+            String value = bindings.get(key);
+            element.appendText(value);
+        }
+
+        // write result
+        Path dir = createResourceFolder (outputDir, resource, analyser) ;
+        Path file = dir.resolve(fileName);
+        Files.write(file, doc.html().getBytes());
+
+        return createLink(resource, analyser, fileName);
+    }
+
     static void diff(Path file1, Path file2, Path diffFile) throws Exception {
-        // `diff -u idb-NoopCallback-1-full.txt idb-NoopCallback-2-full.txt | diff2html -i stdin -s side -F diff.html`
-
-//        new ProcessBuilder("diff","-u",file1.toFile().getAbsolutePath(),file2.toFile().getAbsolutePath())
-//            //.inheritIO()
-//            .redirectOutput(ProcessBuilder.Redirect.to(diffFile.toFile()))
-//            .start()
-//            .waitFor();
-
-
-//        new ProcessBuilder("diff","-u",file1.toFile().getAbsolutePath(),file2.toFile().getAbsolutePath())
-//            //.inheritIO()
-//            .redirectOutput(ProcessBuilder.Redirect.to(diffFile.toFile()))
-//            .start()
-//            .waitFor();
-
         List<ProcessBuilder> pipeline = List.of(
             new ProcessBuilder("diff","-u",file1.toFile().getAbsolutePath(),file2.toFile().getAbsolutePath()),
             new ProcessBuilder("diff2html", "-i","stdin","-s","side","-F",diffFile.toFile().getAbsolutePath())
         );
-
         ProcessBuilder.startPipeline(pipeline);
-
-
-
         LOG.info("diffed {} and {}, output written to {}", file1, file2, diffFile);
     }
 }
