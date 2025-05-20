@@ -80,11 +80,11 @@ public class DaleqAnalyser implements Analyser {
             Files.write(classFile1, data1);
             Files.write(classFile2, data2);
             Path edbDir1 = dir1.resolve("edb");
-            Path edbDir2 = folder.resolve("edb2");
+            Path edbDir2 = dir2.resolve("edb");
             Files.createDirectories(edbDir1);
             Files.createDirectories(edbDir2);
             Path idbDir1 = dir1.resolve("idb");
-            Path idbDir2 = folder.resolve("idb2");
+            Path idbDir2 = dir2.resolve("idb");
             Files.createDirectories(idbDir1);
             Files.createDirectories(idbDir2);
 
@@ -118,10 +118,18 @@ public class DaleqAnalyser implements Analyser {
                     }
 
                     // print projected IDBs
-                    Map<String,String> bindings = Map.of(
+                    Map<String,String> bindings = ResourceUtil.newModifiableMap(
                         "code",idb1ProjectedAsString,
                         "header","Projected IDB",
-                        "details","The textual representations of the projected IDBs generated for the classes compared are the same. Projected means that some elements like ids and instruction counters that are influenced by normalisation rules are ignored. Please check the main report for links to the full IDBs."
+                        "details","The textual representations of the projected IDBs generated for the classes compared are the same. Projected means that some elements like ids and instruction counters that are influenced by normalisation rules are ignored. Please check the main report for links to the full IDBs.",
+                        "edb1",edbDir1.toString(),
+                        "edb2",edbDir2.toString(),
+                        "idb1",idbDir1.toString(),
+                        "idb2",idbDir2.toString(),
+                        "idb1txt",idbFullFile1.toString(),   // TODO: use alternative way to construct map, too many keys and values
+                        "idb2txt",idbFullFile2.toString(),
+                        "pidb1txt",idbProjectedFile1.toString(),
+                        "pidb2txt",idbProjectedFile2.toString()
                     );
                     String link = ResourceUtil.createReportFromTemplate(contextDir,this, resource, PROJECTED_IDB_TEMPLATE,"idb-projected.html", bindings);
                     attachments.add(new AnalysisResultAttachment("diff-full",link,AnalysisResultAttachment.Kind.INFO));

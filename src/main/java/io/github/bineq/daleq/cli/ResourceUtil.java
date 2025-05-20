@@ -13,6 +13,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -132,5 +133,16 @@ public class ResourceUtil {
         );
         ProcessBuilder.startPipeline(pipeline);
         LOG.info("diffed {} and {}, output written to {}", file1, file2, diffFile);
+    }
+
+    static Map<String,String> newModifiableMap(String... keysAndValues) {
+        Preconditions.checkArgument(keysAndValues.length % 2 == 0," number of arguments expected to be even");
+        Map<String,String> map = new HashMap<>();
+        for (int i=0;i<keysAndValues.length;i+=2) {
+            String key = keysAndValues[i];
+            String value = keysAndValues[i+1];
+            map.put(key,value);
+        }
+        return map;
     }
 }

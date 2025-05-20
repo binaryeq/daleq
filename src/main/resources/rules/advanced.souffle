@@ -12,7 +12,6 @@ IS_ROOT_METHOD("R_IS_ROOT_METHOD_GETCLASS","getClass", "()Ljava/lang/Class;").
 IS_ROOT_METHOD("R_IS_ROOT_METHOD_TOSTRING","toString", "()Ljava/lang/String;").
 IS_ROOT_METHOD("R_IS_ROOT_METHOD_EQUALS","equals","(Ljava/lang/Object;)Z").
 IS_ROOT_METHOD("R_IS_ROOT_METHOD_HASHCODE","hashCode","()I").
-// TODO: more
 
 // remove invokeinterface and replace with invokevirtual
 REMOVED_INSTRUCTION(cat("R_REMOVE_PR5165","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,_,name,desc,_),IS_ROOT_METHOD(factid2,name,desc).
