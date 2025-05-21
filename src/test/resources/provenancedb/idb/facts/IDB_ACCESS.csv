@@ -1,0 +1,4 @@
+R_ACCESS[F3495]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer	33
+R_ACCESS[F3498]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::<init>()V	1
+R_ACCESS[F3507]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	1
+R_ACCESS[F3573]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Ljava/lang/Object;)Ljava/io/Serializable;	4161

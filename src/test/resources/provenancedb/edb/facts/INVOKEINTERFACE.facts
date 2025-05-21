@@ -1,0 +1,1 @@
+F3565	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	2800	ch/qos/logback/classic/spi/ILoggingEvent	getClass	()Ljava/lang/Class;	1

@@ -1,0 +1,5 @@
+F3563	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	2600	java/lang/StringBuilder	append	(Ljava/lang/String;)Ljava/lang/StringBuilder;	0
+F3566	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	2900	java/lang/Class	getName	()Ljava/lang/String;	0
+F3567	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	3000	java/lang/StringBuilder	append	(Ljava/lang/String;)Ljava/lang/StringBuilder;	0
+F3568	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	3100	java/lang/StringBuilder	toString	()Ljava/lang/String;	0
+F3582	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Ljava/lang/Object;)Ljava/io/Serializable;	400	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer	transform	(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	0

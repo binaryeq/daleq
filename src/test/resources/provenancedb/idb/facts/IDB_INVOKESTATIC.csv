@@ -1,0 +1,1 @@
+R_INVOKESTATIC[F3547]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	1000	ch/qos/logback/classic/spi/LoggingEventVO	build	(Lch/qos/logback/classic/spi/ILoggingEvent;)Lch/qos/logback/classic/spi/LoggingEventVO;	0

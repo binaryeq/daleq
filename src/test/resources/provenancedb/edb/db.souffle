@@ -1,0 +1,489 @@
+.decl SUPERCLASS(factid: symbol,name: symbol,supername: symbol)
+.input SUPERCLASS // facts are imported from SUPERCLASS.facts
+
+.decl INTERFACE(factid: symbol,name: symbol,interface: symbol)
+.input INTERFACE // facts are imported from INTERFACE.facts
+
+.decl FIELD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+.input FIELD // facts are imported from FIELD.facts
+
+.decl METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+.input METHOD // facts are imported from METHOD.facts
+
+.decl VERSION(factid: symbol,classname: symbol,version: number)
+.input VERSION // facts are imported from VERSION.facts
+
+.decl CLASS_SIGNATURE(factid: symbol,classname: symbol,signature: symbol)
+.input CLASS_SIGNATURE // facts are imported from CLASS_SIGNATURE.facts
+
+.decl FIELD_SIGNATURE(factid: symbol,fieldid: symbol,signature: symbol)
+.input FIELD_SIGNATURE // facts are imported from FIELD_SIGNATURE.facts
+
+.decl METHOD_SIGNATURE(factid: symbol,methodid: symbol,signature: symbol)
+.input METHOD_SIGNATURE // facts are imported from METHOD_SIGNATURE.facts
+
+.decl ACCESS(factid: symbol,id: symbol,access: number)
+.input ACCESS // facts are imported from ACCESS.facts
+
+.decl LABEL(factid: symbol,methodid: symbol,instructioncounter: number,labelid: symbol)
+.input LABEL // facts are imported from LABEL.facts
+
+.decl NOP(factid: symbol,methodid: symbol,instructioncounter: number)
+.input NOP // facts are imported from NOP.facts
+
+.decl ACONST_NULL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ACONST_NULL // facts are imported from ACONST_NULL.facts
+
+.decl ICONST_M1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_M1 // facts are imported from ICONST_M1.facts
+
+.decl ICONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_0 // facts are imported from ICONST_0.facts
+
+.decl ICONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_1 // facts are imported from ICONST_1.facts
+
+.decl ICONST_2(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_2 // facts are imported from ICONST_2.facts
+
+.decl ICONST_3(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_3 // facts are imported from ICONST_3.facts
+
+.decl ICONST_4(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_4 // facts are imported from ICONST_4.facts
+
+.decl ICONST_5(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_5 // facts are imported from ICONST_5.facts
+
+.decl LCONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LCONST_0 // facts are imported from LCONST_0.facts
+
+.decl LCONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LCONST_1 // facts are imported from LCONST_1.facts
+
+.decl FCONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FCONST_0 // facts are imported from FCONST_0.facts
+
+.decl FCONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FCONST_1 // facts are imported from FCONST_1.facts
+
+.decl DCONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DCONST_0 // facts are imported from DCONST_0.facts
+
+.decl DCONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DCONST_1 // facts are imported from DCONST_1.facts
+
+.decl BIPUSH(factid: symbol,methodid: symbol,instructioncounter: number,operand: number)
+.input BIPUSH // facts are imported from BIPUSH.facts
+
+.decl SIPUSH(factid: symbol,methodid: symbol,instructioncounter: number,operand: number)
+.input SIPUSH // facts are imported from SIPUSH.facts
+
+.decl LDC(factid: symbol,methodid: symbol,instructioncounter: number,cst: symbol)
+.input LDC // facts are imported from LDC.facts
+
+.decl ILOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input ILOAD // facts are imported from ILOAD.facts
+
+.decl LLOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input LLOAD // facts are imported from LLOAD.facts
+
+.decl FLOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input FLOAD // facts are imported from FLOAD.facts
+
+.decl DLOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input DLOAD // facts are imported from DLOAD.facts
+
+.decl ALOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input ALOAD // facts are imported from ALOAD.facts
+
+.decl IALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IALOAD // facts are imported from IALOAD.facts
+
+.decl LALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LALOAD // facts are imported from LALOAD.facts
+
+.decl FALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FALOAD // facts are imported from FALOAD.facts
+
+.decl DALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DALOAD // facts are imported from DALOAD.facts
+
+.decl AALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input AALOAD // facts are imported from AALOAD.facts
+
+.decl BALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input BALOAD // facts are imported from BALOAD.facts
+
+.decl CALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input CALOAD // facts are imported from CALOAD.facts
+
+.decl SALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input SALOAD // facts are imported from SALOAD.facts
+
+.decl ISTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input ISTORE // facts are imported from ISTORE.facts
+
+.decl LSTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input LSTORE // facts are imported from LSTORE.facts
+
+.decl FSTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input FSTORE // facts are imported from FSTORE.facts
+
+.decl DSTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input DSTORE // facts are imported from DSTORE.facts
+
+.decl ASTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input ASTORE // facts are imported from ASTORE.facts
+
+.decl IASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IASTORE // facts are imported from IASTORE.facts
+
+.decl LASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LASTORE // facts are imported from LASTORE.facts
+
+.decl FASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FASTORE // facts are imported from FASTORE.facts
+
+.decl DASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DASTORE // facts are imported from DASTORE.facts
+
+.decl AASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input AASTORE // facts are imported from AASTORE.facts
+
+.decl BASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input BASTORE // facts are imported from BASTORE.facts
+
+.decl CASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input CASTORE // facts are imported from CASTORE.facts
+
+.decl SASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input SASTORE // facts are imported from SASTORE.facts
+
+.decl POP(factid: symbol,methodid: symbol,instructioncounter: number)
+.input POP // facts are imported from POP.facts
+
+.decl POP2(factid: symbol,methodid: symbol,instructioncounter: number)
+.input POP2 // facts are imported from POP2.facts
+
+.decl DUP(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DUP // facts are imported from DUP.facts
+
+.decl DUP_X1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DUP_X1 // facts are imported from DUP_X1.facts
+
+.decl DUP_X2(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DUP_X2 // facts are imported from DUP_X2.facts
+
+.decl DUP2(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DUP2 // facts are imported from DUP2.facts
+
+.decl DUP2_X1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DUP2_X1 // facts are imported from DUP2_X1.facts
+
+.decl SWAP(factid: symbol,methodid: symbol,instructioncounter: number)
+.input SWAP // facts are imported from SWAP.facts
+
+.decl IADD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IADD // facts are imported from IADD.facts
+
+.decl LADD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LADD // facts are imported from LADD.facts
+
+.decl FADD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FADD // facts are imported from FADD.facts
+
+.decl DADD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DADD // facts are imported from DADD.facts
+
+.decl ISUB(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ISUB // facts are imported from ISUB.facts
+
+.decl LSUB(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LSUB // facts are imported from LSUB.facts
+
+.decl FSUB(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FSUB // facts are imported from FSUB.facts
+
+.decl DSUB(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DSUB // facts are imported from DSUB.facts
+
+.decl IMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IMUL // facts are imported from IMUL.facts
+
+.decl LMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LMUL // facts are imported from LMUL.facts
+
+.decl FMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FMUL // facts are imported from FMUL.facts
+
+.decl DMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DMUL // facts are imported from DMUL.facts
+
+.decl IDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IDIV // facts are imported from IDIV.facts
+
+.decl LDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LDIV // facts are imported from LDIV.facts
+
+.decl FDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FDIV // facts are imported from FDIV.facts
+
+.decl DDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DDIV // facts are imported from DDIV.facts
+
+.decl IREM(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IREM // facts are imported from IREM.facts
+
+.decl LREM(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LREM // facts are imported from LREM.facts
+
+.decl DREM(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DREM // facts are imported from DREM.facts
+
+.decl INEG(factid: symbol,methodid: symbol,instructioncounter: number)
+.input INEG // facts are imported from INEG.facts
+
+.decl LNEG(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LNEG // facts are imported from LNEG.facts
+
+.decl DNEG(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DNEG // facts are imported from DNEG.facts
+
+.decl ISHL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ISHL // facts are imported from ISHL.facts
+
+.decl LSHL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LSHL // facts are imported from LSHL.facts
+
+.decl ISHR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ISHR // facts are imported from ISHR.facts
+
+.decl LSHR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LSHR // facts are imported from LSHR.facts
+
+.decl IUSHR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IUSHR // facts are imported from IUSHR.facts
+
+.decl LUSHR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LUSHR // facts are imported from LUSHR.facts
+
+.decl IAND(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IAND // facts are imported from IAND.facts
+
+.decl LAND(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LAND // facts are imported from LAND.facts
+
+.decl IOR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IOR // facts are imported from IOR.facts
+
+.decl LOR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LOR // facts are imported from LOR.facts
+
+.decl IXOR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IXOR // facts are imported from IXOR.facts
+
+.decl LXOR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LXOR // facts are imported from LXOR.facts
+
+.decl IINC(factid: symbol,methodid: symbol,instructioncounter: number,incr: number,var: number)
+.input IINC // facts are imported from IINC.facts
+
+.decl I2L(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2L // facts are imported from I2L.facts
+
+.decl I2F(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2F // facts are imported from I2F.facts
+
+.decl I2D(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2D // facts are imported from I2D.facts
+
+.decl L2I(factid: symbol,methodid: symbol,instructioncounter: number)
+.input L2I // facts are imported from L2I.facts
+
+.decl L2F(factid: symbol,methodid: symbol,instructioncounter: number)
+.input L2F // facts are imported from L2F.facts
+
+.decl L2D(factid: symbol,methodid: symbol,instructioncounter: number)
+.input L2D // facts are imported from L2D.facts
+
+.decl F2I(factid: symbol,methodid: symbol,instructioncounter: number)
+.input F2I // facts are imported from F2I.facts
+
+.decl F2L(factid: symbol,methodid: symbol,instructioncounter: number)
+.input F2L // facts are imported from F2L.facts
+
+.decl F2D(factid: symbol,methodid: symbol,instructioncounter: number)
+.input F2D // facts are imported from F2D.facts
+
+.decl D2I(factid: symbol,methodid: symbol,instructioncounter: number)
+.input D2I // facts are imported from D2I.facts
+
+.decl D2L(factid: symbol,methodid: symbol,instructioncounter: number)
+.input D2L // facts are imported from D2L.facts
+
+.decl D2F(factid: symbol,methodid: symbol,instructioncounter: number)
+.input D2F // facts are imported from D2F.facts
+
+.decl I2B(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2B // facts are imported from I2B.facts
+
+.decl I2C(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2C // facts are imported from I2C.facts
+
+.decl I2S(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2S // facts are imported from I2S.facts
+
+.decl LCMP(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LCMP // facts are imported from LCMP.facts
+
+.decl FCMPL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FCMPL // facts are imported from FCMPL.facts
+
+.decl FCMPG(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FCMPG // facts are imported from FCMPG.facts
+
+.decl DCMPL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DCMPL // facts are imported from DCMPL.facts
+
+.decl DCMPG(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DCMPG // facts are imported from DCMPG.facts
+
+.decl IFEQ(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFEQ // facts are imported from IFEQ.facts
+
+.decl IFNE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFNE // facts are imported from IFNE.facts
+
+.decl IFLT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFLT // facts are imported from IFLT.facts
+
+.decl IFGE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFGE // facts are imported from IFGE.facts
+
+.decl IFGT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFGT // facts are imported from IFGT.facts
+
+.decl IFLE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFLE // facts are imported from IFLE.facts
+
+.decl IF_ICMPEQ(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPEQ // facts are imported from IF_ICMPEQ.facts
+
+.decl IF_ICMPNE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPNE // facts are imported from IF_ICMPNE.facts
+
+.decl IF_ICMPLT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPLT // facts are imported from IF_ICMPLT.facts
+
+.decl IF_ICMPGE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPGE // facts are imported from IF_ICMPGE.facts
+
+.decl IF_ICMPGT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPGT // facts are imported from IF_ICMPGT.facts
+
+.decl IF_ICMPLE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPLE // facts are imported from IF_ICMPLE.facts
+
+.decl IF_ACMPEQ(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ACMPEQ // facts are imported from IF_ACMPEQ.facts
+
+.decl IF_ACMPNE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ACMPNE // facts are imported from IF_ACMPNE.facts
+
+.decl GOTO(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input GOTO // facts are imported from GOTO.facts
+
+.decl JSR(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input JSR // facts are imported from JSR.facts
+
+.decl RET(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input RET // facts are imported from RET.facts
+
+.decl TABLESWITCH(factid: symbol,methodid: symbol,instructioncounter: number,dflt: symbol,labels: symbol,max_: number,min_: number)
+.input TABLESWITCH // facts are imported from TABLESWITCH.facts
+
+.decl LOOKUPSWITCH(factid: symbol,methodid: symbol,instructioncounter: number,dflt: symbol,keys: symbol,labels: symbol)
+.input LOOKUPSWITCH // facts are imported from LOOKUPSWITCH.facts
+
+.decl IRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IRETURN // facts are imported from IRETURN.facts
+
+.decl LRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LRETURN // facts are imported from LRETURN.facts
+
+.decl FRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FRETURN // facts are imported from FRETURN.facts
+
+.decl DRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DRETURN // facts are imported from DRETURN.facts
+
+.decl ARETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ARETURN // facts are imported from ARETURN.facts
+
+.decl RETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input RETURN // facts are imported from RETURN.facts
+
+.decl GETSTATIC(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+.input GETSTATIC // facts are imported from GETSTATIC.facts
+
+.decl PUTSTATIC(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+.input PUTSTATIC // facts are imported from PUTSTATIC.facts
+
+.decl GETFIELD(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+.input GETFIELD // facts are imported from GETFIELD.facts
+
+.decl PUTFIELD(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+.input PUTFIELD // facts are imported from PUTFIELD.facts
+
+.decl INVOKEVIRTUAL(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+.input INVOKEVIRTUAL // facts are imported from INVOKEVIRTUAL.facts
+
+.decl INVOKESPECIAL(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+.input INVOKESPECIAL // facts are imported from INVOKESPECIAL.facts
+
+.decl INVOKESTATIC(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+.input INVOKESTATIC // facts are imported from INVOKESTATIC.facts
+
+.decl INVOKEINTERFACE(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+.input INVOKEINTERFACE // facts are imported from INVOKEINTERFACE.facts
+
+.decl INVOKEDYNAMIC(factid: symbol,methodid: symbol,instructioncounter: number,name: symbol,desc: symbol,bsmArgs: symbol,bsm_getOwner: symbol,bsm_getName: symbol,bsm_getDesc: symbol,bsm_getTag: number,bsm_isInterface: number)
+.input INVOKEDYNAMIC // facts are imported from INVOKEDYNAMIC.facts
+
+.decl NEW(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+.input NEW // facts are imported from NEW.facts
+
+.decl NEWARRAY(factid: symbol,methodid: symbol,instructioncounter: number,operand: number)
+.input NEWARRAY // facts are imported from NEWARRAY.facts
+
+.decl ANEWARRAY(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+.input ANEWARRAY // facts are imported from ANEWARRAY.facts
+
+.decl ARRAYLENGTH(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ARRAYLENGTH // facts are imported from ARRAYLENGTH.facts
+
+.decl ATHROW(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ATHROW // facts are imported from ATHROW.facts
+
+.decl CHECKCAST(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+.input CHECKCAST // facts are imported from CHECKCAST.facts
+
+.decl INSTANCEOF(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+.input INSTANCEOF // facts are imported from INSTANCEOF.facts
+
+.decl MONITORENTER(factid: symbol,methodid: symbol,instructioncounter: number)
+.input MONITORENTER // facts are imported from MONITORENTER.facts
+
+.decl MONITOREXIT(factid: symbol,methodid: symbol,instructioncounter: number)
+.input MONITOREXIT // facts are imported from MONITOREXIT.facts
+
+.decl MULTIANEWARRAY(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol,dims: number)
+.input MULTIANEWARRAY // facts are imported from MULTIANEWARRAY.facts
+
+.decl IFNULL(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFNULL // facts are imported from IFNULL.facts
+
+.decl IFNONNULL(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFNONNULL // facts are imported from IFNONNULL.facts
+

@@ -1,0 +1,1 @@
+F3493	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer	Ljava/lang/Object;Lch/qos/logback/core/spi/PreSerializationTransformer<Lch/qos/logback/classic/spi/ILoggingEvent;>;

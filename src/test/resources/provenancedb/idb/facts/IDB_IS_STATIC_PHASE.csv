@@ -1,0 +1,1 @@
+R_IS_STATIC_PHASE[F3573]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Ljava/lang/Object;)Ljava/io/Serializable;

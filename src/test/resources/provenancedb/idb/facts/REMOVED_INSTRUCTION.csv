@@ -1,0 +1,1 @@
+R_REMOVE_PR5165[F3565,R_IS_ROOT_METHOD_GETCLASS]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	2800

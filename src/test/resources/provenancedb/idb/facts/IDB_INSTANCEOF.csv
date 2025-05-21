@@ -1,0 +1,2 @@
+R_INSTANCEOF[F3544]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	700	ch/qos/logback/classic/spi/LoggingEvent
+R_INSTANCEOF[F3551]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	1400	ch/qos/logback/classic/spi/LoggingEventVO

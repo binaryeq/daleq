@@ -1,0 +1,4 @@
+R_ARETURN[F3541]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	400
+R_ARETURN[F3548]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	1100
+R_ARETURN[F3555]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;	1800
+R_ARETURN[F3583]	ch/qos/logback/classic/net/LoggingEventPreSerializationTransformer::transform(Ljava/lang/Object;)Ljava/io/Serializable;	500
