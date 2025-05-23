@@ -115,7 +115,7 @@ public class ResourceUtil {
             Element element = doc.getElementById(key);
             Preconditions.checkState(element!=null,"can't find element with id " + key + " in document " + templatePath);
             String value = bindings.get(key);
-            element.appendText(value);
+            element.append(value);
         }
 
         // write result

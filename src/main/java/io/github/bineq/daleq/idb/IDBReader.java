@@ -53,10 +53,24 @@ public class IDBReader {
             Predicate predicate = fact.predicate();
             assert IDBPredicateRegistry.ALL.values().contains(predicate);
             if (predicate.isInstructionPredicate()) {
-                String methodId = getMethodId(fact);
-                Collection<Fact> instructionFacts = idb.methodInstructionFacts.computeIfAbsent(methodId,mId -> new TreeSet<>(COMPARE_INSTRUCTION_FACTS_BY_POSITION));
-                boolean added = instructionFacts.add(fact);
-                // assert added;
+                if (predicate==IDBRemovalPredicates.REMOVED_INSTRUCTION) {
+                    String methodId = getMethodId(fact);
+                    Collection<Fact> instructionFacts = idb.removedInstructionFacts.computeIfAbsent(methodId,mId -> new TreeSet<>(COMPARE_INSTRUCTION_FACTS_BY_POSITION));
+                    instructionFacts.add(fact);
+                }
+                else if (predicate==IDBRemovalPredicates.MOVED_INSTRUCTION) {
+                    String methodId1 = (String)fact.values()[1]; // from
+                    String methodId2 = (String)fact.values()[2]; // to
+                    Collection<Fact> instructionFacts = idb.removedInstructionFacts.computeIfAbsent(methodId1,mId -> new TreeSet<>(COMPARE_INSTRUCTION_FACTS_BY_POSITION));
+                    instructionFacts.add(fact);
+                    instructionFacts = idb.removedInstructionFacts.computeIfAbsent(methodId2,mId -> new TreeSet<>(COMPARE_INSTRUCTION_FACTS_BY_POSITION));
+                    instructionFacts.add(fact);
+                }
+                else {
+                    String methodId = getMethodId(fact);
+                    Collection<Fact> instructionFacts = idb.methodInstructionFacts.computeIfAbsent(methodId, mId -> new TreeSet<>(COMPARE_INSTRUCTION_FACTS_BY_POSITION));
+                    instructionFacts.add(fact);
+                }
             }
             else {
                 if (isIDBVersionOf(predicate,EBDAdditionalPredicates.SUPERCLASS)) {

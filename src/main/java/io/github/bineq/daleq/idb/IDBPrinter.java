@@ -229,6 +229,16 @@ public class IDBPrinter {
             for (Fact methodInstructionFact:idb.methodInstructionFacts.getOrDefault(methodId, Set.of())) {
                 lines.add(stringify(methodInstructionFact));
             }
+
+            lines.addAll(comment2("removed instructions for method " + methodId));
+            for (Fact fact:idb.removedInstructionFacts.getOrDefault(methodId, Set.of())) {
+                lines.add(stringify(fact));
+            }
+
+            lines.addAll(comment2("moved instructions for method " + methodId));
+            for (Fact fact:idb.movedInstructionFacts.getOrDefault(methodId, Set.of())) {
+                lines.add(stringify(fact));
+            }
         }
 
         return lines;

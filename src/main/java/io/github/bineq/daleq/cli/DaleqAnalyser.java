@@ -1,7 +1,9 @@
 package io.github.bineq.daleq.cli;
 
 import com.google.common.base.Preconditions;
+import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.IOUtil;
+import io.github.bineq.daleq.Predicate;
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
 import io.github.bineq.daleq.idb.IDB;
@@ -9,15 +11,15 @@ import io.github.bineq.daleq.idb.IDBPrinter;
 import io.github.bineq.daleq.idb.IDBReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.net.URL;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static io.github.bineq.daleq.Souffle.checkSouffleExe;
 
@@ -32,6 +34,8 @@ public class DaleqAnalyser implements Analyser {
     private static final String DIFF_FULL_REPORT_NAME = "diff-full.html";
     private static final boolean SOUFFLE_AVAILABLE = checkSouffleExe();
     private static final URL PROJECTED_IDB_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/projected-idb.html");
+    private static final URL ADVANCED_DIFF_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/advanced-diff.html");
+
     public static final String RULES = "/rules/advanced.souffle";
 
 
@@ -122,6 +126,9 @@ public class DaleqAnalyser implements Analyser {
                         "code",idb1ProjectedAsString,
                         "header","Projected IDB",
                         "details","The textual representations of the projected IDBs generated for the classes compared are the same. Projected means that some elements like ids and instruction counters that are influenced by normalisation rules are ignored. Please check the main report for links to the full IDBs.",
+                        "class",resource,
+                        "jar1",jar1.toString(),
+                        "jar2",jar2.toString(),
                         "edb1",edbDir1.toString(),
                         "edb2",edbDir2.toString(),
                         "idb1",idbDir1.toString(),
@@ -133,6 +140,14 @@ public class DaleqAnalyser implements Analyser {
                     );
                     String link = ResourceUtil.createReportFromTemplate(contextDir,this, resource, PROJECTED_IDB_TEMPLATE,"idb-projected.html", bindings);
                     attachments.add(new AnalysisResultAttachment("diff-full",link,AnalysisResultAttachment.Kind.INFO));
+
+                    // print advanced diff
+                    Map<String,String> bindings2 = new HashMap<>();
+                    bindings2.putAll(bindings);
+                    bindings2.remove("code"); // not used in template
+                    createBindingsForAdvancedDiff(bindings2,idb1,idb2);
+                    String link2 = ResourceUtil.createReportFromTemplate(contextDir,this, resource, ADVANCED_DIFF_TEMPLATE,"advanced-diff.html", bindings2);
+                    attachments.add(new AnalysisResultAttachment("advanced-diff",link2,AnalysisResultAttachment.Kind.INFO));
 
                     return new AnalysisResult(AnalysisResultState.PASS, "projected IDBs are identical", attachments);
                 } else {
@@ -163,6 +178,7 @@ public class DaleqAnalyser implements Analyser {
         }
 
     }
+
 
     private IDB computeAndParseIDB(Path contextDir, Path classFile, Path edbDir, Path idbDir) throws Exception {
 
@@ -199,4 +215,63 @@ public class DaleqAnalyser implements Analyser {
     public String description() {
         return "daleq based analyser";
     }
+
+
+    private void createBindingsForAdvancedDiff(Map<String, String> bindings, IDB idb1, IDB idb2) {
+        // the binding is actual html
+        String html = toHtml(idb1.getRemovedMethodFacts(),"<h3>Removed Methods in Jar1</h3>")
+                    + toHtml(idb2.getRemovedMethodFacts(),"<h3>Removed Methods in Jar2</h3>");
+        bindings.put("removed-methods", html);
+
+        html = toHtml(idb1.getRemovedFieldFacts(),"<h3>Removed Fields in Jar1</h3>")
+             + toHtml(idb2.getRemovedFieldFacts(),"<h3>Removed Fields in Jar2</h3>");
+        bindings.put("removed-fields", html);
+
+        Set<Fact> removedInstructionFacts1 = idb1.getRemovedInstructionFacts().values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
+        Set<Fact> removedInstructionFacts2 = idb2.getRemovedInstructionFacts().values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
+        html = toHtml(removedInstructionFacts1,"<h3>Removed Instructions in Jar1</h3>")
+            + toHtml(removedInstructionFacts2,"<h3>Removed Instructions in Jar2</h3>");
+        bindings.put("removed-instructions", html);
+
+
+    }
+
+    private String htmlTableRow(Object... values) {
+        return Stream.of(values)
+            .map(Object::toString)
+            .collect(Collectors.joining("</td><td>","<tr><td>","</td></tr>"));
+    }
+
+    private String htmlTableHeaderRow(String... values) {
+        return Stream.of(values).collect(Collectors.joining("</td><th>","<tr><th>","</th></tr>"));
+    }
+
+    // assume that all facts have the same schema
+    private String toHtml(Collection<Fact> facts, String header) {
+        if (facts.isEmpty()) {
+            return header + "\nNone";
+        }
+        else {
+            Predicate predicate = null;
+            String html = header;
+            html+="<table>";
+            for (Fact fact:facts) {
+                if (predicate == null) {
+                    predicate = fact.predicate();
+                    html+=htmlTableHeaderRow(Arrays.stream(predicate.getSlots()).map(p -> p.name()).collect(Collectors.toUnmodifiableList()).toArray(new String[]{}));
+                }
+                else {
+                    assert predicate== fact.predicate(): "facts is set have different predicates, unsable to represent them in the same table";
+                }
+                html += htmlTableRow(fact.values());
+                html+="</table>";
+            }
+            return html;
+        }
+
+    }
+
+
+
+
 }

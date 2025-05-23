@@ -20,8 +20,8 @@ public class DerivationPrinter {
         for (int i=0;i<offset;i++) {
             out.print("   ");
         }
-        out.println(root.id());
-        for (DerivationNode child : root.children()) {
+        out.println(root.getId());
+        for (DerivationNode child : root.getChildren()) {
             toConsole(child,out,offset+1);
         }
     }

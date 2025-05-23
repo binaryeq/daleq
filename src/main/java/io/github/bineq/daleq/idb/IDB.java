@@ -35,6 +35,9 @@ public class IDB {
     Set<Fact> removedMethodFacts = new TreeSet<>(COMPARE_BY_SLOT_1);
     Set<Fact> removedFieldFacts = new TreeSet<>(COMPARE_BY_SLOT_1);
 
+    Map<String,Set<Fact>> removedInstructionFacts = new HashMap<>();
+    Map<String,Set<Fact>> movedInstructionFacts = new HashMap<>();
+
     Map<String,Fact> methodRawAccessFacts = new HashMap<>(); // raw, value is single fact for all int-encoded access flags
     Map<String,Set<Fact>> methodAccessFacts = new HashMap<>();
     Map<String,Fact> methodSignatureFacts = new HashMap<>();
@@ -43,6 +46,82 @@ public class IDB {
     Map<String,Set<Fact>> fieldAccessFacts = new HashMap<>();
     Map<String,Fact> fieldRawAccessFacts = new HashMap<>(); // raw, value is single fact for all int-encoded access flags
     Map<String,Fact> fieldSignatureFacts = new HashMap<>();
+
+    public Fact getClassSuperclassFact() {
+        return classSuperclassFact;
+    }
+
+    public Fact getClassSignatureFact() {
+        return classSignatureFact;
+    }
+
+    public Fact getBytecodeVersionFact() {
+        return bytecodeVersionFact;
+    }
+
+    public List<Fact> getClassInterfaceFacts() {
+        return classInterfaceFacts;
+    }
+
+    public Fact getClassRawAccessFact() {
+        return classRawAccessFact;
+    }
+
+    public Set<Fact> getClassAccessFacts() {
+        return classAccessFacts;
+    }
+
+    public Set<Fact> getMethodFacts() {
+        return methodFacts;
+    }
+
+    public Set<Fact> getFieldFacts() {
+        return fieldFacts;
+    }
+
+    public Set<Fact> getRemovedMethodFacts() {
+        return removedMethodFacts;
+    }
+
+    public Set<Fact> getRemovedFieldFacts() {
+        return removedFieldFacts;
+    }
+
+    public Map<String, Fact> getMethodRawAccessFacts() {
+        return methodRawAccessFacts;
+    }
+
+    public Map<String, Set<Fact>> getMethodAccessFacts() {
+        return methodAccessFacts;
+    }
+
+    public Map<String, Fact> getMethodSignatureFacts() {
+        return methodSignatureFacts;
+    }
+
+    public Map<String, Collection<Fact>> getMethodInstructionFacts() {
+        return methodInstructionFacts;
+    }
+
+    public Map<String, Set<Fact>> getFieldAccessFacts() {
+        return fieldAccessFacts;
+    }
+
+    public Map<String, Fact> getFieldRawAccessFacts() {
+        return fieldRawAccessFacts;
+    }
+
+    public Map<String, Fact> getFieldSignatureFacts() {
+        return fieldSignatureFacts;
+    }
+
+    public Map<String,Set<Fact>> getRemovedInstructionFacts() {
+        return removedInstructionFacts;
+    }
+
+    public Map<String,Set<Fact>> getMovedInstructionFacts() {
+        return movedInstructionFacts;
+    }
 
     public IDB project() {
         IDB idb = new IDB();
@@ -163,6 +242,8 @@ public class IDB {
             Objects.equals(fieldFacts, idb.fieldFacts) &&
             Objects.equals(removedMethodFacts, idb.removedMethodFacts) &&
             Objects.equals(removedFieldFacts, idb.removedFieldFacts) &&
+            Objects.equals(removedInstructionFacts, idb.removedInstructionFacts) &&
+            Objects.equals(movedInstructionFacts, idb.movedInstructionFacts) &&
             Objects.equals(methodRawAccessFacts, idb.methodRawAccessFacts) &&
             Objects.equals(methodAccessFacts, idb.methodAccessFacts) &&
             Objects.equals(methodSignatureFacts, idb.methodSignatureFacts) &&
