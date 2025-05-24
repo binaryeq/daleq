@@ -12,8 +12,8 @@ public class ProvenanceParserTests {
 
         printDerivation(input,root);
 
-        assertEquals("R1",root.id());
-        assertEquals(0,root.children().size());
+        assertEquals("R1",root.getId());
+        assertEquals(0,root.getChildren().size());
     }
 
     @Test
@@ -23,10 +23,10 @@ public class ProvenanceParserTests {
 
         printDerivation(input,root);
 
-        assertEquals("R1",root.id());
-        assertEquals(2,root.children().size());
-        assertEquals("F1",root.children().get(0).id());
-        assertEquals("F2",root.children().get(1).id());
+        assertEquals("R1",root.getId());
+        assertEquals(2,root.getChildren().size());
+        assertEquals("F1",root.getChildren().get(0).getId());
+        assertEquals("F2",root.getChildren().get(1).getId());
     }
 
     @Test
@@ -36,16 +36,16 @@ public class ProvenanceParserTests {
 
         printDerivation(input,root);
 
-        assertEquals("R1",root.id());
-        assertEquals(2,root.children().size());
-        assertEquals("F1",root.children().get(0).id());
+        assertEquals("R1",root.getId());
+        assertEquals(2,root.getChildren().size());
+        assertEquals("F1",root.getChildren().get(0).getId());
 
-        DerivationNode complexChild = root.children().get(1);
-        assertEquals("R2",complexChild.id());
-        assertEquals(3,complexChild.children().size());
-        assertEquals("F2",complexChild.children().get(0).id());
-        assertEquals("F3",complexChild.children().get(1).id());
-        assertEquals("F4",complexChild.children().get(2).id());
+        DerivationNode complexChild = root.getChildren().get(1);
+        assertEquals("R2",complexChild.getId());
+        assertEquals(3,complexChild.getChildren().size());
+        assertEquals("F2",complexChild.getChildren().get(0).getId());
+        assertEquals("F3",complexChild.getChildren().get(1).getId());
+        assertEquals("F4",complexChild.getChildren().get(2).getId());
     }
 
     @Test
@@ -55,10 +55,10 @@ public class ProvenanceParserTests {
 
         printDerivation(input,root);
 
-        assertEquals("_R1_xX",root.id());
-        assertEquals(2,root.children().size());
-        assertEquals("_F1_xX",root.children().get(0).id());
-        assertEquals("_F2_xX",root.children().get(1).id());
+        assertEquals("_R1_xX",root.getId());
+        assertEquals(2,root.getChildren().size());
+        assertEquals("_F1_xX",root.getChildren().get(0).getId());
+        assertEquals("_F2_xX",root.getChildren().get(1).getId());
     }
 
     @Test
@@ -68,10 +68,10 @@ public class ProvenanceParserTests {
 
         printDerivation(input,root);
 
-        assertEquals("R1",root.id());
-        assertEquals(2,root.children().size());
-        assertEquals("F1",root.children().get(0).id());
-        assertEquals("F2",root.children().get(1).id());
+        assertEquals("R1",root.getId());
+        assertEquals(2,root.getChildren().size());
+        assertEquals("F1",root.getChildren().get(0).getId());
+        assertEquals("F2",root.getChildren().get(1).getId());
     }
 
     private void printDerivation(String input, DerivationNode root) {

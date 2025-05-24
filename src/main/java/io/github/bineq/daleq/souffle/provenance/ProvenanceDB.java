@@ -28,7 +28,7 @@ public class ProvenanceDB {
      * @param predicateName
      * @param values
      */
-    record FlatFact(String predicateName,String[] values){};
+    public record FlatFact(String predicateName,String[] values){};
 
     public ProvenanceDB(Path edbDir, Path idbDir, Path rules) throws IOException {
         this.idbDir = idbDir;

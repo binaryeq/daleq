@@ -9,6 +9,9 @@ import io.github.bineq.daleq.edb.FactExtractor;
 import io.github.bineq.daleq.idb.IDB;
 import io.github.bineq.daleq.idb.IDBPrinter;
 import io.github.bineq.daleq.idb.IDBReader;
+import io.github.bineq.daleq.souffle.provenance.DerivationNode;
+import io.github.bineq.daleq.souffle.provenance.ProvenanceDB;
+import io.github.bineq.daleq.souffle.provenance.ProvenanceParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,10 +94,15 @@ public class DaleqAnalyser implements Analyser {
             Path idbDir2 = dir2.resolve("idb");
             Files.createDirectories(idbDir1);
             Files.createDirectories(idbDir2);
+            Path mergedEDBAndRules1 = dir1.resolve("mergedEDBAndRules.souffle");
+            Path mergedEDBAndRules2 = dir2.resolve("mergedEDBAndRules.souffle");
 
             try {
-                IDB idb1 = computeAndParseIDB(dir1, classFile1, edbDir1, idbDir1);
-                IDB idb2 = computeAndParseIDB(dir2, classFile2, edbDir2, idbDir2);
+                IDB idb1 = computeAndParseIDB(dir1, classFile1, edbDir1, idbDir1,mergedEDBAndRules1);
+                IDB idb2 = computeAndParseIDB(dir2, classFile2, edbDir2, idbDir2,mergedEDBAndRules2);
+
+                ProvenanceDB provDB1 = new ProvenanceDB(edbDir1,idbDir1,mergedEDBAndRules1);
+                ProvenanceDB provDB2 = new ProvenanceDB(edbDir2,idbDir2,mergedEDBAndRules2);
 
                 Path idbProjectedFile1 = dir1.resolve("idb-projected.txt");
                 Path idbProjectedFile2 = dir2.resolve("idb-projected.txt");
@@ -145,7 +153,7 @@ public class DaleqAnalyser implements Analyser {
                     Map<String,String> bindings2 = new HashMap<>();
                     bindings2.putAll(bindings);
                     bindings2.remove("code"); // not used in template
-                    createBindingsForAdvancedDiff(bindings2,idb1,idb2);
+                    createBindingsForAdvancedDiff(bindings2,idb1,idb2,provDB1, provDB2);
                     String link2 = ResourceUtil.createReportFromTemplate(contextDir,this, resource, ADVANCED_DIFF_TEMPLATE,"advanced-diff.html", bindings2);
                     attachments.add(new AnalysisResultAttachment("advanced-diff",link2,AnalysisResultAttachment.Kind.INFO));
 
@@ -180,7 +188,7 @@ public class DaleqAnalyser implements Analyser {
     }
 
 
-    private IDB computeAndParseIDB(Path contextDir, Path classFile, Path edbDir, Path idbDir) throws Exception {
+    private IDB computeAndParseIDB(Path contextDir, Path classFile, Path edbDir, Path idbDir, Path mergedEDBAndRules) throws Exception {
 
         if (Files.exists(edbDir)) {
             IOUtil.deleteDir(edbDir);
@@ -197,7 +205,6 @@ public class DaleqAnalyser implements Analyser {
         FactExtractor.extractAndExport(classFile, edbDef, edbDir, true);
 
         Path rulesPath = Path.of(Souffle.class.getResource(RULES).getPath());
-        Path mergedEDBAndRules = contextDir.resolve("mergedEDBAndRules.souffle");
 
         Souffle.createIDB(edbDef, rulesPath, edbDir, idbDir, mergedEDBAndRules);
 
@@ -217,20 +224,53 @@ public class DaleqAnalyser implements Analyser {
     }
 
 
-    private void createBindingsForAdvancedDiff(Map<String, String> bindings, IDB idb1, IDB idb2) {
+    private void createBindingsForAdvancedDiff(Map<String, String> bindings, IDB idb1, IDB idb2,ProvenanceDB provDB1, ProvenanceDB provDB2) {
         // the binding is actual html
-        String html = toHtml(idb1.getRemovedMethodFacts(),"<h3>Removed Methods in Jar1</h3>")
-                    + toHtml(idb2.getRemovedMethodFacts(),"<h3>Removed Methods in Jar2</h3>");
+        String html = "";
+        if (idb1.getRemovedMethodFacts().size()>0) {
+            html+="<h3>Removed Methods in Jar1</h3>";
+            for (Fact fact:idb1.getRemovedMethodFacts()) {
+                html+=toHtml(fact,provDB1);
+            }
+        }
+        if (idb2.getRemovedMethodFacts().size()>0) {
+            html+="<h3>Removed Methods in Jar2</h3>";
+            for (Fact fact:idb2.getRemovedMethodFacts()) {
+                html+=toHtml(fact,provDB2);
+            }
+        }
         bindings.put("removed-methods", html);
 
-        html = toHtml(idb1.getRemovedFieldFacts(),"<h3>Removed Fields in Jar1</h3>")
-             + toHtml(idb2.getRemovedFieldFacts(),"<h3>Removed Fields in Jar2</h3>");
+        if (idb1.getRemovedFieldFacts().size()>0) {
+            html+="<h3>Removed Fields in Jar1</h3>";
+            for (Fact fact:idb1.getRemovedFieldFacts()) {
+                html+=toHtml(fact,provDB1);
+            }
+        }
+        if (idb2.getRemovedFieldFacts().size()>0) {
+            html+="<h3>Removed Fields in Jar2</h3>";
+            for (Fact fact:idb2.getRemovedFieldFacts()) {
+                html+=toHtml(fact,provDB2);
+            }
+        }
         bindings.put("removed-fields", html);
 
         Set<Fact> removedInstructionFacts1 = idb1.getRemovedInstructionFacts().values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
         Set<Fact> removedInstructionFacts2 = idb2.getRemovedInstructionFacts().values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
-        html = toHtml(removedInstructionFacts1,"<h3>Removed Instructions in Jar1</h3>")
-            + toHtml(removedInstructionFacts2,"<h3>Removed Instructions in Jar2</h3>");
+
+        if (removedInstructionFacts1.size()>0) {
+            html+="<h3>Removed or Replaced Bytecode Instructions in Jar1</h3>";
+            for (Fact fact:removedInstructionFacts1) {
+                html+=toHtml(fact,provDB1);
+            }
+        }
+        if (removedInstructionFacts2.size()>0) {
+            html+="<h3>Removed or Replaced Bytecode Instructions in Jar2</h3>";
+            for (Fact fact:removedInstructionFacts2) {
+                html+=toHtml(fact,provDB2);
+            }
+        }
+
         bindings.put("removed-instructions", html);
 
 
@@ -242,36 +282,74 @@ public class DaleqAnalyser implements Analyser {
             .collect(Collectors.joining("</td><td>","<tr><td>","</td></tr>"));
     }
 
+    private String htmlTableRow(String firstColCssClass, Object... values) {
+        String firstTD = "<td class="+firstColCssClass+">";
+        return Stream.of(values)
+            .map(Object::toString)
+            .collect(Collectors.joining("</td><td>","<tr>"+firstTD,"</td></tr>"));
+    }
+
     private String htmlTableHeaderRow(String... values) {
         return Stream.of(values).collect(Collectors.joining("</td><th>","<tr><th>","</th></tr>"));
     }
 
     // assume that all facts have the same schema
-    private String toHtml(Collection<Fact> facts, String header) {
-        if (facts.isEmpty()) {
-            return header + "\nNone";
+    private String toHtml(Fact fact,ProvenanceDB provDB) {
+        String html="<table>";
+        Predicate predicate = fact.predicate();
+        html+=htmlTableHeaderRow(Arrays.stream(predicate.getSlots()).map(p -> p.name()).collect(Collectors.toUnmodifiableList()).toArray(new String[]{}));
+        html+=htmlTableRow(fact.values());
+        html+="</table>";
+
+        // display provenance
+        html += "<h4>provenance</h4>";
+        String id = (String)fact.values()[0];
+        try {
+            DerivationNode root = ProvenanceParser.parse(id);
+            html += "<table>";
+            html += htmlTableHeaderRow("derivation tree", "kind","details");
+            html += toHtmlTableRow(root,0,provDB);
+            html += "</table>";
+
+        } catch (Exception x) {
+            LOG.error("Error parsing provenance for id \""+id+"\"",x);
+            html += "<div>error parsing provenance !</div>";
         }
-        else {
-            Predicate predicate = null;
-            String html = header;
-            html+="<table>";
-            for (Fact fact:facts) {
-                if (predicate == null) {
-                    predicate = fact.predicate();
-                    html+=htmlTableHeaderRow(Arrays.stream(predicate.getSlots()).map(p -> p.name()).collect(Collectors.toUnmodifiableList()).toArray(new String[]{}));
-                }
-                else {
-                    assert predicate== fact.predicate(): "facts is set have different predicates, unsable to represent them in the same table";
-                }
-                html += htmlTableRow(fact.values());
-                html+="</table>";
-            }
-            return html;
-        }
+
+        return html;
 
     }
 
+    private String toHtmlTableRow(DerivationNode node, int i,ProvenanceDB provDB) {
+        String id = node.getId();
 
+        String kind = "unknown";
+        String detail = provDB.getRule(id);
+        if (detail != null) {
+            kind = "rule";
+        }
+        else {
+            ProvenanceDB.FlatFact ffact = provDB.getEdbFact(id);
+            if (ffact != null) {
+                kind = "base fact extracted from bytecode";
+                detail = Stream.of(ffact.values()).map(Object::toString).collect(Collectors.joining("\t"));
+            }
+            else {
+                ffact = provDB.getIdbFact(id);
+                if (ffact != null) {
+                    kind = "inferred fact";
+                    detail = Stream.of(ffact.values()).map(Object::toString).collect(Collectors.joining("\t"));
+                }
+            }
 
+        }
+
+        String cssClass = "derivation-level-"+i;
+        String html = htmlTableRow(cssClass, id,kind,detail);
+        for (DerivationNode child:node.getChildren()) {
+            html += toHtmlTableRow(child,i+1,provDB);
+        }
+        return html;
+    }
 
 }
