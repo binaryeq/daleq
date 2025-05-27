@@ -1,6 +1,7 @@
 package io.github.bineq.daleq.cli;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
 import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.IOUtil;
 import io.github.bineq.daleq.Predicate;
@@ -226,54 +227,210 @@ public class DaleqAnalyser implements Analyser {
 
     private void createBindingsForAdvancedDiff(Map<String, String> bindings, IDB idb1, IDB idb2,ProvenanceDB provDB1, ProvenanceDB provDB2) {
         // the binding is actual html
-        String html = "";
+        StringBuffer html = new StringBuffer();
+
+        ifDiffBeforeNormalisationAppend(idb1.getBytecodeVersionFact(),idb2.getBytecodeVersionFact(),provDB1,provDB2,"Bytecode Version Fact",html);
+        ifDiffBeforeNormalisationAppend(idb1.getClassSignatureFact(),idb2.getClassSignatureFact(),provDB1,provDB2,"Class Signature Fact",html);
+        ifDiffBeforeNormalisationAppend(idb1.getClassSuperclassFact(),idb2.getClassSuperclassFact(),provDB1,provDB2,"Class Superclass Fact",html);
+        ifDiffBeforeNormalisationAppend(idb1.getClassInterfaceFacts(),idb2.getClassInterfaceFacts(),provDB1,provDB2,"Class Interface Fact",html);
+        ifDiffBeforeNormalisationAppend(idb1.getClassRawAccessFact(),idb2.getClassRawAccessFact(),provDB1,provDB2,"Class Signature Fact",html);
+
+        ifDiffBeforeNormalisationAppend(idb1.getMethodFactsAsList(),idb2.getMethodFactsAsList(),provDB1,provDB2,"Method Fact",html);
+        ifDiffBeforeNormalisationAppend(idb1.getFieldFactsAsList(),idb2.getFieldFactsAsList(),provDB1,provDB2,"Field Fact",html);
+
+
+        ifDiffBeforeNormalisationAppend(idb1.getRemovedMethodFactsAsList(),idb2.getRemovedMethodFactsAsList(),provDB1,provDB2,"Removed Method Fact (SPECIAL)",html);
+
+
         if (idb1.getRemovedMethodFacts().size()>0) {
-            html+="<h3>Removed Methods in Jar1</h3>";
+            html.append("<h3>Removed Methods in Jar1</h3>");
             for (Fact fact:idb1.getRemovedMethodFacts()) {
-                html+=toHtml(fact,provDB1);
+                html.append(toHtml(fact,provDB1));
             }
         }
         if (idb2.getRemovedMethodFacts().size()>0) {
-            html+="<h3>Removed Methods in Jar2</h3>";
+            html.append("<h3>Removed Methods in Jar2</h3>");
             for (Fact fact:idb2.getRemovedMethodFacts()) {
-                html+=toHtml(fact,provDB2);
+                html.append(toHtml(fact,provDB2));
             }
         }
-        bindings.put("removed-methods", html);
 
         if (idb1.getRemovedFieldFacts().size()>0) {
-            html+="<h3>Removed Fields in Jar1</h3>";
+            html.append("<h3>Removed Fields in Jar1</h3>");
             for (Fact fact:idb1.getRemovedFieldFacts()) {
-                html+=toHtml(fact,provDB1);
+                html.append(toHtml(fact,provDB1));
             }
         }
         if (idb2.getRemovedFieldFacts().size()>0) {
-            html+="<h3>Removed Fields in Jar2</h3>";
+            html.append("<h3>Removed Fields in Jar2</h3>");
             for (Fact fact:idb2.getRemovedFieldFacts()) {
-                html+=toHtml(fact,provDB2);
-            }
-        }
-        bindings.put("removed-fields", html);
-
-        Set<Fact> removedInstructionFacts1 = idb1.getRemovedInstructionFacts().values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
-        Set<Fact> removedInstructionFacts2 = idb2.getRemovedInstructionFacts().values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
-
-        if (removedInstructionFacts1.size()>0) {
-            html+="<h3>Removed or Replaced Bytecode Instructions in Jar1</h3>";
-            for (Fact fact:removedInstructionFacts1) {
-                html+=toHtml(fact,provDB1);
-            }
-        }
-        if (removedInstructionFacts2.size()>0) {
-            html+="<h3>Removed or Replaced Bytecode Instructions in Jar2</h3>";
-            for (Fact fact:removedInstructionFacts2) {
-                html+=toHtml(fact,provDB2);
+                html.append(toHtml(fact,provDB2));
             }
         }
 
-        bindings.put("removed-instructions", html);
+        for (String method:idb1.getRemovedInstructionFacts().keySet()) {
+            for (Fact fact:idb1.getRemovedInstructionFacts().get(method)) {
+                html.append("<h3>Removed or Replaced Bytecode Instructions in Jar1, method: " + method+ "</h3>");
+                html.append(toHtml(fact,provDB1));
+            }
+        }
+
+        for (String method:idb2.getRemovedInstructionFacts().keySet()) {
+            for (Fact fact:idb2.getRemovedInstructionFacts().get(method)) {
+                html.append("<h3>Removed or Replaced Bytecode Instructions in Jar2, method: " + method+ "</h3>");
+                html.append(toHtml(fact,provDB2));
+            }
+        }
+
+        for (String method:idb1.getMethodMovedInstructionFacts().keySet()) {
+            for (Fact fact:idb1.getMethodMovedInstructionFacts().get(method)) {
+                html.append("<h3>Moved or Replaced Bytecode Instructions in Jar1, method: " + method+ "</h3>");
+                html.append(toHtml(fact,provDB1));
+            }
+        }
+
+        for (String method:idb2.getMethodMovedInstructionFacts().keySet()) {
+            for (Fact fact:idb2.getMethodMovedInstructionFacts().get(method)) {
+                html.append("<h3>Moved Bytecode Instructions in Jar2, method: " + method+ "</h3>");
+                html.append(toHtml(fact,provDB2));
+            }
+        }
+
+        Set<String> methods = Sets.union(idb1.getMethodInstructionFacts().keySet(),idb2.getMethodInstructionFacts().keySet());
+        for (String method:methods) {
+            List<Fact> instructions1 = idb1.getMethodInstructionFacts(method);
+            List<Fact> instructions2 = idb2.getMethodInstructionFacts(method);
+            ifDiffBeforeNormalisationAppend(instructions1,instructions2,provDB1,provDB2,"Method Instruction Fact for method " + method,html);
+        }
 
 
+
+
+
+//        Set<Fact> removedInstructionFacts1 = idb1.getRemovedInstructionFacts().values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
+//        Set<Fact> removedInstructionFacts2 = idb2.getRemovedInstructionFacts().values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
+
+//        if (removedInstructionFacts1.size()>0) {
+//            html+="<h3>Removed or Replaced Bytecode Instructions in Jar1</h3>";
+//            for (Fact fact:removedInstructionFacts1) {
+//                html+=toHtml(fact,provDB1);
+//            }
+//        }
+//        if (removedInstructionFacts2.size()>0) {
+//            html+="<h3>Removed or Replaced Bytecode Instructions in Jar2</h3>";
+//            for (Fact fact:removedInstructionFacts2) {
+//                html+=toHtml(fact,provDB2);
+//            }
+//        }
+
+        bindings.put("diffs", html.toString());
+
+    }
+
+    private void ifDiffBeforeNormalisationAppend(List<Fact> facts1, List<Fact> facts2, ProvenanceDB provDB1,ProvenanceDB provDB2,String htmlHeader,StringBuffer html) {
+        int l = Math.min(facts1.size(),facts2.size());
+        for (int i=0;i<l;i++) {
+            ifDiffBeforeNormalisationAppend(facts1.get(i),facts2.get(i),provDB1,provDB2,htmlHeader,html);
+        }
+        if (facts1.size()>l) {
+            for (int i=l;i<facts1.size();i++) {
+                ifDiffBeforeNormalisationAppend(facts1.get(i),null,provDB1,provDB2,htmlHeader,html);
+            }
+        }
+        if (facts2.size()>l) {
+            for (int i=l;i<facts2.size();i++) {
+                ifDiffBeforeNormalisationAppend(null,facts2.get(i),provDB1,provDB2,htmlHeader,html);
+            }
+        }
+    }
+
+    private void ifDiffBeforeNormalisationAppend(Fact fact1, Fact fact2, ProvenanceDB provDB1,ProvenanceDB provDB2,String htmlHeader,StringBuffer html) {
+        if (isDiffBeforeNormalisation(fact1, fact2, provDB1, provDB2)) {
+            html.append("<h3>"+htmlHeader+"</h3>");
+            html.append("<h4>"+htmlHeader+" -- Jar1</h4>");
+            html.append(fact1==null?"no fact found":toHtml(fact1,provDB1));
+            html.append("<h4>"+htmlHeader+" -- Jar2</h4>");
+            html.append(fact2==null?"no fact found":toHtml(fact2,provDB2));
+        }
+    }
+
+    /**
+     * Whether two facts are different before normalisation -- this is established as follows:
+     * - either different rules were used
+     * - or facts used by those rules where different
+     * @param fact1
+     * @param fact2
+     * @param provDB1 the first provenance db (to look up actual rules and facts)
+     * @param provDB1 the first provenance db (to look up actual rules and facts)
+     * @return
+     */
+    private boolean isDiffBeforeNormalisation(Fact fact1, Fact fact2, ProvenanceDB provDB1,ProvenanceDB provDB2) {
+        String id1 = (String)fact1.values()[0];
+        String id2 = (String)fact2.values()[0];
+
+        try {
+            DerivationNode root1 = ProvenanceParser.parse(id1);
+            DerivationNode root2 = ProvenanceParser.parse(id2);
+            return isDiffBeforeNormalisation(root1,root2,provDB1,provDB2);
+        } catch (Exception x) {
+            LOG.error("Error parsing provenance",x);
+            return true; // show diff if something goes wrong!
+        }
+    }
+
+    private boolean isDiffBeforeNormalisation(DerivationNode derivation1, DerivationNode derivation2, ProvenanceDB provDB1,ProvenanceDB provDB2) {
+        if (derivation1.getChildren().size()==0) {
+            if (derivation2.getChildren().size()>0) {
+                return true; // derivations are different
+            }
+            else {
+                if (derivation1.getId().startsWith("R_")) {
+                    // this is a rule without premisses, e.g. uses to classify method types as "root"
+                    // IS_ROOT_METHOD("R_IS_ROOT_METHOD_GETCLASS","getClass", "()Ljava/lang/Class;").
+                    return !derivation1.getId().equals(derivation2.getId());
+                }
+                else {
+                    // those are EDB facts -- leaves in the derivation tree
+                    ProvenanceDB.FlatFact fact1 = provDB1.getEdbFact(derivation1.getId());
+                    assert fact1!=null;
+                    ProvenanceDB.FlatFact fact2 = provDB2.getEdbFact(derivation2.getId());
+                    assert fact2!=null;
+
+                    if (!fact1.predicateName().equals(fact2.predicateName())) {
+                        return true;
+                    }
+                    else if (fact1.values().length!=fact2.values().length) {
+                        return true;
+                    }
+                    else {
+                        // skip id
+                        // TODO: skip instruction counter too
+                        for (int i = 1; i < fact1.values().length; i++) {
+                            if (!fact1.values()[i].equals(fact2.values()[i])) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                }
+            }
+        }
+        else {
+            if (!derivation1.getId().equals(derivation2.getId())) {
+                return true;
+            }
+            else if (derivation1.getChildren().size()!=derivation2.getChildren().size()) {
+                return true;
+            }
+            else {
+                for (int i = 0; i < derivation1.getChildren().size(); i++) {
+                    if (isDiffBeforeNormalisation(derivation1.getChildren().get(i),derivation2.getChildren().get(i),provDB1,provDB2)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
     }
 
     private String htmlTableRow(Object... values) {
@@ -302,12 +459,12 @@ public class DaleqAnalyser implements Analyser {
         html+="</table>";
 
         // display provenance
-        html += "<h4>provenance</h4>";
+        html += "<h5>provenance:</h5>";
         String id = (String)fact.values()[0];
         try {
             DerivationNode root = ProvenanceParser.parse(id);
             html += "<table>";
-            html += htmlTableHeaderRow("derivation tree", "kind","details");
+            html += htmlTableHeaderRow("derivation tree", "kind"); // skipped details for better layout
             html += toHtmlTableRow(root,0,provDB);
             html += "</table>";
 
@@ -345,7 +502,7 @@ public class DaleqAnalyser implements Analyser {
         }
 
         String cssClass = "derivation-level-"+i;
-        String html = htmlTableRow(cssClass, id,kind,detail);
+        String html = htmlTableRow(cssClass, id,kind);  // try to skip detail for better layout
         for (DerivationNode child:node.getChildren()) {
             html += toHtmlTableRow(child,i+1,provDB);
         }

@@ -75,18 +75,37 @@ public class IDB {
         return methodFacts;
     }
 
+    // note that set is sorted so order is predictable
+    public List<Fact> getMethodFactsAsList() {
+        return methodFacts.stream().toList();
+    }
+
     public Set<Fact> getFieldFacts() {
         return fieldFacts;
+    }
+
+    // note that set is sorted so order is predictable
+    public List<Fact> getFieldFactsAsList() {
+        return fieldFacts.stream().toList();
     }
 
     public Set<Fact> getRemovedMethodFacts() {
         return removedMethodFacts;
     }
 
+    // note that set is sorted so order is predictable
+    public List<Fact> getRemovedMethodFactsAsList() {
+        return removedMethodFacts.stream().toList();
+    }
+
     public Set<Fact> getRemovedFieldFacts() {
         return removedFieldFacts;
     }
 
+    // note that set is sorted so order is predictable
+    public List<Fact> getRemovedFieldFactsAsList() {
+        return removedFieldFacts.stream().toList();
+    }
     public Map<String, Fact> getMethodRawAccessFacts() {
         return methodRawAccessFacts;
     }
@@ -101,6 +120,18 @@ public class IDB {
 
     public Map<String, Collection<Fact>> getMethodInstructionFacts() {
         return methodInstructionFacts;
+    }
+
+    // note that set is sorted so order is predictable
+    public List<Fact> getMethodInstructionFacts(String method) {
+        Collection<Fact> set = getMethodInstructionFacts().get(method);
+        return set==null?null:set.stream().toList();
+    }
+
+    // note that set is sorted so order is predictable
+    public List<Fact> getMethodRemovedInstructionFactsAsList(String method) {
+        Collection<Fact> set = getMethodInstructionFacts().get(method);
+        return set==null?null:set.stream().toList();
     }
 
     public Map<String, Set<Fact>> getFieldAccessFacts() {
@@ -119,7 +150,7 @@ public class IDB {
         return removedInstructionFacts;
     }
 
-    public Map<String,Set<Fact>> getMovedInstructionFacts() {
+    public Map<String,Set<Fact>> getMethodMovedInstructionFacts() {
         return movedInstructionFacts;
     }
 
