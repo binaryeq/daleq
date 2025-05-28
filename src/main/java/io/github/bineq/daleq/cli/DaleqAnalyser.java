@@ -2,6 +2,7 @@ package io.github.bineq.daleq.cli;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Streams;
 import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.IOUtil;
 import io.github.bineq.daleq.Predicate;
@@ -15,7 +16,6 @@ import io.github.bineq.daleq.souffle.provenance.ProvenanceDB;
 import io.github.bineq.daleq.souffle.provenance.ProvenanceParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -39,7 +39,6 @@ public class DaleqAnalyser implements Analyser {
     private static final boolean SOUFFLE_AVAILABLE = checkSouffleExe();
     private static final URL PROJECTED_IDB_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/projected-idb.html");
     private static final URL ADVANCED_DIFF_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/advanced-diff.html");
-
     public static final String RULES = "/rules/advanced.souffle";
 
 
@@ -454,8 +453,18 @@ public class DaleqAnalyser implements Analyser {
     private String toHtml(Fact fact,ProvenanceDB provDB) {
         String html="<table>";
         Predicate predicate = fact.predicate();
-        html+=htmlTableHeaderRow(Arrays.stream(predicate.getSlots()).map(p -> p.name()).collect(Collectors.toUnmodifiableList()).toArray(new String[]{}));
-        html+=htmlTableRow(fact.values());
+        html+=htmlTableHeaderRow(
+            Streams.concat(
+                Stream.of("predicate"),
+                Arrays.stream(predicate.getSlots()).map(p -> p.name())
+            ).collect(Collectors.toUnmodifiableList()).toArray(new String[]{}
+        ));
+        html+=htmlTableRow(
+            Streams.concat(
+                Stream.of(fact.predicate().getName()),
+                Stream.of(fact.values())
+            ).collect(Collectors.toUnmodifiableList()).toArray(new Object[]{}
+        ));
         html+="</table>";
 
         // display provenance
@@ -496,6 +505,7 @@ public class DaleqAnalyser implements Analyser {
                 if (ffact != null) {
                     kind = "inferred fact";
                     detail = Stream.of(ffact.values()).map(Object::toString).collect(Collectors.joining("\t"));
+                    // detail = ffact.predicateName() + "\t" + detail;
                 }
             }
 
