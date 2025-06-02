@@ -20,10 +20,15 @@
             border-width: thin;
             border-style: solid;
             border-color: black;
-            width:100%;
+            table-layout: fixed;
         }
         .value {
             font-style: italic;
+        }
+        .key {
+            text-align: right;
+            min-width: 150px;
+            max-width: 150px;
         }
         .derivation-level-0::before {
             display: inline-block;
@@ -93,22 +98,29 @@
     </style>
 </head>
 <body>
-    <h1 id="header">Advanced Diff for Classes Deemed to be Equivalent</h1>
-    <h2 id="details"></h2>
-    <p/>
-    Class: <p id="class" class="value"></p>
-    Jar1: <p id="jar1" class="value"></p>
-    Jar2: <p id="jar2" class="value"></p>
-    EDB extracted from jar 1: <p id="edb1" class="value"></p>
-    EDB extracted from jar 2: <p id="edb2" class="value"></p>
-    IDB computed for jar 1: <p id="idb1" class="value"></p>
-    IDB computed for jar 2: <p id="idb2" class="value"></p>
-    IDB computed for jar 1 (as text): <p id="idb1txt" class="value"></p>
-    IDB computed for jar 2 (as text): <p id="idb2txt" class="value"></p>
-    projected IDB for jar 1 (as text): <p id="pidb1txt" class="value"></p>
-    projected IDB for jar 2 (as text): <p id="pidb2txt" class="value"></p>
+    <h1>Advanced Diff for Classes Deemed to be Equivalent</h1>
+    <div id="about"></div>
+    <h2>File locations</h2>
     <p/>
 
+    <table>
+        <tbody>
+        <tr><th>key</th><th>value</th></tr>
+        <tr><td class="key">class:</td><td id="class" class="value"></td></tr>
+        <tr><td class="key">jar1:</td><td id="jar1" class="value"></td></tr>
+        <tr><td class="key">jar2:</td><td id="jar2" class="value"></td></tr>
+        <tr><td class="key">EDB extracted from jar1:</td><td id="edb1" class="value"></td></tr>
+        <tr><td class="key">EDB extracted from jar2:</td><td id="edb2" class="value"></td></tr>
+        <tr><td class="key">IDB computed for jar1:</td><td id="idb1" class="value"></td></tr>
+        <tr><td class="key">IDB computed for jar2:</td><td id="idb2" class="value"></td></tr>
+        <tr><td class="key">IDB from jar1 as text:</td><td id="idb1txt" class="value"></td></tr>
+        <tr><td class="key">IDB from jar2 as text:</td><td id="idb2txt" class="value"></td></tr>
+        <tr><td class="key">projected IDB from jar1:</td><td id="pidb1txt" class="value"></td></tr>
+        <tr><td class="key">projected IDB from jar2:</td><td id="pidb2txt" class="value"></td></tr>
+        </tbody>
+    </table>
+
+    <h2>Diffs</h2>
     <div id="diffs"></div>
 
 

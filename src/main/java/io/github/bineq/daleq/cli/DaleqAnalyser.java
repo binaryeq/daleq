@@ -132,19 +132,18 @@ public class DaleqAnalyser implements Analyser {
                     // print projected IDBs
                     Map<String,String> bindings = ResourceUtil.newModifiableMap(
                         "code",idb1ProjectedAsString,
-                        "header","Projected IDB",
-                        "details","The textual representations of the projected IDBs generated for the classes compared are the same. Projected means that some elements like ids and instruction counters that are influenced by normalisation rules are ignored. Please check the main report for links to the full IDBs.",
+                        "about","The textual representations of the projected IDBs generated for the classes compared are the same. Projected means that some elements like ids and instruction counters that are influenced by normalisation rules are ignored. Please check the main report for links to the full IDBs.",
                         "class",resource,
-                        "jar1",jar1.toString(),
-                        "jar2",jar2.toString(),
-                        "edb1",edbDir1.toString(),
-                        "edb2",edbDir2.toString(),
-                        "idb1",idbDir1.toString(),
-                        "idb2",idbDir2.toString(),
-                        "idb1txt",idbFullFile1.toString(),   // TODO: use alternative way to construct map, too many keys and values
-                        "idb2txt",idbFullFile2.toString(),
-                        "pidb1txt",idbProjectedFile1.toString(),
-                        "pidb2txt",idbProjectedFile2.toString()
+                        "jar1",asLink(jar1),
+                        "jar2",asLink(jar2),
+                        "edb1",asLink(edbDir1),
+                        "edb2",asLink(edbDir2),
+                        "idb1",asLink(idbDir1),
+                        "idb2",asLink(idbDir2),
+                        "idb1txt",asLink(idbFullFile1),
+                        "idb2txt",asLink(idbFullFile2),
+                        "pidb1txt",asLink(idbProjectedFile1),
+                        "pidb2txt",asLink(idbProjectedFile2)
                     );
                     String link = ResourceUtil.createReportFromTemplate(contextDir,this, resource, PROJECTED_IDB_TEMPLATE,"idb-projected.html", bindings);
                     attachments.add(new AnalysisResultAttachment("diff-full",link,AnalysisResultAttachment.Kind.INFO));
@@ -430,6 +429,12 @@ public class DaleqAnalyser implements Analyser {
                 return false;
             }
         }
+    }
+
+    private static String asLink(Path path) {
+        String name = path.toString();
+        String link = "file://"+path.toFile().getAbsolutePath().toString();
+        return "<a target=\"_blank\" href=\""+link+"\">"+name+"</a>";
     }
 
     private String htmlTableRow(Object... values) {

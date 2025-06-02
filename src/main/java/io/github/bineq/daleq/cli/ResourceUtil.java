@@ -113,7 +113,7 @@ public class ResourceUtil {
         // instantiate template
         for (String key: bindings.keySet()) {
             Element element = doc.getElementById(key);
-            Preconditions.checkState(element!=null,"can't find element with id " + key + " in document " + templatePath);
+            Preconditions.checkState(element!=null,"can't find element with id \"" + key + "\" in document " + templatePath);
             String value = bindings.get(key);
             element.append(value);
         }
