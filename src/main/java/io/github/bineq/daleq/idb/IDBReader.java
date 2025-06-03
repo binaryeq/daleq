@@ -150,18 +150,7 @@ public class IDBReader {
         // we should allow predicates introduced in rules sets not known at this stage, perhaps just
         // creating them "on-the-fly" here. Downside: make all slots symbol typed
         Preconditions.checkState(predicate != null,"unknown predicate " + predicateName);
-
-        // tsv ignores the last slot of it is empty -- we augment this for ldc instructions
-        // this was observed for IDB_LDC, IDB_LDC_W, IDB_LDC2_W, IDB_LOOKUPSWITCH, IDB_TABLESWITCH
-        if (tokens.length==predicate.getSlots().length-1) {
-            String[] tokens2 = new String[predicate.getSlots().length];
-            for (int i=0;i<tokens.length;i++) {
-                tokens2[i] = tokens[i];
-            }
-            tokens2[tokens2.length-1] = "";
-            tokens=tokens2;
-        }
-
+        tokens = Predicate.pad(predicate,tokens);
         assert tokens.length==predicate.getSlots().length:"token length was " + tokens.length + " but predicate " + predicateName + " has " + predicate.getSlots().length + " slots";
 
         String[] tokens3 = tokens; // alias for use in lambda

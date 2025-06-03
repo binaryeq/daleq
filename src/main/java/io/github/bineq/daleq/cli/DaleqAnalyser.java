@@ -157,7 +157,7 @@ public class DaleqAnalyser implements Analyser {
                     Map<String,String> bindings2 = new HashMap<>();
                     bindings2.putAll(bindings);
                     bindings2.remove("code"); // not used in template
-                    createBindingsForAdvancedDiff(bindings2,idb1,idb2,provDB1, provDB2);
+                    createBindingsForAdvancedDiff(bindings2,idb1,idb2,provDB1, provDB2,edb1Link,edb2Link);
                     String link2 = ResourceUtil.createReportFromTemplate(contextDir,this, resource, ADVANCED_DIFF_TEMPLATE,"advanced-diff.html", bindings2);
                     attachments.add(new AnalysisResultAttachment("advanced-diff",link2,AnalysisResultAttachment.Kind.INFO));
 
@@ -229,74 +229,73 @@ public class DaleqAnalyser implements Analyser {
     }
 
 
-    private void createBindingsForAdvancedDiff(Map<String, String> bindings, IDB idb1, IDB idb2,ProvenanceDB provDB1, ProvenanceDB provDB2) {
+    private void createBindingsForAdvancedDiff(Map<String, String> bindings, IDB idb1, IDB idb2,ProvenanceDB provDB1, ProvenanceDB provDB2,String edbLink1, String edbLink2) {
         // the binding is actual html
         StringBuffer html = new StringBuffer();
 
-        ifDiffBeforeNormalisationAppend(idb1.getBytecodeVersionFact(),idb2.getBytecodeVersionFact(),provDB1,provDB2,"Bytecode Version Fact",html);
-        ifDiffBeforeNormalisationAppend(idb1.getClassSignatureFact(),idb2.getClassSignatureFact(),provDB1,provDB2,"Class Signature Fact",html);
-        ifDiffBeforeNormalisationAppend(idb1.getClassSuperclassFact(),idb2.getClassSuperclassFact(),provDB1,provDB2,"Class Superclass Fact",html);
-        ifDiffBeforeNormalisationAppend(idb1.getClassInterfaceFacts(),idb2.getClassInterfaceFacts(),provDB1,provDB2,"Class Interface Fact",html);
-        ifDiffBeforeNormalisationAppend(idb1.getClassRawAccessFact(),idb2.getClassRawAccessFact(),provDB1,provDB2,"Class Signature Fact",html);
+        ifDiffBeforeNormalisationAppend(idb1.getBytecodeVersionFact(),idb2.getBytecodeVersionFact(),provDB1,provDB2,"Bytecode Version Fact",html,edbLink1,edbLink2);
+        ifDiffBeforeNormalisationAppend(idb1.getClassSignatureFact(),idb2.getClassSignatureFact(),provDB1,provDB2,"Class Signature Fact",html,edbLink1,edbLink2);
+        ifDiffBeforeNormalisationAppend(idb1.getClassSuperclassFact(),idb2.getClassSuperclassFact(),provDB1,provDB2,"Class Superclass Fact",html,edbLink1,edbLink2);
+        ifDiffBeforeNormalisationAppend(idb1.getClassInterfaceFacts(),idb2.getClassInterfaceFacts(),provDB1,provDB2,"Class Interface Fact",html,edbLink1,edbLink2);
+        ifDiffBeforeNormalisationAppend(idb1.getClassRawAccessFact(),idb2.getClassRawAccessFact(),provDB1,provDB2,"Class Signature Fact",html,edbLink1,edbLink2);
 
-        ifDiffBeforeNormalisationAppend(idb1.getMethodFactsAsList(),idb2.getMethodFactsAsList(),provDB1,provDB2,"Method Fact",html);
-        ifDiffBeforeNormalisationAppend(idb1.getFieldFactsAsList(),idb2.getFieldFactsAsList(),provDB1,provDB2,"Field Fact",html);
+        ifDiffBeforeNormalisationAppend(idb1.getMethodFactsAsList(),idb2.getMethodFactsAsList(),provDB1,provDB2,"Method Fact",html,edbLink1,edbLink2);
+        ifDiffBeforeNormalisationAppend(idb1.getFieldFactsAsList(),idb2.getFieldFactsAsList(),provDB1,provDB2,"Field Fact",html,edbLink1,edbLink2);
 
-
-        ifDiffBeforeNormalisationAppend(idb1.getRemovedMethodFactsAsList(),idb2.getRemovedMethodFactsAsList(),provDB1,provDB2,"Removed Method Fact (SPECIAL)",html);
+        ifDiffBeforeNormalisationAppend(idb1.getRemovedMethodFactsAsList(),idb2.getRemovedMethodFactsAsList(),provDB1,provDB2,"Removed Method Fact (SPECIAL)",html,edbLink1,edbLink2);
 
 
         if (idb1.getRemovedMethodFacts().size()>0) {
             html.append("<h3>Removed Methods in Jar1</h3>");
             for (Fact fact:idb1.getRemovedMethodFacts()) {
-                html.append(toHtml(fact,provDB1));
+                html.append(toHtml(fact,provDB1,edbLink1));
             }
         }
         if (idb2.getRemovedMethodFacts().size()>0) {
             html.append("<h3>Removed Methods in Jar2</h3>");
             for (Fact fact:idb2.getRemovedMethodFacts()) {
-                html.append(toHtml(fact,provDB2));
+                html.append(toHtml(fact,provDB2,edbLink2));
             }
         }
 
         if (idb1.getRemovedFieldFacts().size()>0) {
             html.append("<h3>Removed Fields in Jar1</h3>");
             for (Fact fact:idb1.getRemovedFieldFacts()) {
-                html.append(toHtml(fact,provDB1));
+                html.append(toHtml(fact,provDB1,edbLink1));
             }
         }
         if (idb2.getRemovedFieldFacts().size()>0) {
             html.append("<h3>Removed Fields in Jar2</h3>");
             for (Fact fact:idb2.getRemovedFieldFacts()) {
-                html.append(toHtml(fact,provDB2));
+                html.append(toHtml(fact,provDB2,edbLink2));
             }
         }
 
         for (String method:idb1.getRemovedInstructionFacts().keySet()) {
             for (Fact fact:idb1.getRemovedInstructionFacts().get(method)) {
                 html.append("<h3>Removed or Replaced Bytecode Instructions in Jar1, method: " + method+ "</h3>");
-                html.append(toHtml(fact,provDB1));
+                html.append(toHtml(fact,provDB1,edbLink1));
             }
         }
 
         for (String method:idb2.getRemovedInstructionFacts().keySet()) {
             for (Fact fact:idb2.getRemovedInstructionFacts().get(method)) {
                 html.append("<h3>Removed or Replaced Bytecode Instructions in Jar2, method: " + method+ "</h3>");
-                html.append(toHtml(fact,provDB2));
+                html.append(toHtml(fact,provDB2,edbLink2));
             }
         }
 
         for (String method:idb1.getMethodMovedInstructionFacts().keySet()) {
             for (Fact fact:idb1.getMethodMovedInstructionFacts().get(method)) {
                 html.append("<h3>Moved or Replaced Bytecode Instructions in Jar1, method: " + method+ "</h3>");
-                html.append(toHtml(fact,provDB1));
+                html.append(toHtml(fact,provDB1,edbLink1));
             }
         }
 
         for (String method:idb2.getMethodMovedInstructionFacts().keySet()) {
             for (Fact fact:idb2.getMethodMovedInstructionFacts().get(method)) {
                 html.append("<h3>Moved Bytecode Instructions in Jar2, method: " + method+ "</h3>");
-                html.append(toHtml(fact,provDB2));
+                html.append(toHtml(fact,provDB2,edbLink2));
             }
         }
 
@@ -304,37 +303,37 @@ public class DaleqAnalyser implements Analyser {
         for (String method:methods) {
             List<Fact> instructions1 = idb1.getMethodInstructionFacts(method);
             List<Fact> instructions2 = idb2.getMethodInstructionFacts(method);
-            ifDiffBeforeNormalisationAppend(instructions1,instructions2,provDB1,provDB2,"Method Instruction Fact for method " + method,html);
+            ifDiffBeforeNormalisationAppend(instructions1,instructions2,provDB1,provDB2,"Method Instruction Fact for method " + method,html,edbLink1,edbLink2);
         }
 
         bindings.put("diffs", html.toString());
 
     }
 
-    private void ifDiffBeforeNormalisationAppend(List<Fact> facts1, List<Fact> facts2, ProvenanceDB provDB1,ProvenanceDB provDB2,String htmlHeader,StringBuffer html) {
+    private void ifDiffBeforeNormalisationAppend(List<Fact> facts1, List<Fact> facts2, ProvenanceDB provDB1,ProvenanceDB provDB2,String htmlHeader,StringBuffer html,String edbLink1,String edbLink2) {
         int l = Math.min(facts1.size(),facts2.size());
         for (int i=0;i<l;i++) {
-            ifDiffBeforeNormalisationAppend(facts1.get(i),facts2.get(i),provDB1,provDB2,htmlHeader,html);
+            ifDiffBeforeNormalisationAppend(facts1.get(i),facts2.get(i),provDB1,provDB2,htmlHeader,html,edbLink1,edbLink2);
         }
         if (facts1.size()>l) {
             for (int i=l;i<facts1.size();i++) {
-                ifDiffBeforeNormalisationAppend(facts1.get(i),null,provDB1,provDB2,htmlHeader,html);
+                ifDiffBeforeNormalisationAppend(facts1.get(i),null,provDB1,provDB2,htmlHeader,html,edbLink1,edbLink2);
             }
         }
         if (facts2.size()>l) {
             for (int i=l;i<facts2.size();i++) {
-                ifDiffBeforeNormalisationAppend(null,facts2.get(i),provDB1,provDB2,htmlHeader,html);
+                ifDiffBeforeNormalisationAppend(null,facts2.get(i),provDB1,provDB2,htmlHeader,html,edbLink1,edbLink2);
             }
         }
     }
 
-    private void ifDiffBeforeNormalisationAppend(Fact fact1, Fact fact2, ProvenanceDB provDB1,ProvenanceDB provDB2,String htmlHeader,StringBuffer html) {
+    private void ifDiffBeforeNormalisationAppend(Fact fact1, Fact fact2, ProvenanceDB provDB1,ProvenanceDB provDB2,String htmlHeader,StringBuffer html,String edbLink1,String edbLink2) {
         if (isDiffBeforeNormalisation(fact1, fact2, provDB1, provDB2)) {
             html.append("<h3>"+htmlHeader+"</h3>");
             html.append("<h4>In Jar1</h4>");
-            html.append(fact1==null?"no fact found":toHtml(fact1,provDB1));
+            html.append(fact1==null?"no fact found":toHtml(fact1,provDB1,edbLink1));
             html.append("<h4>In Jar2</h4>");
-            html.append(fact2==null?"no fact found":toHtml(fact2,provDB2));
+            html.append(fact2==null?"no fact found":toHtml(fact2,provDB2,edbLink2));
         }
     }
 
@@ -441,7 +440,8 @@ public class DaleqAnalyser implements Analyser {
     }
 
     // assume that all facts have the same schema
-    private String toHtml(Fact fact,ProvenanceDB provDB) {
+    // edbLink -- to create link to the website representing the EDB
+    private String toHtml(Fact fact,ProvenanceDB provDB, String edbLink) {
         String html="<table>";
         Predicate predicate = fact.predicate();
         html+=htmlTableHeaderRow(
@@ -465,19 +465,18 @@ public class DaleqAnalyser implements Analyser {
             DerivationNode root = ProvenanceParser.parse(id);
             html += "<table>";
             html += htmlTableHeaderRow("derivation tree", "kind"); // skipped details for better layout
-            html += toHtmlTableRow(root,0,provDB);
+            html += toHtmlTableRow(root,0,provDB,edbLink);
             html += "</table>";
 
         } catch (Exception x) {
             LOG.error("Error parsing provenance for id \""+id+"\"",x);
             html += "<div>error parsing provenance !</div>";
         }
-
         return html;
 
     }
 
-    private String toHtmlTableRow(DerivationNode node, int i,ProvenanceDB provDB) {
+    private String toHtmlTableRow(DerivationNode node, int i,ProvenanceDB provDB,String edbLink) {
         String id = node.getId();
 
         String kind = "unknown";
@@ -489,23 +488,21 @@ public class DaleqAnalyser implements Analyser {
             ProvenanceDB.FlatFact ffact = provDB.getEdbFact(id);
             if (ffact != null) {
                 kind = "base fact extracted from bytecode";
-                detail = Stream.of(ffact.values()).map(Object::toString).collect(Collectors.joining("\t"));
+                String link = "file://"+edbLink+"#"+id;
+                id = "<a href=\""+link+"\" target=\"_blank\">"+id+"</a>";
             }
             else {
                 ffact = provDB.getIdbFact(id);
                 if (ffact != null) {
                     kind = "inferred fact";
-                    detail = Stream.of(ffact.values()).map(Object::toString).collect(Collectors.joining("\t"));
-                    // detail = ffact.predicateName() + "\t" + detail;
                 }
             }
-
         }
 
         String cssClass = "derivation-level-"+i;
         String html = htmlTableRow(cssClass, id,kind);  // try to skip detail for better layout
         for (DerivationNode child:node.getChildren()) {
-            html += toHtmlTableRow(child,i+1,provDB);
+            html += toHtmlTableRow(child,i+1,provDB,edbLink);
         }
         return html;
     }
@@ -522,51 +519,63 @@ public class DaleqAnalyser implements Analyser {
             .sorted(Comparator.naturalOrder())
             .collect(Collectors.toUnmodifiableList());
 
+        Map<Predicate,Path> dataByPredicate = new LinkedHashMap<>();
         for (Path f:files) {
             String predicateName = f.getFileName().toString().replace(".facts", "");
-            Predicate predicate = null;
             for (Predicate p : EDBPredicateRegistry.ALL) {
                 if (predicateName.equals(p.getName())) {
-                    predicate = p;
+                    dataByPredicate.put(p,f);
                 }
             }
-            assert predicate != null : "no EDB predicate found named \"" + predicateName + "\"";
-
-            List<String> lines = Files.readAllLines(f);
-            if (lines.size()>0) { // skip empty tables
-                html.append("<h2>Facts for Predicate " + predicateName + (predicate.isInstructionPredicate() ? " (instructions in methods)" : "") + "</h2>");
-                html.append("<table><tbody>");
-                String header = Arrays.stream(predicate.getSlots()).map(Slot::name).collect(Collectors.joining("</th><th>", "<tr><th>", "</th></tr>"));
-                html.append(header);
-                for (String line : lines) {
-                    String[] tokens = line.split("\t");
-                    assert tokens.length <= predicate.getSlots().length;
-
-                    if (tokens.length < predicate.getSlots().length) {
-                        // tsv ignores the last slot of it is empty -- we augment this for ldc instructions
-                        // this was observed for IDB_LDC, IDB_LDC_W, IDB_LDC2_W, IDB_LOOKUPSWITCH, IDB_TABLESWITCH
-                        if (tokens.length == predicate.getSlots().length - 1) {
-                            String[] tokens2 = new String[predicate.getSlots().length];
-                            for (int i = 0; i < tokens.length; i++) {
-                                tokens2[i] = tokens[i];
-                            }
-                            tokens2[tokens2.length-1] = "";
-                            tokens = tokens2;
-                        }
-                    }
-                    assert tokens.length == predicate.getSlots().length;
-                    tokens = escapeHtml(tokens);
-
-                    // insert link target in id slot
-                    String id = tokens[0];
-                    tokens[0] = "<a id=\"" + id + "\">" + id + "</a>";
-                    String tr = Arrays.stream(tokens).collect(Collectors.joining("</td><td>", "<tr><td>", "</td></tr>"));
-                    html.append(tr);
-                }
-            }
-
-            html.append("</tbody></table>");
         }
+        html.append("<h2>Facts for Representing Class-Wide Properties</h2>");
+        dataByPredicate.keySet().stream()
+            .filter(p->!p.isInstructionPredicate())
+            .forEach(p-> {
+                try {
+                    html.append(edbToHtml(dataByPredicate.get(p),p));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        html.append("<h2>Facts for Representing Instructions in Methods</h2>");
+        dataByPredicate.keySet().stream()
+            .filter(p->p.isInstructionPredicate())
+            .forEach(p-> {
+                try {
+                    html.append(edbToHtml(dataByPredicate.get(p),p));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+
+        return html.toString();
+    }
+
+    private static String edbToHtml(Path f,Predicate predicate) throws IOException {
+        StringBuffer html = new StringBuffer();
+        List<String> lines = Files.readAllLines(f);
+        if (lines.size()>0) { // skip empty tables
+            html.append("<h3>Facts for Predicate " + predicate.getName() + "</h3>");
+            html.append("<table><tbody>");
+            String header = Arrays.stream(predicate.getSlots()).map(Slot::name).collect(Collectors.joining("</th><th>", "<tr><th>", "</th></tr>"));
+            html.append(header);
+            for (String line : lines) {
+                String[] tokens = line.split("\t");
+                assert tokens.length <= predicate.getSlots().length;
+                tokens = Predicate.pad(predicate, tokens);
+                assert tokens.length == predicate.getSlots().length;
+                tokens = escapeHtml(tokens);
+
+                // insert link target in id slot
+                String id = tokens[0];
+                tokens[0] = "<a id=\"" + id + "\">" + id + "</a>";
+                String tr = Arrays.stream(tokens).collect(Collectors.joining("</td><td>", "<tr><td>", "</td></tr>"));
+                html.append(tr);
+            }
+        }
+        html.append("</tbody></table>");
         return html.toString();
     }
 

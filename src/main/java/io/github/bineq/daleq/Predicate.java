@@ -40,4 +40,30 @@ public interface Predicate {
 
     boolean isIDBPredicate();
 
+
+    /**
+     * Utility to parse facts, i.e. importing TSV data.
+     * Sometimes data is missing if the last value is an empty string.
+     * This method "fills" parsed values with emty strings.
+     * @param tokens
+     * @return
+     */
+    static String[] pad(Predicate predicate, String[] tokens) {
+
+        if (tokens.length == predicate.getSlots().length - 1) {
+            String[] tokens2 = new String[predicate.getSlots().length];
+            for (int i = 0; i < tokens.length; i++) {
+                tokens2[i] = tokens[i];
+            }
+            tokens2[tokens2.length - 1] = "";
+            return tokens2;
+        }
+        else if (tokens.length == predicate.getSlots().length) {
+            return tokens;
+        }
+        assert false;
+        return tokens;
+
+    }
+
 }
