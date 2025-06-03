@@ -63,9 +63,8 @@ public class ResourceUtil {
     }
 
     // hyperlink to be used in report generated in outputDir
-    static String createLink (String resourceUnderAnalysis, Analyser analyser, String filename) {
-        // outputDir is context, can be ignored
-        return analyser.getClass().getName()+'/'+resourceUnderAnalysis+'/'+filename;
+    static String createLink (Path contextDir,String resourceUnderAnalysis, Analyser analyser, String filename) {
+        return contextDir.toFile().getAbsolutePath()+'/'+analyser.getClass().getName()+'/'+resourceUnderAnalysis+'/'+filename;
     }
 
     static String createLink (Analyser analyser, String filename) {
@@ -104,7 +103,7 @@ public class ResourceUtil {
      * @param bindings - binds ids if html elements in the template to values
      * @return a link to the created resource (instantiated template)
      */
-    static String createReportFromTemplate(Path outputDir, Analyser analyser, String resource, URL template, String fileName, Map<String,String> bindings) throws IOException {
+    static String createReportFromTemplate(Path contextDir, Analyser analyser, String resource, URL template, String fileName, Map<String,String> bindings) throws IOException {
 
         Path templatePath = Path.of(template.getPath());
         String templ = Files.readString(templatePath);
@@ -119,11 +118,11 @@ public class ResourceUtil {
         }
 
         // write result
-        Path dir = createResourceFolder (outputDir, resource, analyser) ;
+        Path dir = createResourceFolder (contextDir, resource, analyser) ;
         Path file = dir.resolve(fileName);
         Files.write(file, doc.html().getBytes());
 
-        return createLink(resource, analyser, fileName);
+        return createLink(contextDir,resource, analyser, fileName);
     }
 
     static void diff(Path file1, Path file2, Path diffFile) throws Exception {

@@ -151,7 +151,7 @@ public class IDBReader {
         // creating them "on-the-fly" here. Downside: make all slots symbol typed
         Preconditions.checkState(predicate != null,"unknown predicate " + predicateName);
 
-        // tsv ignores the lqst slot of it is empty -- we augment this for ldc instructions
+        // tsv ignores the last slot of it is empty -- we augment this for ldc instructions
         // this was observed for IDB_LDC, IDB_LDC_W, IDB_LDC2_W, IDB_LOOKUPSWITCH, IDB_TABLESWITCH
         if (tokens.length==predicate.getSlots().length-1) {
             String[] tokens2 = new String[predicate.getSlots().length];

@@ -3,10 +3,8 @@ package io.github.bineq.daleq.cli;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
-import io.github.bineq.daleq.Fact;
-import io.github.bineq.daleq.IOUtil;
-import io.github.bineq.daleq.Predicate;
-import io.github.bineq.daleq.Souffle;
+import io.github.bineq.daleq.*;
+import io.github.bineq.daleq.edb.EDBPredicateRegistry;
 import io.github.bineq.daleq.edb.FactExtractor;
 import io.github.bineq.daleq.idb.IDB;
 import io.github.bineq.daleq.idb.IDBPrinter;
@@ -39,6 +37,8 @@ public class DaleqAnalyser implements Analyser {
     private static final boolean SOUFFLE_AVAILABLE = checkSouffleExe();
     private static final URL PROJECTED_IDB_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/projected-idb.html");
     private static final URL ADVANCED_DIFF_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/advanced-diff.html");
+    private static final URL EDB_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/edb.html");
+
     public static final String RULES = "/rules/advanced.souffle";
 
 
@@ -119,13 +119,18 @@ public class DaleqAnalyser implements Analyser {
                 String idb1ProjectedAsString = Files.readString(idbProjectedFile1);
                 String idb2ProjectedAsString = Files.readString(idbProjectedFile2);
 
+                // print EDB
+                String edb1Link = createReport4EDB(contextDir,resource,"edb1.html",edbDir1);
+                String edb2Link = createReport4EDB(contextDir,resource,"edb2.html",edbDir2);
+                Path edb1Report = Path.of(edb1Link);
+                Path edb2Report = Path.of(edb2Link);
 
                 if (idb1ProjectedAsString.equals(idb2ProjectedAsString)) {
                     if (!idb1FullAsString.equals(idb2FullAsString)) {
                         // still print diff
                         Path diffFull = folder.resolve(DIFF_FULL_REPORT_NAME);
                         ResourceUtil.diff(idbFullFile1, idbFullFile2, diffFull);
-                        String link2 = ResourceUtil.createLink(resource, this, DIFF_FULL_REPORT_NAME);
+                        String link2 = ResourceUtil.createLink(contextDir,resource, this, DIFF_FULL_REPORT_NAME);
                         attachments.add(new AnalysisResultAttachment("diff-full",link2,AnalysisResultAttachment.Kind.DIFF));
                     }
 
@@ -136,8 +141,8 @@ public class DaleqAnalyser implements Analyser {
                         "class",resource,
                         "jar1",asLink(jar1),
                         "jar2",asLink(jar2),
-                        "edb1",asLink(edbDir1),
-                        "edb2",asLink(edbDir2),
+                        "edb1",asLink(edb1Report),
+                        "edb2",asLink(edb2Report),
                         "idb1",asLink(idbDir1),
                         "idb2",asLink(idbDir2),
                         "idb1txt",asLink(idbFullFile1),
@@ -161,12 +166,12 @@ public class DaleqAnalyser implements Analyser {
 
                     Path diffProjected = folder.resolve(DIFF_PROJECTED_REPORT_NAME);
                     ResourceUtil.diff(idbProjectedFile1, idbProjectedFile2, diffProjected);
-                    String link = ResourceUtil.createLink(resource, this, DIFF_PROJECTED_REPORT_NAME);
+                    String link = ResourceUtil.createLink(contextDir,resource, this, DIFF_PROJECTED_REPORT_NAME);
                     attachments.add(new AnalysisResultAttachment("diff-projected",link,AnalysisResultAttachment.Kind.DIFF));
 
                     Path diffFull = folder.resolve(DIFF_FULL_REPORT_NAME);
                     ResourceUtil.diff(idbFullFile1, idbFullFile2, diffFull);
-                    String link2 = ResourceUtil.createLink(resource, this, DIFF_FULL_REPORT_NAME);
+                    String link2 = ResourceUtil.createLink(contextDir,resource, this, DIFF_FULL_REPORT_NAME);
                     attachments.add(new AnalysisResultAttachment("diff-full",link2,AnalysisResultAttachment.Kind.DIFF));
 
                     return new AnalysisResult(AnalysisResultState.FAIL, "projected IDBs are different", attachments);
@@ -175,7 +180,7 @@ public class DaleqAnalyser implements Analyser {
             catch (Exception x) {
                 Path errorFile = folder.resolve("error.txt");
                 ResourceUtil.createErrorFile(x,"Exception running analysis: \"" + this.name()+"\"",errorFile);
-                String link = ResourceUtil.createLink(resource, this, "error.txt");
+                String link = ResourceUtil.createLink(contextDir,resource, this, "error.txt");
                 attachments.add(new AnalysisResultAttachment("error",link,AnalysisResultAttachment.Kind.ERROR));
                 return new AnalysisResult(AnalysisResultState.ERROR, "Failed to compute and compare IDB", attachments);
             }
@@ -185,6 +190,7 @@ public class DaleqAnalyser implements Analyser {
         }
 
     }
+
 
 
     private IDB computeAndParseIDB(Path contextDir, Path classFile, Path edbDir, Path idbDir, Path mergedEDBAndRules) throws Exception {
@@ -301,26 +307,6 @@ public class DaleqAnalyser implements Analyser {
             ifDiffBeforeNormalisationAppend(instructions1,instructions2,provDB1,provDB2,"Method Instruction Fact for method " + method,html);
         }
 
-
-
-
-
-//        Set<Fact> removedInstructionFacts1 = idb1.getRemovedInstructionFacts().values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
-//        Set<Fact> removedInstructionFacts2 = idb2.getRemovedInstructionFacts().values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
-
-//        if (removedInstructionFacts1.size()>0) {
-//            html+="<h3>Removed or Replaced Bytecode Instructions in Jar1</h3>";
-//            for (Fact fact:removedInstructionFacts1) {
-//                html+=toHtml(fact,provDB1);
-//            }
-//        }
-//        if (removedInstructionFacts2.size()>0) {
-//            html+="<h3>Removed or Replaced Bytecode Instructions in Jar2</h3>";
-//            for (Fact fact:removedInstructionFacts2) {
-//                html+=toHtml(fact,provDB2);
-//            }
-//        }
-
         bindings.put("diffs", html.toString());
 
     }
@@ -345,9 +331,9 @@ public class DaleqAnalyser implements Analyser {
     private void ifDiffBeforeNormalisationAppend(Fact fact1, Fact fact2, ProvenanceDB provDB1,ProvenanceDB provDB2,String htmlHeader,StringBuffer html) {
         if (isDiffBeforeNormalisation(fact1, fact2, provDB1, provDB2)) {
             html.append("<h3>"+htmlHeader+"</h3>");
-            html.append("<h4>"+htmlHeader+" -- Jar1</h4>");
+            html.append("<h4>In Jar1</h4>");
             html.append(fact1==null?"no fact found":toHtml(fact1,provDB1));
-            html.append("<h4>"+htmlHeader+" -- Jar2</h4>");
+            html.append("<h4>In Jar2</h4>");
             html.append(fact2==null?"no fact found":toHtml(fact2,provDB2));
         }
     }
@@ -522,6 +508,84 @@ public class DaleqAnalyser implements Analyser {
             html += toHtmlTableRow(child,i+1,provDB);
         }
         return html;
+    }
+
+
+    private static String edbToHtml(Path dir) throws IOException {
+        StringBuffer html = new StringBuffer();
+        html.append("The EDB (extenional database) consists of facts extracted from bytecode.");
+        html.append("The EDB can be found here: " + asLink(dir));
+
+        List<Path> files = Files.walk(dir)
+            .filter(Files::isRegularFile)
+            .filter(f -> f.toString().endsWith(".facts"))
+            .sorted(Comparator.naturalOrder())
+            .collect(Collectors.toUnmodifiableList());
+
+        for (Path f:files) {
+            String predicateName = f.getFileName().toString().replace(".facts", "");
+            Predicate predicate = null;
+            for (Predicate p : EDBPredicateRegistry.ALL) {
+                if (predicateName.equals(p.getName())) {
+                    predicate = p;
+                }
+            }
+            assert predicate != null : "no EDB predicate found named \"" + predicateName + "\"";
+
+            List<String> lines = Files.readAllLines(f);
+            if (lines.size()>0) { // skip empty tables
+                html.append("<h2>Facts for Predicate " + predicateName + (predicate.isInstructionPredicate() ? " (instructions in methods)" : "") + "</h2>");
+                html.append("<table><tbody>");
+                String header = Arrays.stream(predicate.getSlots()).map(Slot::name).collect(Collectors.joining("</th><th>", "<tr><th>", "</th></tr>"));
+                html.append(header);
+                for (String line : lines) {
+                    String[] tokens = line.split("\t");
+                    assert tokens.length <= predicate.getSlots().length;
+
+                    if (tokens.length < predicate.getSlots().length) {
+                        // tsv ignores the last slot of it is empty -- we augment this for ldc instructions
+                        // this was observed for IDB_LDC, IDB_LDC_W, IDB_LDC2_W, IDB_LOOKUPSWITCH, IDB_TABLESWITCH
+                        if (tokens.length == predicate.getSlots().length - 1) {
+                            String[] tokens2 = new String[predicate.getSlots().length];
+                            for (int i = 0; i < tokens.length; i++) {
+                                tokens2[i] = tokens[i];
+                            }
+                            tokens2[tokens2.length-1] = "";
+                            tokens = tokens2;
+                        }
+                    }
+                    assert tokens.length == predicate.getSlots().length;
+                    tokens = escapeHtml(tokens);
+
+                    // insert link target in id slot
+                    String id = tokens[0];
+                    tokens[0] = "<a id=\"" + id + "\">" + id + "</a>";
+                    String tr = Arrays.stream(tokens).collect(Collectors.joining("</td><td>", "<tr><td>", "</td></tr>"));
+                    html.append(tr);
+                }
+            }
+
+            html.append("</tbody></table>");
+        }
+        return html.toString();
+    }
+
+    private static String[] escapeHtml(String[] text) {
+        String[] escaped = new String[text.length];
+        for (int i = 0; i < text.length; i++) {
+            escaped[i] = text[i]
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
+        }
+        return escaped;
+    }
+
+
+    private String createReport4EDB(Path contextDir,String resource,String reportName,Path edbDir) throws IOException {
+        String edbToHtml = edbToHtml(edbDir);
+        Map<String,String> bindings = Map.of("edb",edbToHtml);
+        return ResourceUtil.createReportFromTemplate(contextDir,this,resource,EDB_TEMPLATE,reportName,bindings);
     }
 
 }

@@ -78,7 +78,7 @@ public abstract class AbstractJavapAnalyser implements Analyser {
                     } else {
                         Path diff = folder.resolve(DIFF_REPORT_NAME);
                         ResourceUtil.diff(disassembled1, disassembled2, diff);
-                        String link = ResourceUtil.createLink(resource, this, DIFF_REPORT_NAME);
+                        String link = ResourceUtil.createLink(contextDir,resource, this, DIFF_REPORT_NAME);
                         attachments.add(new AnalysisResultAttachment("diff", link, AnalysisResultAttachment.Kind.DIFF));
                         return new AnalysisResult(AnalysisResultState.FAIL, "disassemblies of .class files are different", attachments);
                     }
@@ -88,7 +88,7 @@ public abstract class AbstractJavapAnalyser implements Analyser {
                     try {
                         Path errorFile = folder.resolve("error.txt");
                         ResourceUtil.createErrorFile(x, "Exception running analysis: \"" + this.name() + "\"", errorFile);
-                        String link = ResourceUtil.createLink(resource, this, "error.txt");
+                        String link = ResourceUtil.createLink(contextDir,resource, this, "error.txt");
                         attachments.add(new AnalysisResultAttachment("error", link, AnalysisResultAttachment.Kind.ERROR));
                     }
                     catch (Exception y) {

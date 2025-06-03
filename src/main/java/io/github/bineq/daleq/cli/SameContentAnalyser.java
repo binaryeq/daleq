@@ -54,7 +54,7 @@ public class SameContentAnalyser implements Analyser {
                     Path diff = folder.resolve(DIFF_REPORT_NAME);
                     try {
                         ResourceUtil.diff(file1, file2, diff);
-                        String link = ResourceUtil.createLink(resource, this, DIFF_REPORT_NAME);
+                        String link = ResourceUtil.createLink(contextDir,resource, this, DIFF_REPORT_NAME);
                         attachments.add(new AnalysisResultAttachment("diff", link,AnalysisResultAttachment.Kind.DIFF));
                     }
                     catch (Exception e) {
