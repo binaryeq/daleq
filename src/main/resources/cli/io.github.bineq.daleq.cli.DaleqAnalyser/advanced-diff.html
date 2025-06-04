@@ -99,8 +99,22 @@
 </head>
 <body>
     <h1>Advanced Diff for Classes Deemed to be Equivalent</h1>
-    <div id="about"></div>
-    <h2>File locations</h2>
+    <div>
+        The textual representations of the projected IDBs generated for the classes compared are the same.
+        Projected means that some elements like ids and instruction counters that are influenced by normalisation rules are ignored.
+        This report provides details of the logic applied to establish equivalence.
+    </div>
+    <h2>Table of Content</h2>
+
+    <ol>
+        <li><a href="#header-file-locations">File locations</a></li>
+        <li><a href="#header-normalisations">Normalisations Performed to Establish Equivalence</a></li>
+        <li><a href="#header-rules">Rules Used to Compute the Normalised Database (IDB) - Rule IDs Highlighted</a></li>
+        <li><a href="#header-edb1">EDB1: Database Extracted from Jar1</a></li>
+        <li><a href="#header-edb2">EDB2: Database Extracted from Jar2</a></li>
+    </ol>
+
+    <h2><a id="header-file-locations">File locations</a></h2>
     <p/>
 
     <table>
@@ -120,16 +134,16 @@
         </tbody>
     </table>
 
-    <h2>Normalisation Performed to Establish Equivalence</h2>
+    <h2><a id="header-normalisations">Normalisations Performed to Establish Equivalence</a></h2>
     <div id="diffs"></div>
 
-    <h2>Rules Used to Compute the Normalised Database (IDB) - Rule IDs Highlighted</h2>
+    <h2><a id="header-rules">Rules Used to Compute the Normalised Database (IDB) - Rule IDs Highlighted</a></h2>
     <div id="rules"></div>
 
-    <h2>EDB1: Database Extracted from Jar1</h2>
+    <h2><a id="header-edb1">EDB1: Database Extracted from Jar1</a></h2>
     <div id="edb1IL"></div>
 
-    <h2>EDB2: Database Extracted from Jar2</h2>
+    <h2><a id="header-edb2">EDB2: Database Extracted from Jar2</a></h2>
     <div id="edb2IL"></div>
 
 </body>

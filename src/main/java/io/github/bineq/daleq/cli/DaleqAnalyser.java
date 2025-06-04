@@ -133,7 +133,6 @@ public class DaleqAnalyser implements Analyser {
                     // print projected IDBs
                     Map<String,String> bindings = ResourceUtil.newModifiableMap(
                         "code",idb1ProjectedAsString,
-                        "about","The textual representations of the projected IDBs generated for the classes compared are the same. Projected means that some elements like ids and instruction counters that are influenced by normalisation rules are ignored. Please check the main report for links to the full IDBs.",
                         "class",resource,
                         "jar1",asLink(jar1),
                         "jar2",asLink(jar2),
