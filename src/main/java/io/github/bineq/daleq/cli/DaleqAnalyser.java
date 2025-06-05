@@ -592,7 +592,21 @@ public class DaleqAnalyser implements Analyser {
     private String rulesToHtml(Path rules) throws IOException {
         StringBuffer html = new StringBuffer();
         for (String line:Files.readAllLines(rules)) {
-            html.append("<p>"+insertRuleLabelAndHighlightId(line)+"</p>");
+            String cssClass = null;
+            line = line.trim();
+            if (line.startsWith("//")) {
+                cssClass = "datalog-comment";
+            }
+            else if (line.startsWith(".decl ")) {
+                cssClass = "datalog-declaration";
+            }
+            else if (line.startsWith(".output ")) {
+                cssClass = "datalog-output";
+            }
+            else {
+                cssClass = "datalog-rule";
+            }
+            html.append("<p class=\""+cssClass+"\">"+insertRuleLabelAndHighlightId(line)+"</p>");
         }
         return html.toString();
     }
