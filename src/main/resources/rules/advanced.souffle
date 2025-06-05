@@ -1,10 +1,11 @@
-// custom rule to remove version metadata
+// NORMALISATION PATTERN: custom rule to remove version metadata
 .decl IDB_VERSION(factid: symbol,classname: symbol,version: number)
 IDB_VERSION(cat("R_REMOVE_BYTECODE_VERSION","[",factid,"]"),classname,0) :- VERSION(factid,classname,_).
 .output IDB_VERSION
 
+// **************************************************************
 
-// normalise changes before/after https://github.com/openjdk/jdk/pull/5165
+// NORMALISATION PATTERN: normalise changes before/after https://github.com/openjdk/jdk/pull/5165
 
 // @auxiliary-predicate
 .decl IS_ROOT_METHOD(factid: symbol,name: symbol,descriptor: symbol)
@@ -14,19 +15,19 @@ IS_ROOT_METHOD("R_IS_ROOT_METHOD_EQUALS","equals","(Ljava/lang/Object;)Z").
 IS_ROOT_METHOD("R_IS_ROOT_METHOD_HASHCODE","hashCode","()I").
 
 // remove invokeinterface and replace with invokevirtual
-REMOVED_INSTRUCTION(cat("R_REMOVE_PR5165","[",factid1,",",factid2,"]"),methodid,instructioncounter) :-
-INVOKEINTERFACE(factid1,methodid,instructioncounter,_,name,desc,_),
-IS_ROOT_METHOD(factid2,name,desc).
+REMOVED_INSTRUCTION(cat("R_REMOVE_PR5165","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,_,name,desc,_),IS_ROOT_METHOD(factid2,name,desc).
 IDB_INVOKEVIRTUAL(cat("R_ADD_PR5165","[",factid1,",",factid2,"]"),methodid,instructioncounter,"java/lang/Object",name,desc,itf) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,_,name,desc,itf),IS_ROOT_METHOD(factid2,name,desc).
 
-// Inline $values() method in enumerations
+// **************************************************************
+
+
+// NORMALISATION PATTERN: Inline $values() method in enumerations
 // see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
 
 // (1) removal
 .decl IS_ENUM_VALUE_SYNTH_METHOD(factid: symbol,id: symbol)
 // @auxiliary-predicate
 IS_ENUM_VALUE_SYNTH_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,",",factid2,",",factid3,"]"),id) :- METHOD(factid1,id,classname,name,_),IDB_IS_ENUM(factid2,classname),IDB_IS_SYNTHETIC(factid3,id),name="$values".
-// .output IS_ENUM_VALUE_SYNTH_METHOD
 REMOVED_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,"]"),methodid) :- IS_ENUM_VALUE_SYNTH_METHOD(factid1,methodid).
 
 // (2) move instructions *****************************************
@@ -34,23 +35,14 @@ REMOVED_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,"]"),method
 .decl IS_ENUM_STATIC_BLOCK(factid: symbol,id: symbol)
 IS_ENUM_STATIC_BLOCK(cat("R_IS_ENUM_STATIC_BLOCK","[",factid1,",",factid2,"]"),id) :- METHOD(factid1,id,classname,name,descriptor),IDB_IS_ENUM(factid2,classname),name="<clinit>",descriptor="()V".
 
-MOVED_INSTRUCTION(cat("R_MOVE_INSTRUCTIONS","[",factid1,",",factid2,",",factid3,",",factid4,"]"),sourceMethodid,sourceInstructionCounter,destMethodId,destInstructionCounter,instructionName) :-
-   IS_ENUM_VALUE_SYNTH_METHOD(factid1,sourceMethodid),
-   IS_ENUM_STATIC_BLOCK(factid2,destMethodId),
-   INVOKESTATIC(factid3,destMethodId,destInstructionCounter,_,_,_,_),
-   IDB_INSTRUCTION(factid4,sourceMethodid,sourceInstructionCounter,instructionName),
-   !instructionName="ARETURN".
+MOVED_INSTRUCTION(cat("R_MOVE_INSTRUCTIONS","[",factid1,",",factid2,",",factid3,",",factid4,"]"),sourceMethodid,sourceInstructionCounter,destMethodId,destInstructionCounter,instructionName) :- IS_ENUM_VALUE_SYNTH_METHOD(factid1,sourceMethodid), IS_ENUM_STATIC_BLOCK(factid2,destMethodId),INVOKESTATIC(factid3,destMethodId,destInstructionCounter,_,_,_,_), IDB_INSTRUCTION(factid4,sourceMethodid,sourceInstructionCounter,instructionName), !instructionName="ARETURN".
 
 // remove invocation of now inlined method
-REMOVED_INSTRUCTION(cat("R_REMOVE_INSTRUCTIONS","[",factid1,",",factid2,"]"),methodid,instructioncounter) :-
-    IS_ENUM_STATIC_BLOCK(factid1,methodid),
-    INVOKESTATIC(factid2,methodid,instructioncounter,_,name,_,_),
-    name="$values".
+REMOVED_INSTRUCTION(cat("R_REMOVE_INSTRUCTIONS","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- IS_ENUM_STATIC_BLOCK(factid1,methodid), INVOKESTATIC(factid2,methodid,instructioncounter,_,name,_,_), name="$values".
 
+// **************************************************************
 
-// (2) move instructions *****************************************
-
-// Remove Redundant Checkcasts
+// NORMALISATION PATTERN: Remove Redundant Checkcasts
 // see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
 
 REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- CHECKCAST(factid1,methodid,instructioncounter,desc),CHECKCAST(factid2,methodid,instructioncounter-100,desc).
@@ -70,11 +62,13 @@ REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"
 .decl MOVED_INSTRUCTION(factid: symbol, sourcemethodid: symbol,sourceinstructioncounter: number, destmethodid: symbol,destinstructioncounter: number,instructionname: symbol)
 .output MOVED_INSTRUCTION
 
+// **************************************************************
+
 
 // auxiliary predicate used in standard rules to reprersent any instruction
 .decl IDB_INSTRUCTION(factid: symbol,methodid: symbol,instructioncounter: number,instructionName: symbol)
 
-// standard rules
+// STANDARD RULES
 // @generated io.github.bineq.daleq.idb.rulegeneration.BaselineRuleGeneration
 
 .decl IDB_SUPERCLASS(factid: symbol,name: symbol,supername: symbol)
