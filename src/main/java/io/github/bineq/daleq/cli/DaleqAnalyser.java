@@ -565,7 +565,7 @@ public class DaleqAnalyser implements Analyser {
                 // insert link target in id slot
                 String id = tokens[0];
                 tokens[0] = "<a id=\"" + id + "\">" + id + "</a>";
-                String tr = Arrays.stream(tokens).collect(Collectors.joining("</td><td>", "<tr><td>", "</td></tr>"));
+                String tr = Arrays.stream(tokens).collect(Collectors.joining("</td><td>", "<tr class=\"highlightable-link-target\"><td>", "</td></tr>"));
                 html.append(tr);
             }
         }
@@ -593,6 +593,7 @@ public class DaleqAnalyser implements Analyser {
         StringBuffer html = new StringBuffer();
         for (String line:Files.readAllLines(rules)) {
             String cssClass = null;
+            String ruleId = null;
             line = line.trim();
             if (line.startsWith("//")) {
                 cssClass = "datalog-comment";
@@ -605,8 +606,15 @@ public class DaleqAnalyser implements Analyser {
             }
             else {
                 cssClass = "datalog-rule";
+                ruleId = extractId(line);
             }
-            html.append("<p class=\""+cssClass+"\">"+insertRuleLabelAndHighlightId(line)+"</p>");
+            if (ruleId==null) {
+                html.append("<p class=\"" + cssClass + "\">" + line + "</p>");
+            }
+            else {
+                line = line.replace(ruleId,"<strong>"+ruleId+"</strong>");
+                html.append("<p class=\"" + cssClass + " highlightable-link-target\"><a id=\""+ruleId+"\">" + line + "</a></p>");
+            }
         }
         return html.toString();
     }
@@ -621,6 +629,18 @@ public class DaleqAnalyser implements Analyser {
         }
         else {
             return line;
+        }
+    }
+
+    static String extractId(String rule) {
+        Matcher matcher = RULE_LABEL_REGEX.matcher(rule);
+        if (matcher.find()) {
+            String match = matcher.group();
+            match = match.substring(1, match.length() - 1).trim();
+            return match;
+        }
+        else {
+            return null;
         }
     }
 

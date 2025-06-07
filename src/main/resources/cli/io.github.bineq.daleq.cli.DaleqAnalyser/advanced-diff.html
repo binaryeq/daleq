@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <script>
+        var highlightedElement = null;
+        document.addEventListener('click', function(event) {
+            // remove old highlighted element
+            if (highlightedElement) {
+                highlightedElement.classList.remove('highlighted');
+                highlightedElement = null;
+            }
+            if (event.target.tagName === 'A') {
+                const href = event.target.getAttribute('href');
+                if (href && (href.startsWith('#') || href.startsWith(window.location.pathname))) {
+                    var target = href.substring(1);
+                    var element = document.getElementById(target);
+                    element = element.closest('.highlightable-link-target');
+                    if (element) {
+                        element.classList.add('highlighted');
+                        highlightedElement = element;
+                    }
+                }
+
+            }
+        });
+    </script>
+
     <style>
         body {
             background-color: lightsteelblue;
@@ -29,6 +54,9 @@
             text-align: right;
             min-width: 150px;
             max-width: 150px;
+        }
+        .highlighted {
+            background: #fdf2d0;
         }
         .derivation-level-0::before {
             display: inline-block;
@@ -97,16 +125,17 @@
 
         <!-- styles for rule listing -->
         .datalog-rule {
-
         }
         .datalog-comment {
             color: #6e7681;
         }
         .datalog-output {
-            color: #399839;
+            color: #3545b0;
+            font-style: italic;
         }
         .datalog-declaration {
-            color: #3572b0;
+            color: #3545b0;
+            font-style: italic;
         }
     </style>
 </head>
@@ -151,7 +180,7 @@
     <div id="diffs"></div>
 
     <h2><a id="header-rules">Rules Used to Compute the Normalised Database (IDB) - Rule IDs Highlighted</a></h2>
-    <div id="rules"></div>
+    <div id="rules" style="margin-left: 20px" ></div>
 
     <h2><a id="header-edb1">EDB1: Database Extracted from Jar1</a></h2>
     <div id="edb1IL"></div>
