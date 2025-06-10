@@ -209,6 +209,13 @@ public class DaleqAnalyser implements Analyser {
         Path edbDef = edbDir.resolve("db.souffle");
         FactExtractor.extractAndExport(classFile, edbDef, edbDir, true);
         Souffle.createIDB(edbDef, rulesPath, edbDir, idbDir, mergedEDBAndRules);
+
+        // there might be a race condition is souffle that some background thread is still writing the IDB when createIDB returns
+        // there have been cased when facts where missing, leading to NPEs when printing the IDB
+        // but upon inspection, those facts where there
+        // try to mitigate with this for now
+        Thread.sleep(200);
+
         return IDBReader.read(idbDir);
 
     }

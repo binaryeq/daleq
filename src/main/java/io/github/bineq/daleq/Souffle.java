@@ -3,6 +3,7 @@ package io.github.bineq.daleq;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,6 +21,7 @@ public class Souffle {
     public static final String COMMENT_SEP = "// ************************************************";
 
     public static final Path COMMON_RULES_DIR = Path.of(Souffle.class.getResource("/rules/commons/").getPath());
+    public static final String LINE_SEP = System.getProperty("line.separator");
 
     /**
      * Create the DB.
@@ -76,10 +78,19 @@ public class Souffle {
         LOG.info("Merged rules and facts into single souffle program {}", mergedEDBAndRules.toFile().getAbsolutePath());
 
         LOG.info("Starting souffle");
-        new ProcessBuilder(souffle.toString(),"-F",edbDir.toString(),"-D",idbDir.toString(),mergedEDBAndRules.toString())
-            .inheritIO()
-            .start()
-            .waitFor();
+        Process process = new ProcessBuilder(souffle.toString(),"-F",edbDir.toString(),"-D",idbDir.toString(),mergedEDBAndRules.toString())
+            .start();
+
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//        StringJoiner sj = new StringJoiner(LINE_SEP);
+//        reader.lines().iterator().forEachRemaining(sj::add);
+//        String text = sj.toString();
+
+        int result = process.waitFor();
+        if (result != 0) {
+            LOG.error("Souffle exited with result " + result);
+            throw new IOException("Souffle exited with " + result);
+        }
     }
 
 
