@@ -1,12 +1,11 @@
 package io.github.bineq.daleq.edb.instruction_fact_factories;
 
 import javax.annotation.processing.Generated;
-import java.util.Map;
 
 import io.github.bineq.daleq.SimpleFact;
 import io.github.bineq.daleq.edb.EBDInstructionPredicate;
 import io.github.bineq.daleq.edb.EDBPredicateRegistry;
-import org.objectweb.asm.tree.LabelNode;
+import io.github.bineq.daleq.edb.FactExtractor;
 import io.github.bineq.daleq.Fact;
 import org.objectweb.asm.tree.MethodInsnNode;
 
@@ -22,7 +21,7 @@ public class InstructionFactFactory__INVOKESTATIC implements io.github.bineq.dal
         return EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(184);
     }
 
-    @Override public Fact createFact(String factId, MethodInsnNode node, String methodRef, int instructionCounter, Map<LabelNode, String> labelMap) {
+    @Override public Fact createFact(String factId, MethodInsnNode node, String methodRef, int instructionCounter, FactExtractor.LabelMap labelMap) {
         return new SimpleFact(EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(184),new Object[]{factId,methodRef,instructionCounter,node.owner,node.name,node.desc,node.itf});
     }
 

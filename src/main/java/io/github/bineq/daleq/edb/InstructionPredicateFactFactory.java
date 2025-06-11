@@ -2,9 +2,8 @@ package io.github.bineq.daleq.edb;
 
 import io.github.bineq.daleq.Fact;
 import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.LabelNode;
+
 import javax.annotation.processing.Generated;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -21,7 +20,7 @@ public interface InstructionPredicateFactFactory<NT extends AbstractInsnNode> {
 
     EBDInstructionPredicate getPredicate();
 
-    Fact createFact(String id, NT node, String methodRef, int instructionCounter, Map<LabelNode, String> labelMap);
+    Fact createFact(String id, NT node, String methodRef, int instructionCounter, FactExtractor.LabelMap labelMap);
 
     default void verify() throws VerificationException {
         if (!Objects.equals(getVersion(), getPredicate().getId())) {

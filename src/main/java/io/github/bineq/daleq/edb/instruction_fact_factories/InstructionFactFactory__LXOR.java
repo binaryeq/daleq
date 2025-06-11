@@ -1,8 +1,9 @@
 package io.github.bineq.daleq.edb.instruction_fact_factories;
 
 import javax.annotation.processing.Generated;
-import java.util.Map;
-import org.objectweb.asm.tree.LabelNode;
+
+import io.github.bineq.daleq.edb.FactExtractor;
+import org.objectweb.asm.tree.InsnNode;
 import io.github.bineq.daleq.Fact;
 
 @Generated(value="io.github.bineq.daleq.edb.InstructionFactFactoryCodeGenerator", date= "2025-04-28T23:19Z",
@@ -17,7 +18,7 @@ public class InstructionFactFactory__LXOR implements io.github.bineq.daleq.edb.I
         return io.github.bineq.daleq.edb.EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(131);
     }
 
-    @Override public Fact createFact(String factid,org.objectweb.asm.tree.InsnNode node,String methodRef,int instructionCounter,Map<LabelNode,String> labelMap) {
+    @Override public Fact createFact(String factid, InsnNode node, String methodRef, int instructionCounter, FactExtractor.LabelMap labelMap) {
         return new io.github.bineq.daleq.SimpleFact(io.github.bineq.daleq.edb.EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(131),new Object[]{factid,methodRef,instructionCounter});
     }
 

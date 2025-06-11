@@ -1,14 +1,13 @@
 package io.github.bineq.daleq.edb.instruction_fact_factories;
 
-import javax.annotation.processing.Generated;
-import java.util.Map;
-
+import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.SimpleFact;
 import io.github.bineq.daleq.edb.EBDInstructionPredicate;
 import io.github.bineq.daleq.edb.EDBPredicateRegistry;
+import io.github.bineq.daleq.edb.FactExtractor;
 import org.objectweb.asm.tree.InsnNode;
-import org.objectweb.asm.tree.LabelNode;
-import io.github.bineq.daleq.Fact;
+
+import javax.annotation.processing.Generated;
 
 @Generated(value="io.github.bineq.daleq.factextraction.InstructionFactFactoryCodeGenerator", date= "2025-02-13T10:40Z",
       comments= "factory generated from ASM tree API nodes")
@@ -22,7 +21,7 @@ public class InstructionFactFactory__AALOAD implements io.github.bineq.daleq.edb
         return EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(50);
     }
 
-    @Override public Fact createFact(String factId, InsnNode node, String methodRef, int instructionCounter, Map<LabelNode, String> labelMap) {
+    @Override public Fact createFact(String factId, InsnNode node, String methodRef, int instructionCounter, FactExtractor.LabelMap labelMap) {
         return new SimpleFact(EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(50),new Object[]{factId,methodRef,instructionCounter});
     }
 

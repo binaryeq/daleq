@@ -60,7 +60,7 @@ public class IDBReader {
                 }
                 else if (predicate==IDBRemovalPredicates.MOVED_INSTRUCTION) {
                     String methodId1 = (String)fact.values()[1]; // from
-                    String methodId2 = (String)fact.values()[2]; // to
+                    String methodId2 = (String)fact.values()[3]; // to
                     Collection<Fact> instructionFacts = idb.removedInstructionFacts.computeIfAbsent(methodId1,mId -> new TreeSet<>(COMPARE_INSTRUCTION_FACTS_BY_POSITION));
                     instructionFacts.add(fact);
                     instructionFacts = idb.removedInstructionFacts.computeIfAbsent(methodId2,mId -> new TreeSet<>(COMPARE_INSTRUCTION_FACTS_BY_POSITION));

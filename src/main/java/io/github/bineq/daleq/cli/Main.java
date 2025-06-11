@@ -67,7 +67,10 @@ public class Main {
             Preconditions.checkState(!Files.isDirectory(jar1));
             Preconditions.checkState(Files.exists(jar2));
             Preconditions.checkState(!Files.isDirectory(jar2));
-            Preconditions.checkState(Files.exists(outPath));
+
+            if (!outPath.toFile().exists()) {
+                Files.createDirectories(outPath);
+            }
             Preconditions.checkState(Files.isDirectory(outPath));
 
             Preconditions.checkState(TEMPLATE!=null);

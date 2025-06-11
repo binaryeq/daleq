@@ -28,28 +28,32 @@ public class FactExtractor   {
     // sort members to make order predictable
     public static final Comparator<FieldNode> FIELD_COMP = Comparator.comparing(fn -> fn.name);
     public static final Comparator<MethodNode> METHOD_NODE_COMPARATOR = Comparator.comparing(mn -> mn.name + mn.desc);
-
     public static final Logger LOG = LoggerFactory.getLogger(FactExtractor.class);
     public static final String INFERRED_INSTRUCTION_PREDICATE_SPECS = "inferred-instruction-predicates";
-
     public static final Map<Integer,InstructionPredicateFactFactory> FACT_FACTORIES = new HashMap<>();
 
     // by inserting gaps, rules can insert additional instructions
     public static final int INSTRUCTION_COUNTER_STEP_SIZE = 100;
 
-    private static class HashMapWthKeyAccessRecording<K,V> extends HashMap<K,V> {
-        Set<K> accessedKeys = new HashSet<>();
+    public static class LabelMap {
+        Set<LabelNode> accessedKeys = new HashSet<>();
+        Map<LabelNode,String> nodeToIntermediateLabelMap = new IdentityHashMap<>();
+        Map<LabelNode,String> intermediateToFinalLabelMap = new IdentityHashMap<>();
+        private AtomicInteger labelCounter1 = new AtomicInteger(-1);
+        private AtomicInteger labelCounter2 = new AtomicInteger(-1);
 
-        @Override
-        public V get(Object key) {
-            accessedKeys.add((K) key);
-            return super.get(key);
+        // this means that the nodes are actually being consumed
+        // not create the final label, labelCounter2 skips any labels that are never used
+        public String get(LabelNode key) {
+            accessedKeys.add(key);
+            return intermediateToFinalLabelMap.computeIfAbsent(key, k -> {
+                String iL = nodeToIntermediateLabelMap.get(key);
+                assert iL != null;
+                return "L"+labelCounter2.incrementAndGet();
+            });
         }
-
-        @Override
-        public V getOrDefault(Object key, V defaultValue) {
-            accessedKeys.add((K) key);
-            return super.getOrDefault(key, defaultValue);
+        public String put(LabelNode key) {
+            return nodeToIntermediateLabelMap.put(key,"iL"+labelCounter1.incrementAndGet());
         }
     }
 
@@ -245,18 +249,18 @@ public class FactExtractor   {
             facts.add(new SimpleFact(EBDAdditionalPredicates.METHOD_SIGNATURE,FactIdGenerator.nextId(EBDAdditionalPredicates.METHOD_SIGNATURE),methodId, methodNode.signature));
             facts.add(new SimpleFact(EBDAdditionalPredicates.ACCESS,FactIdGenerator.nextId(EBDAdditionalPredicates.ACCESS),methodId,methodNode.access));
 
-            AtomicInteger labelCounter = new AtomicInteger(-1);
-
             // first iteration to collect labels
-            final HashMapWthKeyAccessRecording<LabelNode,String> labelMap = new HashMapWthKeyAccessRecording<>();
+            final LabelMap labelMap = new LabelMap();
             for (AbstractInsnNode instructionNode:methodNode.instructions) {
                 // TODO: label nodes, frame nodes, line NUMBER nodes
+                instructionCounter.incrementAndGet(); // for debugging
                 int opCode = instructionNode.getOpcode();
                 String instr = InstructionTable.getInstruction(opCode);
                 if (instr == null) {
                     if (instructionNode instanceof LabelNode labelNode) {
                         LOG.debug("label: " + labelNode);
-                        labelMap.put(labelNode, "L" + labelCounter.incrementAndGet());
+                        String value = labelMap.put(labelNode);
+                        assert value == null; // should not override already created label tag
                     }
                 }
             }
@@ -281,6 +285,8 @@ public class FactExtractor   {
                     }
                 }
             };
+
+           // assert labelMap.keySet().equals(labelMap.accessedKeys);
 
             // third iteration to actually build and collect facts
             instructionCounter.set(0); // reset !
@@ -334,7 +340,7 @@ public class FactExtractor   {
         return facts;
     }
 
-    private static Fact createFact(EBDInstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode, Map<LabelNode,String> labelMap) {
+    private static Fact createFact(EBDInstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode, LabelMap labelMap) {
         InstructionPredicateFactFactory factory = FACT_FACTORIES.get(predicate.getOpCode());
         Preconditions.checkNotNull(factory,"no fact factory found for instruction " + predicate.getName());
         String factId = FactIdGenerator.nextId(predicate);
