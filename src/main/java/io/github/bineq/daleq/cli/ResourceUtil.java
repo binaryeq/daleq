@@ -25,9 +25,14 @@ public class ResourceUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger(ResourceUtil.class);
 
+    static boolean isSourcecode(String resource) {
+        return resource.endsWith(".java"); // TODO: kotlin, scala, groovy etc
+    }
 
     static boolean isCharData (String resource) {
-        return resource.endsWith(".xml")
+
+        return isSourcecode(resource)
+            || resource.endsWith(".xml")
             || resource.endsWith(".json")
             || resource.endsWith(".properties")
             || resource.endsWith(".mf")

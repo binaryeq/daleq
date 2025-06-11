@@ -17,6 +17,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * CLI. Produces a html report.
@@ -26,6 +27,8 @@ public class Main {
 
     private static final Option OPT_JAR1 = new Option("j1","jar1",true,"the first jar file to compare");
     private static final Option OPT_JAR2 = new Option("j2","jar2",true,"the second jar file to compare");
+    private static final Option OPT_SRCJAR1 = new Option("s1","src1",true,"the first jar file with source code to compare");
+    private static final Option OPT_SRCJAR2 = new Option("s2","src2",true,"the second jar file with source code to compare");
     private static final Option OUT = new Option("o","out",true,"the output folder where the report will be generated");
 
     private static final URL TEMPLATE = Main.class.getClassLoader().getResource("cli/report-template.html");
@@ -39,6 +42,7 @@ public class Main {
 
     public static final Analyser[] ANALYSERS = new Analyser[]{
         new ResourceIsPresentAnalyser(),
+        new SameSourceCodeAnalyser(),
         new SameContentAnalyser(),
         new VerboseJavapAnalyser(),
         new CompactJavapAnalyser(),
@@ -52,6 +56,8 @@ public class Main {
         Options options = new Options();
         options.addOption(OPT_JAR1);
         options.addOption(OPT_JAR2);
+        options.addOption(OPT_SRCJAR1);
+        options.addOption(OPT_SRCJAR2);
         options.addOption(OUT);
 
         CommandLineParser parser = new DefaultParser();
@@ -68,6 +74,19 @@ public class Main {
             Preconditions.checkState(Files.exists(jar2));
             Preconditions.checkState(!Files.isDirectory(jar2));
 
+            Path src1 = null;
+            Path src2 = null;
+            if (cmd.hasOption(OPT_SRCJAR1)) {
+                src1 = Path.of(cmd.getOptionValue(OPT_SRCJAR1));
+                Preconditions.checkState(Files.exists(src1));
+                Preconditions.checkState(!Files.isDirectory(src1));
+            }
+            if (cmd.hasOption(OPT_SRCJAR2)) {
+                src2 = Path.of(cmd.getOptionValue(OPT_SRCJAR2));
+                Preconditions.checkState(Files.exists(src2));
+                Preconditions.checkState(!Files.isDirectory(src2));
+            }
+
             if (!outPath.toFile().exists()) {
                 Files.createDirectories(outPath);
             }
@@ -75,7 +94,7 @@ public class Main {
 
             Preconditions.checkState(TEMPLATE!=null);
 
-            analyse(jar1,jar2,outPath);
+            analyse(jar1,jar2,src1,src2,outPath);
 
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
@@ -84,10 +103,15 @@ public class Main {
         }
     }
 
-    private static void analyse(Path jar1, Path jar2, Path outPath) throws IOException {
+    private static void analyse(Path jar1, Path jar2, Path src1, Path src2, Path outPath) throws IOException {
+
+        boolean sourceAvailable = src1!=null && src2!=null;
+        List<Analyser> analysers = Stream.of(ANALYSERS)
+            .filter(anal -> anal.isBytecodeAnalyser() || sourceAvailable)
+            .collect(Collectors.toUnmodifiableList());
 
         LOG.info("Initialising analysers");
-        for (Analyser analyser:ANALYSERS) {
+        for (Analyser analyser:analysers) {
             LOG.info("Initialising analyser {}", analyser.getClass().getSimpleName());
             analyser.init(outPath);
         }
@@ -112,7 +136,7 @@ public class Main {
         Path report = outPath.resolve("report.html");
 
         String headerRow = "<tr><th>resource</th>";
-        for (Analyser analyser:ANALYSERS) {
+        for (Analyser analyser:analysers) {
             headerRow+=String.format("<th>%s</th>",analyser.name());
         }
         headerRow+="</tr>";
@@ -122,8 +146,10 @@ public class Main {
             String row = "<tr><td>";
             row+=resource;
             row+="</td>";
-            for (Analyser analyser:ANALYSERS) {
-                AnalysisResult analyserResult = analyser.analyse(resource,jar1,jar2,outPath);
+            for (Analyser analyser:analysers) {
+                AnalysisResult analyserResult = analyser.isBytecodeAnalyser() ?
+                    analyser.analyse(resource,jar1,jar2,outPath):
+                    analyser.analyse(resource,src1,src2,outPath);
                 row+=String.format("<td class=\"%s\">",getCSSClass(analyserResult));
                 row+=analyserResult.state();
 
@@ -135,7 +161,6 @@ public class Main {
             }
             table.append(row);
         }
-
 
         Files.write(report, document.html().getBytes());
         Path css = outPath.resolve("daleq.css");

@@ -11,6 +11,14 @@ import java.util.Set;
  */
 public interface Analyser {
 
+    /**
+     * By default, analysers are checking bytecode. If set to false, the analyser will check the jars passed for source code.
+     * @return
+     */
+    default boolean isBytecodeAnalyser() {
+        return true;
+    }
+
     // contextDir is the folder where the report is being generated
     // used to create resources that need to be linked
     AnalysisResult analyse (String resource, Path jar1, Path jar2, Path contextDir) throws IOException ;
