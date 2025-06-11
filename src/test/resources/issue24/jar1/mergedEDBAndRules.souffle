@@ -1,0 +1,1471 @@
+
+// ************************************************
+// EDB from examples/commons-configuration2/io.github.bineq.daleq.cli.DaleqAnalyser/org/apache/commons/configuration2/interpol/ConfigurationInterpolator.class/jar1/edb/db.souffle
+// ************************************************
+
+.decl SUPERCLASS(factid: symbol,name: symbol,supername: symbol)
+.input SUPERCLASS // facts are imported from SUPERCLASS.facts
+
+.decl INTERFACE(factid: symbol,name: symbol,interface: symbol)
+.input INTERFACE // facts are imported from INTERFACE.facts
+
+.decl FIELD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+.input FIELD // facts are imported from FIELD.facts
+
+.decl METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+.input METHOD // facts are imported from METHOD.facts
+
+.decl VERSION(factid: symbol,classname: symbol,version: number)
+.input VERSION // facts are imported from VERSION.facts
+
+.decl CLASS_SIGNATURE(factid: symbol,classname: symbol,signature: symbol)
+.input CLASS_SIGNATURE // facts are imported from CLASS_SIGNATURE.facts
+
+.decl FIELD_SIGNATURE(factid: symbol,fieldid: symbol,signature: symbol)
+.input FIELD_SIGNATURE // facts are imported from FIELD_SIGNATURE.facts
+
+.decl METHOD_SIGNATURE(factid: symbol,methodid: symbol,signature: symbol)
+.input METHOD_SIGNATURE // facts are imported from METHOD_SIGNATURE.facts
+
+.decl ACCESS(factid: symbol,id: symbol,access: number)
+.input ACCESS // facts are imported from ACCESS.facts
+
+.decl LABEL(factid: symbol,methodid: symbol,instructioncounter: number,labelid: symbol)
+.input LABEL // facts are imported from LABEL.facts
+
+.decl NOP(factid: symbol,methodid: symbol,instructioncounter: number)
+.input NOP // facts are imported from NOP.facts
+
+.decl ACONST_NULL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ACONST_NULL // facts are imported from ACONST_NULL.facts
+
+.decl ICONST_M1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_M1 // facts are imported from ICONST_M1.facts
+
+.decl ICONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_0 // facts are imported from ICONST_0.facts
+
+.decl ICONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_1 // facts are imported from ICONST_1.facts
+
+.decl ICONST_2(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_2 // facts are imported from ICONST_2.facts
+
+.decl ICONST_3(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_3 // facts are imported from ICONST_3.facts
+
+.decl ICONST_4(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_4 // facts are imported from ICONST_4.facts
+
+.decl ICONST_5(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ICONST_5 // facts are imported from ICONST_5.facts
+
+.decl LCONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LCONST_0 // facts are imported from LCONST_0.facts
+
+.decl LCONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LCONST_1 // facts are imported from LCONST_1.facts
+
+.decl FCONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FCONST_0 // facts are imported from FCONST_0.facts
+
+.decl FCONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FCONST_1 // facts are imported from FCONST_1.facts
+
+.decl DCONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DCONST_0 // facts are imported from DCONST_0.facts
+
+.decl DCONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DCONST_1 // facts are imported from DCONST_1.facts
+
+.decl BIPUSH(factid: symbol,methodid: symbol,instructioncounter: number,operand: number)
+.input BIPUSH // facts are imported from BIPUSH.facts
+
+.decl SIPUSH(factid: symbol,methodid: symbol,instructioncounter: number,operand: number)
+.input SIPUSH // facts are imported from SIPUSH.facts
+
+.decl LDC(factid: symbol,methodid: symbol,instructioncounter: number,cst: symbol)
+.input LDC // facts are imported from LDC.facts
+
+.decl ILOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input ILOAD // facts are imported from ILOAD.facts
+
+.decl LLOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input LLOAD // facts are imported from LLOAD.facts
+
+.decl FLOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input FLOAD // facts are imported from FLOAD.facts
+
+.decl DLOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input DLOAD // facts are imported from DLOAD.facts
+
+.decl ALOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input ALOAD // facts are imported from ALOAD.facts
+
+.decl IALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IALOAD // facts are imported from IALOAD.facts
+
+.decl LALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LALOAD // facts are imported from LALOAD.facts
+
+.decl FALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FALOAD // facts are imported from FALOAD.facts
+
+.decl DALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DALOAD // facts are imported from DALOAD.facts
+
+.decl AALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input AALOAD // facts are imported from AALOAD.facts
+
+.decl BALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input BALOAD // facts are imported from BALOAD.facts
+
+.decl CALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input CALOAD // facts are imported from CALOAD.facts
+
+.decl SALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input SALOAD // facts are imported from SALOAD.facts
+
+.decl ISTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input ISTORE // facts are imported from ISTORE.facts
+
+.decl LSTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input LSTORE // facts are imported from LSTORE.facts
+
+.decl FSTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input FSTORE // facts are imported from FSTORE.facts
+
+.decl DSTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input DSTORE // facts are imported from DSTORE.facts
+
+.decl ASTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input ASTORE // facts are imported from ASTORE.facts
+
+.decl IASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IASTORE // facts are imported from IASTORE.facts
+
+.decl LASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LASTORE // facts are imported from LASTORE.facts
+
+.decl FASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FASTORE // facts are imported from FASTORE.facts
+
+.decl DASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DASTORE // facts are imported from DASTORE.facts
+
+.decl AASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input AASTORE // facts are imported from AASTORE.facts
+
+.decl BASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input BASTORE // facts are imported from BASTORE.facts
+
+.decl CASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input CASTORE // facts are imported from CASTORE.facts
+
+.decl SASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+.input SASTORE // facts are imported from SASTORE.facts
+
+.decl POP(factid: symbol,methodid: symbol,instructioncounter: number)
+.input POP // facts are imported from POP.facts
+
+.decl POP2(factid: symbol,methodid: symbol,instructioncounter: number)
+.input POP2 // facts are imported from POP2.facts
+
+.decl DUP(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DUP // facts are imported from DUP.facts
+
+.decl DUP_X1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DUP_X1 // facts are imported from DUP_X1.facts
+
+.decl DUP_X2(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DUP_X2 // facts are imported from DUP_X2.facts
+
+.decl DUP2(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DUP2 // facts are imported from DUP2.facts
+
+.decl DUP2_X1(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DUP2_X1 // facts are imported from DUP2_X1.facts
+
+.decl SWAP(factid: symbol,methodid: symbol,instructioncounter: number)
+.input SWAP // facts are imported from SWAP.facts
+
+.decl IADD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IADD // facts are imported from IADD.facts
+
+.decl LADD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LADD // facts are imported from LADD.facts
+
+.decl FADD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FADD // facts are imported from FADD.facts
+
+.decl DADD(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DADD // facts are imported from DADD.facts
+
+.decl ISUB(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ISUB // facts are imported from ISUB.facts
+
+.decl LSUB(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LSUB // facts are imported from LSUB.facts
+
+.decl FSUB(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FSUB // facts are imported from FSUB.facts
+
+.decl DSUB(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DSUB // facts are imported from DSUB.facts
+
+.decl IMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IMUL // facts are imported from IMUL.facts
+
+.decl LMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LMUL // facts are imported from LMUL.facts
+
+.decl FMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FMUL // facts are imported from FMUL.facts
+
+.decl DMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DMUL // facts are imported from DMUL.facts
+
+.decl IDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IDIV // facts are imported from IDIV.facts
+
+.decl LDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LDIV // facts are imported from LDIV.facts
+
+.decl FDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FDIV // facts are imported from FDIV.facts
+
+.decl DDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DDIV // facts are imported from DDIV.facts
+
+.decl IREM(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IREM // facts are imported from IREM.facts
+
+.decl LREM(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LREM // facts are imported from LREM.facts
+
+.decl DREM(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DREM // facts are imported from DREM.facts
+
+.decl INEG(factid: symbol,methodid: symbol,instructioncounter: number)
+.input INEG // facts are imported from INEG.facts
+
+.decl LNEG(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LNEG // facts are imported from LNEG.facts
+
+.decl DNEG(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DNEG // facts are imported from DNEG.facts
+
+.decl ISHL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ISHL // facts are imported from ISHL.facts
+
+.decl LSHL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LSHL // facts are imported from LSHL.facts
+
+.decl ISHR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ISHR // facts are imported from ISHR.facts
+
+.decl LSHR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LSHR // facts are imported from LSHR.facts
+
+.decl IUSHR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IUSHR // facts are imported from IUSHR.facts
+
+.decl LUSHR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LUSHR // facts are imported from LUSHR.facts
+
+.decl IAND(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IAND // facts are imported from IAND.facts
+
+.decl LAND(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LAND // facts are imported from LAND.facts
+
+.decl IOR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IOR // facts are imported from IOR.facts
+
+.decl LOR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LOR // facts are imported from LOR.facts
+
+.decl IXOR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IXOR // facts are imported from IXOR.facts
+
+.decl LXOR(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LXOR // facts are imported from LXOR.facts
+
+.decl IINC(factid: symbol,methodid: symbol,instructioncounter: number,incr: number,var: number)
+.input IINC // facts are imported from IINC.facts
+
+.decl I2L(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2L // facts are imported from I2L.facts
+
+.decl I2F(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2F // facts are imported from I2F.facts
+
+.decl I2D(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2D // facts are imported from I2D.facts
+
+.decl L2I(factid: symbol,methodid: symbol,instructioncounter: number)
+.input L2I // facts are imported from L2I.facts
+
+.decl L2F(factid: symbol,methodid: symbol,instructioncounter: number)
+.input L2F // facts are imported from L2F.facts
+
+.decl L2D(factid: symbol,methodid: symbol,instructioncounter: number)
+.input L2D // facts are imported from L2D.facts
+
+.decl F2I(factid: symbol,methodid: symbol,instructioncounter: number)
+.input F2I // facts are imported from F2I.facts
+
+.decl F2L(factid: symbol,methodid: symbol,instructioncounter: number)
+.input F2L // facts are imported from F2L.facts
+
+.decl F2D(factid: symbol,methodid: symbol,instructioncounter: number)
+.input F2D // facts are imported from F2D.facts
+
+.decl D2I(factid: symbol,methodid: symbol,instructioncounter: number)
+.input D2I // facts are imported from D2I.facts
+
+.decl D2L(factid: symbol,methodid: symbol,instructioncounter: number)
+.input D2L // facts are imported from D2L.facts
+
+.decl D2F(factid: symbol,methodid: symbol,instructioncounter: number)
+.input D2F // facts are imported from D2F.facts
+
+.decl I2B(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2B // facts are imported from I2B.facts
+
+.decl I2C(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2C // facts are imported from I2C.facts
+
+.decl I2S(factid: symbol,methodid: symbol,instructioncounter: number)
+.input I2S // facts are imported from I2S.facts
+
+.decl LCMP(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LCMP // facts are imported from LCMP.facts
+
+.decl FCMPL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FCMPL // facts are imported from FCMPL.facts
+
+.decl FCMPG(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FCMPG // facts are imported from FCMPG.facts
+
+.decl DCMPL(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DCMPL // facts are imported from DCMPL.facts
+
+.decl DCMPG(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DCMPG // facts are imported from DCMPG.facts
+
+.decl IFEQ(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFEQ // facts are imported from IFEQ.facts
+
+.decl IFNE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFNE // facts are imported from IFNE.facts
+
+.decl IFLT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFLT // facts are imported from IFLT.facts
+
+.decl IFGE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFGE // facts are imported from IFGE.facts
+
+.decl IFGT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFGT // facts are imported from IFGT.facts
+
+.decl IFLE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFLE // facts are imported from IFLE.facts
+
+.decl IF_ICMPEQ(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPEQ // facts are imported from IF_ICMPEQ.facts
+
+.decl IF_ICMPNE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPNE // facts are imported from IF_ICMPNE.facts
+
+.decl IF_ICMPLT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPLT // facts are imported from IF_ICMPLT.facts
+
+.decl IF_ICMPGE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPGE // facts are imported from IF_ICMPGE.facts
+
+.decl IF_ICMPGT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPGT // facts are imported from IF_ICMPGT.facts
+
+.decl IF_ICMPLE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ICMPLE // facts are imported from IF_ICMPLE.facts
+
+.decl IF_ACMPEQ(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ACMPEQ // facts are imported from IF_ACMPEQ.facts
+
+.decl IF_ACMPNE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IF_ACMPNE // facts are imported from IF_ACMPNE.facts
+
+.decl GOTO(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input GOTO // facts are imported from GOTO.facts
+
+.decl JSR(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input JSR // facts are imported from JSR.facts
+
+.decl RET(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+.input RET // facts are imported from RET.facts
+
+.decl TABLESWITCH(factid: symbol,methodid: symbol,instructioncounter: number,dflt: symbol,labels: symbol,max_: number,min_: number)
+.input TABLESWITCH // facts are imported from TABLESWITCH.facts
+
+.decl LOOKUPSWITCH(factid: symbol,methodid: symbol,instructioncounter: number,dflt: symbol,keys: symbol,labels: symbol)
+.input LOOKUPSWITCH // facts are imported from LOOKUPSWITCH.facts
+
+.decl IRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input IRETURN // facts are imported from IRETURN.facts
+
+.decl LRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input LRETURN // facts are imported from LRETURN.facts
+
+.decl FRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input FRETURN // facts are imported from FRETURN.facts
+
+.decl DRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input DRETURN // facts are imported from DRETURN.facts
+
+.decl ARETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ARETURN // facts are imported from ARETURN.facts
+
+.decl RETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+.input RETURN // facts are imported from RETURN.facts
+
+.decl GETSTATIC(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+.input GETSTATIC // facts are imported from GETSTATIC.facts
+
+.decl PUTSTATIC(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+.input PUTSTATIC // facts are imported from PUTSTATIC.facts
+
+.decl GETFIELD(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+.input GETFIELD // facts are imported from GETFIELD.facts
+
+.decl PUTFIELD(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+.input PUTFIELD // facts are imported from PUTFIELD.facts
+
+.decl INVOKEVIRTUAL(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+.input INVOKEVIRTUAL // facts are imported from INVOKEVIRTUAL.facts
+
+.decl INVOKESPECIAL(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+.input INVOKESPECIAL // facts are imported from INVOKESPECIAL.facts
+
+.decl INVOKESTATIC(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+.input INVOKESTATIC // facts are imported from INVOKESTATIC.facts
+
+.decl INVOKEINTERFACE(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+.input INVOKEINTERFACE // facts are imported from INVOKEINTERFACE.facts
+
+.decl INVOKEDYNAMIC(factid: symbol,methodid: symbol,instructioncounter: number,name: symbol,desc: symbol,bsmArgs: symbol,bsm_getOwner: symbol,bsm_getName: symbol,bsm_getDesc: symbol,bsm_getTag: number,bsm_isInterface: number)
+.input INVOKEDYNAMIC // facts are imported from INVOKEDYNAMIC.facts
+
+.decl NEW(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+.input NEW // facts are imported from NEW.facts
+
+.decl NEWARRAY(factid: symbol,methodid: symbol,instructioncounter: number,operand: number)
+.input NEWARRAY // facts are imported from NEWARRAY.facts
+
+.decl ANEWARRAY(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+.input ANEWARRAY // facts are imported from ANEWARRAY.facts
+
+.decl ARRAYLENGTH(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ARRAYLENGTH // facts are imported from ARRAYLENGTH.facts
+
+.decl ATHROW(factid: symbol,methodid: symbol,instructioncounter: number)
+.input ATHROW // facts are imported from ATHROW.facts
+
+.decl CHECKCAST(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+.input CHECKCAST // facts are imported from CHECKCAST.facts
+
+.decl INSTANCEOF(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+.input INSTANCEOF // facts are imported from INSTANCEOF.facts
+
+.decl MONITORENTER(factid: symbol,methodid: symbol,instructioncounter: number)
+.input MONITORENTER // facts are imported from MONITORENTER.facts
+
+.decl MONITOREXIT(factid: symbol,methodid: symbol,instructioncounter: number)
+.input MONITOREXIT // facts are imported from MONITOREXIT.facts
+
+.decl MULTIANEWARRAY(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol,dims: number)
+.input MULTIANEWARRAY // facts are imported from MULTIANEWARRAY.facts
+
+.decl IFNULL(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFNULL // facts are imported from IFNULL.facts
+
+.decl IFNONNULL(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+.input IFNONNULL // facts are imported from IFNONNULL.facts
+
+
+// ************************************************
+// RULES from /Users/jens/Development/binaryeq/daleq/target/classes/rules/advanced.souffle
+// ************************************************
+
+// NORMALISATION PATTERN: custom rule to remove version metadata
+.decl IDB_VERSION(factid: symbol,classname: symbol,version: number)
+IDB_VERSION(cat("R_REMOVE_BYTECODE_VERSION","[",factid,"]"),classname,0) :- VERSION(factid,classname,_).
+.output IDB_VERSION
+
+// **************************************************************
+
+// NORMALISATION PATTERN: normalise changes before/after https://github.com/openjdk/jdk/pull/5165
+
+// @auxiliary-predicate
+.decl IS_ROOT_METHOD(factid: symbol,name: symbol,descriptor: symbol)
+IS_ROOT_METHOD("R_IS_ROOT_METHOD_GETCLASS","getClass", "()Ljava/lang/Class;").
+IS_ROOT_METHOD("R_IS_ROOT_METHOD_TOSTRING","toString", "()Ljava/lang/String;").
+IS_ROOT_METHOD("R_IS_ROOT_METHOD_EQUALS","equals","(Ljava/lang/Object;)Z").
+IS_ROOT_METHOD("R_IS_ROOT_METHOD_HASHCODE","hashCode","()I").
+
+// remove invokeinterface and replace with invokevirtual
+REMOVED_INSTRUCTION(cat("R_REMOVE_PR5165","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,_,name,desc,_),IS_ROOT_METHOD(factid2,name,desc).
+IDB_INVOKEVIRTUAL(cat("R_ADD_PR5165","[",factid1,",",factid2,"]"),methodid,instructioncounter,"java/lang/Object",name,desc,itf) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,_,name,desc,itf),IS_ROOT_METHOD(factid2,name,desc).
+
+// **************************************************************
+
+
+// NORMALISATION PATTERN: Inline $values() method in enumerations
+// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
+
+// (1) removal
+.decl IS_ENUM_VALUE_SYNTH_METHOD(factid: symbol,id: symbol)
+// @auxiliary-predicate
+IS_ENUM_VALUE_SYNTH_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,",",factid2,",",factid3,"]"),id) :- METHOD(factid1,id,classname,name,_),IDB_IS_ENUM(factid2,classname),IDB_IS_SYNTHETIC(factid3,id),name="$values".
+REMOVED_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,"]"),methodid) :- IS_ENUM_VALUE_SYNTH_METHOD(factid1,methodid).
+
+// (2) move instructions *****************************************
+// @auxiliary-predicate
+.decl IS_ENUM_STATIC_BLOCK(factid: symbol,id: symbol)
+IS_ENUM_STATIC_BLOCK(cat("R_IS_ENUM_STATIC_BLOCK","[",factid1,",",factid2,"]"),id) :- METHOD(factid1,id,classname,name,descriptor),IDB_IS_ENUM(factid2,classname),name="<clinit>",descriptor="()V".
+
+MOVED_INSTRUCTION(cat("R_MOVE_INSTRUCTIONS","[",factid1,",",factid2,",",factid3,",",factid4,"]"),sourceMethodid,sourceInstructionCounter,destMethodId,destInstructionCounter,instructionName) :- IS_ENUM_VALUE_SYNTH_METHOD(factid1,sourceMethodid), IS_ENUM_STATIC_BLOCK(factid2,destMethodId),INVOKESTATIC(factid3,destMethodId,destInstructionCounter,_,_,_,_), IDB_INSTRUCTION(factid4,sourceMethodid,sourceInstructionCounter,instructionName), !instructionName="ARETURN".
+
+// remove invocation of now inlined method
+REMOVED_INSTRUCTION(cat("R_REMOVE_INSTRUCTIONS","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- IS_ENUM_STATIC_BLOCK(factid1,methodid), INVOKESTATIC(factid2,methodid,instructioncounter,_,name,_,_), name="$values".
+
+// **************************************************************
+
+// NORMALISATION PATTERN: Remove Redundant Checkcasts
+// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
+
+REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- CHECKCAST(factid1,methodid,instructioncounter,desc),CHECKCAST(factid2,methodid,instructioncounter-100,desc).
+
+// declaration of removed and moved items
+
+.decl REMOVED_INSTRUCTION(factid: symbol,methodid: symbol,instructioncounter: number)
+.output REMOVED_INSTRUCTION
+
+.decl REMOVED_FIELD(factid: symbol,id: symbol)
+.output REMOVED_FIELD
+
+.decl REMOVED_METHOD(factid: symbol,id: symbol)
+.output REMOVED_METHOD
+
+// Move instructions (predcate can be used to inline methods)
+.decl MOVED_INSTRUCTION(factid: symbol, sourcemethodid: symbol,sourceinstructioncounter: number, destmethodid: symbol,destinstructioncounter: number,instructionname: symbol)
+.output MOVED_INSTRUCTION
+
+// **************************************************************
+
+
+// auxiliary predicate used in standard rules to reprersent any instruction
+.decl IDB_INSTRUCTION(factid: symbol,methodid: symbol,instructioncounter: number,instructionName: symbol)
+
+// STANDARD RULES
+// @generated io.github.bineq.daleq.idb.rulegeneration.BaselineRuleGeneration
+
+.decl IDB_SUPERCLASS(factid: symbol,name: symbol,supername: symbol)
+IDB_SUPERCLASS(cat("R_SUPERCLASS","[",factid,"]"),name,supername) :- SUPERCLASS(factid,name,supername).
+.output IDB_SUPERCLASS
+
+.decl IDB_INTERFACE(factid: symbol,name: symbol,interface: symbol)
+IDB_INTERFACE(cat("R_INTERFACE","[",factid,"]"),name,interface) :- INTERFACE(factid,name,interface).
+.output IDB_INTERFACE
+
+.decl IDB_FIELD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+IDB_FIELD(cat("R_FIELD","[",factid,"]"),id,classname,name,descriptor) :- FIELD(factid,id,classname,name,descriptor),!REMOVED_FIELD(_,id).
+.output IDB_FIELD
+
+.decl IDB_METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
+IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor),!REMOVED_METHOD(_,id).
+.output IDB_METHOD
+
+.decl IDB_CLASS_SIGNATURE(factid: symbol,classname: symbol,signature: symbol)
+IDB_CLASS_SIGNATURE(cat("R_CLASS_SIGNATURE","[",factid,"]"),classname,signature) :- CLASS_SIGNATURE(factid,classname,signature).
+.output IDB_CLASS_SIGNATURE
+
+.decl IDB_FIELD_SIGNATURE(factid: symbol,fieldid: symbol,signature: symbol)
+IDB_FIELD_SIGNATURE(cat("R_FIELD_SIGNATURE","[",factid,"]"),fieldid,signature) :- FIELD_SIGNATURE(factid,fieldid,signature).
+.output IDB_FIELD_SIGNATURE
+
+.decl IDB_METHOD_SIGNATURE(factid: symbol,methodid: symbol,signature: symbol)
+IDB_METHOD_SIGNATURE(cat("R_METHOD_SIGNATURE","[",factid,"]"),methodid,signature) :- METHOD_SIGNATURE(factid,methodid,signature).
+.output IDB_METHOD_SIGNATURE
+
+.decl IDB_ACCESS(factid: symbol,id: symbol,access: number)
+IDB_ACCESS(cat("R_ACCESS","[",factid,"]"),id,access) :- ACCESS(factid,id,access).
+.output IDB_ACCESS
+
+.decl IDB_LABEL(factid: symbol,methodid: symbol,instructioncounter: number,labelid: symbol)
+IDB_LABEL(cat("R_LABEL","[",factid,"]"),methodid,instructioncounter,labelid) :- LABEL(factid,methodid,instructioncounter,labelid),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LABEL
+IDB_INSTRUCTION(cat("R_INSTR_LABEL","[",factid,"]"),methodid,instructioncounter,"LABEL") :- LABEL(factid,methodid,instructioncounter,_).
+
+.decl IDB_NOP(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_NOP(cat("R_NOP","[",factid,"]"),methodid,instructioncounter) :- NOP(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_NOP
+IDB_INSTRUCTION(cat("R_INSTR_NOP","[",factid,"]"),methodid,instructioncounter,"NOP") :- NOP(factid,methodid,instructioncounter).
+
+.decl IDB_ACONST_NULL(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ACONST_NULL(cat("R_ACONST_NULL","[",factid,"]"),methodid,instructioncounter) :- ACONST_NULL(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ACONST_NULL
+IDB_INSTRUCTION(cat("R_INSTR_ACONST_NULL","[",factid,"]"),methodid,instructioncounter,"ACONST_NULL") :- ACONST_NULL(factid,methodid,instructioncounter).
+
+.decl IDB_ICONST_M1(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ICONST_M1(cat("R_ICONST_M1","[",factid,"]"),methodid,instructioncounter) :- ICONST_M1(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ICONST_M1
+IDB_INSTRUCTION(cat("R_INSTR_ICONST_M1","[",factid,"]"),methodid,instructioncounter,"ICONST_M1") :- ICONST_M1(factid,methodid,instructioncounter).
+
+.decl IDB_ICONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ICONST_0(cat("R_ICONST_0","[",factid,"]"),methodid,instructioncounter) :- ICONST_0(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ICONST_0
+IDB_INSTRUCTION(cat("R_INSTR_ICONST_0","[",factid,"]"),methodid,instructioncounter,"ICONST_0") :- ICONST_0(factid,methodid,instructioncounter).
+
+.decl IDB_ICONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ICONST_1(cat("R_ICONST_1","[",factid,"]"),methodid,instructioncounter) :- ICONST_1(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ICONST_1
+IDB_INSTRUCTION(cat("R_INSTR_ICONST_1","[",factid,"]"),methodid,instructioncounter,"ICONST_1") :- ICONST_1(factid,methodid,instructioncounter).
+
+.decl IDB_ICONST_2(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ICONST_2(cat("R_ICONST_2","[",factid,"]"),methodid,instructioncounter) :- ICONST_2(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ICONST_2
+IDB_INSTRUCTION(cat("R_INSTR_ICONST_2","[",factid,"]"),methodid,instructioncounter,"ICONST_2") :- ICONST_2(factid,methodid,instructioncounter).
+
+.decl IDB_ICONST_3(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ICONST_3(cat("R_ICONST_3","[",factid,"]"),methodid,instructioncounter) :- ICONST_3(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ICONST_3
+IDB_INSTRUCTION(cat("R_INSTR_ICONST_3","[",factid,"]"),methodid,instructioncounter,"ICONST_3") :- ICONST_3(factid,methodid,instructioncounter).
+
+.decl IDB_ICONST_4(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ICONST_4(cat("R_ICONST_4","[",factid,"]"),methodid,instructioncounter) :- ICONST_4(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ICONST_4
+IDB_INSTRUCTION(cat("R_INSTR_ICONST_4","[",factid,"]"),methodid,instructioncounter,"ICONST_4") :- ICONST_4(factid,methodid,instructioncounter).
+
+.decl IDB_ICONST_5(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ICONST_5(cat("R_ICONST_5","[",factid,"]"),methodid,instructioncounter) :- ICONST_5(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ICONST_5
+IDB_INSTRUCTION(cat("R_INSTR_ICONST_5","[",factid,"]"),methodid,instructioncounter,"ICONST_5") :- ICONST_5(factid,methodid,instructioncounter).
+
+.decl IDB_LCONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LCONST_0(cat("R_LCONST_0","[",factid,"]"),methodid,instructioncounter) :- LCONST_0(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LCONST_0
+IDB_INSTRUCTION(cat("R_INSTR_LCONST_0","[",factid,"]"),methodid,instructioncounter,"LCONST_0") :- LCONST_0(factid,methodid,instructioncounter).
+
+.decl IDB_LCONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LCONST_1(cat("R_LCONST_1","[",factid,"]"),methodid,instructioncounter) :- LCONST_1(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LCONST_1
+IDB_INSTRUCTION(cat("R_INSTR_LCONST_1","[",factid,"]"),methodid,instructioncounter,"LCONST_1") :- LCONST_1(factid,methodid,instructioncounter).
+
+.decl IDB_FCONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FCONST_0(cat("R_FCONST_0","[",factid,"]"),methodid,instructioncounter) :- FCONST_0(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FCONST_0
+IDB_INSTRUCTION(cat("R_INSTR_FCONST_0","[",factid,"]"),methodid,instructioncounter,"FCONST_0") :- FCONST_0(factid,methodid,instructioncounter).
+
+.decl IDB_FCONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FCONST_1(cat("R_FCONST_1","[",factid,"]"),methodid,instructioncounter) :- FCONST_1(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FCONST_1
+IDB_INSTRUCTION(cat("R_INSTR_FCONST_1","[",factid,"]"),methodid,instructioncounter,"FCONST_1") :- FCONST_1(factid,methodid,instructioncounter).
+
+.decl IDB_DCONST_0(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DCONST_0(cat("R_DCONST_0","[",factid,"]"),methodid,instructioncounter) :- DCONST_0(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DCONST_0
+IDB_INSTRUCTION(cat("R_INSTR_DCONST_0","[",factid,"]"),methodid,instructioncounter,"DCONST_0") :- DCONST_0(factid,methodid,instructioncounter).
+
+.decl IDB_DCONST_1(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DCONST_1(cat("R_DCONST_1","[",factid,"]"),methodid,instructioncounter) :- DCONST_1(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DCONST_1
+IDB_INSTRUCTION(cat("R_INSTR_DCONST_1","[",factid,"]"),methodid,instructioncounter,"DCONST_1") :- DCONST_1(factid,methodid,instructioncounter).
+
+.decl IDB_BIPUSH(factid: symbol,methodid: symbol,instructioncounter: number,operand: number)
+IDB_BIPUSH(cat("R_BIPUSH","[",factid,"]"),methodid,instructioncounter,operand) :- BIPUSH(factid,methodid,instructioncounter,operand),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_BIPUSH
+IDB_INSTRUCTION(cat("R_INSTR_BIPUSH","[",factid,"]"),methodid,instructioncounter,"BIPUSH") :- BIPUSH(factid,methodid,instructioncounter,_).
+
+.decl IDB_SIPUSH(factid: symbol,methodid: symbol,instructioncounter: number,operand: number)
+IDB_SIPUSH(cat("R_SIPUSH","[",factid,"]"),methodid,instructioncounter,operand) :- SIPUSH(factid,methodid,instructioncounter,operand),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_SIPUSH
+IDB_INSTRUCTION(cat("R_INSTR_SIPUSH","[",factid,"]"),methodid,instructioncounter,"SIPUSH") :- SIPUSH(factid,methodid,instructioncounter,_).
+
+.decl IDB_LDC(factid: symbol,methodid: symbol,instructioncounter: number,cst: symbol)
+IDB_LDC(cat("R_LDC","[",factid,"]"),methodid,instructioncounter,cst) :- LDC(factid,methodid,instructioncounter,cst),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LDC
+IDB_INSTRUCTION(cat("R_INSTR_LDC","[",factid,"]"),methodid,instructioncounter,"LDC") :- LDC(factid,methodid,instructioncounter,_).
+
+.decl IDB_ILOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_ILOAD(cat("R_ILOAD","[",factid,"]"),methodid,instructioncounter,var) :- ILOAD(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ILOAD
+IDB_INSTRUCTION(cat("R_INSTR_ILOAD","[",factid,"]"),methodid,instructioncounter,"ILOAD") :- ILOAD(factid,methodid,instructioncounter,_).
+
+.decl IDB_LLOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_LLOAD(cat("R_LLOAD","[",factid,"]"),methodid,instructioncounter,var) :- LLOAD(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LLOAD
+IDB_INSTRUCTION(cat("R_INSTR_LLOAD","[",factid,"]"),methodid,instructioncounter,"LLOAD") :- LLOAD(factid,methodid,instructioncounter,_).
+
+.decl IDB_FLOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_FLOAD(cat("R_FLOAD","[",factid,"]"),methodid,instructioncounter,var) :- FLOAD(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FLOAD
+IDB_INSTRUCTION(cat("R_INSTR_FLOAD","[",factid,"]"),methodid,instructioncounter,"FLOAD") :- FLOAD(factid,methodid,instructioncounter,_).
+
+.decl IDB_DLOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_DLOAD(cat("R_DLOAD","[",factid,"]"),methodid,instructioncounter,var) :- DLOAD(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DLOAD
+IDB_INSTRUCTION(cat("R_INSTR_DLOAD","[",factid,"]"),methodid,instructioncounter,"DLOAD") :- DLOAD(factid,methodid,instructioncounter,_).
+
+.decl IDB_ALOAD(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_ALOAD(cat("R_ALOAD","[",factid,"]"),methodid,instructioncounter,var) :- ALOAD(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ALOAD
+IDB_INSTRUCTION(cat("R_INSTR_ALOAD","[",factid,"]"),methodid,instructioncounter,"ALOAD") :- ALOAD(factid,methodid,instructioncounter,_).
+
+.decl IDB_IALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IALOAD(cat("R_IALOAD","[",factid,"]"),methodid,instructioncounter) :- IALOAD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IALOAD
+IDB_INSTRUCTION(cat("R_INSTR_IALOAD","[",factid,"]"),methodid,instructioncounter,"IALOAD") :- IALOAD(factid,methodid,instructioncounter).
+
+.decl IDB_LALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LALOAD(cat("R_LALOAD","[",factid,"]"),methodid,instructioncounter) :- LALOAD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LALOAD
+IDB_INSTRUCTION(cat("R_INSTR_LALOAD","[",factid,"]"),methodid,instructioncounter,"LALOAD") :- LALOAD(factid,methodid,instructioncounter).
+
+.decl IDB_FALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FALOAD(cat("R_FALOAD","[",factid,"]"),methodid,instructioncounter) :- FALOAD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FALOAD
+IDB_INSTRUCTION(cat("R_INSTR_FALOAD","[",factid,"]"),methodid,instructioncounter,"FALOAD") :- FALOAD(factid,methodid,instructioncounter).
+
+.decl IDB_DALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DALOAD(cat("R_DALOAD","[",factid,"]"),methodid,instructioncounter) :- DALOAD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DALOAD
+IDB_INSTRUCTION(cat("R_INSTR_DALOAD","[",factid,"]"),methodid,instructioncounter,"DALOAD") :- DALOAD(factid,methodid,instructioncounter).
+
+.decl IDB_AALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_AALOAD(cat("R_AALOAD","[",factid,"]"),methodid,instructioncounter) :- AALOAD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_AALOAD
+IDB_INSTRUCTION(cat("R_INSTR_AALOAD","[",factid,"]"),methodid,instructioncounter,"AALOAD") :- AALOAD(factid,methodid,instructioncounter).
+
+.decl IDB_BALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_BALOAD(cat("R_BALOAD","[",factid,"]"),methodid,instructioncounter) :- BALOAD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_BALOAD
+IDB_INSTRUCTION(cat("R_INSTR_BALOAD","[",factid,"]"),methodid,instructioncounter,"BALOAD") :- BALOAD(factid,methodid,instructioncounter).
+
+.decl IDB_CALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_CALOAD(cat("R_CALOAD","[",factid,"]"),methodid,instructioncounter) :- CALOAD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_CALOAD
+IDB_INSTRUCTION(cat("R_INSTR_CALOAD","[",factid,"]"),methodid,instructioncounter,"CALOAD") :- CALOAD(factid,methodid,instructioncounter).
+
+.decl IDB_SALOAD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_SALOAD(cat("R_SALOAD","[",factid,"]"),methodid,instructioncounter) :- SALOAD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_SALOAD
+IDB_INSTRUCTION(cat("R_INSTR_SALOAD","[",factid,"]"),methodid,instructioncounter,"SALOAD") :- SALOAD(factid,methodid,instructioncounter).
+
+.decl IDB_ISTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_ISTORE(cat("R_ISTORE","[",factid,"]"),methodid,instructioncounter,var) :- ISTORE(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ISTORE
+IDB_INSTRUCTION(cat("R_INSTR_ISTORE","[",factid,"]"),methodid,instructioncounter,"ISTORE") :- ISTORE(factid,methodid,instructioncounter,_).
+
+.decl IDB_LSTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_LSTORE(cat("R_LSTORE","[",factid,"]"),methodid,instructioncounter,var) :- LSTORE(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LSTORE
+IDB_INSTRUCTION(cat("R_INSTR_LSTORE","[",factid,"]"),methodid,instructioncounter,"LSTORE") :- LSTORE(factid,methodid,instructioncounter,_).
+
+.decl IDB_FSTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_FSTORE(cat("R_FSTORE","[",factid,"]"),methodid,instructioncounter,var) :- FSTORE(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FSTORE
+IDB_INSTRUCTION(cat("R_INSTR_FSTORE","[",factid,"]"),methodid,instructioncounter,"FSTORE") :- FSTORE(factid,methodid,instructioncounter,_).
+
+.decl IDB_DSTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_DSTORE(cat("R_DSTORE","[",factid,"]"),methodid,instructioncounter,var) :- DSTORE(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DSTORE
+IDB_INSTRUCTION(cat("R_INSTR_DSTORE","[",factid,"]"),methodid,instructioncounter,"DSTORE") :- DSTORE(factid,methodid,instructioncounter,_).
+
+.decl IDB_ASTORE(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_ASTORE(cat("R_ASTORE","[",factid,"]"),methodid,instructioncounter,var) :- ASTORE(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ASTORE
+IDB_INSTRUCTION(cat("R_INSTR_ASTORE","[",factid,"]"),methodid,instructioncounter,"ASTORE") :- ASTORE(factid,methodid,instructioncounter,_).
+
+.decl IDB_IASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IASTORE(cat("R_IASTORE","[",factid,"]"),methodid,instructioncounter) :- IASTORE(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IASTORE
+IDB_INSTRUCTION(cat("R_INSTR_IASTORE","[",factid,"]"),methodid,instructioncounter,"IASTORE") :- IASTORE(factid,methodid,instructioncounter).
+
+.decl IDB_LASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LASTORE(cat("R_LASTORE","[",factid,"]"),methodid,instructioncounter) :- LASTORE(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LASTORE
+IDB_INSTRUCTION(cat("R_INSTR_LASTORE","[",factid,"]"),methodid,instructioncounter,"LASTORE") :- LASTORE(factid,methodid,instructioncounter).
+
+.decl IDB_FASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FASTORE(cat("R_FASTORE","[",factid,"]"),methodid,instructioncounter) :- FASTORE(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FASTORE
+IDB_INSTRUCTION(cat("R_INSTR_FASTORE","[",factid,"]"),methodid,instructioncounter,"FASTORE") :- FASTORE(factid,methodid,instructioncounter).
+
+.decl IDB_DASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DASTORE(cat("R_DASTORE","[",factid,"]"),methodid,instructioncounter) :- DASTORE(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DASTORE
+IDB_INSTRUCTION(cat("R_INSTR_DASTORE","[",factid,"]"),methodid,instructioncounter,"DASTORE") :- DASTORE(factid,methodid,instructioncounter).
+
+.decl IDB_AASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_AASTORE(cat("R_AASTORE","[",factid,"]"),methodid,instructioncounter) :- AASTORE(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_AASTORE
+IDB_INSTRUCTION(cat("R_INSTR_AASTORE","[",factid,"]"),methodid,instructioncounter,"AASTORE") :- AASTORE(factid,methodid,instructioncounter).
+
+.decl IDB_BASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_BASTORE(cat("R_BASTORE","[",factid,"]"),methodid,instructioncounter) :- BASTORE(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_BASTORE
+IDB_INSTRUCTION(cat("R_INSTR_BASTORE","[",factid,"]"),methodid,instructioncounter,"BASTORE") :- BASTORE(factid,methodid,instructioncounter).
+
+.decl IDB_CASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_CASTORE(cat("R_CASTORE","[",factid,"]"),methodid,instructioncounter) :- CASTORE(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_CASTORE
+IDB_INSTRUCTION(cat("R_INSTR_CASTORE","[",factid,"]"),methodid,instructioncounter,"CASTORE") :- CASTORE(factid,methodid,instructioncounter).
+
+.decl IDB_SASTORE(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_SASTORE(cat("R_SASTORE","[",factid,"]"),methodid,instructioncounter) :- SASTORE(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_SASTORE
+IDB_INSTRUCTION(cat("R_INSTR_SASTORE","[",factid,"]"),methodid,instructioncounter,"SASTORE") :- SASTORE(factid,methodid,instructioncounter).
+
+.decl IDB_POP(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_POP(cat("R_POP","[",factid,"]"),methodid,instructioncounter) :- POP(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_POP
+IDB_INSTRUCTION(cat("R_INSTR_POP","[",factid,"]"),methodid,instructioncounter,"POP") :- POP(factid,methodid,instructioncounter).
+
+.decl IDB_POP2(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_POP2(cat("R_POP2","[",factid,"]"),methodid,instructioncounter) :- POP2(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_POP2
+IDB_INSTRUCTION(cat("R_INSTR_POP2","[",factid,"]"),methodid,instructioncounter,"POP2") :- POP2(factid,methodid,instructioncounter).
+
+.decl IDB_DUP(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DUP(cat("R_DUP","[",factid,"]"),methodid,instructioncounter) :- DUP(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DUP
+IDB_INSTRUCTION(cat("R_INSTR_DUP","[",factid,"]"),methodid,instructioncounter,"DUP") :- DUP(factid,methodid,instructioncounter).
+
+.decl IDB_DUP_X1(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DUP_X1(cat("R_DUP_X1","[",factid,"]"),methodid,instructioncounter) :- DUP_X1(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DUP_X1
+IDB_INSTRUCTION(cat("R_INSTR_DUP_X1","[",factid,"]"),methodid,instructioncounter,"DUP_X1") :- DUP_X1(factid,methodid,instructioncounter).
+
+.decl IDB_DUP_X2(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DUP_X2(cat("R_DUP_X2","[",factid,"]"),methodid,instructioncounter) :- DUP_X2(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DUP_X2
+IDB_INSTRUCTION(cat("R_INSTR_DUP_X2","[",factid,"]"),methodid,instructioncounter,"DUP_X2") :- DUP_X2(factid,methodid,instructioncounter).
+
+.decl IDB_DUP2(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DUP2(cat("R_DUP2","[",factid,"]"),methodid,instructioncounter) :- DUP2(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DUP2
+IDB_INSTRUCTION(cat("R_INSTR_DUP2","[",factid,"]"),methodid,instructioncounter,"DUP2") :- DUP2(factid,methodid,instructioncounter).
+
+.decl IDB_DUP2_X1(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DUP2_X1(cat("R_DUP2_X1","[",factid,"]"),methodid,instructioncounter) :- DUP2_X1(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DUP2_X1
+IDB_INSTRUCTION(cat("R_INSTR_DUP2_X1","[",factid,"]"),methodid,instructioncounter,"DUP2_X1") :- DUP2_X1(factid,methodid,instructioncounter).
+
+.decl IDB_SWAP(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_SWAP(cat("R_SWAP","[",factid,"]"),methodid,instructioncounter) :- SWAP(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_SWAP
+IDB_INSTRUCTION(cat("R_INSTR_SWAP","[",factid,"]"),methodid,instructioncounter,"SWAP") :- SWAP(factid,methodid,instructioncounter).
+
+.decl IDB_IADD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IADD(cat("R_IADD","[",factid,"]"),methodid,instructioncounter) :- IADD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IADD
+IDB_INSTRUCTION(cat("R_INSTR_IADD","[",factid,"]"),methodid,instructioncounter,"IADD") :- IADD(factid,methodid,instructioncounter).
+
+.decl IDB_LADD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LADD(cat("R_LADD","[",factid,"]"),methodid,instructioncounter) :- LADD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LADD
+IDB_INSTRUCTION(cat("R_INSTR_LADD","[",factid,"]"),methodid,instructioncounter,"LADD") :- LADD(factid,methodid,instructioncounter).
+
+.decl IDB_FADD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FADD(cat("R_FADD","[",factid,"]"),methodid,instructioncounter) :- FADD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FADD
+IDB_INSTRUCTION(cat("R_INSTR_FADD","[",factid,"]"),methodid,instructioncounter,"FADD") :- FADD(factid,methodid,instructioncounter).
+
+.decl IDB_DADD(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DADD(cat("R_DADD","[",factid,"]"),methodid,instructioncounter) :- DADD(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DADD
+IDB_INSTRUCTION(cat("R_INSTR_DADD","[",factid,"]"),methodid,instructioncounter,"DADD") :- DADD(factid,methodid,instructioncounter).
+
+.decl IDB_ISUB(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ISUB(cat("R_ISUB","[",factid,"]"),methodid,instructioncounter) :- ISUB(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ISUB
+IDB_INSTRUCTION(cat("R_INSTR_ISUB","[",factid,"]"),methodid,instructioncounter,"ISUB") :- ISUB(factid,methodid,instructioncounter).
+
+.decl IDB_LSUB(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LSUB(cat("R_LSUB","[",factid,"]"),methodid,instructioncounter) :- LSUB(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LSUB
+IDB_INSTRUCTION(cat("R_INSTR_LSUB","[",factid,"]"),methodid,instructioncounter,"LSUB") :- LSUB(factid,methodid,instructioncounter).
+
+.decl IDB_FSUB(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FSUB(cat("R_FSUB","[",factid,"]"),methodid,instructioncounter) :- FSUB(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FSUB
+IDB_INSTRUCTION(cat("R_INSTR_FSUB","[",factid,"]"),methodid,instructioncounter,"FSUB") :- FSUB(factid,methodid,instructioncounter).
+
+.decl IDB_DSUB(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DSUB(cat("R_DSUB","[",factid,"]"),methodid,instructioncounter) :- DSUB(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DSUB
+IDB_INSTRUCTION(cat("R_INSTR_DSUB","[",factid,"]"),methodid,instructioncounter,"DSUB") :- DSUB(factid,methodid,instructioncounter).
+
+.decl IDB_IMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IMUL(cat("R_IMUL","[",factid,"]"),methodid,instructioncounter) :- IMUL(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IMUL
+IDB_INSTRUCTION(cat("R_INSTR_IMUL","[",factid,"]"),methodid,instructioncounter,"IMUL") :- IMUL(factid,methodid,instructioncounter).
+
+.decl IDB_LMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LMUL(cat("R_LMUL","[",factid,"]"),methodid,instructioncounter) :- LMUL(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LMUL
+IDB_INSTRUCTION(cat("R_INSTR_LMUL","[",factid,"]"),methodid,instructioncounter,"LMUL") :- LMUL(factid,methodid,instructioncounter).
+
+.decl IDB_FMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FMUL(cat("R_FMUL","[",factid,"]"),methodid,instructioncounter) :- FMUL(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FMUL
+IDB_INSTRUCTION(cat("R_INSTR_FMUL","[",factid,"]"),methodid,instructioncounter,"FMUL") :- FMUL(factid,methodid,instructioncounter).
+
+.decl IDB_DMUL(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DMUL(cat("R_DMUL","[",factid,"]"),methodid,instructioncounter) :- DMUL(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DMUL
+IDB_INSTRUCTION(cat("R_INSTR_DMUL","[",factid,"]"),methodid,instructioncounter,"DMUL") :- DMUL(factid,methodid,instructioncounter).
+
+.decl IDB_IDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IDIV(cat("R_IDIV","[",factid,"]"),methodid,instructioncounter) :- IDIV(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IDIV
+IDB_INSTRUCTION(cat("R_INSTR_IDIV","[",factid,"]"),methodid,instructioncounter,"IDIV") :- IDIV(factid,methodid,instructioncounter).
+
+.decl IDB_LDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LDIV(cat("R_LDIV","[",factid,"]"),methodid,instructioncounter) :- LDIV(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LDIV
+IDB_INSTRUCTION(cat("R_INSTR_LDIV","[",factid,"]"),methodid,instructioncounter,"LDIV") :- LDIV(factid,methodid,instructioncounter).
+
+.decl IDB_FDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FDIV(cat("R_FDIV","[",factid,"]"),methodid,instructioncounter) :- FDIV(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FDIV
+IDB_INSTRUCTION(cat("R_INSTR_FDIV","[",factid,"]"),methodid,instructioncounter,"FDIV") :- FDIV(factid,methodid,instructioncounter).
+
+.decl IDB_DDIV(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DDIV(cat("R_DDIV","[",factid,"]"),methodid,instructioncounter) :- DDIV(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DDIV
+IDB_INSTRUCTION(cat("R_INSTR_DDIV","[",factid,"]"),methodid,instructioncounter,"DDIV") :- DDIV(factid,methodid,instructioncounter).
+
+.decl IDB_IREM(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IREM(cat("R_IREM","[",factid,"]"),methodid,instructioncounter) :- IREM(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IREM
+IDB_INSTRUCTION(cat("R_INSTR_IREM","[",factid,"]"),methodid,instructioncounter,"IREM") :- IREM(factid,methodid,instructioncounter).
+
+.decl IDB_LREM(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LREM(cat("R_LREM","[",factid,"]"),methodid,instructioncounter) :- LREM(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LREM
+IDB_INSTRUCTION(cat("R_INSTR_LREM","[",factid,"]"),methodid,instructioncounter,"LREM") :- LREM(factid,methodid,instructioncounter).
+
+.decl IDB_DREM(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DREM(cat("R_DREM","[",factid,"]"),methodid,instructioncounter) :- DREM(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DREM
+IDB_INSTRUCTION(cat("R_INSTR_DREM","[",factid,"]"),methodid,instructioncounter,"DREM") :- DREM(factid,methodid,instructioncounter).
+
+.decl IDB_INEG(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_INEG(cat("R_INEG","[",factid,"]"),methodid,instructioncounter) :- INEG(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_INEG
+IDB_INSTRUCTION(cat("R_INSTR_INEG","[",factid,"]"),methodid,instructioncounter,"INEG") :- INEG(factid,methodid,instructioncounter).
+
+.decl IDB_LNEG(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LNEG(cat("R_LNEG","[",factid,"]"),methodid,instructioncounter) :- LNEG(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LNEG
+IDB_INSTRUCTION(cat("R_INSTR_LNEG","[",factid,"]"),methodid,instructioncounter,"LNEG") :- LNEG(factid,methodid,instructioncounter).
+
+.decl IDB_DNEG(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DNEG(cat("R_DNEG","[",factid,"]"),methodid,instructioncounter) :- DNEG(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DNEG
+IDB_INSTRUCTION(cat("R_INSTR_DNEG","[",factid,"]"),methodid,instructioncounter,"DNEG") :- DNEG(factid,methodid,instructioncounter).
+
+.decl IDB_ISHL(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ISHL(cat("R_ISHL","[",factid,"]"),methodid,instructioncounter) :- ISHL(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ISHL
+IDB_INSTRUCTION(cat("R_INSTR_ISHL","[",factid,"]"),methodid,instructioncounter,"ISHL") :- ISHL(factid,methodid,instructioncounter).
+
+.decl IDB_LSHL(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LSHL(cat("R_LSHL","[",factid,"]"),methodid,instructioncounter) :- LSHL(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LSHL
+IDB_INSTRUCTION(cat("R_INSTR_LSHL","[",factid,"]"),methodid,instructioncounter,"LSHL") :- LSHL(factid,methodid,instructioncounter).
+
+.decl IDB_ISHR(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ISHR(cat("R_ISHR","[",factid,"]"),methodid,instructioncounter) :- ISHR(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ISHR
+IDB_INSTRUCTION(cat("R_INSTR_ISHR","[",factid,"]"),methodid,instructioncounter,"ISHR") :- ISHR(factid,methodid,instructioncounter).
+
+.decl IDB_LSHR(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LSHR(cat("R_LSHR","[",factid,"]"),methodid,instructioncounter) :- LSHR(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LSHR
+IDB_INSTRUCTION(cat("R_INSTR_LSHR","[",factid,"]"),methodid,instructioncounter,"LSHR") :- LSHR(factid,methodid,instructioncounter).
+
+.decl IDB_IUSHR(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IUSHR(cat("R_IUSHR","[",factid,"]"),methodid,instructioncounter) :- IUSHR(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IUSHR
+IDB_INSTRUCTION(cat("R_INSTR_IUSHR","[",factid,"]"),methodid,instructioncounter,"IUSHR") :- IUSHR(factid,methodid,instructioncounter).
+
+.decl IDB_LUSHR(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LUSHR(cat("R_LUSHR","[",factid,"]"),methodid,instructioncounter) :- LUSHR(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LUSHR
+IDB_INSTRUCTION(cat("R_INSTR_LUSHR","[",factid,"]"),methodid,instructioncounter,"LUSHR") :- LUSHR(factid,methodid,instructioncounter).
+
+.decl IDB_IAND(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IAND(cat("R_IAND","[",factid,"]"),methodid,instructioncounter) :- IAND(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IAND
+IDB_INSTRUCTION(cat("R_INSTR_IAND","[",factid,"]"),methodid,instructioncounter,"IAND") :- IAND(factid,methodid,instructioncounter).
+
+.decl IDB_LAND(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LAND(cat("R_LAND","[",factid,"]"),methodid,instructioncounter) :- LAND(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LAND
+IDB_INSTRUCTION(cat("R_INSTR_LAND","[",factid,"]"),methodid,instructioncounter,"LAND") :- LAND(factid,methodid,instructioncounter).
+
+.decl IDB_IOR(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IOR(cat("R_IOR","[",factid,"]"),methodid,instructioncounter) :- IOR(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IOR
+IDB_INSTRUCTION(cat("R_INSTR_IOR","[",factid,"]"),methodid,instructioncounter,"IOR") :- IOR(factid,methodid,instructioncounter).
+
+.decl IDB_LOR(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LOR(cat("R_LOR","[",factid,"]"),methodid,instructioncounter) :- LOR(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LOR
+IDB_INSTRUCTION(cat("R_INSTR_LOR","[",factid,"]"),methodid,instructioncounter,"LOR") :- LOR(factid,methodid,instructioncounter).
+
+.decl IDB_IXOR(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IXOR(cat("R_IXOR","[",factid,"]"),methodid,instructioncounter) :- IXOR(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IXOR
+IDB_INSTRUCTION(cat("R_INSTR_IXOR","[",factid,"]"),methodid,instructioncounter,"IXOR") :- IXOR(factid,methodid,instructioncounter).
+
+.decl IDB_LXOR(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LXOR(cat("R_LXOR","[",factid,"]"),methodid,instructioncounter) :- LXOR(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LXOR
+IDB_INSTRUCTION(cat("R_INSTR_LXOR","[",factid,"]"),methodid,instructioncounter,"LXOR") :- LXOR(factid,methodid,instructioncounter).
+
+.decl IDB_IINC(factid: symbol,methodid: symbol,instructioncounter: number,incr: number,var: number)
+IDB_IINC(cat("R_IINC","[",factid,"]"),methodid,instructioncounter,incr,var) :- IINC(factid,methodid,instructioncounter,incr,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IINC
+IDB_INSTRUCTION(cat("R_INSTR_IINC","[",factid,"]"),methodid,instructioncounter,"IINC") :- IINC(factid,methodid,instructioncounter,_,_).
+
+.decl IDB_I2L(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_I2L(cat("R_I2L","[",factid,"]"),methodid,instructioncounter) :- I2L(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_I2L
+IDB_INSTRUCTION(cat("R_INSTR_I2L","[",factid,"]"),methodid,instructioncounter,"I2L") :- I2L(factid,methodid,instructioncounter).
+
+.decl IDB_I2F(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_I2F(cat("R_I2F","[",factid,"]"),methodid,instructioncounter) :- I2F(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_I2F
+IDB_INSTRUCTION(cat("R_INSTR_I2F","[",factid,"]"),methodid,instructioncounter,"I2F") :- I2F(factid,methodid,instructioncounter).
+
+.decl IDB_I2D(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_I2D(cat("R_I2D","[",factid,"]"),methodid,instructioncounter) :- I2D(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_I2D
+IDB_INSTRUCTION(cat("R_INSTR_I2D","[",factid,"]"),methodid,instructioncounter,"I2D") :- I2D(factid,methodid,instructioncounter).
+
+.decl IDB_L2I(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_L2I(cat("R_L2I","[",factid,"]"),methodid,instructioncounter) :- L2I(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_L2I
+IDB_INSTRUCTION(cat("R_INSTR_L2I","[",factid,"]"),methodid,instructioncounter,"L2I") :- L2I(factid,methodid,instructioncounter).
+
+.decl IDB_L2F(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_L2F(cat("R_L2F","[",factid,"]"),methodid,instructioncounter) :- L2F(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_L2F
+IDB_INSTRUCTION(cat("R_INSTR_L2F","[",factid,"]"),methodid,instructioncounter,"L2F") :- L2F(factid,methodid,instructioncounter).
+
+.decl IDB_L2D(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_L2D(cat("R_L2D","[",factid,"]"),methodid,instructioncounter) :- L2D(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_L2D
+IDB_INSTRUCTION(cat("R_INSTR_L2D","[",factid,"]"),methodid,instructioncounter,"L2D") :- L2D(factid,methodid,instructioncounter).
+
+.decl IDB_F2I(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_F2I(cat("R_F2I","[",factid,"]"),methodid,instructioncounter) :- F2I(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_F2I
+IDB_INSTRUCTION(cat("R_INSTR_F2I","[",factid,"]"),methodid,instructioncounter,"F2I") :- F2I(factid,methodid,instructioncounter).
+
+.decl IDB_F2L(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_F2L(cat("R_F2L","[",factid,"]"),methodid,instructioncounter) :- F2L(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_F2L
+IDB_INSTRUCTION(cat("R_INSTR_F2L","[",factid,"]"),methodid,instructioncounter,"F2L") :- F2L(factid,methodid,instructioncounter).
+
+.decl IDB_F2D(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_F2D(cat("R_F2D","[",factid,"]"),methodid,instructioncounter) :- F2D(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_F2D
+IDB_INSTRUCTION(cat("R_INSTR_F2D","[",factid,"]"),methodid,instructioncounter,"F2D") :- F2D(factid,methodid,instructioncounter).
+
+.decl IDB_D2I(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_D2I(cat("R_D2I","[",factid,"]"),methodid,instructioncounter) :- D2I(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_D2I
+IDB_INSTRUCTION(cat("R_INSTR_D2I","[",factid,"]"),methodid,instructioncounter,"D2I") :- D2I(factid,methodid,instructioncounter).
+
+.decl IDB_D2L(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_D2L(cat("R_D2L","[",factid,"]"),methodid,instructioncounter) :- D2L(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_D2L
+IDB_INSTRUCTION(cat("R_INSTR_D2L","[",factid,"]"),methodid,instructioncounter,"D2L") :- D2L(factid,methodid,instructioncounter).
+
+.decl IDB_D2F(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_D2F(cat("R_D2F","[",factid,"]"),methodid,instructioncounter) :- D2F(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_D2F
+IDB_INSTRUCTION(cat("R_INSTR_D2F","[",factid,"]"),methodid,instructioncounter,"D2F") :- D2F(factid,methodid,instructioncounter).
+
+.decl IDB_I2B(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_I2B(cat("R_I2B","[",factid,"]"),methodid,instructioncounter) :- I2B(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_I2B
+IDB_INSTRUCTION(cat("R_INSTR_I2B","[",factid,"]"),methodid,instructioncounter,"I2B") :- I2B(factid,methodid,instructioncounter).
+
+.decl IDB_I2C(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_I2C(cat("R_I2C","[",factid,"]"),methodid,instructioncounter) :- I2C(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_I2C
+IDB_INSTRUCTION(cat("R_INSTR_I2C","[",factid,"]"),methodid,instructioncounter,"I2C") :- I2C(factid,methodid,instructioncounter).
+
+.decl IDB_I2S(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_I2S(cat("R_I2S","[",factid,"]"),methodid,instructioncounter) :- I2S(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_I2S
+IDB_INSTRUCTION(cat("R_INSTR_I2S","[",factid,"]"),methodid,instructioncounter,"I2S") :- I2S(factid,methodid,instructioncounter).
+
+.decl IDB_LCMP(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LCMP(cat("R_LCMP","[",factid,"]"),methodid,instructioncounter) :- LCMP(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LCMP
+IDB_INSTRUCTION(cat("R_INSTR_LCMP","[",factid,"]"),methodid,instructioncounter,"LCMP") :- LCMP(factid,methodid,instructioncounter).
+
+.decl IDB_FCMPL(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FCMPL(cat("R_FCMPL","[",factid,"]"),methodid,instructioncounter) :- FCMPL(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FCMPL
+IDB_INSTRUCTION(cat("R_INSTR_FCMPL","[",factid,"]"),methodid,instructioncounter,"FCMPL") :- FCMPL(factid,methodid,instructioncounter).
+
+.decl IDB_FCMPG(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FCMPG(cat("R_FCMPG","[",factid,"]"),methodid,instructioncounter) :- FCMPG(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FCMPG
+IDB_INSTRUCTION(cat("R_INSTR_FCMPG","[",factid,"]"),methodid,instructioncounter,"FCMPG") :- FCMPG(factid,methodid,instructioncounter).
+
+.decl IDB_DCMPL(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DCMPL(cat("R_DCMPL","[",factid,"]"),methodid,instructioncounter) :- DCMPL(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DCMPL
+IDB_INSTRUCTION(cat("R_INSTR_DCMPL","[",factid,"]"),methodid,instructioncounter,"DCMPL") :- DCMPL(factid,methodid,instructioncounter).
+
+.decl IDB_DCMPG(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DCMPG(cat("R_DCMPG","[",factid,"]"),methodid,instructioncounter) :- DCMPG(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DCMPG
+IDB_INSTRUCTION(cat("R_INSTR_DCMPG","[",factid,"]"),methodid,instructioncounter,"DCMPG") :- DCMPG(factid,methodid,instructioncounter).
+
+.decl IDB_IFEQ(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IFEQ(cat("R_IFEQ","[",factid,"]"),methodid,instructioncounter,label) :- IFEQ(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IFEQ
+IDB_INSTRUCTION(cat("R_INSTR_IFEQ","[",factid,"]"),methodid,instructioncounter,"IFEQ") :- IFEQ(factid,methodid,instructioncounter,_).
+
+.decl IDB_IFNE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IFNE(cat("R_IFNE","[",factid,"]"),methodid,instructioncounter,label) :- IFNE(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IFNE
+IDB_INSTRUCTION(cat("R_INSTR_IFNE","[",factid,"]"),methodid,instructioncounter,"IFNE") :- IFNE(factid,methodid,instructioncounter,_).
+
+.decl IDB_IFLT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IFLT(cat("R_IFLT","[",factid,"]"),methodid,instructioncounter,label) :- IFLT(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IFLT
+IDB_INSTRUCTION(cat("R_INSTR_IFLT","[",factid,"]"),methodid,instructioncounter,"IFLT") :- IFLT(factid,methodid,instructioncounter,_).
+
+.decl IDB_IFGE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IFGE(cat("R_IFGE","[",factid,"]"),methodid,instructioncounter,label) :- IFGE(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IFGE
+IDB_INSTRUCTION(cat("R_INSTR_IFGE","[",factid,"]"),methodid,instructioncounter,"IFGE") :- IFGE(factid,methodid,instructioncounter,_).
+
+.decl IDB_IFGT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IFGT(cat("R_IFGT","[",factid,"]"),methodid,instructioncounter,label) :- IFGT(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IFGT
+IDB_INSTRUCTION(cat("R_INSTR_IFGT","[",factid,"]"),methodid,instructioncounter,"IFGT") :- IFGT(factid,methodid,instructioncounter,_).
+
+.decl IDB_IFLE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IFLE(cat("R_IFLE","[",factid,"]"),methodid,instructioncounter,label) :- IFLE(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IFLE
+IDB_INSTRUCTION(cat("R_INSTR_IFLE","[",factid,"]"),methodid,instructioncounter,"IFLE") :- IFLE(factid,methodid,instructioncounter,_).
+
+.decl IDB_IF_ICMPEQ(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IF_ICMPEQ(cat("R_IF_ICMPEQ","[",factid,"]"),methodid,instructioncounter,label) :- IF_ICMPEQ(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IF_ICMPEQ
+IDB_INSTRUCTION(cat("R_INSTR_IF_ICMPEQ","[",factid,"]"),methodid,instructioncounter,"IF_ICMPEQ") :- IF_ICMPEQ(factid,methodid,instructioncounter,_).
+
+.decl IDB_IF_ICMPNE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IF_ICMPNE(cat("R_IF_ICMPNE","[",factid,"]"),methodid,instructioncounter,label) :- IF_ICMPNE(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IF_ICMPNE
+IDB_INSTRUCTION(cat("R_INSTR_IF_ICMPNE","[",factid,"]"),methodid,instructioncounter,"IF_ICMPNE") :- IF_ICMPNE(factid,methodid,instructioncounter,_).
+
+.decl IDB_IF_ICMPLT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IF_ICMPLT(cat("R_IF_ICMPLT","[",factid,"]"),methodid,instructioncounter,label) :- IF_ICMPLT(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IF_ICMPLT
+IDB_INSTRUCTION(cat("R_INSTR_IF_ICMPLT","[",factid,"]"),methodid,instructioncounter,"IF_ICMPLT") :- IF_ICMPLT(factid,methodid,instructioncounter,_).
+
+.decl IDB_IF_ICMPGE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IF_ICMPGE(cat("R_IF_ICMPGE","[",factid,"]"),methodid,instructioncounter,label) :- IF_ICMPGE(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IF_ICMPGE
+IDB_INSTRUCTION(cat("R_INSTR_IF_ICMPGE","[",factid,"]"),methodid,instructioncounter,"IF_ICMPGE") :- IF_ICMPGE(factid,methodid,instructioncounter,_).
+
+.decl IDB_IF_ICMPGT(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IF_ICMPGT(cat("R_IF_ICMPGT","[",factid,"]"),methodid,instructioncounter,label) :- IF_ICMPGT(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IF_ICMPGT
+IDB_INSTRUCTION(cat("R_INSTR_IF_ICMPGT","[",factid,"]"),methodid,instructioncounter,"IF_ICMPGT") :- IF_ICMPGT(factid,methodid,instructioncounter,_).
+
+.decl IDB_IF_ICMPLE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IF_ICMPLE(cat("R_IF_ICMPLE","[",factid,"]"),methodid,instructioncounter,label) :- IF_ICMPLE(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IF_ICMPLE
+IDB_INSTRUCTION(cat("R_INSTR_IF_ICMPLE","[",factid,"]"),methodid,instructioncounter,"IF_ICMPLE") :- IF_ICMPLE(factid,methodid,instructioncounter,_).
+
+.decl IDB_IF_ACMPEQ(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IF_ACMPEQ(cat("R_IF_ACMPEQ","[",factid,"]"),methodid,instructioncounter,label) :- IF_ACMPEQ(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IF_ACMPEQ
+IDB_INSTRUCTION(cat("R_INSTR_IF_ACMPEQ","[",factid,"]"),methodid,instructioncounter,"IF_ACMPEQ") :- IF_ACMPEQ(factid,methodid,instructioncounter,_).
+
+.decl IDB_IF_ACMPNE(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IF_ACMPNE(cat("R_IF_ACMPNE","[",factid,"]"),methodid,instructioncounter,label) :- IF_ACMPNE(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IF_ACMPNE
+IDB_INSTRUCTION(cat("R_INSTR_IF_ACMPNE","[",factid,"]"),methodid,instructioncounter,"IF_ACMPNE") :- IF_ACMPNE(factid,methodid,instructioncounter,_).
+
+.decl IDB_GOTO(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_GOTO(cat("R_GOTO","[",factid,"]"),methodid,instructioncounter,label) :- GOTO(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_GOTO
+IDB_INSTRUCTION(cat("R_INSTR_GOTO","[",factid,"]"),methodid,instructioncounter,"GOTO") :- GOTO(factid,methodid,instructioncounter,_).
+
+.decl IDB_JSR(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_JSR(cat("R_JSR","[",factid,"]"),methodid,instructioncounter,label) :- JSR(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_JSR
+IDB_INSTRUCTION(cat("R_INSTR_JSR","[",factid,"]"),methodid,instructioncounter,"JSR") :- JSR(factid,methodid,instructioncounter,_).
+
+.decl IDB_RET(factid: symbol,methodid: symbol,instructioncounter: number,var: number)
+IDB_RET(cat("R_RET","[",factid,"]"),methodid,instructioncounter,var) :- RET(factid,methodid,instructioncounter,var),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_RET
+IDB_INSTRUCTION(cat("R_INSTR_RET","[",factid,"]"),methodid,instructioncounter,"RET") :- RET(factid,methodid,instructioncounter,_).
+
+.decl IDB_TABLESWITCH(factid: symbol,methodid: symbol,instructioncounter: number,dflt: symbol,labels: symbol,max_: number,min_: number)
+IDB_TABLESWITCH(cat("R_TABLESWITCH","[",factid,"]"),methodid,instructioncounter,dflt,labels,max_,min_) :- TABLESWITCH(factid,methodid,instructioncounter,dflt,labels,max_,min_),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_TABLESWITCH
+IDB_INSTRUCTION(cat("R_INSTR_TABLESWITCH","[",factid,"]"),methodid,instructioncounter,"TABLESWITCH") :- TABLESWITCH(factid,methodid,instructioncounter,_,_,_,_).
+
+.decl IDB_LOOKUPSWITCH(factid: symbol,methodid: symbol,instructioncounter: number,dflt: symbol,keys: symbol,labels: symbol)
+IDB_LOOKUPSWITCH(cat("R_LOOKUPSWITCH","[",factid,"]"),methodid,instructioncounter,dflt,keys,labels) :- LOOKUPSWITCH(factid,methodid,instructioncounter,dflt,keys,labels),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LOOKUPSWITCH
+IDB_INSTRUCTION(cat("R_INSTR_LOOKUPSWITCH","[",factid,"]"),methodid,instructioncounter,"LOOKUPSWITCH") :- LOOKUPSWITCH(factid,methodid,instructioncounter,_,_,_).
+
+.decl IDB_IRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_IRETURN(cat("R_IRETURN","[",factid,"]"),methodid,instructioncounter) :- IRETURN(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IRETURN
+IDB_INSTRUCTION(cat("R_INSTR_IRETURN","[",factid,"]"),methodid,instructioncounter,"IRETURN") :- IRETURN(factid,methodid,instructioncounter).
+
+.decl IDB_LRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_LRETURN(cat("R_LRETURN","[",factid,"]"),methodid,instructioncounter) :- LRETURN(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_LRETURN
+IDB_INSTRUCTION(cat("R_INSTR_LRETURN","[",factid,"]"),methodid,instructioncounter,"LRETURN") :- LRETURN(factid,methodid,instructioncounter).
+
+.decl IDB_FRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_FRETURN(cat("R_FRETURN","[",factid,"]"),methodid,instructioncounter) :- FRETURN(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_FRETURN
+IDB_INSTRUCTION(cat("R_INSTR_FRETURN","[",factid,"]"),methodid,instructioncounter,"FRETURN") :- FRETURN(factid,methodid,instructioncounter).
+
+.decl IDB_DRETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_DRETURN(cat("R_DRETURN","[",factid,"]"),methodid,instructioncounter) :- DRETURN(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_DRETURN
+IDB_INSTRUCTION(cat("R_INSTR_DRETURN","[",factid,"]"),methodid,instructioncounter,"DRETURN") :- DRETURN(factid,methodid,instructioncounter).
+
+.decl IDB_ARETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ARETURN(cat("R_ARETURN","[",factid,"]"),methodid,instructioncounter) :- ARETURN(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ARETURN
+IDB_INSTRUCTION(cat("R_INSTR_ARETURN","[",factid,"]"),methodid,instructioncounter,"ARETURN") :- ARETURN(factid,methodid,instructioncounter).
+
+.decl IDB_RETURN(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_RETURN(cat("R_RETURN","[",factid,"]"),methodid,instructioncounter) :- RETURN(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_RETURN
+IDB_INSTRUCTION(cat("R_INSTR_RETURN","[",factid,"]"),methodid,instructioncounter,"RETURN") :- RETURN(factid,methodid,instructioncounter).
+
+.decl IDB_GETSTATIC(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+IDB_GETSTATIC(cat("R_GETSTATIC","[",factid,"]"),methodid,instructioncounter,owner,name,desc) :- GETSTATIC(factid,methodid,instructioncounter,owner,name,desc),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_GETSTATIC
+IDB_INSTRUCTION(cat("R_INSTR_GETSTATIC","[",factid,"]"),methodid,instructioncounter,"GETSTATIC") :- GETSTATIC(factid,methodid,instructioncounter,_,_,_).
+
+.decl IDB_PUTSTATIC(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+IDB_PUTSTATIC(cat("R_PUTSTATIC","[",factid,"]"),methodid,instructioncounter,owner,name,desc) :- PUTSTATIC(factid,methodid,instructioncounter,owner,name,desc),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_PUTSTATIC
+IDB_INSTRUCTION(cat("R_INSTR_PUTSTATIC","[",factid,"]"),methodid,instructioncounter,"PUTSTATIC") :- PUTSTATIC(factid,methodid,instructioncounter,_,_,_).
+
+.decl IDB_GETFIELD(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+IDB_GETFIELD(cat("R_GETFIELD","[",factid,"]"),methodid,instructioncounter,owner,name,desc) :- GETFIELD(factid,methodid,instructioncounter,owner,name,desc),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_GETFIELD
+IDB_INSTRUCTION(cat("R_INSTR_GETFIELD","[",factid,"]"),methodid,instructioncounter,"GETFIELD") :- GETFIELD(factid,methodid,instructioncounter,_,_,_).
+
+.decl IDB_PUTFIELD(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol)
+IDB_PUTFIELD(cat("R_PUTFIELD","[",factid,"]"),methodid,instructioncounter,owner,name,desc) :- PUTFIELD(factid,methodid,instructioncounter,owner,name,desc),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_PUTFIELD
+IDB_INSTRUCTION(cat("R_INSTR_PUTFIELD","[",factid,"]"),methodid,instructioncounter,"PUTFIELD") :- PUTFIELD(factid,methodid,instructioncounter,_,_,_).
+
+.decl IDB_INVOKEVIRTUAL(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+IDB_INVOKEVIRTUAL(cat("R_INVOKEVIRTUAL","[",factid,"]"),methodid,instructioncounter,owner,name,desc,itf) :- INVOKEVIRTUAL(factid,methodid,instructioncounter,owner,name,desc,itf),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_INVOKEVIRTUAL
+IDB_INSTRUCTION(cat("R_INSTR_INVOKEVIRTUAL","[",factid,"]"),methodid,instructioncounter,"INVOKEVIRTUAL") :- INVOKEVIRTUAL(factid,methodid,instructioncounter,_,_,_,_).
+
+.decl IDB_INVOKESPECIAL(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+IDB_INVOKESPECIAL(cat("R_INVOKESPECIAL","[",factid,"]"),methodid,instructioncounter,owner,name,desc,itf) :- INVOKESPECIAL(factid,methodid,instructioncounter,owner,name,desc,itf),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_INVOKESPECIAL
+IDB_INSTRUCTION(cat("R_INSTR_INVOKESPECIAL","[",factid,"]"),methodid,instructioncounter,"INVOKESPECIAL") :- INVOKESPECIAL(factid,methodid,instructioncounter,_,_,_,_).
+
+.decl IDB_INVOKESTATIC(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+IDB_INVOKESTATIC(cat("R_INVOKESTATIC","[",factid,"]"),methodid,instructioncounter,owner,name,desc,itf) :- INVOKESTATIC(factid,methodid,instructioncounter,owner,name,desc,itf),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_INVOKESTATIC
+IDB_INSTRUCTION(cat("R_INSTR_INVOKESTATIC","[",factid,"]"),methodid,instructioncounter,"INVOKESTATIC") :- INVOKESTATIC(factid,methodid,instructioncounter,_,_,_,_).
+
+.decl IDB_INVOKEINTERFACE(factid: symbol,methodid: symbol,instructioncounter: number,owner: symbol,name: symbol,desc: symbol,itf: number)
+IDB_INVOKEINTERFACE(cat("R_INVOKEINTERFACE","[",factid,"]"),methodid,instructioncounter,owner,name,desc,itf) :- INVOKEINTERFACE(factid,methodid,instructioncounter,owner,name,desc,itf),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_INVOKEINTERFACE
+IDB_INSTRUCTION(cat("R_INSTR_INVOKEINTERFACE","[",factid,"]"),methodid,instructioncounter,"INVOKEINTERFACE") :- INVOKEINTERFACE(factid,methodid,instructioncounter,_,_,_,_).
+
+.decl IDB_INVOKEDYNAMIC(factid: symbol,methodid: symbol,instructioncounter: number,name: symbol,desc: symbol,bsmArgs: symbol,bsm_getOwner: symbol,bsm_getName: symbol,bsm_getDesc: symbol,bsm_getTag: number,bsm_isInterface: number)
+IDB_INVOKEDYNAMIC(cat("R_INVOKEDYNAMIC","[",factid,"]"),methodid,instructioncounter,name,desc,bsmArgs,bsm_getOwner,bsm_getName,bsm_getDesc,bsm_getTag,bsm_isInterface) :- INVOKEDYNAMIC(factid,methodid,instructioncounter,name,desc,bsmArgs,bsm_getOwner,bsm_getName,bsm_getDesc,bsm_getTag,bsm_isInterface),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_INVOKEDYNAMIC
+IDB_INSTRUCTION(cat("R_INSTR_INVOKEDYNAMIC","[",factid,"]"),methodid,instructioncounter,"INVOKEDYNAMIC") :- INVOKEDYNAMIC(factid,methodid,instructioncounter,_,_,_,_,_,_,_,_).
+
+.decl IDB_NEW(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+IDB_NEW(cat("R_NEW","[",factid,"]"),methodid,instructioncounter,desc) :- NEW(factid,methodid,instructioncounter,desc),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_NEW
+IDB_INSTRUCTION(cat("R_INSTR_NEW","[",factid,"]"),methodid,instructioncounter,"NEW") :- NEW(factid,methodid,instructioncounter,_).
+
+.decl IDB_NEWARRAY(factid: symbol,methodid: symbol,instructioncounter: number,operand: number)
+IDB_NEWARRAY(cat("R_NEWARRAY","[",factid,"]"),methodid,instructioncounter,operand) :- NEWARRAY(factid,methodid,instructioncounter,operand),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_NEWARRAY
+IDB_INSTRUCTION(cat("R_INSTR_NEWARRAY","[",factid,"]"),methodid,instructioncounter,"NEWARRAY") :- NEWARRAY(factid,methodid,instructioncounter,_).
+
+.decl IDB_ANEWARRAY(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+IDB_ANEWARRAY(cat("R_ANEWARRAY","[",factid,"]"),methodid,instructioncounter,desc) :- ANEWARRAY(factid,methodid,instructioncounter,desc),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ANEWARRAY
+IDB_INSTRUCTION(cat("R_INSTR_ANEWARRAY","[",factid,"]"),methodid,instructioncounter,"ANEWARRAY") :- ANEWARRAY(factid,methodid,instructioncounter,_).
+
+.decl IDB_ARRAYLENGTH(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ARRAYLENGTH(cat("R_ARRAYLENGTH","[",factid,"]"),methodid,instructioncounter) :- ARRAYLENGTH(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ARRAYLENGTH
+IDB_INSTRUCTION(cat("R_INSTR_ARRAYLENGTH","[",factid,"]"),methodid,instructioncounter,"ARRAYLENGTH") :- ARRAYLENGTH(factid,methodid,instructioncounter).
+
+.decl IDB_ATHROW(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_ATHROW(cat("R_ATHROW","[",factid,"]"),methodid,instructioncounter) :- ATHROW(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_ATHROW
+IDB_INSTRUCTION(cat("R_INSTR_ATHROW","[",factid,"]"),methodid,instructioncounter,"ATHROW") :- ATHROW(factid,methodid,instructioncounter).
+
+.decl IDB_CHECKCAST(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+IDB_CHECKCAST(cat("R_CHECKCAST","[",factid,"]"),methodid,instructioncounter,desc) :- CHECKCAST(factid,methodid,instructioncounter,desc),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_CHECKCAST
+IDB_INSTRUCTION(cat("R_INSTR_CHECKCAST","[",factid,"]"),methodid,instructioncounter,"CHECKCAST") :- CHECKCAST(factid,methodid,instructioncounter,_).
+
+.decl IDB_INSTANCEOF(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol)
+IDB_INSTANCEOF(cat("R_INSTANCEOF","[",factid,"]"),methodid,instructioncounter,desc) :- INSTANCEOF(factid,methodid,instructioncounter,desc),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_INSTANCEOF
+IDB_INSTRUCTION(cat("R_INSTR_INSTANCEOF","[",factid,"]"),methodid,instructioncounter,"INSTANCEOF") :- INSTANCEOF(factid,methodid,instructioncounter,_).
+
+.decl IDB_MONITORENTER(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_MONITORENTER(cat("R_MONITORENTER","[",factid,"]"),methodid,instructioncounter) :- MONITORENTER(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_MONITORENTER
+IDB_INSTRUCTION(cat("R_INSTR_MONITORENTER","[",factid,"]"),methodid,instructioncounter,"MONITORENTER") :- MONITORENTER(factid,methodid,instructioncounter).
+
+.decl IDB_MONITOREXIT(factid: symbol,methodid: symbol,instructioncounter: number)
+IDB_MONITOREXIT(cat("R_MONITOREXIT","[",factid,"]"),methodid,instructioncounter) :- MONITOREXIT(factid,methodid,instructioncounter),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_MONITOREXIT
+IDB_INSTRUCTION(cat("R_INSTR_MONITOREXIT","[",factid,"]"),methodid,instructioncounter,"MONITOREXIT") :- MONITOREXIT(factid,methodid,instructioncounter).
+
+.decl IDB_MULTIANEWARRAY(factid: symbol,methodid: symbol,instructioncounter: number,desc: symbol,dims: number)
+IDB_MULTIANEWARRAY(cat("R_MULTIANEWARRAY","[",factid,"]"),methodid,instructioncounter,desc,dims) :- MULTIANEWARRAY(factid,methodid,instructioncounter,desc,dims),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_MULTIANEWARRAY
+IDB_INSTRUCTION(cat("R_INSTR_MULTIANEWARRAY","[",factid,"]"),methodid,instructioncounter,"MULTIANEWARRAY") :- MULTIANEWARRAY(factid,methodid,instructioncounter,_,_).
+
+.decl IDB_IFNULL(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IFNULL(cat("R_IFNULL","[",factid,"]"),methodid,instructioncounter,label) :- IFNULL(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IFNULL
+IDB_INSTRUCTION(cat("R_INSTR_IFNULL","[",factid,"]"),methodid,instructioncounter,"IFNULL") :- IFNULL(factid,methodid,instructioncounter,_).
+
+.decl IDB_IFNONNULL(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
+IDB_IFNONNULL(cat("R_IFNONNULL","[",factid,"]"),methodid,instructioncounter,label) :- IFNONNULL(factid,methodid,instructioncounter,label),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
+.output IDB_IFNONNULL
+IDB_INSTRUCTION(cat("R_INSTR_IFNONNULL","[",factid,"]"),methodid,instructioncounter,"IFNONNULL") :- IFNONNULL(factid,methodid,instructioncounter,_).
+
+
+// ************************************************
+// COMMON RULES from /Users/jens/Development/binaryeq/daleq/target/classes/rules/commons/access.souffle
+// ************************************************
+
+.decl IDB_IS_SYNCHRONIZED(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_SYNCHRONIZED(cat("R_IS_SYNCHRONIZED","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0020)!=0.
+.output IDB_IS_SYNCHRONIZED
+
+.decl IDB_IS_TRANSITIVE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_TRANSITIVE(cat("R_IS_TRANSITIVE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0020)!=0.
+.output IDB_IS_TRANSITIVE
+
+.decl IDB_IS_VOLATILE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_VOLATILE(cat("R_IS_VOLATILE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0040)!=0.
+.output IDB_IS_VOLATILE
+
+.decl IDB_IS_VARARGS(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_VARARGS(cat("R_IS_VARARGS","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0080)!=0.
+.output IDB_IS_VARARGS
+
+.decl IDB_IS_STRICT(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_STRICT(cat("R_IS_STRICT","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0800)!=0.
+.output IDB_IS_STRICT
+
+.decl IDB_IS_ENUM(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_ENUM(cat("R_IS_ENUM","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x4000)!=0.
+.output IDB_IS_ENUM
+
+.decl IDB_IS_SUPER(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_SUPER(cat("R_IS_SUPER","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0020)!=0.
+.output IDB_IS_SUPER
+
+.decl IDB_IS_NATIVE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_NATIVE(cat("R_IS_NATIVE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0100)!=0.
+.output IDB_IS_NATIVE
+
+.decl IDB_IS_SYNTHETIC(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_SYNTHETIC(cat("R_IS_SYNTHETIC","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x1000)!=0.
+.output IDB_IS_SYNTHETIC
+
+.decl IDB_IS_FINAL(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_FINAL(cat("R_IS_FINAL","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0010)!=0.
+.output IDB_IS_FINAL
+
+.decl IDB_IS_BRIDGE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_BRIDGE(cat("R_IS_BRIDGE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0040)!=0.
+.output IDB_IS_BRIDGE
+
+.decl IDB_IS_ABSTRACT(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_ABSTRACT(cat("R_IS_ABSTRACT","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0400)!=0.
+.output IDB_IS_ABSTRACT
+
+.decl IDB_IS_STATIC(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_STATIC(cat("R_IS_STATIC","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0008)!=0.
+.output IDB_IS_STATIC
+
+.decl IDB_IS_PRIVATE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_PRIVATE(cat("R_IS_PRIVATE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0002)!=0.
+.output IDB_IS_PRIVATE
+
+.decl IDB_IS_OPEN(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_OPEN(cat("R_IS_OPEN","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0020)!=0.
+.output IDB_IS_OPEN
+
+.decl IDB_IS_STATIC_PHASE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_STATIC_PHASE(cat("R_IS_STATIC_PHASE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0040)!=0.
+.output IDB_IS_STATIC_PHASE
+
+.decl IDB_IS_MODULE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_MODULE(cat("R_IS_MODULE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x8000)!=0.
+.output IDB_IS_MODULE
+
+.decl IDB_IS_INTERFACE(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_INTERFACE(cat("R_IS_INTERFACE","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0200)!=0.
+.output IDB_IS_INTERFACE
+
+.decl IDB_IS_ANNOTATION(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_ANNOTATION(cat("R_IS_ANNOTATION","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x2000)!=0.
+.output IDB_IS_ANNOTATION
+
+.decl IDB_IS_PUBLIC(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_PUBLIC(cat("R_IS_PUBLIC","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0001)!=0.
+.output IDB_IS_PUBLIC
+
+.decl IDB_IS_MANDATED(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_MANDATED(cat("R_IS_MANDATED","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x8000)!=0.
+.output IDB_IS_MANDATED
+
+.decl IDB_IS_PROTECTED(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_PROTECTED(cat("R_IS_PROTECTED","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0004)!=0.
+.output IDB_IS_PROTECTED
+
+.decl IDB_IS_TRANSIENT(factid: symbol,classOrMethodOrFieldId: symbol)
+IDB_IS_TRANSIENT(cat("R_IS_TRANSIENT","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0080)!=0.
+.output IDB_IS_TRANSIENT
+

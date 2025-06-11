@@ -1,0 +1,1000 @@
+Classfile /Users/jens/Development/binaryeq/daleq/src/test/resources/issue24/jar1/ConfigurationInterpolator.class
+  Last modified 10/06/2025; size 9893 bytes
+  SHA-256 checksum 0406e2ca5f560277411f3283f1f24b7e4c105eb138019c9d85c53b6c1051da1d
+  Compiled from "ConfigurationInterpolator.java"
+public class org.apache.commons.configuration2.interpol.ConfigurationInterpolator
+  minor version: 0
+  major version: 52
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #12                         // org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+  super_class: #76                        // java/lang/Object
+  interfaces: 0, fields: 11, methods: 29, attributes: 3
+Constant pool:
+    #1 = Methodref          #76.#199      // java/lang/Object."<init>":()V
+    #2 = Fieldref           #77.#200      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter.INSTANCE:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter;
+    #3 = Fieldref           #12.#201      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.stringConverter:Ljava/util/function/Function;
+    #4 = Class              #202          // java/util/concurrent/ConcurrentHashMap
+    #5 = Methodref          #4.#199       // java/util/concurrent/ConcurrentHashMap."<init>":()V
+    #6 = Fieldref           #12.#203      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.prefixLookups:Ljava/util/Map;
+    #7 = Class              #204          // java/util/concurrent/CopyOnWriteArrayList
+    #8 = Methodref          #7.#199       // java/util/concurrent/CopyOnWriteArrayList."<init>":()V
+    #9 = Fieldref           #12.#205      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.defaultLookups:Ljava/util/List;
+   #10 = Methodref          #12.#206      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.initSubstitutor:()Lorg/apache/commons/text/StringSubstitutor;
+   #11 = Fieldref           #12.#207      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.substitutor:Lorg/apache/commons/text/StringSubstitutor;
+   #12 = Class              #208          // org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+   #13 = Methodref          #12.#199      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator."<init>":()V
+   #14 = Methodref          #209.#210     // org/apache/commons/configuration2/interpol/InterpolatorSpecification.getDefaultLookups:()Ljava/util/Collection;
+   #15 = Methodref          #12.#211      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.addDefaultLookups:(Ljava/util/Collection;)V
+   #16 = Methodref          #209.#212     // org/apache/commons/configuration2/interpol/InterpolatorSpecification.getPrefixLookups:()Ljava/util/Map;
+   #17 = Methodref          #12.#213      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.registerLookups:(Ljava/util/Map;)V
+   #18 = Methodref          #209.#214     // org/apache/commons/configuration2/interpol/InterpolatorSpecification.getParentInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+   #19 = Methodref          #12.#215      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.setParentInterpolator:(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+   #20 = Methodref          #209.#216     // org/apache/commons/configuration2/interpol/InterpolatorSpecification.getStringConverter:()Ljava/util/function/Function;
+   #21 = Methodref          #12.#217      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.setStringConverter:(Ljava/util/function/Function;)V
+   #22 = Fieldref           #12.#218      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.VAR_START_LENGTH:I
+   #23 = Methodref          #48.#219      // java/lang/String.length:()I
+   #24 = Fieldref           #12.#220      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.VAR_END_LENGTH:I
+   #25 = Methodref          #48.#221      // java/lang/String.substring:(II)Ljava/lang/String;
+   #26 = Class              #222          // java/lang/IllegalArgumentException
+   #27 = String             #223          // InterpolatorSpecification must not be null!
+   #28 = Methodref          #26.#224      // java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+   #29 = Methodref          #209.#225     // org/apache/commons/configuration2/interpol/InterpolatorSpecification.getInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+   #30 = Methodref          #12.#226      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.createInterpolator:(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+   #31 = Fieldref           #80.#227      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder.INSTANCE:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder;
+   #32 = Methodref          #80.#228      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder.getDefaultPrefixLookups:()Ljava/util/Map;
+   #33 = Fieldref           #229.#230     // org/apache/commons/configuration2/interpol/DummyLookup.INSTANCE:Lorg/apache/commons/configuration2/interpol/DummyLookup;
+   #34 = InterfaceMethodref #231.#232     // java/util/List.add:(Ljava/lang/Object;)Z
+   #35 = InterfaceMethodref #231.#233     // java/util/List.addAll:(Ljava/util/Collection;)Z
+   #36 = InterfaceMethodref #234.#235     // java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+   #37 = InterfaceMethodref #234.#236     // java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+   #38 = Class              #237          // org/apache/commons/configuration2/interpol/Lookup
+   #39 = Methodref          #12.#238      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.nullSafeLookup:(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+   #40 = Class              #239          // java/util/ArrayList
+   #41 = Methodref          #40.#240      // java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+   #42 = Class              #241          // java/util/HashMap
+   #43 = Methodref          #42.#242      // java/util/HashMap."<init>":(Ljava/util/Map;)V
+   #44 = Fieldref           #12.#243      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.parentInterpolator:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+   #45 = Class              #244          // org/apache/commons/text/StringSubstitutor
+   #46 = InvokeDynamic      #0:#249       // #0:lookup:(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)Lorg/apache/commons/text/lookup/StringLookup;
+   #47 = Methodref          #45.#250      // org/apache/commons/text/StringSubstitutor."<init>":(Lorg/apache/commons/text/lookup/StringLookup;)V
+   #48 = Class              #251          // java/lang/String
+   #49 = Methodref          #12.#252      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.isSingleVariable:(Ljava/lang/String;)Z
+   #50 = Methodref          #12.#253      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.resolveSingleVariable:(Ljava/lang/String;)Ljava/lang/Object;
+   #51 = Methodref          #45.#254      // org/apache/commons/text/StringSubstitutor.replace:(Ljava/lang/String;)Ljava/lang/String;
+   #52 = Methodref          #45.#255      // org/apache/commons/text/StringSubstitutor.isEnableSubstitutionInVariables:()Z
+   #53 = String             #256          // ${
+   #54 = Methodref          #48.#257      // java/lang/String.startsWith:(Ljava/lang/String;)Z
+   #55 = String             #258          // }
+   #56 = Methodref          #48.#259      // java/lang/String.indexOf:(Ljava/lang/String;I)I
+   #57 = InterfaceMethodref #234.#260     // java/util/Map.keySet:()Ljava/util/Set;
+   #58 = Methodref          #261.#262     // java/util/Collections.unmodifiableSet:(Ljava/util/Set;)Ljava/util/Set;
+   #59 = String             #263          // Prefix for lookup object must not be null!
+   #60 = String             #264          // Lookup object must not be null!
+   #61 = InterfaceMethodref #234.#265     // java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+   #62 = InterfaceMethodref #234.#266     // java/util/Map.putAll:(Ljava/util/Map;)V
+   #63 = InterfaceMethodref #231.#267     // java/util/List.remove:(Ljava/lang/Object;)Z
+   #64 = Methodref          #48.#268      // java/lang/String.indexOf:(I)I
+   #65 = Methodref          #48.#269      // java/lang/String.substring:(I)Ljava/lang/String;
+   #66 = Methodref          #12.#270      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.fetchLookupForPrefix:(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+   #67 = InterfaceMethodref #38.#271      // org/apache/commons/configuration2/interpol/Lookup.lookup:(Ljava/lang/String;)Ljava/lang/Object;
+   #68 = InterfaceMethodref #231.#272     // java/util/List.iterator:()Ljava/util/Iterator;
+   #69 = InterfaceMethodref #186.#273     // java/util/Iterator.hasNext:()Z
+   #70 = InterfaceMethodref #186.#274     // java/util/Iterator.next:()Ljava/lang/Object;
+   #71 = Methodref          #12.#214      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.getParentInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+   #72 = Methodref          #12.#275      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.resolve:(Ljava/lang/String;)Ljava/lang/Object;
+   #73 = Methodref          #12.#276      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.extractVariableName:(Ljava/lang/String;)Ljava/lang/String;
+   #74 = Methodref          #45.#277      // org/apache/commons/text/StringSubstitutor.setEnableSubstitutionInVariables:(Z)Lorg/apache/commons/text/StringSubstitutor;
+   #75 = InterfaceMethodref #166.#278     // java/util/function/Function.apply:(Ljava/lang/Object;)Ljava/lang/Object;
+   #76 = Class              #279          // java/lang/Object
+   #77 = Class              #280          // org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter
+   #78 = Utf8               DefaultStringConverter
+   #79 = Utf8               InnerClasses
+   #80 = Class              #281          // org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder
+   #81 = Utf8               DefaultPrefixLookupsHolder
+   #82 = Utf8               DEFAULT_PREFIX_LOOKUPS_PROPERTY
+   #83 = Utf8               Ljava/lang/String;
+   #84 = Utf8               ConstantValue
+   #85 = String             #282          // org.apache.commons.configuration2.interpol.ConfigurationInterpolator.defaultPrefixLookups
+   #86 = Utf8               PREFIX_SEPARATOR
+   #87 = Utf8               C
+   #88 = Integer            58
+   #89 = Utf8               VAR_START
+   #90 = Utf8               VAR_START_LENGTH
+   #91 = Utf8               I
+   #92 = Utf8               VAR_END
+   #93 = Utf8               VAR_END_LENGTH
+   #94 = Utf8               prefixLookups
+   #95 = Utf8               Ljava/util/Map;
+   #96 = Utf8               Signature
+   #97 = Utf8               Ljava/util/Map<Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;>;
+   #98 = Utf8               defaultLookups
+   #99 = Utf8               Ljava/util/List;
+  #100 = Utf8               Ljava/util/List<Lorg/apache/commons/configuration2/interpol/Lookup;>;
+  #101 = Utf8               substitutor
+  #102 = Utf8               Lorg/apache/commons/text/StringSubstitutor;
+  #103 = Utf8               parentInterpolator
+  #104 = Utf8               Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+  #105 = Utf8               stringConverter
+  #106 = Utf8               Ljava/util/function/Function;
+  #107 = Utf8               Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+  #108 = Utf8               <init>
+  #109 = Utf8               ()V
+  #110 = Utf8               Code
+  #111 = Utf8               LineNumberTable
+  #112 = Utf8               LocalVariableTable
+  #113 = Utf8               this
+  #114 = Utf8               createInterpolator
+  #115 = Utf8               (Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+  #116 = Utf8               spec
+  #117 = Utf8               Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;
+  #118 = Utf8               ci
+  #119 = Utf8               extractVariableName
+  #120 = Utf8               (Ljava/lang/String;)Ljava/lang/String;
+  #121 = Utf8               strValue
+  #122 = Utf8               fromSpecification
+  #123 = Utf8               StackMapTable
+  #124 = Utf8               getDefaultPrefixLookups
+  #125 = Utf8               ()Ljava/util/Map;
+  #126 = Utf8               ()Ljava/util/Map<Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;>;
+  #127 = Utf8               nullSafeLookup
+  #128 = Utf8               (Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+  #129 = Utf8               lookup
+  #130 = Utf8               Lorg/apache/commons/configuration2/interpol/Lookup;
+  #131 = Utf8               addDefaultLookup
+  #132 = Utf8               (Lorg/apache/commons/configuration2/interpol/Lookup;)V
+  #133 = Utf8               defaultLookup
+  #134 = Utf8               addDefaultLookups
+  #135 = Utf8               (Ljava/util/Collection;)V
+  #136 = Utf8               lookups
+  #137 = Utf8               Ljava/util/Collection;
+  #138 = Utf8               LocalVariableTypeTable
+  #139 = Utf8               Ljava/util/Collection<+Lorg/apache/commons/configuration2/interpol/Lookup;>;
+  #140 = Utf8               (Ljava/util/Collection<+Lorg/apache/commons/configuration2/interpol/Lookup;>;)V
+  #141 = Utf8               deregisterLookup
+  #142 = Utf8               (Ljava/lang/String;)Z
+  #143 = Utf8               prefix
+  #144 = Utf8               fetchLookupForPrefix
+  #145 = Utf8               (Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+  #146 = Utf8               getDefaultLookups
+  #147 = Utf8               ()Ljava/util/List;
+  #148 = Utf8               ()Ljava/util/List<Lorg/apache/commons/configuration2/interpol/Lookup;>;
+  #149 = Utf8               getLookups
+  #150 = Utf8               getParentInterpolator
+  #151 = Utf8               ()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+  #152 = Utf8               initSubstitutor
+  #153 = Utf8               ()Lorg/apache/commons/text/StringSubstitutor;
+  #154 = Utf8               interpolate
+  #155 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+  #156 = Utf8               resolvedValue
+  #157 = Utf8               Ljava/lang/Object;
+  #158 = Utf8               value
+  #159 = Utf8               isEnableSubstitutionInVariables
+  #160 = Utf8               ()Z
+  #161 = Utf8               getStringConverter
+  #162 = Utf8               ()Ljava/util/function/Function;
+  #163 = Utf8               ()Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+  #164 = Utf8               setStringConverter
+  #165 = Utf8               (Ljava/util/function/Function;)V
+  #166 = Class              #283          // java/util/function/Function
+  #167 = Utf8               (Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;)V
+  #168 = Utf8               isSingleVariable
+  #169 = Utf8               prefixSet
+  #170 = Utf8               ()Ljava/util/Set;
+  #171 = Utf8               ()Ljava/util/Set<Ljava/lang/String;>;
+  #172 = Utf8               registerLookup
+  #173 = Utf8               (Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V
+  #174 = Utf8               registerLookups
+  #175 = Utf8               (Ljava/util/Map;)V
+  #176 = Utf8               Ljava/util/Map<Ljava/lang/String;+Lorg/apache/commons/configuration2/interpol/Lookup;>;
+  #177 = Utf8               (Ljava/util/Map<Ljava/lang/String;+Lorg/apache/commons/configuration2/interpol/Lookup;>;)V
+  #178 = Utf8               removeDefaultLookup
+  #179 = Utf8               (Lorg/apache/commons/configuration2/interpol/Lookup;)Z
+  #180 = Utf8               resolve
+  #181 = Utf8               (Ljava/lang/String;)Ljava/lang/Object;
+  #182 = Utf8               name
+  #183 = Utf8               var
+  #184 = Utf8               prefixPos
+  #185 = Utf8               parent
+  #186 = Class              #284          // java/util/Iterator
+  #187 = Utf8               resolveSingleVariable
+  #188 = Utf8               setEnableSubstitutionInVariables
+  #189 = Utf8               (Z)V
+  #190 = Utf8               f
+  #191 = Utf8               Z
+  #192 = Utf8               setParentInterpolator
+  #193 = Utf8               (Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+  #194 = Utf8               lambda$initSubstitutor$0
+  #195 = Utf8               key
+  #196 = Utf8               <clinit>
+  #197 = Utf8               SourceFile
+  #198 = Utf8               ConfigurationInterpolator.java
+  #199 = NameAndType        #108:#109     // "<init>":()V
+  #200 = NameAndType        #285:#286     // INSTANCE:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter;
+  #201 = NameAndType        #105:#106     // stringConverter:Ljava/util/function/Function;
+  #202 = Utf8               java/util/concurrent/ConcurrentHashMap
+  #203 = NameAndType        #94:#95       // prefixLookups:Ljava/util/Map;
+  #204 = Utf8               java/util/concurrent/CopyOnWriteArrayList
+  #205 = NameAndType        #98:#99       // defaultLookups:Ljava/util/List;
+  #206 = NameAndType        #152:#153     // initSubstitutor:()Lorg/apache/commons/text/StringSubstitutor;
+  #207 = NameAndType        #101:#102     // substitutor:Lorg/apache/commons/text/StringSubstitutor;
+  #208 = Utf8               org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+  #209 = Class              #287          // org/apache/commons/configuration2/interpol/InterpolatorSpecification
+  #210 = NameAndType        #146:#288     // getDefaultLookups:()Ljava/util/Collection;
+  #211 = NameAndType        #134:#135     // addDefaultLookups:(Ljava/util/Collection;)V
+  #212 = NameAndType        #289:#125     // getPrefixLookups:()Ljava/util/Map;
+  #213 = NameAndType        #174:#175     // registerLookups:(Ljava/util/Map;)V
+  #214 = NameAndType        #150:#151     // getParentInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+  #215 = NameAndType        #192:#193     // setParentInterpolator:(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+  #216 = NameAndType        #161:#162     // getStringConverter:()Ljava/util/function/Function;
+  #217 = NameAndType        #164:#165     // setStringConverter:(Ljava/util/function/Function;)V
+  #218 = NameAndType        #90:#91       // VAR_START_LENGTH:I
+  #219 = NameAndType        #290:#291     // length:()I
+  #220 = NameAndType        #93:#91       // VAR_END_LENGTH:I
+  #221 = NameAndType        #292:#293     // substring:(II)Ljava/lang/String;
+  #222 = Utf8               java/lang/IllegalArgumentException
+  #223 = Utf8               InterpolatorSpecification must not be null!
+  #224 = NameAndType        #108:#294     // "<init>":(Ljava/lang/String;)V
+  #225 = NameAndType        #295:#151     // getInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+  #226 = NameAndType        #114:#115     // createInterpolator:(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+  #227 = NameAndType        #285:#296     // INSTANCE:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder;
+  #228 = NameAndType        #124:#125     // getDefaultPrefixLookups:()Ljava/util/Map;
+  #229 = Class              #297          // org/apache/commons/configuration2/interpol/DummyLookup
+  #230 = NameAndType        #285:#298     // INSTANCE:Lorg/apache/commons/configuration2/interpol/DummyLookup;
+  #231 = Class              #299          // java/util/List
+  #232 = NameAndType        #300:#301     // add:(Ljava/lang/Object;)Z
+  #233 = NameAndType        #302:#303     // addAll:(Ljava/util/Collection;)Z
+  #234 = Class              #304          // java/util/Map
+  #235 = NameAndType        #305:#155     // remove:(Ljava/lang/Object;)Ljava/lang/Object;
+  #236 = NameAndType        #306:#155     // get:(Ljava/lang/Object;)Ljava/lang/Object;
+  #237 = Utf8               org/apache/commons/configuration2/interpol/Lookup
+  #238 = NameAndType        #127:#128     // nullSafeLookup:(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+  #239 = Utf8               java/util/ArrayList
+  #240 = NameAndType        #108:#135     // "<init>":(Ljava/util/Collection;)V
+  #241 = Utf8               java/util/HashMap
+  #242 = NameAndType        #108:#175     // "<init>":(Ljava/util/Map;)V
+  #243 = NameAndType        #103:#104     // parentInterpolator:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+  #244 = Utf8               org/apache/commons/text/StringSubstitutor
+  #245 = Utf8               BootstrapMethods
+  #246 = MethodHandle       6:#307        // REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #247 = MethodType         #120          //  (Ljava/lang/String;)Ljava/lang/String;
+  #248 = MethodHandle       7:#308        // REF_invokeSpecial org/apache/commons/configuration2/interpol/ConfigurationInterpolator.lambda$initSubstitutor$0:(Ljava/lang/String;)Ljava/lang/String;
+  #249 = NameAndType        #129:#309     // lookup:(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)Lorg/apache/commons/text/lookup/StringLookup;
+  #250 = NameAndType        #108:#310     // "<init>":(Lorg/apache/commons/text/lookup/StringLookup;)V
+  #251 = Utf8               java/lang/String
+  #252 = NameAndType        #168:#142     // isSingleVariable:(Ljava/lang/String;)Z
+  #253 = NameAndType        #187:#181     // resolveSingleVariable:(Ljava/lang/String;)Ljava/lang/Object;
+  #254 = NameAndType        #311:#120     // replace:(Ljava/lang/String;)Ljava/lang/String;
+  #255 = NameAndType        #159:#160     // isEnableSubstitutionInVariables:()Z
+  #256 = Utf8               ${
+  #257 = NameAndType        #312:#142     // startsWith:(Ljava/lang/String;)Z
+  #258 = Utf8               }
+  #259 = NameAndType        #313:#314     // indexOf:(Ljava/lang/String;I)I
+  #260 = NameAndType        #315:#170     // keySet:()Ljava/util/Set;
+  #261 = Class              #316          // java/util/Collections
+  #262 = NameAndType        #317:#318     // unmodifiableSet:(Ljava/util/Set;)Ljava/util/Set;
+  #263 = Utf8               Prefix for lookup object must not be null!
+  #264 = Utf8               Lookup object must not be null!
+  #265 = NameAndType        #319:#320     // put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #266 = NameAndType        #321:#175     // putAll:(Ljava/util/Map;)V
+  #267 = NameAndType        #305:#301     // remove:(Ljava/lang/Object;)Z
+  #268 = NameAndType        #313:#322     // indexOf:(I)I
+  #269 = NameAndType        #292:#323     // substring:(I)Ljava/lang/String;
+  #270 = NameAndType        #144:#145     // fetchLookupForPrefix:(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+  #271 = NameAndType        #129:#181     // lookup:(Ljava/lang/String;)Ljava/lang/Object;
+  #272 = NameAndType        #324:#325     // iterator:()Ljava/util/Iterator;
+  #273 = NameAndType        #326:#160     // hasNext:()Z
+  #274 = NameAndType        #327:#328     // next:()Ljava/lang/Object;
+  #275 = NameAndType        #180:#181     // resolve:(Ljava/lang/String;)Ljava/lang/Object;
+  #276 = NameAndType        #119:#120     // extractVariableName:(Ljava/lang/String;)Ljava/lang/String;
+  #277 = NameAndType        #188:#329     // setEnableSubstitutionInVariables:(Z)Lorg/apache/commons/text/StringSubstitutor;
+  #278 = NameAndType        #330:#155     // apply:(Ljava/lang/Object;)Ljava/lang/Object;
+  #279 = Utf8               java/lang/Object
+  #280 = Utf8               org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter
+  #281 = Utf8               org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder
+  #282 = Utf8               org.apache.commons.configuration2.interpol.ConfigurationInterpolator.defaultPrefixLookups
+  #283 = Utf8               java/util/function/Function
+  #284 = Utf8               java/util/Iterator
+  #285 = Utf8               INSTANCE
+  #286 = Utf8               Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter;
+  #287 = Utf8               org/apache/commons/configuration2/interpol/InterpolatorSpecification
+  #288 = Utf8               ()Ljava/util/Collection;
+  #289 = Utf8               getPrefixLookups
+  #290 = Utf8               length
+  #291 = Utf8               ()I
+  #292 = Utf8               substring
+  #293 = Utf8               (II)Ljava/lang/String;
+  #294 = Utf8               (Ljava/lang/String;)V
+  #295 = Utf8               getInterpolator
+  #296 = Utf8               Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder;
+  #297 = Utf8               org/apache/commons/configuration2/interpol/DummyLookup
+  #298 = Utf8               Lorg/apache/commons/configuration2/interpol/DummyLookup;
+  #299 = Utf8               java/util/List
+  #300 = Utf8               add
+  #301 = Utf8               (Ljava/lang/Object;)Z
+  #302 = Utf8               addAll
+  #303 = Utf8               (Ljava/util/Collection;)Z
+  #304 = Utf8               java/util/Map
+  #305 = Utf8               remove
+  #306 = Utf8               get
+  #307 = Methodref          #331.#332     // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #308 = Methodref          #12.#333      // org/apache/commons/configuration2/interpol/ConfigurationInterpolator.lambda$initSubstitutor$0:(Ljava/lang/String;)Ljava/lang/String;
+  #309 = Utf8               (Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)Lorg/apache/commons/text/lookup/StringLookup;
+  #310 = Utf8               (Lorg/apache/commons/text/lookup/StringLookup;)V
+  #311 = Utf8               replace
+  #312 = Utf8               startsWith
+  #313 = Utf8               indexOf
+  #314 = Utf8               (Ljava/lang/String;I)I
+  #315 = Utf8               keySet
+  #316 = Utf8               java/util/Collections
+  #317 = Utf8               unmodifiableSet
+  #318 = Utf8               (Ljava/util/Set;)Ljava/util/Set;
+  #319 = Utf8               put
+  #320 = Utf8               (Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  #321 = Utf8               putAll
+  #322 = Utf8               (I)I
+  #323 = Utf8               (I)Ljava/lang/String;
+  #324 = Utf8               iterator
+  #325 = Utf8               ()Ljava/util/Iterator;
+  #326 = Utf8               hasNext
+  #327 = Utf8               next
+  #328 = Utf8               ()Ljava/lang/Object;
+  #329 = Utf8               (Z)Lorg/apache/commons/text/StringSubstitutor;
+  #330 = Utf8               apply
+  #331 = Class              #334          // java/lang/invoke/LambdaMetafactory
+  #332 = NameAndType        #335:#338     // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #333 = NameAndType        #194:#120     // lambda$initSubstitutor$0:(Ljava/lang/String;)Ljava/lang/String;
+  #334 = Utf8               java/lang/invoke/LambdaMetafactory
+  #335 = Utf8               metafactory
+  #336 = Class              #340          // java/lang/invoke/MethodHandles$Lookup
+  #337 = Utf8               Lookup
+  #338 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #339 = Class              #341          // java/lang/invoke/MethodHandles
+  #340 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #341 = Utf8               java/lang/invoke/MethodHandles
+{
+  public static final java.lang.String DEFAULT_PREFIX_LOOKUPS_PROPERTY;
+    descriptor: Ljava/lang/String;
+    flags: (0x0019) ACC_PUBLIC, ACC_STATIC, ACC_FINAL
+    ConstantValue: String org.apache.commons.configuration2.interpol.ConfigurationInterpolator.defaultPrefixLookups
+
+  public org.apache.commons.configuration2.interpol.ConfigurationInterpolator();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: getstatic     #2                  // Field org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter.INSTANCE:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter;
+         8: putfield      #3                  // Field stringConverter:Ljava/util/function/Function;
+        11: aload_0
+        12: new           #4                  // class java/util/concurrent/ConcurrentHashMap
+        15: dup
+        16: invokespecial #5                  // Method java/util/concurrent/ConcurrentHashMap."<init>":()V
+        19: putfield      #6                  // Field prefixLookups:Ljava/util/Map;
+        22: aload_0
+        23: new           #7                  // class java/util/concurrent/CopyOnWriteArrayList
+        26: dup
+        27: invokespecial #8                  // Method java/util/concurrent/CopyOnWriteArrayList."<init>":()V
+        30: putfield      #9                  // Field defaultLookups:Ljava/util/List;
+        33: aload_0
+        34: aload_0
+        35: invokespecial #10                 // Method initSubstitutor:()Lorg/apache/commons/text/StringSubstitutor;
+        38: putfield      #11                 // Field substitutor:Lorg/apache/commons/text/StringSubstitutor;
+        41: return
+      LineNumberTable:
+        line 136: 0
+        line 131: 4
+        line 137: 11
+        line 138: 22
+        line 139: 33
+        line 140: 41
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      42     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+  public static org.apache.commons.configuration2.interpol.ConfigurationInterpolator fromSpecification(org.apache.commons.configuration2.interpol.InterpolatorSpecification);
+    descriptor: (Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=1, args_size=1
+         0: aload_0
+         1: ifnonnull     14
+         4: new           #26                 // class java/lang/IllegalArgumentException
+         7: dup
+         8: ldc           #27                 // String InterpolatorSpecification must not be null!
+        10: invokespecial #28                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        13: athrow
+        14: aload_0
+        15: invokevirtual #29                 // Method org/apache/commons/configuration2/interpol/InterpolatorSpecification.getInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+        18: ifnull        28
+        21: aload_0
+        22: invokevirtual #29                 // Method org/apache/commons/configuration2/interpol/InterpolatorSpecification.getInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+        25: goto          32
+        28: aload_0
+        29: invokestatic  #30                 // Method createInterpolator:(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+        32: areturn
+      LineNumberTable:
+        line 178: 0
+        line 179: 4
+        line 181: 14
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      33     0  spec   Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;
+      StackMapTable: number_of_entries = 3
+        frame_type = 14 /* same */
+        frame_type = 13 /* same */
+        frame_type = 67 /* same_locals_1_stack_item */
+          stack = [ class org/apache/commons/configuration2/interpol/ConfigurationInterpolator ]
+
+  public static java.util.Map<java.lang.String, org.apache.commons.configuration2.interpol.Lookup> getDefaultPrefixLookups();
+    descriptor: ()Ljava/util/Map;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: getstatic     #31                 // Field org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder.INSTANCE:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder;
+         3: invokevirtual #32                 // Method org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder.getDefaultPrefixLookups:()Ljava/util/Map;
+         6: areturn
+      LineNumberTable:
+        line 290: 0
+    Signature: #126                         // ()Ljava/util/Map<Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;>;
+
+  public static org.apache.commons.configuration2.interpol.Lookup nullSafeLookup(org.apache.commons.configuration2.interpol.Lookup);
+    descriptor: (Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: ifnonnull     8
+         4: getstatic     #33                 // Field org/apache/commons/configuration2/interpol/DummyLookup.INSTANCE:Lorg/apache/commons/configuration2/interpol/DummyLookup;
+         7: astore_0
+         8: aload_0
+         9: areturn
+      LineNumberTable:
+        line 303: 0
+        line 304: 4
+        line 306: 8
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0 lookup   Lorg/apache/commons/configuration2/interpol/Lookup;
+      StackMapTable: number_of_entries = 1
+        frame_type = 8 /* same */
+
+  public void addDefaultLookup(org.apache.commons.configuration2.interpol.Lookup);
+    descriptor: (Lorg/apache/commons/configuration2/interpol/Lookup;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: getfield      #9                  // Field defaultLookups:Ljava/util/List;
+         4: aload_1
+         5: invokeinterface #34,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+        10: pop
+        11: return
+      LineNumberTable:
+        line 318: 0
+        line 319: 11
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      12     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0      12     1 defaultLookup   Lorg/apache/commons/configuration2/interpol/Lookup;
+
+  public void addDefaultLookups(java.util.Collection<? extends org.apache.commons.configuration2.interpol.Lookup>);
+    descriptor: (Ljava/util/Collection;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_1
+         1: ifnull        15
+         4: aload_0
+         5: getfield      #9                  // Field defaultLookups:Ljava/util/List;
+         8: aload_1
+         9: invokeinterface #35,  2           // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+        14: pop
+        15: return
+      LineNumberTable:
+        line 329: 0
+        line 330: 4
+        line 332: 15
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      16     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0      16     1 lookups   Ljava/util/Collection;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      16     1 lookups   Ljava/util/Collection<+Lorg/apache/commons/configuration2/interpol/Lookup;>;
+      StackMapTable: number_of_entries = 1
+        frame_type = 15 /* same */
+    Signature: #140                         // (Ljava/util/Collection<+Lorg/apache/commons/configuration2/interpol/Lookup;>;)V
+
+  public boolean deregisterLookup(java.lang.String);
+    descriptor: (Ljava/lang/String;)Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+         4: aload_1
+         5: invokeinterface #36,  2           // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+        10: ifnull        17
+        13: iconst_1
+        14: goto          18
+        17: iconst_0
+        18: ireturn
+      LineNumberTable:
+        line 342: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      19     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0      19     1 prefix   Ljava/lang/String;
+      StackMapTable: number_of_entries = 2
+        frame_type = 17 /* same */
+        frame_type = 64 /* same_locals_1_stack_item */
+          stack = [ int ]
+
+  protected org.apache.commons.configuration2.interpol.Lookup fetchLookupForPrefix(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+    flags: (0x0004) ACC_PROTECTED
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+         4: aload_1
+         5: invokeinterface #37,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+        10: checkcast     #38                 // class org/apache/commons/configuration2/interpol/Lookup
+        13: invokestatic  #39                 // Method nullSafeLookup:(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+        16: areturn
+      LineNumberTable:
+        line 354: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      17     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0      17     1 prefix   Ljava/lang/String;
+
+  public java.util.List<org.apache.commons.configuration2.interpol.Lookup> getDefaultLookups();
+    descriptor: ()Ljava/util/List;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=1, args_size=1
+         0: new           #40                 // class java/util/ArrayList
+         3: dup
+         4: aload_0
+         5: getfield      #9                  // Field defaultLookups:Ljava/util/List;
+         8: invokespecial #41                 // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+        11: areturn
+      LineNumberTable:
+        line 365: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      12     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+    Signature: #148                         // ()Ljava/util/List<Lorg/apache/commons/configuration2/interpol/Lookup;>;
+
+  public java.util.Map<java.lang.String, org.apache.commons.configuration2.interpol.Lookup> getLookups();
+    descriptor: ()Ljava/util/Map;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=1, args_size=1
+         0: new           #42                 // class java/util/HashMap
+         3: dup
+         4: aload_0
+         5: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+         8: invokespecial #43                 // Method java/util/HashMap."<init>":(Ljava/util/Map;)V
+        11: areturn
+      LineNumberTable:
+        line 375: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      12     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+    Signature: #126                         // ()Ljava/util/Map<Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;>;
+
+  public org.apache.commons.configuration2.interpol.ConfigurationInterpolator getParentInterpolator();
+    descriptor: ()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #44                 // Field parentInterpolator:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+         4: areturn
+      LineNumberTable:
+        line 384: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+  public java.lang.Object interpolate(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Ljava/lang/Object;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=4, args_size=2
+         0: aload_1
+         1: instanceof    #48                 // class java/lang/String
+         4: ifeq          48
+         7: aload_1
+         8: checkcast     #48                 // class java/lang/String
+        11: astore_2
+        12: aload_0
+        13: aload_2
+        14: invokespecial #49                 // Method isSingleVariable:(Ljava/lang/String;)Z
+        17: ifeq          39
+        20: aload_0
+        21: aload_2
+        22: invokespecial #50                 // Method resolveSingleVariable:(Ljava/lang/String;)Ljava/lang/Object;
+        25: astore_3
+        26: aload_3
+        27: ifnull        39
+        30: aload_3
+        31: instanceof    #48                 // class java/lang/String
+        34: ifne          39
+        37: aload_3
+        38: areturn
+        39: aload_0
+        40: getfield      #11                 // Field substitutor:Lorg/apache/commons/text/StringSubstitutor;
+        43: aload_2
+        44: invokevirtual #51                 // Method org/apache/commons/text/StringSubstitutor.replace:(Ljava/lang/String;)Ljava/lang/String;
+        47: areturn
+        48: aload_1
+        49: areturn
+      LineNumberTable:
+        line 428: 0
+        line 429: 7
+        line 430: 12
+        line 431: 20
+        line 432: 26
+        line 437: 37
+        line 440: 39
+        line 442: 48
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           26      13     3 resolvedValue   Ljava/lang/Object;
+           12      36     2 strValue   Ljava/lang/String;
+            0      50     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0      50     1 value   Ljava/lang/Object;
+      StackMapTable: number_of_entries = 2
+        frame_type = 252 /* append */
+          offset_delta = 39
+          locals = [ class java/lang/String ]
+        frame_type = 250 /* chop */
+          offset_delta = 8
+
+  public boolean isEnableSubstitutionInVariables();
+    descriptor: ()Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #11                 // Field substitutor:Lorg/apache/commons/text/StringSubstitutor;
+         4: invokevirtual #52                 // Method org/apache/commons/text/StringSubstitutor.isEnableSubstitutionInVariables:()Z
+         7: ireturn
+      LineNumberTable:
+        line 452: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       8     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+  public java.util.function.Function<java.lang.Object, java.lang.String> getStringConverter();
+    descriptor: ()Ljava/util/function/Function;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #3                  // Field stringConverter:Ljava/util/function/Function;
+         4: areturn
+      LineNumberTable:
+        line 459: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+    Signature: #163                         // ()Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+
+  public void setStringConverter(java.util.function.Function<java.lang.Object, java.lang.String>);
+    descriptor: (Ljava/util/function/Function;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: ifnull        9
+         5: aload_1
+         6: goto          12
+         9: getstatic     #2                  // Field org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter.INSTANCE:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter;
+        12: putfield      #3                  // Field stringConverter:Ljava/util/function/Function;
+        15: return
+      LineNumberTable:
+        line 468: 0
+        line 469: 5
+        line 470: 9
+        line 471: 15
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      16     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0      16     1 stringConverter   Ljava/util/function/Function;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      16     1 stringConverter   Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+      StackMapTable: number_of_entries = 2
+        frame_type = 73 /* same_locals_1_stack_item */
+          stack = [ class org/apache/commons/configuration2/interpol/ConfigurationInterpolator ]
+        frame_type = 255 /* full_frame */
+          offset_delta = 2
+          locals = [ class org/apache/commons/configuration2/interpol/ConfigurationInterpolator, class java/util/function/Function ]
+          stack = [ class org/apache/commons/configuration2/interpol/ConfigurationInterpolator, class java/util/function/Function ]
+    Signature: #167                         // (Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;)V
+
+  public java.util.Set<java.lang.String> prefixSet();
+    descriptor: ()Ljava/util/Set;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+         4: invokeinterface #57,  1           // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+         9: invokestatic  #58                 // Method java/util/Collections.unmodifiableSet:(Ljava/util/Set;)Ljava/util/Set;
+        12: areturn
+      LineNumberTable:
+        line 493: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      13     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+    Signature: #171                         // ()Ljava/util/Set<Ljava/lang/String;>;
+
+  public void registerLookup(java.lang.String, org.apache.commons.configuration2.interpol.Lookup);
+    descriptor: (Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=3, args_size=3
+         0: aload_1
+         1: ifnonnull     14
+         4: new           #26                 // class java/lang/IllegalArgumentException
+         7: dup
+         8: ldc           #59                 // String Prefix for lookup object must not be null!
+        10: invokespecial #28                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        13: athrow
+        14: aload_2
+        15: ifnonnull     28
+        18: new           #26                 // class java/lang/IllegalArgumentException
+        21: dup
+        22: ldc           #60                 // String Lookup object must not be null!
+        24: invokespecial #28                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        27: athrow
+        28: aload_0
+        29: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+        32: aload_1
+        33: aload_2
+        34: invokeinterface #61,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+        39: pop
+        40: return
+      LineNumberTable:
+        line 505: 0
+        line 506: 4
+        line 508: 14
+        line 509: 18
+        line 511: 28
+        line 512: 40
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      41     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0      41     1 prefix   Ljava/lang/String;
+            0      41     2 lookup   Lorg/apache/commons/configuration2/interpol/Lookup;
+      StackMapTable: number_of_entries = 2
+        frame_type = 14 /* same */
+        frame_type = 13 /* same */
+
+  public void registerLookups(java.util.Map<java.lang.String, ? extends org.apache.commons.configuration2.interpol.Lookup>);
+    descriptor: (Ljava/util/Map;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_1
+         1: ifnull        14
+         4: aload_0
+         5: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+         8: aload_1
+         9: invokeinterface #62,  2           // InterfaceMethod java/util/Map.putAll:(Ljava/util/Map;)V
+        14: return
+      LineNumberTable:
+        line 523: 0
+        line 524: 4
+        line 526: 14
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      15     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0      15     1 lookups   Ljava/util/Map;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      15     1 lookups   Ljava/util/Map<Ljava/lang/String;+Lorg/apache/commons/configuration2/interpol/Lookup;>;
+      StackMapTable: number_of_entries = 1
+        frame_type = 14 /* same */
+    Signature: #177                         // (Ljava/util/Map<Ljava/lang/String;+Lorg/apache/commons/configuration2/interpol/Lookup;>;)V
+
+  public boolean removeDefaultLookup(org.apache.commons.configuration2.interpol.Lookup);
+    descriptor: (Lorg/apache/commons/configuration2/interpol/Lookup;)Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: getfield      #9                  // Field defaultLookups:Ljava/util/List;
+         4: aload_1
+         5: invokeinterface #63,  2           // InterfaceMethod java/util/List.remove:(Ljava/lang/Object;)Z
+        10: ireturn
+      LineNumberTable:
+        line 535: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      11     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0      11     1 lookup   Lorg/apache/commons/configuration2/interpol/Lookup;
+
+  public java.lang.Object resolve(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/Object;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=3, locals=6, args_size=2
+         0: aload_1
+         1: ifnonnull     6
+         4: aconst_null
+         5: areturn
+         6: aload_1
+         7: bipush        58
+         9: invokevirtual #64                 // Method java/lang/String.indexOf:(I)I
+        12: istore_2
+        13: iload_2
+        14: iflt          55
+        17: aload_1
+        18: iconst_0
+        19: iload_2
+        20: invokevirtual #25                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+        23: astore_3
+        24: aload_1
+        25: iload_2
+        26: iconst_1
+        27: iadd
+        28: invokevirtual #65                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+        31: astore        4
+        33: aload_0
+        34: aload_3
+        35: invokevirtual #66                 // Method fetchLookupForPrefix:(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+        38: aload         4
+        40: invokeinterface #67,  2           // InterfaceMethod org/apache/commons/configuration2/interpol/Lookup.lookup:(Ljava/lang/String;)Ljava/lang/Object;
+        45: astore        5
+        47: aload         5
+        49: ifnull        55
+        52: aload         5
+        54: areturn
+        55: aload_0
+        56: getfield      #9                  // Field defaultLookups:Ljava/util/List;
+        59: invokeinterface #68,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+        64: astore_3
+        65: aload_3
+        66: invokeinterface #69,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+        71: ifeq          106
+        74: aload_3
+        75: invokeinterface #70,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+        80: checkcast     #38                 // class org/apache/commons/configuration2/interpol/Lookup
+        83: astore        4
+        85: aload         4
+        87: aload_1
+        88: invokeinterface #67,  2           // InterfaceMethod org/apache/commons/configuration2/interpol/Lookup.lookup:(Ljava/lang/String;)Ljava/lang/Object;
+        93: astore        5
+        95: aload         5
+        97: ifnull        103
+       100: aload         5
+       102: areturn
+       103: goto          65
+       106: aload_0
+       107: invokevirtual #71                 // Method getParentInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+       110: astore_3
+       111: aload_3
+       112: ifnull        124
+       115: aload_0
+       116: invokevirtual #71                 // Method getParentInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+       119: aload_1
+       120: invokevirtual #72                 // Method resolve:(Ljava/lang/String;)Ljava/lang/Object;
+       123: areturn
+       124: aconst_null
+       125: areturn
+      LineNumberTable:
+        line 549: 0
+        line 550: 4
+        line 553: 6
+        line 554: 13
+        line 555: 17
+        line 556: 24
+        line 557: 33
+        line 558: 47
+        line 559: 52
+        line 563: 55
+        line 564: 85
+        line 565: 95
+        line 566: 100
+        line 568: 103
+        line 570: 106
+        line 571: 111
+        line 572: 115
+        line 574: 124
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           24      31     3 prefix   Ljava/lang/String;
+           33      22     4  name   Ljava/lang/String;
+           47       8     5 value   Ljava/lang/Object;
+           95       8     5 value   Ljava/lang/Object;
+           85      18     4 lookup   Lorg/apache/commons/configuration2/interpol/Lookup;
+            0     126     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0     126     1   var   Ljava/lang/String;
+           13     113     2 prefixPos   I
+          111      15     3 parent   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+      StackMapTable: number_of_entries = 6
+        frame_type = 6 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 48
+          locals = [ int ]
+        frame_type = 252 /* append */
+          offset_delta = 9
+          locals = [ class java/util/Iterator ]
+        frame_type = 37 /* same */
+        frame_type = 250 /* chop */
+          offset_delta = 2
+        frame_type = 252 /* append */
+          offset_delta = 17
+          locals = [ class org/apache/commons/configuration2/interpol/ConfigurationInterpolator ]
+
+  public void setEnableSubstitutionInVariables(boolean);
+    descriptor: (Z)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: getfield      #11                 // Field substitutor:Lorg/apache/commons/text/StringSubstitutor;
+         4: iload_1
+         5: invokevirtual #74                 // Method org/apache/commons/text/StringSubstitutor.setEnableSubstitutionInVariables:(Z)Lorg/apache/commons/text/StringSubstitutor;
+         8: pop
+         9: return
+      LineNumberTable:
+        line 594: 0
+        line 595: 9
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0      10     1     f   Z
+
+  public void setParentInterpolator(org.apache.commons.configuration2.interpol.ConfigurationInterpolator);
+    descriptor: (Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #44                 // Field parentInterpolator:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+         5: return
+      LineNumberTable:
+        line 604: 0
+        line 605: 5
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+            0       6     1 parentInterpolator   Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: ldc           #53                 // String ${
+         2: invokevirtual #23                 // Method java/lang/String.length:()I
+         5: putstatic     #22                 // Field VAR_START_LENGTH:I
+         8: ldc           #55                 // String }
+        10: invokevirtual #23                 // Method java/lang/String.length:()I
+        13: putstatic     #24                 // Field VAR_END_LENGTH:I
+        16: return
+      LineNumberTable:
+        line 110: 0
+        line 116: 8
+}
+SourceFile: "ConfigurationInterpolator.java"
+InnerClasses:
+  static final #81= #80 of #12;           // DefaultPrefixLookupsHolder=class org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder of class org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+  public static final #337= #336 of #339; // Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
+BootstrapMethods:
+  0: #246 REF_invokeStatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #247 (Ljava/lang/String;)Ljava/lang/String;
+      #248 REF_invokeSpecial org/apache/commons/configuration2/interpol/ConfigurationInterpolator.lambda$initSubstitutor$0:(Ljava/lang/String;)Ljava/lang/String;
+      #247 (Ljava/lang/String;)Ljava/lang/String;

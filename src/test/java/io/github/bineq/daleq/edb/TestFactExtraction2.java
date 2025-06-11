@@ -116,8 +116,8 @@ public class TestFactExtraction2 extends AbstractFactExtractionTest {
         assertTrue(jumpFacts.contains(instructionFacts.get(8)));
 
         // inspect src/test/resources/conditional/mypck/ClassWithConditionals.javap for oracle
-        containsJump(instructionFacts.get(2),"L2");
-        containsJump(instructionFacts.get(8),"L4");
+        containsJump(instructionFacts.get(2),"L0");
+        containsJump(instructionFacts.get(8),"L1");
 
     }
 

@@ -1,0 +1,945 @@
+
+// CLASS FACTS
+
+IDB_VERSION	R_REMOVE_BYTECODE_VERSION[F120497]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	0
+IDB_SUPERCLASS	R_SUPERCLASS[F120495]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	java/lang/Object
+IDB_ACCESS	R_ACCESS[F120498]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	33
+IDB_CLASS_SIGNATURE	R_CLASS_SIGNATURE[F120496]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	null
+IDB_IS_OPEN	R_IS_OPEN[F120498]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120498]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+IDB_IS_SUPER	R_IS_SUPER[F120498]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+IDB_IS_SYNCHRONIZED	R_IS_SYNCHRONIZED[F120498]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+IDB_IS_TRANSITIVE	R_IS_TRANSITIVE[F120498]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+
+// LIST OF FIELDS
+
+IDB_FIELD	R_FIELD[F120499]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::DEFAULT_PREFIX_LOOKUPS_PROPERTY(Ljava/lang/String;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	DEFAULT_PREFIX_LOOKUPS_PROPERTY	Ljava/lang/String;
+IDB_FIELD	R_FIELD[F120502]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::PREFIX_SEPARATOR(C	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	PREFIX_SEPARATOR	C
+IDB_FIELD	R_FIELD[F120505]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END(Ljava/lang/String;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	VAR_END	Ljava/lang/String;
+IDB_FIELD	R_FIELD[F120508]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END_LENGTH(I	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	VAR_END_LENGTH	I
+IDB_FIELD	R_FIELD[F120511]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START(Ljava/lang/String;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	VAR_START	Ljava/lang/String;
+IDB_FIELD	R_FIELD[F120514]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START_LENGTH(I	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	VAR_START_LENGTH	I
+IDB_FIELD	R_FIELD[F120517]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::defaultLookups(Ljava/util/List;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	defaultLookups	Ljava/util/List;
+IDB_FIELD	R_FIELD[F120520]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::parentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	parentInterpolator	Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_FIELD	R_FIELD[F120523]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixLookups(Ljava/util/Map;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	prefixLookups	Ljava/util/Map;
+IDB_FIELD	R_FIELD[F120526]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::stringConverter(Ljava/util/function/Function;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	stringConverter	Ljava/util/function/Function;
+IDB_FIELD	R_FIELD[F120529]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::substitutor(Lorg/apache/commons/text/StringSubstitutor;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	substitutor	Lorg/apache/commons/text/StringSubstitutor;
+
+// LIST OF REMOVED FIELDS
+
+
+// FIELD DETAILS
+
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::DEFAULT_PREFIX_LOOKUPS_PROPERTY(Ljava/lang/String;
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120500]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::DEFAULT_PREFIX_LOOKUPS_PROPERTY(Ljava/lang/String;	null
+IDB_ACCESS	R_ACCESS[F120501]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::DEFAULT_PREFIX_LOOKUPS_PROPERTY(Ljava/lang/String;	25
+IDB_IS_FINAL	R_IS_FINAL[F120501]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::DEFAULT_PREFIX_LOOKUPS_PROPERTY(Ljava/lang/String;
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120501]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::DEFAULT_PREFIX_LOOKUPS_PROPERTY(Ljava/lang/String;
+IDB_IS_STATIC	R_IS_STATIC[F120501]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::DEFAULT_PREFIX_LOOKUPS_PROPERTY(Ljava/lang/String;
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::PREFIX_SEPARATOR(C
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120503]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::PREFIX_SEPARATOR(C	null
+IDB_ACCESS	R_ACCESS[F120504]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::PREFIX_SEPARATOR(C	26
+IDB_IS_FINAL	R_IS_FINAL[F120504]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::PREFIX_SEPARATOR(C
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120504]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::PREFIX_SEPARATOR(C
+IDB_IS_STATIC	R_IS_STATIC[F120504]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::PREFIX_SEPARATOR(C
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END(Ljava/lang/String;
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120506]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END(Ljava/lang/String;	null
+IDB_ACCESS	R_ACCESS[F120507]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END(Ljava/lang/String;	26
+IDB_IS_FINAL	R_IS_FINAL[F120507]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END(Ljava/lang/String;
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120507]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END(Ljava/lang/String;
+IDB_IS_STATIC	R_IS_STATIC[F120507]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END(Ljava/lang/String;
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END_LENGTH(I
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120509]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END_LENGTH(I	null
+IDB_ACCESS	R_ACCESS[F120510]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END_LENGTH(I	26
+IDB_IS_FINAL	R_IS_FINAL[F120510]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END_LENGTH(I
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120510]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END_LENGTH(I
+IDB_IS_STATIC	R_IS_STATIC[F120510]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_END_LENGTH(I
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START(Ljava/lang/String;
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120512]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START(Ljava/lang/String;	null
+IDB_ACCESS	R_ACCESS[F120513]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START(Ljava/lang/String;	26
+IDB_IS_FINAL	R_IS_FINAL[F120513]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START(Ljava/lang/String;
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120513]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START(Ljava/lang/String;
+IDB_IS_STATIC	R_IS_STATIC[F120513]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START(Ljava/lang/String;
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START_LENGTH(I
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120515]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START_LENGTH(I	null
+IDB_ACCESS	R_ACCESS[F120516]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START_LENGTH(I	26
+IDB_IS_FINAL	R_IS_FINAL[F120516]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START_LENGTH(I
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120516]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START_LENGTH(I
+IDB_IS_STATIC	R_IS_STATIC[F120516]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::VAR_START_LENGTH(I
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::defaultLookups(Ljava/util/List;
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120518]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::defaultLookups(Ljava/util/List;	Ljava/util/List<Lorg/apache/commons/configuration2/interpol/Lookup;>;
+IDB_ACCESS	R_ACCESS[F120519]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::defaultLookups(Ljava/util/List;	18
+IDB_IS_FINAL	R_IS_FINAL[F120519]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::defaultLookups(Ljava/util/List;
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120519]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::defaultLookups(Ljava/util/List;
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::parentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120521]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::parentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	null
+IDB_ACCESS	R_ACCESS[F120522]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::parentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	66
+IDB_IS_BRIDGE	R_IS_BRIDGE[F120522]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::parentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120522]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::parentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_IS_STATIC_PHASE	R_IS_STATIC_PHASE[F120522]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::parentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_IS_VOLATILE	R_IS_VOLATILE[F120522]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::parentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixLookups(Ljava/util/Map;
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120524]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixLookups(Ljava/util/Map;	Ljava/util/Map<Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;>;
+IDB_ACCESS	R_ACCESS[F120525]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixLookups(Ljava/util/Map;	18
+IDB_IS_FINAL	R_IS_FINAL[F120525]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixLookups(Ljava/util/Map;
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120525]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixLookups(Ljava/util/Map;
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::stringConverter(Ljava/util/function/Function;
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120527]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::stringConverter(Ljava/util/function/Function;	Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+IDB_ACCESS	R_ACCESS[F120528]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::stringConverter(Ljava/util/function/Function;	66
+IDB_IS_BRIDGE	R_IS_BRIDGE[F120528]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::stringConverter(Ljava/util/function/Function;
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120528]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::stringConverter(Ljava/util/function/Function;
+IDB_IS_STATIC_PHASE	R_IS_STATIC_PHASE[F120528]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::stringConverter(Ljava/util/function/Function;
+IDB_IS_VOLATILE	R_IS_VOLATILE[F120528]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::stringConverter(Ljava/util/function/Function;
+
+// details for field org/apache/commons/configuration2/interpol/ConfigurationInterpolator::substitutor(Lorg/apache/commons/text/StringSubstitutor;
+
+IDB_FIELD_SIGNATURE	R_FIELD_SIGNATURE[F120530]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::substitutor(Lorg/apache/commons/text/StringSubstitutor;	null
+IDB_ACCESS	R_ACCESS[F120531]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::substitutor(Lorg/apache/commons/text/StringSubstitutor;	18
+IDB_IS_FINAL	R_IS_FINAL[F120531]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::substitutor(Lorg/apache/commons/text/StringSubstitutor;
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120531]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::substitutor(Lorg/apache/commons/text/StringSubstitutor;
+
+// LIST OF METHODS
+
+IDB_METHOD	R_METHOD[F120532]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	<clinit>	()V
+IDB_METHOD	R_METHOD[F120549]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	<init>	()V
+IDB_METHOD	R_METHOD[F120592]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	addDefaultLookup	(Lorg/apache/commons/configuration2/interpol/Lookup;)V
+IDB_METHOD	R_METHOD[F120607]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	addDefaultLookups	(Ljava/util/Collection;)V
+IDB_METHOD	R_METHOD[F120627]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	createInterpolator	(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_METHOD	R_METHOD[F120674]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	deregisterLookup	(Ljava/lang/String;)Z
+IDB_METHOD	R_METHOD[F120697]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	extractVariableName	(Ljava/lang/String;)Ljava/lang/String;
+IDB_METHOD	R_METHOD[F120716]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	fetchLookupForPrefix	(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+IDB_METHOD	R_METHOD[F120733]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	fromSpecification	(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_METHOD	R_METHOD[F120771]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	getDefaultLookups	()Ljava/util/List;
+IDB_METHOD	R_METHOD[F120786]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	getDefaultPrefixLookups	()Ljava/util/Map;
+IDB_METHOD	R_METHOD[F120795]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	getLookups	()Ljava/util/Map;
+IDB_METHOD	R_METHOD[F120810]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	getParentInterpolator	()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_METHOD	R_METHOD[F120819]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	getStringConverter	()Ljava/util/function/Function;
+IDB_METHOD	R_METHOD[F120828]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	initSubstitutor	()Lorg/apache/commons/text/StringSubstitutor;
+IDB_METHOD	R_METHOD[F120843]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	interpolate	(Ljava/lang/Object;)Ljava/lang/Object;
+IDB_METHOD	R_METHOD[F120904]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	isEnableSubstitutionInVariables	()Z
+IDB_METHOD	R_METHOD[F120915]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	isSingleVariable	(Ljava/lang/String;)Z
+IDB_METHOD	R_METHOD[F120954]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	lambda$initSubstitutor$0	(Ljava/lang/String;)Ljava/lang/String;
+IDB_METHOD	R_METHOD[F120987]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	nullSafeLookup	(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+IDB_METHOD	R_METHOD[F121003]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	prefixSet	()Ljava/util/Set;
+IDB_METHOD	R_METHOD[F121016]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	registerLookup	(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V
+IDB_METHOD	R_METHOD[F121063]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	registerLookups	(Ljava/util/Map;)V
+IDB_METHOD	R_METHOD[F121081]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	removeDefaultLookup	(Lorg/apache/commons/configuration2/interpol/Lookup;)Z
+IDB_METHOD	R_METHOD[F121094]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	resolve	(Ljava/lang/String;)Ljava/lang/Object;
+IDB_METHOD	R_METHOD[F121229]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	resolveSingleVariable	(Ljava/lang/String;)Ljava/lang/Object;
+IDB_METHOD	R_METHOD[F121242]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	setEnableSubstitutionInVariables	(Z)V
+IDB_METHOD	R_METHOD[F121257]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	setParentInterpolator	(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+IDB_METHOD	R_METHOD[F121268]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	setStringConverter	(Ljava/util/function/Function;)V
+
+// LIST OF REMOVED METHODS
+
+
+// METHODS DETAILS
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120533]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V	null
+IDB_ACCESS	R_ACCESS[F120534]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V	8
+IDB_IS_STATIC	R_IS_STATIC[F120534]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V
+
+IDB_LDC	R_LDC[F120542]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V	100	${
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120543]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V	200	java/lang/String	length	()I	false
+IDB_PUTSTATIC	R_PUTSTATIC[F120544]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V	300	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	VAR_START_LENGTH	I
+IDB_LDC	R_LDC[F120545]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V	400	}
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120546]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V	500	java/lang/String	length	()I	false
+IDB_PUTSTATIC	R_PUTSTATIC[F120547]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V	600	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	VAR_END_LENGTH	I
+IDB_RETURN	R_RETURN[F120548]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V	700
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<clinit>()V
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120550]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	null
+IDB_ACCESS	R_ACCESS[F120551]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120551]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V
+
+IDB_ALOAD	R_ALOAD[F120572]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	100	0
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120573]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	200	java/lang/Object	<init>	()V	false
+IDB_ALOAD	R_ALOAD[F120574]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	300	0
+IDB_GETSTATIC	R_GETSTATIC[F120575]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	400	org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter	INSTANCE	Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter;
+IDB_PUTFIELD	R_PUTFIELD[F120576]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	500	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	stringConverter	Ljava/util/function/Function;
+IDB_ALOAD	R_ALOAD[F120577]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	600	0
+IDB_NEW	R_NEW[F120578]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	700	java/util/concurrent/ConcurrentHashMap
+IDB_DUP	R_DUP[F120579]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	800
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120580]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	900	java/util/concurrent/ConcurrentHashMap	<init>	()V	false
+IDB_PUTFIELD	R_PUTFIELD[F120581]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1000	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	prefixLookups	Ljava/util/Map;
+IDB_ALOAD	R_ALOAD[F120582]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1100	0
+IDB_NEW	R_NEW[F120583]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1200	java/util/concurrent/CopyOnWriteArrayList
+IDB_DUP	R_DUP[F120584]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1300
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120585]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1400	java/util/concurrent/CopyOnWriteArrayList	<init>	()V	false
+IDB_PUTFIELD	R_PUTFIELD[F120586]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1500	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	defaultLookups	Ljava/util/List;
+IDB_ALOAD	R_ALOAD[F120587]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1600	0
+IDB_ALOAD	R_ALOAD[F120588]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1700	0
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120589]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1800	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	initSubstitutor	()Lorg/apache/commons/text/StringSubstitutor;	false
+IDB_PUTFIELD	R_PUTFIELD[F120590]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	1900	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	substitutor	Lorg/apache/commons/text/StringSubstitutor;
+IDB_RETURN	R_RETURN[F120591]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V	2000
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::<init>()V
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120593]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V	null
+IDB_ACCESS	R_ACCESS[F120594]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120594]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V
+
+IDB_ALOAD	R_ALOAD[F120601]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V	100	0
+IDB_GETFIELD	R_GETFIELD[F120602]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	defaultLookups	Ljava/util/List;
+IDB_ALOAD	R_ALOAD[F120603]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V	300	1
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F120604]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V	400	java/util/List	add	(Ljava/lang/Object;)Z	false
+IDB_POP	R_POP[F120605]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V	500
+IDB_RETURN	R_RETURN[F120606]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V	600
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)V
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120608]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	(Ljava/util/Collection<+Lorg/apache/commons/configuration2/interpol/Lookup;>;)V
+IDB_ACCESS	R_ACCESS[F120609]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120609]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V
+
+IDB_ALOAD	R_ALOAD[F120618]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	100	1
+IDB_IFNULL	R_IFNULL[F120619]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	200	L2
+IDB_ALOAD	R_ALOAD[F120620]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	300	0
+IDB_GETFIELD	R_GETFIELD[F120621]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	400	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	defaultLookups	Ljava/util/List;
+IDB_ALOAD	R_ALOAD[F120622]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	500	1
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F120623]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	600	java/util/List	addAll	(Ljava/util/Collection;)Z	false
+IDB_POP	R_POP[F120624]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	700
+IDB_LABEL	R_LABEL[F120625]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	800	L2
+IDB_RETURN	R_RETURN[F120626]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V	900
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::addDefaultLookups(Ljava/util/Collection;)V
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120628]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	null
+IDB_ACCESS	R_ACCESS[F120629]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	10
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120629]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_IS_STATIC	R_IS_STATIC[F120629]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+IDB_NEW	R_NEW[F120652]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	100	org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+IDB_DUP	R_DUP[F120653]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	200
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120654]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	300	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	<init>	()V	false
+IDB_ASTORE	R_ASTORE[F120655]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	400	1
+IDB_ALOAD	R_ALOAD[F120656]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	500	1
+IDB_ALOAD	R_ALOAD[F120657]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	600	0
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120658]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	700	org/apache/commons/configuration2/interpol/InterpolatorSpecification	getDefaultLookups	()Ljava/util/Collection;	false
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120659]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	800	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	addDefaultLookups	(Ljava/util/Collection;)V	false
+IDB_ALOAD	R_ALOAD[F120660]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	900	1
+IDB_ALOAD	R_ALOAD[F120661]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1000	0
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120662]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1100	org/apache/commons/configuration2/interpol/InterpolatorSpecification	getPrefixLookups	()Ljava/util/Map;	false
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120663]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	registerLookups	(Ljava/util/Map;)V	false
+IDB_ALOAD	R_ALOAD[F120664]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1300	1
+IDB_ALOAD	R_ALOAD[F120665]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1400	0
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120666]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1500	org/apache/commons/configuration2/interpol/InterpolatorSpecification	getParentInterpolator	()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	false
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120667]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1600	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	setParentInterpolator	(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V	false
+IDB_ALOAD	R_ALOAD[F120668]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1700	1
+IDB_ALOAD	R_ALOAD[F120669]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1800	0
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120670]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1900	org/apache/commons/configuration2/interpol/InterpolatorSpecification	getStringConverter	()Ljava/util/function/Function;	false
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120671]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	2000	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	setStringConverter	(Ljava/util/function/Function;)V	false
+IDB_ALOAD	R_ALOAD[F120672]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	2100	1
+IDB_ARETURN	R_ARETURN[F120673]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	2200
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::createInterpolator(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120675]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	null
+IDB_ACCESS	R_ACCESS[F120676]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120676]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z
+
+IDB_ALOAD	R_ALOAD[F120686]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	100	0
+IDB_GETFIELD	R_GETFIELD[F120687]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	prefixLookups	Ljava/util/Map;
+IDB_ALOAD	R_ALOAD[F120688]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	300	1
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F120689]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	400	java/util/Map	remove	(Ljava/lang/Object;)Ljava/lang/Object;	false
+IDB_IFNULL	R_IFNULL[F120690]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	500	L1
+IDB_ICONST_1	R_ICONST_1[F120691]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	600
+IDB_GOTO	R_GOTO[F120692]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	700	L2
+IDB_LABEL	R_LABEL[F120693]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	800	L1
+IDB_ICONST_0	R_ICONST_0[F120694]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	900
+IDB_LABEL	R_LABEL[F120695]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	1000	L2
+IDB_IRETURN	R_IRETURN[F120696]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z	1100
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::deregisterLookup(Ljava/lang/String;)Z
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120698]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	null
+IDB_ACCESS	R_ACCESS[F120699]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	10
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120699]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;
+IDB_IS_STATIC	R_IS_STATIC[F120699]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;
+
+IDB_ALOAD	R_ALOAD[F120708]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	100	0
+IDB_GETSTATIC	R_GETSTATIC[F120709]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	VAR_START_LENGTH	I
+IDB_ALOAD	R_ALOAD[F120710]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	300	0
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120711]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	400	java/lang/String	length	()I	false
+IDB_GETSTATIC	R_GETSTATIC[F120712]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	500	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	VAR_END_LENGTH	I
+IDB_ISUB	R_ISUB[F120713]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	600
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120714]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	700	java/lang/String	substring	(II)Ljava/lang/String;	false
+IDB_ARETURN	R_ARETURN[F120715]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;	800
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::extractVariableName(Ljava/lang/String;)Ljava/lang/String;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120717]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	null
+IDB_ACCESS	R_ACCESS[F120718]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	4
+IDB_IS_PROTECTED	R_IS_PROTECTED[F120718]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+
+IDB_ALOAD	R_ALOAD[F120726]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	100	0
+IDB_GETFIELD	R_GETFIELD[F120727]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	prefixLookups	Ljava/util/Map;
+IDB_ALOAD	R_ALOAD[F120728]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	300	1
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F120729]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	400	java/util/Map	get	(Ljava/lang/Object;)Ljava/lang/Object;	false
+IDB_CHECKCAST	R_CHECKCAST[F120730]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	500	org/apache/commons/configuration2/interpol/Lookup
+IDB_INVOKESTATIC	R_INVOKESTATIC[F120731]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	600	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	nullSafeLookup	(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	false
+IDB_ARETURN	R_ARETURN[F120732]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	700
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fetchLookupForPrefix(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120734]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	null
+IDB_ACCESS	R_ACCESS[F120735]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	9
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120735]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_IS_STATIC	R_IS_STATIC[F120735]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+IDB_ALOAD	R_ALOAD[F120752]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	100	0
+IDB_IFNONNULL	R_IFNONNULL[F120753]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	200	L2
+IDB_NEW	R_NEW[F120754]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	300	java/lang/IllegalArgumentException
+IDB_DUP	R_DUP[F120755]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	400
+IDB_LDC	R_LDC[F120756]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	500	InterpolatorSpecification must not be null!
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120757]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	600	java/lang/IllegalArgumentException	<init>	(Ljava/lang/String;)V	false
+IDB_ATHROW	R_ATHROW[F120758]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	700
+IDB_LABEL	R_LABEL[F120759]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	800	L2
+IDB_ALOAD	R_ALOAD[F120760]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	900	0
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120761]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1000	org/apache/commons/configuration2/interpol/InterpolatorSpecification	getInterpolator	()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	false
+IDB_IFNULL	R_IFNULL[F120762]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1100	L3
+IDB_ALOAD	R_ALOAD[F120763]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1200	0
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120764]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1300	org/apache/commons/configuration2/interpol/InterpolatorSpecification	getInterpolator	()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	false
+IDB_GOTO	R_GOTO[F120765]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1400	L4
+IDB_LABEL	R_LABEL[F120766]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1500	L3
+IDB_ALOAD	R_ALOAD[F120767]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1600	0
+IDB_INVOKESTATIC	R_INVOKESTATIC[F120768]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1700	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	createInterpolator	(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	false
+IDB_LABEL	R_LABEL[F120769]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1800	L4
+IDB_ARETURN	R_ARETURN[F120770]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1900
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::fromSpecification(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120772]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;	()Ljava/util/List<Lorg/apache/commons/configuration2/interpol/Lookup;>;
+IDB_ACCESS	R_ACCESS[F120773]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120773]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;
+
+IDB_NEW	R_NEW[F120780]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;	100	java/util/ArrayList
+IDB_DUP	R_DUP[F120781]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;	200
+IDB_ALOAD	R_ALOAD[F120782]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;	300	0
+IDB_GETFIELD	R_GETFIELD[F120783]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;	400	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	defaultLookups	Ljava/util/List;
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120784]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;	500	java/util/ArrayList	<init>	(Ljava/util/Collection;)V	false
+IDB_ARETURN	R_ARETURN[F120785]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;	600
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultLookups()Ljava/util/List;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120787]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;	()Ljava/util/Map<Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;>;
+IDB_ACCESS	R_ACCESS[F120788]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;	9
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120788]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;
+IDB_IS_STATIC	R_IS_STATIC[F120788]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;
+
+IDB_GETSTATIC	R_GETSTATIC[F120792]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;	100	org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder	INSTANCE	Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder;
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120793]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder	getDefaultPrefixLookups	()Ljava/util/Map;	false
+IDB_ARETURN	R_ARETURN[F120794]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;	300
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getDefaultPrefixLookups()Ljava/util/Map;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120796]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;	()Ljava/util/Map<Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;>;
+IDB_ACCESS	R_ACCESS[F120797]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120797]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;
+
+IDB_NEW	R_NEW[F120804]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;	100	java/util/HashMap
+IDB_DUP	R_DUP[F120805]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;	200
+IDB_ALOAD	R_ALOAD[F120806]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;	300	0
+IDB_GETFIELD	R_GETFIELD[F120807]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;	400	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	prefixLookups	Ljava/util/Map;
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120808]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;	500	java/util/HashMap	<init>	(Ljava/util/Map;)V	false
+IDB_ARETURN	R_ARETURN[F120809]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;	600
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getLookups()Ljava/util/Map;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120811]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	null
+IDB_ACCESS	R_ACCESS[F120812]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120812]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+IDB_ALOAD	R_ALOAD[F120816]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	100	0
+IDB_GETFIELD	R_GETFIELD[F120817]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	parentInterpolator	Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_ARETURN	R_ARETURN[F120818]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	300
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getParentInterpolator()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120820]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;	()Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+IDB_ACCESS	R_ACCESS[F120821]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120821]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;
+
+IDB_ALOAD	R_ALOAD[F120825]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;	100	0
+IDB_GETFIELD	R_GETFIELD[F120826]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	stringConverter	Ljava/util/function/Function;
+IDB_ARETURN	R_ARETURN[F120827]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;	300
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::getStringConverter()Ljava/util/function/Function;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120829]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;	null
+IDB_ACCESS	R_ACCESS[F120830]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;	2
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120830]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;
+
+IDB_NEW	R_NEW[F120837]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;	100	org/apache/commons/text/StringSubstitutor
+IDB_DUP	R_DUP[F120838]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;	200
+IDB_ALOAD	R_ALOAD[F120839]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;	300	0
+IDB_INVOKEDYNAMIC	R_INVOKEDYNAMIC[F120840]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;	400	lookup	(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)Lorg/apache/commons/text/lookup/StringLookup;	(Ljava/lang/String;)Ljava/lang/String;,org/apache/commons/configuration2/interpol/ConfigurationInterpolator.lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String; (7),(Ljava/lang/String;)Ljava/lang/String;	java/lang/invoke/LambdaMetafactory	metafactory	(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;	6	false
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120841]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;	500	org/apache/commons/text/StringSubstitutor	<init>	(Lorg/apache/commons/text/lookup/StringLookup;)V	false
+IDB_ARETURN	R_ARETURN[F120842]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;	600
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::initSubstitutor()Lorg/apache/commons/text/StringSubstitutor;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120844]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	null
+IDB_ACCESS	R_ACCESS[F120845]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120845]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;
+
+IDB_ALOAD	R_ALOAD[F120874]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	100	1
+IDB_INSTANCEOF	R_INSTANCEOF[F120875]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	200	java/lang/String
+IDB_IFEQ	R_IFEQ[F120876]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	300	L7
+IDB_ALOAD	R_ALOAD[F120877]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	400	1
+IDB_CHECKCAST	R_CHECKCAST[F120878]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	500	java/lang/String
+IDB_ASTORE	R_ASTORE[F120879]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	600	2
+IDB_ALOAD	R_ALOAD[F120880]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	700	0
+IDB_ALOAD	R_ALOAD[F120881]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	800	2
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120882]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	900	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	isSingleVariable	(Ljava/lang/String;)Z	false
+IDB_IFEQ	R_IFEQ[F120883]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1000	L6
+IDB_ALOAD	R_ALOAD[F120884]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1100	0
+IDB_ALOAD	R_ALOAD[F120885]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1200	2
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F120886]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1300	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	resolveSingleVariable	(Ljava/lang/String;)Ljava/lang/Object;	false
+IDB_ASTORE	R_ASTORE[F120887]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1400	3
+IDB_ALOAD	R_ALOAD[F120888]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1500	3
+IDB_IFNULL	R_IFNULL[F120889]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1600	L6
+IDB_ALOAD	R_ALOAD[F120890]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1700	3
+IDB_INSTANCEOF	R_INSTANCEOF[F120891]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1800	java/lang/String
+IDB_IFNE	R_IFNE[F120892]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	1900	L6
+IDB_ALOAD	R_ALOAD[F120893]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	2000	3
+IDB_ARETURN	R_ARETURN[F120894]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	2100
+IDB_LABEL	R_LABEL[F120895]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	2200	L6
+IDB_ALOAD	R_ALOAD[F120896]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	2300	0
+IDB_GETFIELD	R_GETFIELD[F120897]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	2400	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	substitutor	Lorg/apache/commons/text/StringSubstitutor;
+IDB_ALOAD	R_ALOAD[F120898]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	2500	2
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120899]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	2600	org/apache/commons/text/StringSubstitutor	replace	(Ljava/lang/String;)Ljava/lang/String;	false
+IDB_ARETURN	R_ARETURN[F120900]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	2700
+IDB_LABEL	R_LABEL[F120901]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	2800	L7
+IDB_ALOAD	R_ALOAD[F120902]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	2900	1
+IDB_ARETURN	R_ARETURN[F120903]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;	3000
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::interpolate(Ljava/lang/Object;)Ljava/lang/Object;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120905]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z	null
+IDB_ACCESS	R_ACCESS[F120906]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120906]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z
+
+IDB_ALOAD	R_ALOAD[F120911]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z	100	0
+IDB_GETFIELD	R_GETFIELD[F120912]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	substitutor	Lorg/apache/commons/text/StringSubstitutor;
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120913]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z	300	org/apache/commons/text/StringSubstitutor	isEnableSubstitutionInVariables	()Z	false
+IDB_IRETURN	R_IRETURN[F120914]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z	400
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isEnableSubstitutionInVariables()Z
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120916]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	null
+IDB_ACCESS	R_ACCESS[F120917]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	2
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120917]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z
+
+IDB_ALOAD	R_ALOAD[F120935]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	100	1
+IDB_LDC	R_LDC[F120936]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	200	${
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120937]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	300	java/lang/String	startsWith	(Ljava/lang/String;)Z	false
+IDB_IFEQ	R_IFEQ[F120938]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	400	L2
+IDB_ALOAD	R_ALOAD[F120939]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	500	1
+IDB_LDC	R_LDC[F120940]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	600	}
+IDB_GETSTATIC	R_GETSTATIC[F120941]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	700	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	VAR_START_LENGTH	I
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120942]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	800	java/lang/String	indexOf	(Ljava/lang/String;I)I	false
+IDB_ALOAD	R_ALOAD[F120943]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	900	1
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120944]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	1000	java/lang/String	length	()I	false
+IDB_GETSTATIC	R_GETSTATIC[F120945]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	1100	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	VAR_END_LENGTH	I
+IDB_ISUB	R_ISUB[F120946]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	1200
+IDB_IF_ICMPNE	R_IF_ICMPNE[F120947]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	1300	L2
+IDB_ICONST_1	R_ICONST_1[F120948]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	1400
+IDB_GOTO	R_GOTO[F120949]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	1500	L3
+IDB_LABEL	R_LABEL[F120950]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	1600	L2
+IDB_ICONST_0	R_ICONST_0[F120951]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	1700
+IDB_LABEL	R_LABEL[F120952]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	1800	L3
+IDB_IRETURN	R_IRETURN[F120953]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z	1900
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::isSingleVariable(Ljava/lang/String;)Z
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120955]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	null
+IDB_ACCESS	R_ACCESS[F120956]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	4098
+IDB_IS_PRIVATE	R_IS_PRIVATE[F120956]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;
+IDB_IS_SYNTHETIC	R_IS_SYNTHETIC[F120956]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;
+
+IDB_ALOAD	R_ALOAD[F120971]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	100	0
+IDB_ALOAD	R_ALOAD[F120972]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	200	1
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F120973]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	300	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	resolve	(Ljava/lang/String;)Ljava/lang/Object;	false
+IDB_ASTORE	R_ASTORE[F120974]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	400	2
+IDB_ALOAD	R_ALOAD[F120975]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	500	2
+IDB_IFNULL	R_IFNULL[F120976]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	600	L3
+IDB_ALOAD	R_ALOAD[F120977]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	700	0
+IDB_GETFIELD	R_GETFIELD[F120978]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	800	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	stringConverter	Ljava/util/function/Function;
+IDB_ALOAD	R_ALOAD[F120979]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	900	2
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F120980]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	1000	java/util/function/Function	apply	(Ljava/lang/Object;)Ljava/lang/Object;	false
+IDB_CHECKCAST	R_CHECKCAST[F120981]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	1100	java/lang/String
+IDB_GOTO	R_GOTO[F120982]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	1200	L4
+IDB_LABEL	R_LABEL[F120983]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	1300	L3
+IDB_ACONST_NULL	R_ACONST_NULL[F120984]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	1400
+IDB_LABEL	R_LABEL[F120985]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	1500	L4
+IDB_ARETURN	R_ARETURN[F120986]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;	1600
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::lambda$initSubstitutor$0(Ljava/lang/String;)Ljava/lang/String;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F120988]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	null
+IDB_ACCESS	R_ACCESS[F120989]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	9
+IDB_IS_PUBLIC	R_IS_PUBLIC[F120989]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+IDB_IS_STATIC	R_IS_STATIC[F120989]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+
+IDB_ALOAD	R_ALOAD[F120996]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	100	0
+IDB_IFNONNULL	R_IFNONNULL[F120997]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	200	L2
+IDB_GETSTATIC	R_GETSTATIC[F120998]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	300	org/apache/commons/configuration2/interpol/DummyLookup	INSTANCE	Lorg/apache/commons/configuration2/interpol/DummyLookup;
+IDB_ASTORE	R_ASTORE[F120999]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	400	0
+IDB_LABEL	R_LABEL[F121000]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	500	L2
+IDB_ALOAD	R_ALOAD[F121001]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	600	0
+IDB_ARETURN	R_ARETURN[F121002]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;	700
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::nullSafeLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F121004]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;	()Ljava/util/Set<Ljava/lang/String;>;
+IDB_ACCESS	R_ACCESS[F121005]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F121005]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;
+
+IDB_ALOAD	R_ALOAD[F121011]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;	100	0
+IDB_GETFIELD	R_GETFIELD[F121012]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	prefixLookups	Ljava/util/Map;
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F121013]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;	300	java/util/Map	keySet	()Ljava/util/Set;	false
+IDB_INVOKESTATIC	R_INVOKESTATIC[F121014]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;	400	java/util/Collections	unmodifiableSet	(Ljava/util/Set;)Ljava/util/Set;	false
+IDB_ARETURN	R_ARETURN[F121015]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;	500
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::prefixSet()Ljava/util/Set;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F121017]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	null
+IDB_ACCESS	R_ACCESS[F121018]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F121018]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V
+
+IDB_ALOAD	R_ALOAD[F121040]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	100	1
+IDB_IFNONNULL	R_IFNONNULL[F121041]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	200	L2
+IDB_NEW	R_NEW[F121042]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	300	java/lang/IllegalArgumentException
+IDB_DUP	R_DUP[F121043]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	400
+IDB_LDC	R_LDC[F121044]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	500	Prefix for lookup object must not be null!
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F121045]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	600	java/lang/IllegalArgumentException	<init>	(Ljava/lang/String;)V	false
+IDB_ATHROW	R_ATHROW[F121046]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	700
+IDB_LABEL	R_LABEL[F121047]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	800	L2
+IDB_ALOAD	R_ALOAD[F121048]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	900	2
+IDB_IFNONNULL	R_IFNONNULL[F121049]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1000	L4
+IDB_NEW	R_NEW[F121050]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1100	java/lang/IllegalArgumentException
+IDB_DUP	R_DUP[F121051]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1200
+IDB_LDC	R_LDC[F121052]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1300	Lookup object must not be null!
+IDB_INVOKESPECIAL	R_INVOKESPECIAL[F121053]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1400	java/lang/IllegalArgumentException	<init>	(Ljava/lang/String;)V	false
+IDB_ATHROW	R_ATHROW[F121054]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1500
+IDB_LABEL	R_LABEL[F121055]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1600	L4
+IDB_ALOAD	R_ALOAD[F121056]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1700	0
+IDB_GETFIELD	R_GETFIELD[F121057]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1800	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	prefixLookups	Ljava/util/Map;
+IDB_ALOAD	R_ALOAD[F121058]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	1900	1
+IDB_ALOAD	R_ALOAD[F121059]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	2000	2
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F121060]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	2100	java/util/Map	put	(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;	false
+IDB_POP	R_POP[F121061]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	2200
+IDB_RETURN	R_RETURN[F121062]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V	2300
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookup(Ljava/lang/String;Lorg/apache/commons/configuration2/interpol/Lookup;)V
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F121064]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	(Ljava/util/Map<Ljava/lang/String;+Lorg/apache/commons/configuration2/interpol/Lookup;>;)V
+IDB_ACCESS	R_ACCESS[F121065]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F121065]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V
+
+IDB_ALOAD	R_ALOAD[F121073]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	100	1
+IDB_IFNULL	R_IFNULL[F121074]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	200	L2
+IDB_ALOAD	R_ALOAD[F121075]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	300	0
+IDB_GETFIELD	R_GETFIELD[F121076]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	400	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	prefixLookups	Ljava/util/Map;
+IDB_ALOAD	R_ALOAD[F121077]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	500	1
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F121078]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	600	java/util/Map	putAll	(Ljava/util/Map;)V	false
+IDB_LABEL	R_LABEL[F121079]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	700	L2
+IDB_RETURN	R_RETURN[F121080]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V	800
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::registerLookups(Ljava/util/Map;)V
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F121082]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z	null
+IDB_ACCESS	R_ACCESS[F121083]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F121083]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z
+
+IDB_ALOAD	R_ALOAD[F121089]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z	100	0
+IDB_GETFIELD	R_GETFIELD[F121090]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	defaultLookups	Ljava/util/List;
+IDB_ALOAD	R_ALOAD[F121091]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z	300	1
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F121092]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z	400	java/util/List	remove	(Ljava/lang/Object;)Z	false
+IDB_IRETURN	R_IRETURN[F121093]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z	500
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::removeDefaultLookup(Lorg/apache/commons/configuration2/interpol/Lookup;)Z
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F121095]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	null
+IDB_ACCESS	R_ACCESS[F121096]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F121096]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;
+
+IDB_ALOAD	R_ALOAD[F121160]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	100	1
+IDB_IFNONNULL	R_IFNONNULL[F121161]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	200	L2
+IDB_ACONST_NULL	R_ACONST_NULL[F121162]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	300
+IDB_ARETURN	R_ARETURN[F121163]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	400
+IDB_LABEL	R_LABEL[F121164]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	500	L2
+IDB_ALOAD	R_ALOAD[F121165]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	600	1
+IDB_BIPUSH	R_BIPUSH[F121166]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	700	58
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F121167]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	800	java/lang/String	indexOf	(I)I	false
+IDB_ISTORE	R_ISTORE[F121168]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	900	2
+IDB_ILOAD	R_ILOAD[F121169]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1000	2
+IDB_IFLT	R_IFLT[F121170]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1100	L9
+IDB_ALOAD	R_ALOAD[F121171]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1200	1
+IDB_ICONST_0	R_ICONST_0[F121172]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1300
+IDB_ILOAD	R_ILOAD[F121173]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1400	2
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F121174]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1500	java/lang/String	substring	(II)Ljava/lang/String;	false
+IDB_ASTORE	R_ASTORE[F121175]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1600	3
+IDB_ALOAD	R_ALOAD[F121176]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1700	1
+IDB_ILOAD	R_ILOAD[F121177]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1800	2
+IDB_ICONST_1	R_ICONST_1[F121178]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	1900
+IDB_IADD	R_IADD[F121179]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	2000
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F121180]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	2100	java/lang/String	substring	(I)Ljava/lang/String;	false
+IDB_ASTORE	R_ASTORE[F121181]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	2200	4
+IDB_ALOAD	R_ALOAD[F121182]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	2300	0
+IDB_ALOAD	R_ALOAD[F121183]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	2400	3
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F121184]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	2500	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	fetchLookupForPrefix	(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;	false
+IDB_ALOAD	R_ALOAD[F121185]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	2600	4
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F121186]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	2700	org/apache/commons/configuration2/interpol/Lookup	lookup	(Ljava/lang/String;)Ljava/lang/Object;	false
+IDB_ASTORE	R_ASTORE[F121187]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	2800	5
+IDB_ALOAD	R_ALOAD[F121188]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	2900	5
+IDB_IFNULL	R_IFNULL[F121189]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	3000	L9
+IDB_ALOAD	R_ALOAD[F121190]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	3100	5
+IDB_ARETURN	R_ARETURN[F121191]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	3200
+IDB_LABEL	R_LABEL[F121192]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	3300	L9
+IDB_ALOAD	R_ALOAD[F121193]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	3400	0
+IDB_GETFIELD	R_GETFIELD[F121194]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	3500	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	defaultLookups	Ljava/util/List;
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F121195]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	3600	java/util/List	iterator	()Ljava/util/Iterator;	false
+IDB_ASTORE	R_ASTORE[F121196]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	3700	3
+IDB_LABEL	R_LABEL[F121197]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	3800	L10
+IDB_ALOAD	R_ALOAD[F121198]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	3900	3
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F121199]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	4000	java/util/Iterator	hasNext	()Z	false
+IDB_IFEQ	R_IFEQ[F121200]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	4100	L15
+IDB_ALOAD	R_ALOAD[F121201]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	4200	3
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F121202]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	4300	java/util/Iterator	next	()Ljava/lang/Object;	false
+IDB_CHECKCAST	R_CHECKCAST[F121203]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	4400	org/apache/commons/configuration2/interpol/Lookup
+IDB_ASTORE	R_ASTORE[F121204]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	4500	4
+IDB_ALOAD	R_ALOAD[F121205]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	4600	4
+IDB_ALOAD	R_ALOAD[F121206]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	4700	1
+IDB_INVOKEINTERFACE	R_INVOKEINTERFACE[F121207]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	4800	org/apache/commons/configuration2/interpol/Lookup	lookup	(Ljava/lang/String;)Ljava/lang/Object;	false
+IDB_ASTORE	R_ASTORE[F121208]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	4900	5
+IDB_ALOAD	R_ALOAD[F121209]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	5000	5
+IDB_IFNULL	R_IFNULL[F121210]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	5100	L14
+IDB_ALOAD	R_ALOAD[F121211]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	5200	5
+IDB_ARETURN	R_ARETURN[F121212]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	5300
+IDB_LABEL	R_LABEL[F121213]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	5400	L14
+IDB_GOTO	R_GOTO[F121214]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	5500	L10
+IDB_LABEL	R_LABEL[F121215]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	5600	L15
+IDB_ALOAD	R_ALOAD[F121216]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	5700	0
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F121217]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	5800	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	getParentInterpolator	()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	false
+IDB_ASTORE	R_ASTORE[F121218]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	5900	3
+IDB_ALOAD	R_ALOAD[F121219]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	6000	3
+IDB_IFNULL	R_IFNULL[F121220]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	6100	L18
+IDB_ALOAD	R_ALOAD[F121221]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	6200	0
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F121222]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	6300	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	getParentInterpolator	()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;	false
+IDB_ALOAD	R_ALOAD[F121223]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	6400	1
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F121224]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	6500	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	resolve	(Ljava/lang/String;)Ljava/lang/Object;	false
+IDB_ARETURN	R_ARETURN[F121225]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	6600
+IDB_LABEL	R_LABEL[F121226]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	6700	L18
+IDB_ACONST_NULL	R_ACONST_NULL[F121227]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	6800
+IDB_ARETURN	R_ARETURN[F121228]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;	6900
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolve(Ljava/lang/String;)Ljava/lang/Object;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F121230]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;	null
+IDB_ACCESS	R_ACCESS[F121231]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;	2
+IDB_IS_PRIVATE	R_IS_PRIVATE[F121231]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;
+
+IDB_ALOAD	R_ALOAD[F121237]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;	100	0
+IDB_ALOAD	R_ALOAD[F121238]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;	200	1
+IDB_INVOKESTATIC	R_INVOKESTATIC[F121239]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;	300	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	extractVariableName	(Ljava/lang/String;)Ljava/lang/String;	false
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F121240]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;	400	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	resolve	(Ljava/lang/String;)Ljava/lang/Object;	false
+IDB_ARETURN	R_ARETURN[F121241]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;	500
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::resolveSingleVariable(Ljava/lang/String;)Ljava/lang/Object;
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F121243]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V	null
+IDB_ACCESS	R_ACCESS[F121244]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F121244]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V
+
+IDB_ALOAD	R_ALOAD[F121251]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V	100	0
+IDB_GETFIELD	R_GETFIELD[F121252]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V	200	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	substitutor	Lorg/apache/commons/text/StringSubstitutor;
+IDB_ILOAD	R_ILOAD[F121253]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V	300	1
+IDB_INVOKEVIRTUAL	R_INVOKEVIRTUAL[F121254]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V	400	org/apache/commons/text/StringSubstitutor	setEnableSubstitutionInVariables	(Z)Lorg/apache/commons/text/StringSubstitutor;	false
+IDB_POP	R_POP[F121255]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V	500
+IDB_RETURN	R_RETURN[F121256]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V	600
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setEnableSubstitutionInVariables(Z)V
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F121258]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V	null
+IDB_ACCESS	R_ACCESS[F121259]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F121259]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+
+IDB_ALOAD	R_ALOAD[F121264]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V	100	0
+IDB_ALOAD	R_ALOAD[F121265]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V	200	1
+IDB_PUTFIELD	R_PUTFIELD[F121266]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V	300	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	parentInterpolator	Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+IDB_RETURN	R_RETURN[F121267]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V	400
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setParentInterpolator(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+
+
+// details for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V
+
+IDB_METHOD_SIGNATURE	R_METHOD_SIGNATURE[F121269]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	(Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;)V
+IDB_ACCESS	R_ACCESS[F121270]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	1
+IDB_IS_PUBLIC	R_IS_PUBLIC[F121270]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V
+
+// instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V
+
+IDB_ALOAD	R_ALOAD[F121279]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	100	0
+IDB_ALOAD	R_ALOAD[F121280]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	200	1
+IDB_IFNULL	R_IFNULL[F121281]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	300	L1
+IDB_ALOAD	R_ALOAD[F121282]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	400	1
+IDB_GOTO	R_GOTO[F121283]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	500	L2
+IDB_LABEL	R_LABEL[F121284]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	600	L1
+IDB_GETSTATIC	R_GETSTATIC[F121285]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	700	org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter	INSTANCE	Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter;
+IDB_LABEL	R_LABEL[F121286]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	800	L2
+IDB_PUTFIELD	R_PUTFIELD[F121287]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	900	org/apache/commons/configuration2/interpol/ConfigurationInterpolator	stringConverter	Ljava/util/function/Function;
+IDB_RETURN	R_RETURN[F121288]	org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V	1000
+
+// removed instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V
+
+
+// moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V
+

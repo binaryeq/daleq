@@ -1,0 +1,434 @@
+Compiled from "ConfigurationInterpolator.java"
+public class org.apache.commons.configuration2.interpol.ConfigurationInterpolator {
+  public static final java.lang.String DEFAULT_PREFIX_LOOKUPS_PROPERTY;
+
+  private static final char PREFIX_SEPARATOR;
+
+  private static final java.lang.String VAR_START;
+
+  private static final int VAR_START_LENGTH;
+
+  private static final java.lang.String VAR_END;
+
+  private static final int VAR_END_LENGTH;
+
+  private final java.util.Map<java.lang.String, org.apache.commons.configuration2.interpol.Lookup> prefixLookups;
+
+  private final java.util.List<org.apache.commons.configuration2.interpol.Lookup> defaultLookups;
+
+  private final org.apache.commons.text.StringSubstitutor substitutor;
+
+  private volatile org.apache.commons.configuration2.interpol.ConfigurationInterpolator parentInterpolator;
+
+  private volatile java.util.function.Function<java.lang.Object, java.lang.String> stringConverter;
+
+  public org.apache.commons.configuration2.interpol.ConfigurationInterpolator();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: getstatic     #2                  // Field org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter.INSTANCE:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter;
+       8: putfield      #3                  // Field stringConverter:Ljava/util/function/Function;
+      11: aload_0
+      12: new           #4                  // class java/util/concurrent/ConcurrentHashMap
+      15: dup
+      16: invokespecial #5                  // Method java/util/concurrent/ConcurrentHashMap."<init>":()V
+      19: putfield      #6                  // Field prefixLookups:Ljava/util/Map;
+      22: aload_0
+      23: new           #7                  // class java/util/concurrent/CopyOnWriteArrayList
+      26: dup
+      27: invokespecial #8                  // Method java/util/concurrent/CopyOnWriteArrayList."<init>":()V
+      30: putfield      #9                  // Field defaultLookups:Ljava/util/List;
+      33: aload_0
+      34: aload_0
+      35: invokespecial #10                 // Method initSubstitutor:()Lorg/apache/commons/text/StringSubstitutor;
+      38: putfield      #11                 // Field substitutor:Lorg/apache/commons/text/StringSubstitutor;
+      41: return
+
+  private static org.apache.commons.configuration2.interpol.ConfigurationInterpolator createInterpolator(org.apache.commons.configuration2.interpol.InterpolatorSpecification);
+    Code:
+       0: new           #12                 // class org/apache/commons/configuration2/interpol/ConfigurationInterpolator
+       3: dup
+       4: invokespecial #13                 // Method "<init>":()V
+       7: astore_1
+       8: aload_1
+       9: aload_0
+      10: invokevirtual #14                 // Method org/apache/commons/configuration2/interpol/InterpolatorSpecification.getDefaultLookups:()Ljava/util/Collection;
+      13: invokevirtual #15                 // Method addDefaultLookups:(Ljava/util/Collection;)V
+      16: aload_1
+      17: aload_0
+      18: invokevirtual #16                 // Method org/apache/commons/configuration2/interpol/InterpolatorSpecification.getPrefixLookups:()Ljava/util/Map;
+      21: invokevirtual #17                 // Method registerLookups:(Ljava/util/Map;)V
+      24: aload_1
+      25: aload_0
+      26: invokevirtual #18                 // Method org/apache/commons/configuration2/interpol/InterpolatorSpecification.getParentInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+      29: invokevirtual #19                 // Method setParentInterpolator:(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)V
+      32: aload_1
+      33: aload_0
+      34: invokevirtual #20                 // Method org/apache/commons/configuration2/interpol/InterpolatorSpecification.getStringConverter:()Ljava/util/function/Function;
+      37: invokevirtual #21                 // Method setStringConverter:(Ljava/util/function/Function;)V
+      40: aload_1
+      41: areturn
+
+  private static java.lang.String extractVariableName(java.lang.String);
+    Code:
+       0: aload_0
+       1: getstatic     #22                 // Field VAR_START_LENGTH:I
+       4: aload_0
+       5: invokevirtual #23                 // Method java/lang/String.length:()I
+       8: getstatic     #24                 // Field VAR_END_LENGTH:I
+      11: isub
+      12: invokevirtual #25                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+      15: areturn
+
+  public static org.apache.commons.configuration2.interpol.ConfigurationInterpolator fromSpecification(org.apache.commons.configuration2.interpol.InterpolatorSpecification);
+    Code:
+       0: aload_0
+       1: ifnonnull     14
+       4: new           #26                 // class java/lang/IllegalArgumentException
+       7: dup
+       8: ldc           #27                 // String InterpolatorSpecification must not be null!
+      10: invokespecial #28                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      13: athrow
+      14: aload_0
+      15: invokevirtual #29                 // Method org/apache/commons/configuration2/interpol/InterpolatorSpecification.getInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+      18: ifnull        28
+      21: aload_0
+      22: invokevirtual #29                 // Method org/apache/commons/configuration2/interpol/InterpolatorSpecification.getInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+      25: goto          32
+      28: aload_0
+      29: invokestatic  #30                 // Method createInterpolator:(Lorg/apache/commons/configuration2/interpol/InterpolatorSpecification;)Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+      32: areturn
+
+  public static java.util.Map<java.lang.String, org.apache.commons.configuration2.interpol.Lookup> getDefaultPrefixLookups();
+    Code:
+       0: getstatic     #31                 // Field org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder.INSTANCE:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder;
+       3: invokevirtual #32                 // Method org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultPrefixLookupsHolder.getDefaultPrefixLookups:()Ljava/util/Map;
+       6: areturn
+
+  public static org.apache.commons.configuration2.interpol.Lookup nullSafeLookup(org.apache.commons.configuration2.interpol.Lookup);
+    Code:
+       0: aload_0
+       1: ifnonnull     8
+       4: getstatic     #33                 // Field org/apache/commons/configuration2/interpol/DummyLookup.INSTANCE:Lorg/apache/commons/configuration2/interpol/DummyLookup;
+       7: astore_0
+       8: aload_0
+       9: areturn
+
+  public void addDefaultLookup(org.apache.commons.configuration2.interpol.Lookup);
+    Code:
+       0: aload_0
+       1: getfield      #9                  // Field defaultLookups:Ljava/util/List;
+       4: aload_1
+       5: invokeinterface #34,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z
+      10: pop
+      11: return
+
+  public void addDefaultLookups(java.util.Collection<? extends org.apache.commons.configuration2.interpol.Lookup>);
+    Code:
+       0: aload_1
+       1: ifnull        15
+       4: aload_0
+       5: getfield      #9                  // Field defaultLookups:Ljava/util/List;
+       8: aload_1
+       9: invokeinterface #35,  2           // InterfaceMethod java/util/List.addAll:(Ljava/util/Collection;)Z
+      14: pop
+      15: return
+
+  public boolean deregisterLookup(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #36,  2           // InterfaceMethod java/util/Map.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: ifnull        17
+      13: iconst_1
+      14: goto          18
+      17: iconst_0
+      18: ireturn
+
+  protected org.apache.commons.configuration2.interpol.Lookup fetchLookupForPrefix(java.lang.String);
+    Code:
+       0: aload_0
+       1: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+       4: aload_1
+       5: invokeinterface #37,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      10: checkcast     #38                 // class org/apache/commons/configuration2/interpol/Lookup
+      13: invokestatic  #39                 // Method nullSafeLookup:(Lorg/apache/commons/configuration2/interpol/Lookup;)Lorg/apache/commons/configuration2/interpol/Lookup;
+      16: areturn
+
+  public java.util.List<org.apache.commons.configuration2.interpol.Lookup> getDefaultLookups();
+    Code:
+       0: new           #40                 // class java/util/ArrayList
+       3: dup
+       4: aload_0
+       5: getfield      #9                  // Field defaultLookups:Ljava/util/List;
+       8: invokespecial #41                 // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+      11: areturn
+
+  public java.util.Map<java.lang.String, org.apache.commons.configuration2.interpol.Lookup> getLookups();
+    Code:
+       0: new           #42                 // class java/util/HashMap
+       3: dup
+       4: aload_0
+       5: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+       8: invokespecial #43                 // Method java/util/HashMap."<init>":(Ljava/util/Map;)V
+      11: areturn
+
+  public org.apache.commons.configuration2.interpol.ConfigurationInterpolator getParentInterpolator();
+    Code:
+       0: aload_0
+       1: getfield      #44                 // Field parentInterpolator:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+       4: areturn
+
+  private org.apache.commons.text.StringSubstitutor initSubstitutor();
+    Code:
+       0: new           #45                 // class org/apache/commons/text/StringSubstitutor
+       3: dup
+       4: aload_0
+       5: invokedynamic #46,  0             // InvokeDynamic #0:lookup:(Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;)Lorg/apache/commons/text/lookup/StringLookup;
+      10: invokespecial #47                 // Method org/apache/commons/text/StringSubstitutor."<init>":(Lorg/apache/commons/text/lookup/StringLookup;)V
+      13: areturn
+
+  public java.lang.Object interpolate(java.lang.Object);
+    Code:
+       0: aload_1
+       1: instanceof    #48                 // class java/lang/String
+       4: ifeq          48
+       7: aload_1
+       8: checkcast     #48                 // class java/lang/String
+      11: astore_2
+      12: aload_0
+      13: aload_2
+      14: invokespecial #49                 // Method isSingleVariable:(Ljava/lang/String;)Z
+      17: ifeq          39
+      20: aload_0
+      21: aload_2
+      22: invokespecial #50                 // Method resolveSingleVariable:(Ljava/lang/String;)Ljava/lang/Object;
+      25: astore_3
+      26: aload_3
+      27: ifnull        39
+      30: aload_3
+      31: instanceof    #48                 // class java/lang/String
+      34: ifne          39
+      37: aload_3
+      38: areturn
+      39: aload_0
+      40: getfield      #11                 // Field substitutor:Lorg/apache/commons/text/StringSubstitutor;
+      43: aload_2
+      44: invokevirtual #51                 // Method org/apache/commons/text/StringSubstitutor.replace:(Ljava/lang/String;)Ljava/lang/String;
+      47: areturn
+      48: aload_1
+      49: areturn
+
+  public boolean isEnableSubstitutionInVariables();
+    Code:
+       0: aload_0
+       1: getfield      #11                 // Field substitutor:Lorg/apache/commons/text/StringSubstitutor;
+       4: invokevirtual #52                 // Method org/apache/commons/text/StringSubstitutor.isEnableSubstitutionInVariables:()Z
+       7: ireturn
+
+  public java.util.function.Function<java.lang.Object, java.lang.String> getStringConverter();
+    Code:
+       0: aload_0
+       1: getfield      #3                  // Field stringConverter:Ljava/util/function/Function;
+       4: areturn
+
+  public void setStringConverter(java.util.function.Function<java.lang.Object, java.lang.String>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: ifnull        9
+       5: aload_1
+       6: goto          12
+       9: getstatic     #2                  // Field org/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter.INSTANCE:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator$DefaultStringConverter;
+      12: putfield      #3                  // Field stringConverter:Ljava/util/function/Function;
+      15: return
+
+  private boolean isSingleVariable(java.lang.String);
+    Code:
+       0: aload_1
+       1: ldc           #53                 // String ${
+       3: invokevirtual #54                 // Method java/lang/String.startsWith:(Ljava/lang/String;)Z
+       6: ifeq          33
+       9: aload_1
+      10: ldc           #55                 // String }
+      12: getstatic     #22                 // Field VAR_START_LENGTH:I
+      15: invokevirtual #56                 // Method java/lang/String.indexOf:(Ljava/lang/String;I)I
+      18: aload_1
+      19: invokevirtual #23                 // Method java/lang/String.length:()I
+      22: getstatic     #24                 // Field VAR_END_LENGTH:I
+      25: isub
+      26: if_icmpne     33
+      29: iconst_1
+      30: goto          34
+      33: iconst_0
+      34: ireturn
+
+  public java.util.Set<java.lang.String> prefixSet();
+    Code:
+       0: aload_0
+       1: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+       4: invokeinterface #57,  1           // InterfaceMethod java/util/Map.keySet:()Ljava/util/Set;
+       9: invokestatic  #58                 // Method java/util/Collections.unmodifiableSet:(Ljava/util/Set;)Ljava/util/Set;
+      12: areturn
+
+  public void registerLookup(java.lang.String, org.apache.commons.configuration2.interpol.Lookup);
+    Code:
+       0: aload_1
+       1: ifnonnull     14
+       4: new           #26                 // class java/lang/IllegalArgumentException
+       7: dup
+       8: ldc           #59                 // String Prefix for lookup object must not be null!
+      10: invokespecial #28                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      13: athrow
+      14: aload_2
+      15: ifnonnull     28
+      18: new           #26                 // class java/lang/IllegalArgumentException
+      21: dup
+      22: ldc           #60                 // String Lookup object must not be null!
+      24: invokespecial #28                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      27: athrow
+      28: aload_0
+      29: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+      32: aload_1
+      33: aload_2
+      34: invokeinterface #61,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      39: pop
+      40: return
+
+  public void registerLookups(java.util.Map<java.lang.String, ? extends org.apache.commons.configuration2.interpol.Lookup>);
+    Code:
+       0: aload_1
+       1: ifnull        14
+       4: aload_0
+       5: getfield      #6                  // Field prefixLookups:Ljava/util/Map;
+       8: aload_1
+       9: invokeinterface #62,  2           // InterfaceMethod java/util/Map.putAll:(Ljava/util/Map;)V
+      14: return
+
+  public boolean removeDefaultLookup(org.apache.commons.configuration2.interpol.Lookup);
+    Code:
+       0: aload_0
+       1: getfield      #9                  // Field defaultLookups:Ljava/util/List;
+       4: aload_1
+       5: invokeinterface #63,  2           // InterfaceMethod java/util/List.remove:(Ljava/lang/Object;)Z
+      10: ireturn
+
+  public java.lang.Object resolve(java.lang.String);
+    Code:
+       0: aload_1
+       1: ifnonnull     6
+       4: aconst_null
+       5: areturn
+       6: aload_1
+       7: bipush        58
+       9: invokevirtual #64                 // Method java/lang/String.indexOf:(I)I
+      12: istore_2
+      13: iload_2
+      14: iflt          55
+      17: aload_1
+      18: iconst_0
+      19: iload_2
+      20: invokevirtual #25                 // Method java/lang/String.substring:(II)Ljava/lang/String;
+      23: astore_3
+      24: aload_1
+      25: iload_2
+      26: iconst_1
+      27: iadd
+      28: invokevirtual #65                 // Method java/lang/String.substring:(I)Ljava/lang/String;
+      31: astore        4
+      33: aload_0
+      34: aload_3
+      35: invokevirtual #66                 // Method fetchLookupForPrefix:(Ljava/lang/String;)Lorg/apache/commons/configuration2/interpol/Lookup;
+      38: aload         4
+      40: invokeinterface #67,  2           // InterfaceMethod org/apache/commons/configuration2/interpol/Lookup.lookup:(Ljava/lang/String;)Ljava/lang/Object;
+      45: astore        5
+      47: aload         5
+      49: ifnull        55
+      52: aload         5
+      54: areturn
+      55: aload_0
+      56: getfield      #9                  // Field defaultLookups:Ljava/util/List;
+      59: invokeinterface #68,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+      64: astore_3
+      65: aload_3
+      66: invokeinterface #69,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+      71: ifeq          106
+      74: aload_3
+      75: invokeinterface #70,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      80: checkcast     #38                 // class org/apache/commons/configuration2/interpol/Lookup
+      83: astore        4
+      85: aload         4
+      87: aload_1
+      88: invokeinterface #67,  2           // InterfaceMethod org/apache/commons/configuration2/interpol/Lookup.lookup:(Ljava/lang/String;)Ljava/lang/Object;
+      93: astore        5
+      95: aload         5
+      97: ifnull        103
+     100: aload         5
+     102: areturn
+     103: goto          65
+     106: aload_0
+     107: invokevirtual #71                 // Method getParentInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+     110: astore_3
+     111: aload_3
+     112: ifnull        124
+     115: aload_0
+     116: invokevirtual #71                 // Method getParentInterpolator:()Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+     119: aload_1
+     120: invokevirtual #72                 // Method resolve:(Ljava/lang/String;)Ljava/lang/Object;
+     123: areturn
+     124: aconst_null
+     125: areturn
+
+  private java.lang.Object resolveSingleVariable(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #73                 // Method extractVariableName:(Ljava/lang/String;)Ljava/lang/String;
+       5: invokevirtual #72                 // Method resolve:(Ljava/lang/String;)Ljava/lang/Object;
+       8: areturn
+
+  public void setEnableSubstitutionInVariables(boolean);
+    Code:
+       0: aload_0
+       1: getfield      #11                 // Field substitutor:Lorg/apache/commons/text/StringSubstitutor;
+       4: iload_1
+       5: invokevirtual #74                 // Method org/apache/commons/text/StringSubstitutor.setEnableSubstitutionInVariables:(Z)Lorg/apache/commons/text/StringSubstitutor;
+       8: pop
+       9: return
+
+  public void setParentInterpolator(org.apache.commons.configuration2.interpol.ConfigurationInterpolator);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: putfield      #44                 // Field parentInterpolator:Lorg/apache/commons/configuration2/interpol/ConfigurationInterpolator;
+       5: return
+
+  private java.lang.String lambda$initSubstitutor$0(java.lang.String);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokevirtual #72                 // Method resolve:(Ljava/lang/String;)Ljava/lang/Object;
+       5: astore_2
+       6: aload_2
+       7: ifnull        26
+      10: aload_0
+      11: getfield      #3                  // Field stringConverter:Ljava/util/function/Function;
+      14: aload_2
+      15: invokeinterface #75,  2           // InterfaceMethod java/util/function/Function.apply:(Ljava/lang/Object;)Ljava/lang/Object;
+      20: checkcast     #48                 // class java/lang/String
+      23: goto          27
+      26: aconst_null
+      27: areturn
+
+  static {};
+    Code:
+       0: ldc           #53                 // String ${
+       2: invokevirtual #23                 // Method java/lang/String.length:()I
+       5: putstatic     #22                 // Field VAR_START_LENGTH:I
+       8: ldc           #55                 // String }
+      10: invokevirtual #23                 // Method java/lang/String.length:()I
+      13: putstatic     #24                 // Field VAR_END_LENGTH:I
+      16: return
+}
