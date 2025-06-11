@@ -44,7 +44,6 @@ public class DaleqAnalyser implements Analyser {
 
     public static final String RULES = "/rules/advanced.souffle";
 
-
     private String equivalenceIsInferredFromEqualityLink = null;
 
     @Override
@@ -309,7 +308,11 @@ public class DaleqAnalyser implements Analyser {
             ifDiffBeforeNormalisationAppend(instructions1,instructions2,provDB1,provDB2,"Method Instruction Fact for method " + method,html);
         }
 
-        bindings.put("diffs", html.toString());
+        String content = html.toString();
+        if (content.isEmpty()) {
+            content = "No rules have been appplied. Some normalisation is still applied during the EDB extraction phase as constant pool references are resolved.";
+        }
+        bindings.put("diffs",content);
 
     }
 
