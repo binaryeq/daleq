@@ -30,7 +30,6 @@ public class Main {
     private static final Option OPT_SRCJAR1 = new Option("s1","src1",true,"the first jar file with source code to compare");
     private static final Option OPT_SRCJAR2 = new Option("s2","src2",true,"the second jar file with source code to compare");
     private static final Option OUT = new Option("o","out",true,"the output folder where the report will be generated");
-
     private static final URL TEMPLATE = Main.class.getClassLoader().getResource("cli/report-template.html");
     private static final URL CSS = Main.class.getClassLoader().getResource("cli/daleq.css");
 
@@ -43,6 +42,7 @@ public class Main {
     public static final Analyser[] ANALYSERS = new Analyser[]{
         new ResourceIsPresentAnalyser(),
         new SameSourceCodeAnalyser(),
+        new EquivalentSourceCodeAnalyser(),
         new SameContentAnalyser(),
         new VerboseJavapAnalyser(),
         new CompactJavapAnalyser(),
@@ -91,7 +91,6 @@ public class Main {
                 Files.createDirectories(outPath);
             }
             Preconditions.checkState(Files.isDirectory(outPath));
-
             Preconditions.checkState(TEMPLATE!=null);
 
             analyse(jar1,jar2,src1,src2,outPath);
