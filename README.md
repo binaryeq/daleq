@@ -3,14 +3,14 @@
 
 ## Build and Use CLI 
 
-build the program as follows: 
+The program has been developed and tested with Java 17. Build DALEQ with Maven: 
 
 `mvn clean package dependency:copy-dependencies`
 
-Then run as follows: 
+Then run as follows (for windows: change the classpath separator)
 
 ```
-java -DSOUFFLE=/Users/jens/Development/souffle-2.4.1/build/src/souffle -cp "target/classes:target/dependency/*" io.github.bineq.daleq.cli.Main \
+java -DSOUFFLE=<path-to-souffle> -cp "target/classes:target/dependency/*" io.github.bineq.daleq.cli.Main \
 
  -j1,--jar1 <arg>   the first jar file to compare (required)
  -j2,--jar2 <arg>   the second jar file to compare (required)
