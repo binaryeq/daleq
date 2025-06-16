@@ -25,11 +25,11 @@ import java.util.stream.Stream;
  */
 public class Main {
 
-    private static final Option OPT_JAR1 = new Option("j1","jar1",true,"the first jar file to compare");
-    private static final Option OPT_JAR2 = new Option("j2","jar2",true,"the second jar file to compare");
-    private static final Option OPT_SRCJAR1 = new Option("s1","src1",true,"the first jar file with source code to compare");
-    private static final Option OPT_SRCJAR2 = new Option("s2","src2",true,"the second jar file with source code to compare");
-    private static final Option OUT = new Option("o","out",true,"the output folder where the report will be generated");
+    private static final Option OPT_JAR1 = new Option("j1","jar1",true,"the first jar file to compare (required)");
+    private static final Option OPT_JAR2 = new Option("j2","jar2",true,"the second jar file to compare (required)");
+    private static final Option OPT_SRCJAR1 = new Option("s1","src1",true,"the first jar file with source code to compare (optional)");
+    private static final Option OPT_SRCJAR2 = new Option("s2","src2",true,"the second jar file with source code to compare (optional)");
+    private static final Option OUT = new Option("o","out",true,"the output folder where the report will be generated (required)");
     private static final URL TEMPLATE = Main.class.getClassLoader().getResource("cli/report-template.html");
     private static final URL CSS = Main.class.getClassLoader().getResource("cli/daleq.css");
 
@@ -97,7 +97,7 @@ public class Main {
 
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp("java -jar <built-jar>", options);
+            formatter.printHelp("java -DSOUFFLE=<souffle-executable> -jar <built-jar>", options);
             System.exit(1);
         }
     }
