@@ -218,6 +218,6 @@ Tests that require souffle will not fail but will be skipped if souffle is not a
 
 Souffle [occasionally fails](https://github.com/binaryeq/daleq/issues/22). 
 When souffle is used, a `Thread::sleep` instruction is used to pause DALEQ. 
-This reduces the number of errors (oerhaps a souffle race condition?), but makes DALEQ slower. 
+This reduces the number of errors (perhaps a souffle race condition?), but makes DALEQ slower. 
 
-Souffle issues will be reported by the applictaion, and flagged as __error__ .
+Souffle issues will be reported by the appplication, and flagged as __error__ .
