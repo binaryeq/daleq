@@ -3,18 +3,27 @@
 
 ## Build and Use CLI 
 
-build: `mvn package` , this creates an executable jar in `target`
+build the program as follows: 
 
-then run as follows (souffle path must be set):
+`mvn clean package dependency:copy-dependencies`
+
+Then run as follows: 
 
 ```
-java -DSOUFFLE=<souffle-executable> -jar daleq-<version>.jar
+java -DSOUFFLE=/Users/jens/Development/souffle-2.4.1/build/src/souffle -cp "target/classes:target/dependency/*" io.github.bineq.daleq.cli.Main \
+
  -j1,--jar1 <arg>   the first jar file to compare (required)
  -j2,--jar2 <arg>   the second jar file to compare (required)
  -o,--out <arg>     the output folder where the report will be generated (required)
  -s1,--src1 <arg>   the first jar file with source code to compare (optional)
  -s2,--src2 <arg>   the second jar file with source code to compare (optional)
 ```
+
+There is an [open issue](https://github.com/binaryeq/daleq/issues/28) that prevents building 
+a more convenient executable super-jar. 
+
+Running the program will create a report `report.html` in the specified output folder.
+
 
 ## Overview
 
@@ -28,8 +37,6 @@ This is done in two steps.
 flowchart LR
     bytecode["bytecode (.class)"] --> asm(("asm")) --> edb["EDB"] --> souffle(("souffle")) --> idb["IDB"]
 ```
-
-
 
 A database representing the bytecode is extracted. An [asm-based](https://asm.ow2.io/) static analysis is used for this purpose. 
 The result is the EDB (extensional database), a folder with tsv files, each tsv file corresponding to a predicate.
@@ -199,8 +206,18 @@ IDB_INSTRUCTION(cat("R_AALOAD","[",factid,"]"),methodid,instructioncounter,"AALO
 For a new predicate, such a block must be added. 
 The rule generator `io.github.bineq.daleq.idb.rulegeneration.BaselineRuleGeneration` can be used for this purpose.
 
-## Building the Project
+## Notes
 
-Building with tests requires souffle to be set up (see also **IDB Computation** section).
+### Testing during Builds
+
+Note that tests requires souffle to be set up (see also **IDB Computation** section).
 This has to be done locally at the moment, see also [issue 11](https://github.com/binaryeq/daleq/issues/11).
 Tests that require souffle will not fail but will be skipped if souffle is not available.
+
+### Performance and Issues with Souffle
+
+Souffle [occasionally fails](https://github.com/binaryeq/daleq/issues/22). 
+When souffle is used, a `Thread::sleep` instruction is used to pause DALEQ. 
+This reduces the number of errors (oerhaps a souffle race condition?), but makes DALEQ slower. 
+
+Souffle issues will be reported by the applictaion, and flagged as __error__ .
