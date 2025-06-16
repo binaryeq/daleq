@@ -1,6 +1,21 @@
 # DALEQ - Datalog-based Binary Equivalence
 
 
+## Build and Use CLI 
+
+build: `mvn package` , this creates jar in `target`
+
+then run as follows (souffle path must be set):
+
+```
+java -DSOUFFLE=<souffle-executable> -jar daleq-1.0.0.jar
+ -j1,--jar1 <arg>   the first jar file to compare
+ -j2,--jar2 <arg>   the second jar file to compare
+ -o,--out <arg>     the output folder where the report will be generated
+ -s1,--src1 <arg>   the first jar file with source code to compare
+ -s2,--src2 <arg>   the second jar file with source code to compare
+```
+
 ## Overview
 
 *Daleq* takes Java bytecode as input an produces a relational database.
