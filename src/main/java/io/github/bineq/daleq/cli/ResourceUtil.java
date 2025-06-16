@@ -1,6 +1,7 @@
 package io.github.bineq.daleq.cli;
 
 import com.google.common.base.Preconditions;
+import io.github.bineq.daleq.IOUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
@@ -26,7 +27,11 @@ public class ResourceUtil {
     private static final Logger LOG = LoggerFactory.getLogger(ResourceUtil.class);
 
     static boolean isSourcecode(String resource) {
-        return resource.endsWith(".java"); // TODO: kotlin, scala, groovy etc
+        return isJavaSourcecode(resource); // TODO: kotlin, scala, groovy etc
+    }
+
+    static boolean isJavaSourcecode(String resource) {
+        return resource.endsWith(".java");
     }
 
     static boolean isCharData (String resource) {
@@ -111,14 +116,13 @@ public class ResourceUtil {
      */
     static String createReportFromTemplate(Path contextDir, Analyser analyser, String resource, URL template, String fileName, Map<String,String> bindings) throws IOException {
 
-        Path templatePath = Path.of(template.getPath());
-        String templ = Files.readString(templatePath);
+        String templ = IOUtil.readAsString(template);
         Document doc = Parser.htmlParser().parseInput(templ,"");
 
         // instantiate template
         for (String key: bindings.keySet()) {
             Element element = doc.getElementById(key);
-            Preconditions.checkState(element!=null,"can't find element with id \"" + key + "\" in document " + templatePath);
+            Preconditions.checkState(element!=null,"can't find element with id \"" + key + "\" in template resource " + template);
             String value = bindings.get(key);
             element.append(value);
         }

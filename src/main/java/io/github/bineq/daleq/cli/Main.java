@@ -119,7 +119,7 @@ public class Main {
         Set<String> content2 = IOUtil.nonDirEntries(jar2);
         List<String> joinedContent = Sets.union(content1, content2).stream().sorted().collect(Collectors.toUnmodifiableList());
 
-        String html = Files.readString(Path.of(TEMPLATE.getPath()));
+        String html = IOUtil.readAsString(TEMPLATE);
         Document document = Parser.htmlParser().parseInput(html,"");
 
         Element eJar1 = document.getElementById("jar1");

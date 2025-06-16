@@ -45,14 +45,11 @@ public class EquivalentSourceCodeAnalyser implements Analyser {
             return analysisResult;
         }
 
-        if (ResourceUtil.isCharData(resource)) {
+        if (ResourceUtil.isJavaSourcecode(resource)) {
             try {
                 List<AnalysisResultAttachment> attachments = new ArrayList<>();
                 byte[] data1 = IOUtil.readEntryFromZip(jar1, resource);
                 byte[] data2 = IOUtil.readEntryFromZip(jar2, resource);
-
-                CompilationUnit cu1 = null;
-                CompilationUnit cu2 = null;
 
                 boolean isEquivalent = false;
 
@@ -60,17 +57,20 @@ public class EquivalentSourceCodeAnalyser implements Analyser {
                 String contentString1 = new String(data1, StandardCharsets.UTF_8);
                 String contentString2 = new String(data2, StandardCharsets.UTF_8);
 
+                CompilationUnit cu1 = null;
+                CompilationUnit cu2 = null;
+
                 if (contentString1.equals(contentString2)) {
                     isEquivalent = true;
                 }
-
-                try {
-                    cu1 = StaticJavaParser.parse(contentString1);
-                    cu2 = StaticJavaParser.parse(contentString2);
-                    isEquivalent = compare(cu1, cu2);
-                }
-                catch (Exception x) {
-                    return new AnalysisResult(AnalysisResultState.ERROR,"error parsing sources",attachments);
+                else {
+                    try {
+                        cu1 = StaticJavaParser.parse(contentString1);
+                        cu2 = StaticJavaParser.parse(contentString2);
+                        isEquivalent = compare(cu1, cu2);
+                    } catch (Exception x) {
+                        return new AnalysisResult(AnalysisResultState.ERROR, "error parsing sources", attachments);
+                    }
                 }
 
                 // diff is meaningless if files are the same

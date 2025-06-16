@@ -3,8 +3,11 @@ package io.github.bineq.daleq;
 import com.google.common.base.Preconditions;
 
 import java.io.*;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
@@ -140,6 +143,25 @@ public class IOUtil {
         catch (Exception x) {
             throw new IOException("Error reading from zip file " + file,x);
         }
+    }
+
+    public static void copy(URL resource, Path file) throws IOException {
+        try (InputStream in = resource.openStream()) {
+            Files.copy(in, file, StandardCopyOption.REPLACE_EXISTING);
+        }
+    }
+
+    public static String readAsString(URL resource) throws IOException {
+        StringBuilder content = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(
+            new InputStreamReader(resource.openStream(), StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append(System.lineSeparator());
+            }
+        }
+
+        return content.toString();
     }
 
     // read a zip entry

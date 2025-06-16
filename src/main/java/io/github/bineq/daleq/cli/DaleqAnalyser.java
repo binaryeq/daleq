@@ -1,6 +1,5 @@
 package io.github.bineq.daleq.cli;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
 import io.github.bineq.daleq.*;
@@ -14,16 +13,17 @@ import io.github.bineq.daleq.souffle.provenance.ProvenanceDB;
 import io.github.bineq.daleq.souffle.provenance.ProvenanceParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import static io.github.bineq.daleq.Souffle.checkSouffleExe;
 
 /**
@@ -50,10 +50,9 @@ public class DaleqAnalyser implements Analyser {
     public void init(Path outDir) throws IOException {
         Analyser.super.init(outDir);
         String equivalenceIsInferredFromEqualityResourceHtmlReportName = "equivalence-inferred-from-equality.html";
-        Path equivalenceIsInferredFromEqualityResource = Path.of(DaleqAnalyser.class.getClassLoader().getResource("cli/"+DaleqAnalyser.class.getName()+'/'+equivalenceIsInferredFromEqualityResourceHtmlReportName).getFile());
-        Preconditions.checkState(Files.exists(equivalenceIsInferredFromEqualityResource));
+        URL equivalenceIsInferredFromEqualityResource = DaleqAnalyser.class.getClassLoader().getResource("cli/"+DaleqAnalyser.class.getName()+'/'+equivalenceIsInferredFromEqualityResourceHtmlReportName);
         Path analysisFolder = ResourceUtil.createAnalysisFolder(outDir,this);
-        Files.copy(equivalenceIsInferredFromEqualityResource, analysisFolder.resolve(equivalenceIsInferredFromEqualityResourceHtmlReportName), StandardCopyOption.REPLACE_EXISTING);
+        IOUtil.copy(equivalenceIsInferredFromEqualityResource, analysisFolder.resolve(equivalenceIsInferredFromEqualityResourceHtmlReportName));
         equivalenceIsInferredFromEqualityLink = ResourceUtil.createLink(this,equivalenceIsInferredFromEqualityResourceHtmlReportName);
     }
 
@@ -213,7 +212,7 @@ public class DaleqAnalyser implements Analyser {
         // there have been cased when facts where missing, leading to NPEs when printing the IDB
         // but upon inspection, those facts where there
         // try to mitigate with this for now
-        Thread.sleep(200);
+        Thread.sleep(500);
 
         return IDBReader.read(idbDir);
 

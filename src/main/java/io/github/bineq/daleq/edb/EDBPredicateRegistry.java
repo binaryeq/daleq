@@ -19,8 +19,8 @@ public class EDBPredicateRegistry {
 
     public static final Logger LOG = LoggerFactory.getLogger(EDBPredicateRegistry.class);
 
-
     static {
+
         LOG.info("Loading instruction predicate registry");
         URL folder = EBDInstructionPredicate.class.getResource("/instruction-predicates");
         assert folder != null;

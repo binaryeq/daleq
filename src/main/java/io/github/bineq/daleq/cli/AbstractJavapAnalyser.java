@@ -1,14 +1,16 @@
 package io.github.bineq.daleq.cli;
 
-import com.google.common.base.Preconditions;
 import io.github.bineq.daleq.IOUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Analyser based on comparing the output of javap , concrete subclasses decide in arguments passed to javap.
@@ -27,10 +29,9 @@ public abstract class AbstractJavapAnalyser implements Analyser {
     public void init(Path outDir) throws IOException {
         Analyser.super.init(outDir);
         String equivalenceIsInferredFromEqualityResourceHtmlReportName = "equivalence-inferred-from-equality.html";
-        Path equivalenceIsInferredFromEqualityResource = Path.of(this.getClass().getClassLoader().getResource("cli/"+this.getClass().getName()+'/'+equivalenceIsInferredFromEqualityResourceHtmlReportName).getFile());
-        Preconditions.checkState(Files.exists(equivalenceIsInferredFromEqualityResource));
+        URL equivalenceIsInferredFromEqualityResource = this.getClass().getClassLoader().getResource("cli/"+this.getClass().getName()+'/'+equivalenceIsInferredFromEqualityResourceHtmlReportName);
         Path analysisFolder = ResourceUtil.createAnalysisFolder(outDir,this);
-        Files.copy(equivalenceIsInferredFromEqualityResource, analysisFolder.resolve(equivalenceIsInferredFromEqualityResourceHtmlReportName), StandardCopyOption.REPLACE_EXISTING);
+        IOUtil.copy(equivalenceIsInferredFromEqualityResource, analysisFolder.resolve(equivalenceIsInferredFromEqualityResourceHtmlReportName));
         equivalenceIsInferredFromEqualityLink = ResourceUtil.createLink(this,equivalenceIsInferredFromEqualityResourceHtmlReportName);
     }
 

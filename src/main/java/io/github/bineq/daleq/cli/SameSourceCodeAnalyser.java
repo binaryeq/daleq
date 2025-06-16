@@ -36,7 +36,7 @@ public class SameSourceCodeAnalyser implements Analyser {
             return analysisResult;
         }
 
-        if (ResourceUtil.isCharData(resource)) {
+        if (ResourceUtil.isJavaSourcecode(resource)) {
             try {
                 byte[] data1 = IOUtil.readEntryFromZip(jar1, resource);
                 byte[] data2 = IOUtil.readEntryFromZip(jar2, resource);
