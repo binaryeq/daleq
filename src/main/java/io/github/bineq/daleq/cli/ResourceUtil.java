@@ -46,6 +46,7 @@ public class ResourceUtil {
             || resource.endsWith(".css")
             || resource.endsWith(".js")
             || resource.endsWith(".ts")
+            || resource.endsWith(".txt")
             ;
     }
 

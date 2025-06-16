@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Checks whether a resource with a given name exists in both jars.
+ * Checks whether Java source code resources are equal.
+ * Equal means to check line-by-line, char-by-char.
  * @author jens dietrich
  */
 public class SameSourceCodeAnalyser implements Analyser {
