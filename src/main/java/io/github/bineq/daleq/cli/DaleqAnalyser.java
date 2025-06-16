@@ -159,7 +159,7 @@ public class DaleqAnalyser implements Analyser {
                     bindings2.put("rules",rulesToHtml(rulesPath));
                     createBindingsForAdvancedDiff(bindings2,idb1,idb2,provDB1, provDB2);
                     String link2 = ResourceUtil.createReportFromTemplate(contextDir,this, resource, ADVANCED_DIFF_TEMPLATE,"advanced-diff.html", bindings2);
-                    attachments.add(new AnalysisResultAttachment("advanced-diff",link2,AnalysisResultAttachment.Kind.INFO));
+                    attachments.add(new AnalysisResultAttachment("advanced-diff",link2,AnalysisResultAttachment.Kind.DIFF));
 
                     return new AnalysisResult(AnalysisResultState.PASS, "projected IDBs are identical", attachments);
                 } else {
