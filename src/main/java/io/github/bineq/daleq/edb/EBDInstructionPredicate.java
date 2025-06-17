@@ -88,6 +88,10 @@ public class EBDInstructionPredicate implements Predicate {
         }
     }
 
+    public static EBDInstructionPredicate fromJson(String json) throws IOException {
+        return new Gson().fromJson(json, EBDInstructionPredicate.class);
+    }
+
     @Override
     public boolean isInstructionPredicate() {
         return true;

@@ -93,6 +93,13 @@
             <version>1.20.1</version>
         </dependency>
 
+        <!-- necessary to traverse resources indep on whether they are in the file system or in a zip, see issue https://github.com/binaryeq/daleq/issues/28  -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>6.2.8</version>
+        </dependency>
+
         <!-- testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

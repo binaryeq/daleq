@@ -14,7 +14,9 @@ import io.github.bineq.daleq.souffle.provenance.ProvenanceParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -97,12 +99,12 @@ public class DaleqAnalyser implements Analyser {
             Files.createDirectories(idbDir2);
             Path mergedEDBAndRules1 = dir1.resolve("mergedEDBAndRules.souffle");
             Path mergedEDBAndRules2 = dir2.resolve("mergedEDBAndRules.souffle");
-            Path rulesPath = Path.of(Souffle.class.getResource(RULES).getPath());
+            URL rulesLoc = Souffle.class.getResource(RULES);
 
 
             try {
-                IDB idb1 = computeAndParseIDB(dir1, classFile1, edbDir1, idbDir1,mergedEDBAndRules1,rulesPath);
-                IDB idb2 = computeAndParseIDB(dir2, classFile2, edbDir2, idbDir2,mergedEDBAndRules2,rulesPath);
+                IDB idb1 = computeAndParseIDB(dir1, classFile1, edbDir1, idbDir1,mergedEDBAndRules1,rulesLoc);
+                IDB idb2 = computeAndParseIDB(dir2, classFile2, edbDir2, idbDir2,mergedEDBAndRules2,rulesLoc);
 
                 ProvenanceDB provDB1 = new ProvenanceDB(edbDir1,idbDir1,mergedEDBAndRules1);
                 ProvenanceDB provDB2 = new ProvenanceDB(edbDir2,idbDir2,mergedEDBAndRules2);
@@ -155,7 +157,7 @@ public class DaleqAnalyser implements Analyser {
                     bindings2.remove("code"); // not used in template
                     bindings2.put("edb1IL",edbToHtml(edbDir1,JAR1PREFIX,"jar1"));  // IL = inlined
                     bindings2.put("edb2IL",edbToHtml(edbDir2,JAR2PREFIX,"jar2"));
-                    bindings2.put("rules",rulesToHtml(rulesPath));
+                    bindings2.put("rules",rulesToHtml(rulesLoc));
                     createBindingsForAdvancedDiff(bindings2,idb1,idb2,provDB1, provDB2);
                     String link2 = ResourceUtil.createReportFromTemplate(contextDir,this, resource, ADVANCED_DIFF_TEMPLATE,"advanced-diff.html", bindings2);
                     attachments.add(new AnalysisResultAttachment("advanced-diff",link2,AnalysisResultAttachment.Kind.DIFF));
@@ -192,7 +194,7 @@ public class DaleqAnalyser implements Analyser {
 
 
 
-    private IDB computeAndParseIDB(Path contextDir, Path classFile, Path edbDir, Path idbDir, Path mergedEDBAndRules,Path rulesPath) throws Exception {
+    private IDB computeAndParseIDB(Path contextDir, Path classFile, Path edbDir, Path idbDir, Path mergedEDBAndRules,URL rulesPath) throws Exception {
 
         if (Files.exists(edbDir)) {
             IOUtil.deleteDir(edbDir);
@@ -601,9 +603,10 @@ public class DaleqAnalyser implements Analyser {
     }
 
 
-    private String rulesToHtml(Path rules) throws IOException {
+    private String rulesToHtml(URL rules) throws IOException {
         StringBuffer html = new StringBuffer();
-        for (String line:Files.readAllLines(rules)) {
+        List<String> lines = new BufferedReader(new InputStreamReader(rules.openStream())).lines().collect(Collectors.toUnmodifiableList());
+        for (String line:lines) {
             String cssClass = null;
             String ruleId = null;
             line = line.trim();

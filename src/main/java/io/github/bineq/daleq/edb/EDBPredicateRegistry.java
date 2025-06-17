@@ -3,8 +3,11 @@ package io.github.bineq.daleq.edb;
 import io.github.bineq.daleq.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.File;
-import java.net.URL;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,24 +25,24 @@ public class EDBPredicateRegistry {
     static {
 
         LOG.info("Loading instruction predicate registry");
-        URL folder = EBDInstructionPredicate.class.getResource("/instruction-predicates");
-        assert folder != null;
-        File dir = new File(folder.getPath());
-        File[] files = dir.listFiles(f -> f.getName().endsWith(".json"));
-        LOG.info("{} instruction predicates found", files.length);
-        for (File file : files) {
-            try {
-                EBDInstructionPredicate predicate = EBDInstructionPredicate.fromJson(file);
+
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        try {
+            Resource[] resources = resolver.getResources("classpath*:instruction-predicates/*.json");
+            for (Resource resource : resources) {
+                String json = resource.getContentAsString(StandardCharsets.UTF_8);
+                EBDInstructionPredicate predicate = EBDInstructionPredicate.fromJson(json);
                 int opCode = predicate.getOpCode();
                 if (INSTRUCTION_PREDICATES.containsKey(opCode)) {
                     LOG.warn("Duplicate instruction predicate for op code {}", opCode);
                 }
                 INSTRUCTION_PREDICATES.put(opCode, predicate);
             }
-            catch (Exception x) {
-                LOG.error("Failed to load instruction predicate from " + file.getAbsolutePath(), x);
-            }
+        } catch (IOException e) {
+            LOG.error("Failed to load instruction predicate registry", e);
+            System.exit(2);
         }
+
         LOG.info(""+ INSTRUCTION_PREDICATES.size() + " instruction predicates loaded");
 
 

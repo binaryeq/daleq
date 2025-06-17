@@ -3,12 +3,19 @@ package io.github.bineq.daleq;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The interface to create the IDB using the souffle engine.
@@ -23,6 +30,7 @@ public class Souffle {
     public static final Path COMMON_RULES_DIR = Path.of(Souffle.class.getResource("/rules/commons/").getPath());
     public static final String LINE_SEP = System.getProperty("line.separator");
 
+
     /**
      * Create the DB.
      * @param edb - a file containing input predicate defs and facts
@@ -32,14 +40,38 @@ public class Souffle {
      * @param mergedEDBAndRules - a file where all rules and files will be merged into
      */
     public static void createIDB(Path edb, Path rules, Path edbDir, Path idbDir,Path mergedEDBAndRules) throws IOException, InterruptedException {
+        Preconditions.checkState(Files.exists(rules));
+        List<String> ruleDefs = Files.readAllLines(rules);
+        createIDB(edb,ruleDefs,edbDir,idbDir,mergedEDBAndRules,rules.toString());
+    }
+
+    /**
+     * Create the DB.
+     * @param edb - a file containing input predicate defs and facts
+     * @param rules - a URL containing output predicate defs and rules
+     * @param edbDir - a folder containing .fact files referenced in the edb
+     * @param idbDir - a folder where inferred facts for output relations will be stored
+     * @param mergedEDBAndRules - a file where all rules and files will be merged into
+     */
+    public static void createIDB(Path edb, URL rules, Path edbDir, Path idbDir, Path mergedEDBAndRules) throws IOException, InterruptedException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(rules.openStream()));) {
+            List<String> ruleDefs = reader.lines().collect(Collectors.toUnmodifiableList());
+            createIDB(edb,ruleDefs,edbDir,idbDir,mergedEDBAndRules,rules.toString());
+        } catch (IOException x) {
+            LOG.error("Failed to load rules from {}", rules);
+            throw x;
+        }
+
+    }
+
+    private static void createIDB(Path edb, List<String> rules, Path edbDir, Path idbDir,Path mergedEDBAndRules,String rulesLoc) throws IOException, InterruptedException {
         Path souffle = getAndCheckSouffleExe();
 
         LOG.info("Using souffle {}", souffle);
 
         Preconditions.checkState(Files.exists(edb));
         LOG.info("Using edb {}", edb);
-        Preconditions.checkState(Files.exists(rules));
-        LOG.info("Using rules {}", rules);
+        LOG.info("Using rules {}", rulesLoc);
         Preconditions.checkState(Files.exists(edbDir));
         Preconditions.checkState(Files.isDirectory(edbDir));
         LOG.info("Using edb direcory {}", edbDir);
@@ -55,23 +87,21 @@ public class Souffle {
         List lines = new ArrayList();
         lines.addAll(List.of("",COMMENT_SEP,"// EDB from "+edb,COMMENT_SEP,""));
         lines.addAll(Files.readAllLines(edb));
-        lines.addAll(List.of("",COMMENT_SEP,"// RULES from "+rules,COMMENT_SEP,""));
-        lines.addAll(Files.readAllLines(rules));
+        lines.addAll(List.of("",COMMENT_SEP,"// RULES from "+rulesLoc,COMMENT_SEP,""));
+        lines.addAll(rules);
 
         // common rule sets
-        Files.walk(COMMON_RULES_DIR)
-            .filter(Files::isRegularFile)
-            .filter(f -> f.getFileName().toString().endsWith(".souffle"))
-            .forEach(f -> {
-                lines.addAll(List.of("",COMMENT_SEP,"// COMMON RULES from " + f,COMMENT_SEP,""));
-                try {
-                    List<String> moreLines = Files.readAllLines(f);
-                    lines.addAll(moreLines);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-            });
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        Resource[] resources = resolver.getResources("classpath*:rules/commons/**/*souffle");
+        for (Resource resource : resources) {
+            lines.addAll(List.of("",COMMENT_SEP,"// COMMON RULES from " + resource,COMMENT_SEP,""));
+            try {
+                List<String> moreLines = resource.getContentAsString(StandardCharsets.UTF_8).lines().collect(Collectors.toUnmodifiableList());
+                lines.addAll(moreLines);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        };
 
 
         Files.write(mergedEDBAndRules, lines);

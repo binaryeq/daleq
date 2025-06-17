@@ -163,7 +163,7 @@ public class Main {
 
         Files.write(report, document.html().getBytes());
         Path css = outPath.resolve("daleq.css");
-        Files.copy(Path.of(CSS.getPath()),css, StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(CSS.openStream(),css, StandardCopyOption.REPLACE_EXISTING);
         LOG.info("report written to {}", report);
 
         new ProcessBuilder("open",report.toFile().getAbsolutePath())

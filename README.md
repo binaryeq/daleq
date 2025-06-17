@@ -19,8 +19,17 @@ java -DSOUFFLE=<path-to-souffle> -cp "target/classes:target/dependency/*" io.git
  -s2,--src2 <arg>   the second jar file with source code to compare (optional)
 ```
 
-There is an [open issue](https://github.com/binaryeq/daleq/issues/28) that prevents building 
-a more convenient executable super-jar. 
+The jar built can also be used directly as an executable superjar.
+
+```
+java -DSOUFFLE=<path-to-souffle> -jar target/daleq-<daleq-version>.jar  \
+
+ -j1,--jar1 <arg>   the first jar file to compare (required)
+ -j2,--jar2 <arg>   the second jar file to compare (required)
+ -o,--out <arg>     the output folder where the report will be generated (required)
+ -s1,--src1 <arg>   the first jar file with source code to compare (optional)
+ -s2,--src2 <arg>   the second jar file with source code to compare (optional)
+```
 
 Running the program will create a report `report.html` in the specified output folder.
 
