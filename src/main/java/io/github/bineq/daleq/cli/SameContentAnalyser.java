@@ -18,6 +18,10 @@ public class SameContentAnalyser implements Analyser {
     private static final String DIFF_REPORT_NAME = "diff.html";
     private static final Logger LOG = LoggerFactory.getLogger(SameContentAnalyser.class);
 
+    @Override
+    public int positionHint() {
+        return 50;
+    }
 
     @Override
     public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {

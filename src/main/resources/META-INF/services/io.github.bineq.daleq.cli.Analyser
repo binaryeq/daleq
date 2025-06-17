@@ -1,0 +1,7 @@
+io.github.bineq.daleq.cli.ResourceIsPresentAnalyser
+io.github.bineq.daleq.cli.SameSourceCodeAnalyser
+io.github.bineq.daleq.cli.EquivalentSourceCodeAnalyser
+io.github.bineq.daleq.cli.SameContentAnalyser
+io.github.bineq.daleq.cli.VerboseJavapAnalyser
+io.github.bineq.daleq.cli.CompactJavapAnalyser
+io.github.bineq.daleq.cli.DaleqAnalyser

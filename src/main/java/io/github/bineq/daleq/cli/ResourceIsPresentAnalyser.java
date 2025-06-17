@@ -18,6 +18,10 @@ public class ResourceIsPresentAnalyser implements Analyser {
 
     private static final URL DIFF_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.ResourceIsPresentAnalyser/diff.html");
 
+    @Override
+    public int positionHint() {
+        return 10;
+    }
 
     @Override
     public AnalysisResult analyse(String resource, Path jar1, Path jar2,Path contextDir) throws IOException {

@@ -13,7 +13,6 @@ import io.github.bineq.daleq.souffle.provenance.ProvenanceDB;
 import io.github.bineq.daleq.souffle.provenance.ProvenanceParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,7 +24,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import static io.github.bineq.daleq.Souffle.checkSouffleExe;
 
 /**
@@ -56,6 +54,21 @@ public class DaleqAnalyser implements Analyser {
         Path analysisFolder = ResourceUtil.createAnalysisFolder(outDir,this);
         IOUtil.copy(equivalenceIsInferredFromEqualityResource, analysisFolder.resolve(equivalenceIsInferredFromEqualityResourceHtmlReportName));
         equivalenceIsInferredFromEqualityLink = ResourceUtil.createLink(this,equivalenceIsInferredFromEqualityResourceHtmlReportName);
+    }
+
+    @Override
+    public String name() {
+        return "daleq";
+    }
+
+    @Override
+    public String description() {
+        return "daleq based analyser";
+    }
+
+    @Override
+    public int positionHint() {
+        return 90;
     }
 
     @Override
@@ -218,17 +231,6 @@ public class DaleqAnalyser implements Analyser {
 
         return IDBReader.read(idbDir);
 
-    }
-
-
-    @Override
-    public String name() {
-        return "daleq";
-    }
-
-    @Override
-    public String description() {
-        return "daleq based analyser";
     }
 
 
@@ -601,7 +603,6 @@ public class DaleqAnalyser implements Analyser {
             .replaceAll("<", "&lt;")
             .replaceAll(">", "&gt;");
     }
-
 
     private String rulesToHtml(URL rules) throws IOException {
         StringBuffer html = new StringBuffer();

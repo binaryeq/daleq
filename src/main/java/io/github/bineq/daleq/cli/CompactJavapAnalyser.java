@@ -21,4 +21,9 @@ public class CompactJavapAnalyser extends AbstractJavapAnalyser {
     public String description() {
         return "using the standard java disassembler: \"javap -c -p\"";
     }
+
+    @Override
+    public int positionHint() {
+        return 80;
+    }
 }

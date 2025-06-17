@@ -27,6 +27,11 @@ public interface Analyser {
 
     String description();
 
+    // this will be used to sort analysert output and determine the order of columns in generated reports
+    // Use values from 0-100
+    // columns with outputs of analysers with low positionHint values go to the left
+    int positionHint();
+
     // init the analyser, i.e. create an analysis folder and copy static resources into it
     default void init(Path outDir) throws IOException {};
 

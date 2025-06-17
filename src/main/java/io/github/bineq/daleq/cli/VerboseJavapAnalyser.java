@@ -11,6 +11,10 @@ public class VerboseJavapAnalyser extends AbstractJavapAnalyser {
         return new String[]{"-v"};
     }
 
+    @Override
+    public int positionHint() {
+        return 70;
+    }
 
     @Override
     public String name() {

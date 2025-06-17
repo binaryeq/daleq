@@ -230,3 +230,17 @@ When souffle is used, a `Thread::sleep` instruction is used to pause DALEQ.
 This reduces the number of errors (perhaps a souffle race condition?), but makes DALEQ slower. 
 
 Souffle issues will be reported by the appplication, and flagged as __error__ .
+
+### Adding Your Own Analyser
+
+Additional analysers can be easily added by following those steps: 
+
+1. Write an analyser (say `MyAnalyser`) implementing `io.github.bineq.daleq.cli.Analyser`
+2. In your project, add a file `src/main/resources/META-INF/services/io.github.bineq.daleq.cli.Analyser`
+3. Add a line with the fully qualified name of `MyAnalyser` to this file
+4. Build a jar file
+5. When running DALEQ, add this jar file to the classpath
+6. Note that the order in which columns are displayed in reports is determined by the property `io.github.bineq.daleq.cli.Analyser::positionHint`, a values between 0 and 100. 
+
+
+

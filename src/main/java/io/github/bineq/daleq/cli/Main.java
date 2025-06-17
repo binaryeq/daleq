@@ -14,10 +14,11 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Comparator;
 import java.util.List;
+import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * CLI. Produces a html report.
@@ -39,15 +40,11 @@ public class Main {
         OUT.setRequired(true);
     }
 
-    public static final Analyser[] ANALYSERS = new Analyser[]{
-        new ResourceIsPresentAnalyser(),
-        new SameSourceCodeAnalyser(),
-        new EquivalentSourceCodeAnalyser(),
-        new SameContentAnalyser(),
-        new VerboseJavapAnalyser(),
-        new CompactJavapAnalyser(),
-        new DaleqAnalyser()
-    };
+    public static final List<Analyser> ANALYSERS =
+        ServiceLoader.load(Analyser.class).stream()
+            .map(p -> p.get())
+            .sorted(Comparator.comparingInt(Analyser::positionHint))
+            .collect(Collectors.toUnmodifiableList());
 
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
@@ -105,7 +102,7 @@ public class Main {
     private static void analyse(Path jar1, Path jar2, Path src1, Path src2, Path outPath) throws IOException {
 
         boolean sourceAvailable = src1!=null && src2!=null;
-        List<Analyser> analysers = Stream.of(ANALYSERS)
+        List<Analyser> analysers = ANALYSERS.stream()
             .filter(anal -> anal.isBytecodeAnalyser() || sourceAvailable)
             .collect(Collectors.toUnmodifiableList());
 

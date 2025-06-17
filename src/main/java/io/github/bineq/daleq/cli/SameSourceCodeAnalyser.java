@@ -26,6 +26,11 @@ public class SameSourceCodeAnalyser implements Analyser {
     }
 
     @Override
+    public int positionHint() {
+        return 30;
+    }
+
+    @Override
     public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
 
         // locate source -- TODO: kotlin & co
