@@ -20,9 +20,8 @@ IDB_INVOKEVIRTUAL(cat("R_ADD_PR5165","[",factid1,",",factid2,"]"),methodid,instr
 
 // **************************************************************
 
-
 // NORMALISATION PATTERN: Inline $values() method in enumerations
-// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
+// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N10.
 
 // (1) removal
 .decl IS_ENUM_VALUE_SYNTH_METHOD(factid: symbol,id: symbol)
