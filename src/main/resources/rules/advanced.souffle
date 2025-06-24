@@ -63,6 +63,15 @@ REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"
 
 // **************************************************************
 
+// NORMALISATION PATTERN: Null checks in method reference operator
+// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N6.
+
+// REMOVED_INSTRUCTION(cat("R_REMOVE_NULLCHECK","[",factid1,"]"),methodid,instructioncounter) :- INVOKESTATIC(factid1,methodid,instructioncounter,"java/util/Objects","requireNonNull","(Ljava/lang/Object;)Ljava/lang/Object;",_).
+// IDB_INVOKEVIRTUAL(cat("R_REPLACE_NULLCHECK","[",factid1,"]"),methodid,instructioncounter,"java/lang/Object","getClass","()Ljava/lang/Class;",itf) :- INVOKESTATIC(factid1,methodid,instructioncounter,"java/util/Objects","requireNonNull","(Ljava/lang/Object;)Ljava/lang/Object;",itf).
+// DISABLED !
+// see also https://github.com/binaryeq/daleq/issues/29 for discussion on soundness
+
+// **************************************************************
 
 // auxiliary predicate used in standard rules to reprersent any instruction
 .decl IDB_INSTRUCTION(factid: symbol,methodid: symbol,instructioncounter: number,instructionName: symbol)

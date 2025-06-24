@@ -109,6 +109,7 @@ public class Souffle {
 
         LOG.info("Starting souffle");
         Process process = new ProcessBuilder(souffle.toString(),"-F",edbDir.toString(),"-D",idbDir.toString(),mergedEDBAndRules.toString())
+            .inheritIO()
             .start();
 
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));

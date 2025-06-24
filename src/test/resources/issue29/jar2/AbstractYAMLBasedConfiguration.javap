@@ -1,0 +1,220 @@
+Compiled from "AbstractYAMLBasedConfiguration.java"
+public class org.apache.commons.configuration2.AbstractYAMLBasedConfiguration extends org.apache.commons.configuration2.BaseHierarchicalConfiguration {
+  protected org.apache.commons.configuration2.AbstractYAMLBasedConfiguration();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":()V
+       4: aload_0
+       5: new           #2                  // class org/apache/commons/configuration2/io/ConfigurationLogger
+       8: dup
+       9: aload_0
+      10: invokevirtual #3                  // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      13: invokespecial #4                  // Method org/apache/commons/configuration2/io/ConfigurationLogger."<init>":(Ljava/lang/Class;)V
+      16: invokevirtual #5                  // Method initLogger:(Lorg/apache/commons/configuration2/io/ConfigurationLogger;)V
+      19: return
+
+  protected org.apache.commons.configuration2.AbstractYAMLBasedConfiguration(org.apache.commons.configuration2.HierarchicalConfiguration<org.apache.commons.configuration2.tree.ImmutableNode>);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #6                  // Method org/apache/commons/configuration2/BaseHierarchicalConfiguration."<init>":(Lorg/apache/commons/configuration2/HierarchicalConfiguration;)V
+       5: aload_0
+       6: new           #2                  // class org/apache/commons/configuration2/io/ConfigurationLogger
+       9: dup
+      10: aload_0
+      11: invokevirtual #3                  // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      14: invokespecial #4                  // Method org/apache/commons/configuration2/io/ConfigurationLogger."<init>":(Ljava/lang/Class;)V
+      17: invokevirtual #5                  // Method initLogger:(Lorg/apache/commons/configuration2/io/ConfigurationLogger;)V
+      20: return
+
+  protected void load(java.util.Map<java.lang.String, java.lang.Object>);
+    Code:
+       0: ldc           #7                  // String
+       2: aload_1
+       3: invokestatic  #8                  // Method constructHierarchy:(Ljava/lang/String;Ljava/lang/Object;)Ljava/util/List;
+       6: astore_2
+       7: aload_0
+       8: invokevirtual #9                  // Method getNodeModel:()Lorg/apache/commons/configuration2/tree/InMemoryNodeModel;
+      11: aload_2
+      12: iconst_0
+      13: invokeinterface #10,  2           // InterfaceMethod java/util/List.get:(I)Ljava/lang/Object;
+      18: checkcast     #11                 // class org/apache/commons/configuration2/tree/ImmutableNode
+      21: invokevirtual #12                 // Method org/apache/commons/configuration2/tree/InMemoryNodeModel.setRootNode:(Lorg/apache/commons/configuration2/tree/ImmutableNode;)V
+      24: return
+
+  protected java.util.Map<java.lang.String, java.lang.Object> constructMap(org.apache.commons.configuration2.tree.ImmutableNode);
+    Code:
+       0: new           #13                 // class java/util/HashMap
+       3: dup
+       4: aload_1
+       5: invokevirtual #14                 // Method org/apache/commons/configuration2/tree/ImmutableNode.getChildren:()Ljava/util/List;
+       8: invokeinterface #15,  1           // InterfaceMethod java/util/List.size:()I
+      13: invokespecial #16                 // Method java/util/HashMap."<init>":(I)V
+      16: astore_2
+      17: aload_1
+      18: aload_0
+      19: aload_2
+      20: invokedynamic #17,  0             // InvokeDynamic #0:accept:(Lorg/apache/commons/configuration2/AbstractYAMLBasedConfiguration;Ljava/util/Map;)Ljava/util/function/Consumer;
+      25: invokevirtual #18                 // Method org/apache/commons/configuration2/tree/ImmutableNode.forEach:(Ljava/util/function/Consumer;)V
+      28: aload_2
+      29: areturn
+
+  private static void addEntry(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokeinterface #19,  2           // InterfaceMethod java/util/Map.get:(Ljava/lang/Object;)Ljava/lang/Object;
+       7: astore_3
+       8: aload_3
+       9: ifnonnull     24
+      12: aload_0
+      13: aload_1
+      14: aload_2
+      15: invokeinterface #20,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      20: pop
+      21: goto          86
+      24: aload_3
+      25: instanceof    #21                 // class java/util/Collection
+      28: ifeq          49
+      31: aload_3
+      32: checkcast     #21                 // class java/util/Collection
+      35: astore        4
+      37: aload         4
+      39: aload_2
+      40: invokeinterface #22,  2           // InterfaceMethod java/util/Collection.add:(Ljava/lang/Object;)Z
+      45: pop
+      46: goto          86
+      49: new           #23                 // class java/util/ArrayList
+      52: dup
+      53: invokespecial #24                 // Method java/util/ArrayList."<init>":()V
+      56: astore        4
+      58: aload         4
+      60: aload_3
+      61: invokeinterface #22,  2           // InterfaceMethod java/util/Collection.add:(Ljava/lang/Object;)Z
+      66: pop
+      67: aload         4
+      69: aload_2
+      70: invokeinterface #22,  2           // InterfaceMethod java/util/Collection.add:(Ljava/lang/Object;)Z
+      75: pop
+      76: aload_0
+      77: aload_1
+      78: aload         4
+      80: invokeinterface #20,  3           // InterfaceMethod java/util/Map.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      85: pop
+      86: return
+
+  private static java.util.List<org.apache.commons.configuration2.tree.ImmutableNode> constructHierarchy(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_1
+       1: instanceof    #25                 // class java/util/Map
+       4: ifeq          16
+       7: aload_1
+       8: checkcast     #25                 // class java/util/Map
+      11: aload_0
+      12: invokestatic  #26                 // Method parseMap:(Ljava/util/Map;Ljava/lang/String;)Ljava/util/List;
+      15: areturn
+      16: aload_1
+      17: instanceof    #21                 // class java/util/Collection
+      20: ifeq          32
+      23: aload_1
+      24: checkcast     #21                 // class java/util/Collection
+      27: aload_0
+      28: invokestatic  #27                 // Method parseCollection:(Ljava/util/Collection;Ljava/lang/String;)Ljava/util/List;
+      31: areturn
+      32: new           #28                 // class org/apache/commons/configuration2/tree/ImmutableNode$Builder
+      35: dup
+      36: invokespecial #29                 // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder."<init>":()V
+      39: aload_0
+      40: invokevirtual #30                 // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder.name:(Ljava/lang/String;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
+      43: aload_1
+      44: invokevirtual #31                 // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder.value:(Ljava/lang/Object;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
+      47: invokevirtual #32                 // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder.create:()Lorg/apache/commons/configuration2/tree/ImmutableNode;
+      50: invokestatic  #33                 // Method java/util/Collections.singletonList:(Ljava/lang/Object;)Ljava/util/List;
+      53: areturn
+
+  private static java.util.List<org.apache.commons.configuration2.tree.ImmutableNode> parseMap(java.util.Map<java.lang.String, java.lang.Object>, java.lang.String);
+    Code:
+       0: new           #28                 // class org/apache/commons/configuration2/tree/ImmutableNode$Builder
+       3: dup
+       4: invokespecial #29                 // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder."<init>":()V
+       7: aload_1
+       8: invokevirtual #30                 // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder.name:(Ljava/lang/String;)Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;
+      11: astore_2
+      12: aload_0
+      13: aload_2
+      14: invokedynamic #34,  0             // InvokeDynamic #1:accept:(Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;)Ljava/util/function/BiConsumer;
+      19: invokeinterface #35,  2           // InterfaceMethod java/util/Map.forEach:(Ljava/util/function/BiConsumer;)V
+      24: aload_2
+      25: invokevirtual #32                 // Method org/apache/commons/configuration2/tree/ImmutableNode$Builder.create:()Lorg/apache/commons/configuration2/tree/ImmutableNode;
+      28: invokestatic  #33                 // Method java/util/Collections.singletonList:(Ljava/lang/Object;)Ljava/util/List;
+      31: areturn
+
+  private static java.util.List<org.apache.commons.configuration2.tree.ImmutableNode> parseCollection(java.util.Collection<java.lang.Object>, java.lang.String);
+    Code:
+       0: aload_0
+       1: invokeinterface #36,  1           // InterfaceMethod java/util/Collection.stream:()Ljava/util/stream/Stream;
+       6: aload_1
+       7: invokedynamic #37,  0             // InvokeDynamic #2:apply:(Ljava/lang/String;)Ljava/util/function/Function;
+      12: invokeinterface #38,  2           // InterfaceMethod java/util/stream/Stream.flatMap:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      17: invokestatic  #39                 // Method java/util/stream/Collectors.toList:()Ljava/util/stream/Collector;
+      20: invokeinterface #40,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      25: checkcast     #41                 // class java/util/List
+      28: areturn
+
+  static void rethrowException(java.lang.Exception) throws org.apache.commons.configuration2.ex.ConfigurationException;
+    Code:
+       0: aload_0
+       1: instanceof    #42                 // class java/lang/ClassCastException
+       4: ifeq          18
+       7: new           #43                 // class org/apache/commons/configuration2/ex/ConfigurationException
+      10: dup
+      11: ldc           #44                 // String Error parsing
+      13: aload_0
+      14: invokespecial #45                 // Method org/apache/commons/configuration2/ex/ConfigurationException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      17: athrow
+      18: new           #43                 // class org/apache/commons/configuration2/ex/ConfigurationException
+      21: dup
+      22: ldc           #46                 // String Unable to load the configuration
+      24: aload_0
+      25: invokespecial #45                 // Method org/apache/commons/configuration2/ex/ConfigurationException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      28: athrow
+
+  private static java.util.stream.Stream lambda$parseCollection$2(java.lang.String, java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokestatic  #8                  // Method constructHierarchy:(Ljava/lang/String;Ljava/lang/Object;)Ljava/util/List;
+       5: invokeinterface #47,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      10: areturn
+
+  private static void lambda$parseMap$1(org.apache.commons.configuration2.tree.ImmutableNode$Builder, java.lang.String, java.lang.Object);
+    Code:
+       0: aload_1
+       1: aload_2
+       2: invokestatic  #8                  // Method constructHierarchy:(Ljava/lang/String;Ljava/lang/Object;)Ljava/util/List;
+       5: aload_0
+       6: dup
+       7: invokevirtual #3                  // Method java/lang/Object.getClass:()Ljava/lang/Class;
+      10: pop
+      11: invokedynamic #48,  0             // InvokeDynamic #3:accept:(Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;)Ljava/util/function/Consumer;
+      16: invokeinterface #49,  2           // InterfaceMethod java/util/List.forEach:(Ljava/util/function/Consumer;)V
+      21: return
+
+  private void lambda$constructMap$0(java.util.Map, org.apache.commons.configuration2.tree.ImmutableNode);
+    Code:
+       0: aload_1
+       1: aload_2
+       2: invokevirtual #50                 // Method org/apache/commons/configuration2/tree/ImmutableNode.getNodeName:()Ljava/lang/String;
+       5: aload_2
+       6: invokevirtual #14                 // Method org/apache/commons/configuration2/tree/ImmutableNode.getChildren:()Ljava/util/List;
+       9: invokeinterface #51,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+      14: ifeq          24
+      17: aload_2
+      18: invokevirtual #52                 // Method org/apache/commons/configuration2/tree/ImmutableNode.getValue:()Ljava/lang/Object;
+      21: goto          29
+      24: aload_0
+      25: aload_2
+      26: invokevirtual #53                 // Method constructMap:(Lorg/apache/commons/configuration2/tree/ImmutableNode;)Ljava/util/Map;
+      29: invokestatic  #54                 // Method addEntry:(Ljava/util/Map;Ljava/lang/String;Ljava/lang/Object;)V
+      32: return
+}
