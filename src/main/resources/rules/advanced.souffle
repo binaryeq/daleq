@@ -64,14 +64,15 @@ REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"
 // **************************************************************
 
 // NORMALISATION PATTERN: Null checks in method reference operator
-// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N6.
+// see also: Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N6.
+// see also: https://bugs.openjdk.org/browse/JDK-8073432
 
 // auxiliary predicate
-.decl NON_NULL_CHECK(factid: symbol, methodid: symbol, instructioncounter: number)
+.decl LEGACY_NON_NULL_CHECK(factid: symbol, methodid: symbol, instructioncounter: number)
 // the DUP before and the POP after ensure that the stack after the invocation remains the same
-NON_NULL_CHECK(cat("R_OLD_NULLCHECK","[",factid1,",",factid2,",",factid3,"]"),methodid,instructioncounter) :- INVOKEVIRTUAL(factid1,methodid,instructioncounter,"java/lang/Object","getClass","()Ljava/lang/Class;",_),DUP(factid2,methodid,instructioncounter-100),POP(factid3,methodid,instructioncounter+100).
-IDB_INVOKESTATIC(cat("R_REPLACE_OLD_NULLCHECK","[",factid1,"]"),methodid,instructioncounter,"java/util/Objects","requireNonNull","(Ljava/lang/Object;)Ljava/lang/Object;",0) :- NON_NULL_CHECK(factid1,methodid,instructioncounter).
-REMOVED_INSTRUCTION(cat("R_REMOVE_OLD_NULLCHECK","[",factid1,"]"),methodid,instructioncounter) :- NON_NULL_CHECK(factid1,methodid,instructioncounter).
+LEGACY_NON_NULL_CHECK(cat("R_OLD_NULLCHECK","[",factid1,",",factid2,",",factid3,"]"),methodid,instructioncounter) :- INVOKEVIRTUAL(factid1,methodid,instructioncounter,"java/lang/Object","getClass","()Ljava/lang/Class;",_),DUP(factid2,methodid,instructioncounter-100),POP(factid3,methodid,instructioncounter+100).
+IDB_INVOKESTATIC(cat("R_REPLACE_OLD_NULLCHECK","[",factid1,"]"),methodid,instructioncounter,"java/util/Objects","requireNonNull","(Ljava/lang/Object;)Ljava/lang/Object;",0) :- LEGACY_NON_NULL_CHECK(factid1,methodid,instructioncounter).
+REMOVED_INSTRUCTION(cat("R_REMOVE_OLD_NULLCHECK","[",factid1,"]"),methodid,instructioncounter) :- LEGACY_NON_NULL_CHECK(factid1,methodid,instructioncounter).
 
 // **************************************************************
 
