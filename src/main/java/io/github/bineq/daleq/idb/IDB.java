@@ -21,11 +21,13 @@ public class IDB {
     static final Comparator<Fact> COMPARE_BY_SLOT_1 = Comparator.comparing(f -> f.values()[1].toString());
     static final Comparator<Fact> COMPARE_BY_PREDICATE_NAME = Comparator.comparing(f -> f.predicate().getName());
     static final Comparator<Fact> COMPARE_INSTRUCTION_FACTS_BY_POSITION = Comparator.comparingInt(f -> ((Integer) f.values()[2]));
+    static final Comparator<Fact> COMPARE_ANNOTATION_FACTS_BY_ANNOTATION_TYPE = Comparator.comparing(f -> ((String) f.values()[2]));
 
     Fact classSuperclassFact = null;
     Fact classSignatureFact = null;
     Fact bytecodeVersionFact = null;
     List<Fact> classInterfaceFacts = new ArrayList<>();
+    Set<Fact> classAnnotationFacts = new TreeSet<>(COMPARE_ANNOTATION_FACTS_BY_ANNOTATION_TYPE);
     Fact classRawAccessFact = null; // raw, value is single fact for all int-encoded access flags
     Set<Fact> classAccessFacts = new TreeSet<>(COMPARE_BY_PREDICATE_NAME);
 
@@ -42,10 +44,12 @@ public class IDB {
     Map<String,Set<Fact>> methodAccessFacts = new HashMap<>();
     Map<String,Fact> methodSignatureFacts = new HashMap<>();
     Map<String,Collection<Fact>> methodInstructionFacts = new HashMap<>();
+    Map<String,Set<Fact>> methodAnnotationFacts = new HashMap<>();
 
     Map<String,Set<Fact>> fieldAccessFacts = new HashMap<>();
     Map<String,Fact> fieldRawAccessFacts = new HashMap<>(); // raw, value is single fact for all int-encoded access flags
     Map<String,Fact> fieldSignatureFacts = new HashMap<>();
+    Map<String,Set<Fact>> fieldAnnotationFacts = new HashMap<>();
 
     public Fact getClassSuperclassFact() {
         return classSuperclassFact;
@@ -100,6 +104,22 @@ public class IDB {
 
     public Set<Fact> getRemovedFieldFacts() {
         return removedFieldFacts;
+    }
+
+    public Map<String, Set<Fact>> getMethodAnnotationFacts() {
+        return methodAnnotationFacts;
+    }
+
+    public Map<String, Set<Fact>> getFieldAnnotationFacts() {
+        return fieldAnnotationFacts;
+    }
+
+    public Set<Fact> getClassAnnotationFacts() {
+        return classAnnotationFacts;
+    }
+
+    public Map<String, Set<Fact>> getMovedInstructionFacts() {
+        return movedInstructionFacts;
     }
 
     // note that set is sorted so order is predictable
@@ -173,6 +193,9 @@ public class IDB {
         idb.fieldRawAccessFacts = project(this.fieldRawAccessFacts);
         idb.fieldSignatureFacts = project(this.fieldSignatureFacts);
         idb.methodInstructionFacts = new HashMap<>();
+        idb.classAnnotationFacts = project(this.classAnnotationFacts);
+        idb.methodAnnotationFacts = project2(this.methodAnnotationFacts);
+        idb.fieldAnnotationFacts = project2(this.fieldAnnotationFacts);
         for (String method:methodInstructionFacts.keySet()) {
             Collection<Fact> facts = new ArrayList<>();
             idb.methodInstructionFacts.put(method,facts);
@@ -281,11 +304,15 @@ public class IDB {
             Objects.equals(methodInstructionFacts, idb.methodInstructionFacts) &&
             Objects.equals(fieldAccessFacts, idb.fieldAccessFacts) &&
             Objects.equals(fieldRawAccessFacts, idb.fieldRawAccessFacts) &&
-            Objects.equals(fieldSignatureFacts, idb.fieldSignatureFacts);
+            Objects.equals(fieldSignatureFacts, idb.fieldSignatureFacts) &&
+            Objects.equals(classAnnotationFacts, idb.classAnnotationFacts) &&
+            Objects.equals(methodAnnotationFacts, idb.methodAnnotationFacts) &&
+            Objects.equals(fieldAnnotationFacts, idb.fieldAnnotationFacts)
+            ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(classSuperclassFact, classSignatureFact, bytecodeVersionFact, classInterfaceFacts, classRawAccessFact, classAccessFacts, methodFacts, fieldFacts, removedMethodFacts, removedFieldFacts, methodRawAccessFacts, methodAccessFacts, methodSignatureFacts, methodInstructionFacts, fieldAccessFacts, fieldRawAccessFacts, fieldSignatureFacts);
+        return Objects.hash(classSuperclassFact, classSignatureFact, bytecodeVersionFact, classInterfaceFacts, classRawAccessFact, classAccessFacts, methodFacts, fieldFacts, removedMethodFacts, removedFieldFacts, methodRawAccessFacts, methodAccessFacts, methodSignatureFacts, methodInstructionFacts, fieldAccessFacts, fieldRawAccessFacts, fieldSignatureFacts, classAnnotationFacts, methodAnnotationFacts, fieldAnnotationFacts);
     }
 }

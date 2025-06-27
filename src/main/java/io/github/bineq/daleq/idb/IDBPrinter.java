@@ -179,6 +179,11 @@ public class IDBPrinter {
             lines.add(stringify(accessFact));
         }
 
+        lines.addAll(comment1("class annotations"));
+        for (Fact annotationFact:idb.classAnnotationFacts) {
+            lines.add(stringify(annotationFact));
+        }
+
         lines.addAll(comment1("list of fields"));
         for (Fact fieldFact:idb.fieldFacts) {
             lines.add(stringify(fieldFact));
@@ -200,6 +205,11 @@ public class IDBPrinter {
             lines.add(stringify(fieldRawAccessFact));
             for (Fact fieldAccessFact:idb.fieldAccessFacts.getOrDefault(fieldId,Set.of())) {
                 lines.add(stringify(fieldAccessFact));
+            }
+
+            lines.addAll(comment2("annotations for field " + fieldId));
+            for (Fact annotationFact:idb.fieldAnnotationFacts.getOrDefault(fieldId,Set.of())) {
+                lines.add(stringify(annotationFact));
             }
         }
 
@@ -223,6 +233,11 @@ public class IDBPrinter {
             lines.add(stringify(methodRawAccessFact));
             for (Fact methodAccessFact:idb.methodAccessFacts.getOrDefault(methodId, Set.of())) {
                 lines.add(stringify(methodAccessFact));
+            }
+
+            lines.addAll(comment2("annotations for method " + methodId));
+            for (Fact annotationFact:idb.methodAnnotationFacts.getOrDefault(methodId,Set.of())) {
+                lines.add(stringify(annotationFact));
             }
 
             lines.addAll(comment2("instructions for method " + methodId));

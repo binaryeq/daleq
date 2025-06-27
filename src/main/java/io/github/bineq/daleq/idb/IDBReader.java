@@ -12,6 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static io.github.bineq.daleq.idb.IDB.COMPARE_ANNOTATION_FACTS_BY_ANNOTATION_TYPE;
 import static io.github.bineq.daleq.idb.IDB.COMPARE_INSTRUCTION_FACTS_BY_POSITION;
 
 /**
@@ -105,7 +106,6 @@ public class IDBReader {
                     String fieldId = getFieldId(fact);
                     idb.fieldSignatureFacts.put(fieldId,fact);
                 }
-
                 else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.ACCESS)) {
                     String classOrMethodOrFieldId = getClassOrMethodOrFieldId(fact);
                     Type type = classify(classOrMethodOrFieldId);
@@ -117,6 +117,22 @@ public class IDBReader {
                     }
                     else if (type==Type.METHOD) {
                         idb.methodRawAccessFacts.put(classOrMethodOrFieldId,fact);
+                    }
+                }
+                else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.ANNOTATION)) {
+                    System.out.println(predicateName);
+                    String classOrMethodOrFieldId = getClassOrMethodOrFieldId(fact);
+                    Type type = classify(classOrMethodOrFieldId);
+                    if (type==Type.CLASS) {
+                        idb.classAnnotationFacts.add(fact);
+                    }
+                    else if (type==Type.FIELD) {
+                        Collection<Fact> annotationFacts = idb.fieldAnnotationFacts.computeIfAbsent(classOrMethodOrFieldId, mId -> new TreeSet<>(COMPARE_ANNOTATION_FACTS_BY_ANNOTATION_TYPE));
+                        annotationFacts.add(fact);
+                    }
+                    else if (type==Type.METHOD) {
+                        Collection<Fact> annotationFacts = idb.methodAnnotationFacts.computeIfAbsent(classOrMethodOrFieldId, mId -> new TreeSet<>(COMPARE_ANNOTATION_FACTS_BY_ANNOTATION_TYPE));
+                        annotationFacts.add(fact);
                     }
                 }
 

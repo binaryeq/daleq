@@ -114,6 +114,10 @@ IDB_METHOD_SIGNATURE(cat("R_METHOD_SIGNATURE","[",factid,"]"),methodid,signature
 IDB_ACCESS(cat("R_ACCESS","[",factid,"]"),id,access) :- ACCESS(factid,id,access).
 .output IDB_ACCESS
 
+.decl IDB_ANNOTATION(factid: symbol,id: symbol,annotation: symbol,parameters: symbol)
+IDB_ANNOTATION(cat("R_ANNOTATION","[",factid,"]"),id,annotation,parameters) :- ANNOTATION(factid,id,annotation,parameters).
+.output IDB_ANNOTATION
+
 .decl IDB_LABEL(factid: symbol,methodid: symbol,instructioncounter: number,labelid: symbol)
 IDB_LABEL(cat("R_LABEL","[",factid,"]"),methodid,instructioncounter,labelid) :- LABEL(factid,methodid,instructioncounter,labelid),!REMOVED_INSTRUCTION(_,methodid,instructioncounter).
 .output IDB_LABEL

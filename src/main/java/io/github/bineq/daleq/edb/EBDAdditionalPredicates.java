@@ -26,9 +26,12 @@ public enum EBDAdditionalPredicates implements Predicate {
     // method properties
     METHOD_SIGNATURE(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),symslot("signature")),
 
-    // property of classes, interfaces and methods
+    // property of classes, interfaces, fields and methods
     // the id is the unique name of this class, method or field
     ACCESS(symslot(Fact.ID_SLOT_NAME),symslot("id"),numslot("access",Integer.TYPE.getName())),
+
+    // annotations
+    ANNOTATION(symslot(Fact.ID_SLOT_NAME),symslot("id"),symslot("annotation"),symslot("parameters")),
 
     // labels are represented by instruction-type facts
     LABEL(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),numslot("instructioncounter",Integer.TYPE.getName()),symslot("labelid")) {

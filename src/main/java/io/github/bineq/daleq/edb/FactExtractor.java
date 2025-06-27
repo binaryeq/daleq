@@ -27,6 +27,7 @@ public class FactExtractor   {
 
     // sort members to make order predictable
     public static final Comparator<FieldNode> FIELD_COMP = Comparator.comparing(fn -> fn.name);
+    public static final Comparator<AnnotationNode> ANNOTATION_COMP = Comparator.comparing(an -> an.desc);
     public static final Comparator<MethodNode> METHOD_NODE_COMPARATOR = Comparator.comparing(mn -> mn.name + mn.desc);
     public static final Logger LOG = LoggerFactory.getLogger(FactExtractor.class);
     public static final String INFERRED_INSTRUCTION_PREDICATE_SPECS = "inferred-instruction-predicates";
@@ -233,12 +234,18 @@ public class FactExtractor   {
         facts.add(new SimpleFact(EBDAdditionalPredicates.VERSION,FactIdGenerator.nextId(EBDAdditionalPredicates.VERSION),classNode.name,classNode.version));
         facts.add(new SimpleFact(EBDAdditionalPredicates.ACCESS,FactIdGenerator.nextId(EBDAdditionalPredicates.ACCESS),classNode.name,classNode.access));
 
+        // annotations
+        addAnnotationFacts(classNode.visibleAnnotations,facts,classNode.name);
+
         // fields
         classNode.fields.stream().sorted((FIELD_COMP)).forEach(fieldNode -> {
             String fieldId = getFieldReference(classNode.name,fieldNode.name,fieldNode.desc);
             facts.add(new SimpleFact(EBDAdditionalPredicates.FIELD,FactIdGenerator.nextId(EBDAdditionalPredicates.FIELD), fieldId,classNode.name, fieldNode.name,fieldNode.desc));
             facts.add(new SimpleFact(EBDAdditionalPredicates.FIELD_SIGNATURE, FactIdGenerator.nextId(EBDAdditionalPredicates.FIELD_SIGNATURE), fieldId, fieldNode.signature));
             facts.add(new SimpleFact(EBDAdditionalPredicates.ACCESS,FactIdGenerator.nextId(EBDAdditionalPredicates.ACCESS),fieldId,fieldNode.access));
+
+            // annotations
+            addAnnotationFacts(fieldNode.visibleAnnotations,facts,fieldId);
         });
 
         // methods
@@ -326,7 +333,8 @@ public class FactExtractor   {
                 }
             };
 
-            // TODO annotations
+            // annotations
+            addAnnotationFacts(methodNode.visibleAnnotations,facts,methodId);
 
         });
 
@@ -338,6 +346,29 @@ public class FactExtractor   {
             }
         }
         return facts;
+    }
+
+    private static void addAnnotationFacts(List<AnnotationNode> annotationNodes, List<Fact> facts,String classname) {
+        if (annotationNodes==null) return;
+        annotationNodes.stream().sorted(ANNOTATION_COMP).forEach(annoNode -> {
+            String desc = annoNode.desc;
+            // Each name value pair is stored as two consecutive elements in the list.
+            // https://asm.ow2.io/javadoc/org/objectweb/asm/tree/AnnotationNode.html
+            List<Object> values = annoNode.values;
+            String args = "";
+            if (values != null) {
+                assert values.size() % 2 == 0;
+                Map<String, String> map = new TreeMap<>(); // normalise order
+                for (int i = 0; i < values.size(); i = i + 2) {
+                    String key = values.get(i).toString();
+                    Object value = values.get(i + 1);
+                    String sValue = value == null ? "null" : value.toString();
+                    map.put(key, sValue);
+                }
+                args = map.keySet().stream().map(k -> k+" -> "+map.get(k)).collect(Collectors.joining(","));
+            }
+            facts.add(new SimpleFact(EBDAdditionalPredicates.ANNOTATION,FactIdGenerator.nextId(EBDAdditionalPredicates.ANNOTATION),classname,desc,args));
+        });
     }
 
     private static Fact createFact(EBDInstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode, LabelMap labelMap) {
