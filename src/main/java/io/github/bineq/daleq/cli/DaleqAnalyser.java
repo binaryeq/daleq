@@ -220,6 +220,7 @@ public class DaleqAnalyser implements Analyser {
             Files.createDirectories(idbDir);
         }
         Path edbDef = edbDir.resolve("db.souffle");
+        Thread.sleep(500);
         FactExtractor.extractAndExport(classFile, edbDef, edbDir, true);
         Souffle.createIDB(edbDef, rulesPath, edbDir, idbDir, mergedEDBAndRules);
 

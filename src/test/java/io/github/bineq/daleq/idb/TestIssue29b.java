@@ -1,13 +1,14 @@
 package io.github.bineq.daleq.idb;
 
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// test for support for bytecode changes in issue29
-public class TestIssue29 extends AbstractIDBTest {
+// second test for support for bytecode changes in issue29
+public class TestIssue29b extends AbstractIDBTest {
 
     @Override
     public String getRulesPath() {
@@ -16,10 +17,10 @@ public class TestIssue29 extends AbstractIDBTest {
 
     @Override
     public String getPathOfClassUnderTest() {
-        return "/issue29/jar2/AbstractYAMLBasedConfiguration.class";
+        return "/issue29b/jar2/XMLConfiguration$XMLBuilderVisitor.class";
     }
 
-    public static final String METHOD_ID = "org/apache/commons/configuration2/AbstractYAMLBasedConfiguration::lambda$parseMap$1(Lorg/apache/commons/configuration2/tree/ImmutableNode$Builder;Ljava/lang/String;Ljava/lang/Object;)V";
+    public static final String METHOD_ID = "org/apache/commons/configuration2/XMLConfiguration$XMLBuilderVisitor::handleRemovedNodes(Lorg/apache/commons/configuration2/tree/ReferenceNodeHandler;)V";
     public static final String LINE = "600";
 
     @Test

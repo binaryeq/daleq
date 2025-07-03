@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -35,6 +36,8 @@ public class FactExtractor   {
 
     // by inserting gaps, rules can insert additional instructions
     public static final int INSTRUCTION_COUNTER_STEP_SIZE = 100;
+
+    public static final Pattern INNER_ANO_CLASS_PATTERN = Pattern.compile("ch/qos/logback/classic/net/Logging_34EventPreSerializationTransformer$32");
 
     public static class LabelMap {
         Set<LabelNode> accessedKeys = new HashSet<>();
