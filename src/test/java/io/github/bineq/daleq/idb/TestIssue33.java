@@ -1,0 +1,18 @@
+package io.github.bineq.daleq.idb;
+
+import org.junit.jupiter.api.Test;
+
+public class TestIssue33 extends AbstractEquivalenceTest  {
+
+    @Test
+    public void testFinalInferenceForAllAnonymousInnerClasses() throws Exception {
+        String class1 = "/issue33/mvnc/ConfigurationUtils$1.class";
+        String class2 = "/issue33/bfs/ConfigurationUtils$1.class";
+
+        // debugging
+        String unProjectedDB1 = IDBPrinter.print(computeIDB(class1));
+        String unProjectedDB2 = IDBPrinter.print(computeIDB(class2));
+
+        testEquivalence(class1,class2);
+    }
+}
