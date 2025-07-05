@@ -1,3 +1,10 @@
+// NORMALISATION PATTERN: anonymous classes are always final: make this explicit
+REMOVED_ACCESS(cat("R_REMOVE_ACCESS_TO_ANOINNERCLASSES","[",factid,"]"),classId) :- IS_ANOINNERCLASS(factid,classId).
+IDB_ACCESS(cat("R_MAKE_ANOINNERCLASSES_FINAL","[",factid1,",",factid2,"]"),classId,access bor 0x0010) :- ACCESS(factid1,classId,access),IS_ANOINNERCLASS(factid2,classId).
+
+// **************************************************************
+
+
 // NORMALISATION PATTERN: custom rule to remove version metadata
 .decl IDB_VERSION(factid: symbol,classname: symbol,version: number)
 IDB_VERSION(cat("R_REMOVE_BYTECODE_VERSION","[",factid,"]"),classname,0) :- VERSION(factid,classname,_).
@@ -117,11 +124,15 @@ IDB_METHOD_SIGNATURE(cat("R_METHOD_SIGNATURE","[",factid,"]"),methodid,signature
 .output IDB_METHOD_SIGNATURE
 
 .decl IDB_ACCESS(factid: symbol,classOrMethodOrFieldId: symbol,access: number)
-IDB_ACCESS(cat("R_ACCESS","[",factid,"]"),classOrMethodOrFieldId,access) :- ACCESS(factid,classOrMethodOrFieldId,access),!REMOVED_ACCESS(factid,classOrMethodOrFieldId).
+IDB_ACCESS(cat("R_ACCESS","[",factid,"]"),classOrMethodOrFieldId,access) :- ACCESS(factid,classOrMethodOrFieldId,access),!REMOVED_ACCESS(_,classOrMethodOrFieldId).
 .output IDB_ACCESS
 
+.decl IDB_IS_ANOINNERCLASS(factid: symbol,classId: symbol)
+IDB_IS_ANOINNERCLASS(cat("R_ANOINNERCLASS","[",factid,"]"),classId) :- IS_ANOINNERCLASS(factid,classId).
+.output IDB_IS_ANOINNERCLASS
+
 .decl IDB_ANNOTATION(factid: symbol,classOrMethodOrFieldId: symbol,annotation: symbol,parameters: symbol)
-IDB_ANNOTATION(cat("R_ANNOTATION","[",factid,"]"),classOrMethodOrFieldId,annotation,parameters) :- ANNOTATION(factid,classOrMethodOrFieldId,annotation,parameters),!REMOVED_ANNOTATION(factid,classOrMethodOrFieldId,annotation).
+IDB_ANNOTATION(cat("R_ANNOTATION","[",factid,"]"),classOrMethodOrFieldId,annotation,parameters) :- ANNOTATION(factid,classOrMethodOrFieldId,annotation,parameters),!REMOVED_ANNOTATION(_,classOrMethodOrFieldId,annotation).
 .output IDB_ANNOTATION
 
 .decl IDB_LABEL(factid: symbol,methodid: symbol,instructioncounter: number,labelid: symbol)
