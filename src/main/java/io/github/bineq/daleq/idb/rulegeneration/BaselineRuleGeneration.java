@@ -97,13 +97,13 @@ public class BaselineRuleGeneration {
             guard = ","+body2;
         }
         else
-        if (predicate==EBDAdditionalPredicates.METHOD) {
+        if (predicate== EDBAdditionalPredicates.METHOD) {
             pre = "!"+ IDBRemovalPredicates.REMOVED_METHOD.getName() + '(';
             String body2 = List.of("_",predicate.getSlots()[1].name()).stream()
                 .collect(Collectors.joining(",",pre, post));
             guard = ","+body2;
         }
-        else if (predicate==EBDAdditionalPredicates.FIELD) {
+        else if (predicate== EDBAdditionalPredicates.FIELD) {
             pre = "!"+ IDBRemovalPredicates.REMOVED_FIELD.getName() + '(';
             String body2 = List.of("_",predicate.getSlots()[1].name()).stream()
                 .collect(Collectors.joining(",",pre, post));

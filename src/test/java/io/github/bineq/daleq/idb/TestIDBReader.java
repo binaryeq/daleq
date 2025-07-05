@@ -1,7 +1,7 @@
 package io.github.bineq.daleq.idb;
 
 import io.github.bineq.daleq.Fact;
-import io.github.bineq.daleq.edb.EBDAdditionalPredicates;
+import io.github.bineq.daleq.edb.EDBAdditionalPredicates;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
@@ -47,7 +47,7 @@ public class TestIDBReader {
     public void testSuperClass() {
         Fact fact = idb.classSuperclassFact;
         assertNotNull(fact);
-        assertEquals(IDBPredicates.convertPredicateNameToIDB(EBDAdditionalPredicates.SUPERCLASS.getName()),fact.predicate().getName());
+        assertEquals(IDBPredicates.convertPredicateNameToIDB(EDBAdditionalPredicates.SUPERCLASS.getName()),fact.predicate().getName());
         assertEquals("org/apache/commons/configuration2/BaseHierarchicalConfiguration",fact.values()[2]);
     }
 
@@ -56,7 +56,7 @@ public class TestIDBReader {
         assertNotNull(idb.classInterfaceFacts);
         assertEquals(2,idb.classInterfaceFacts.size());
         idb.classInterfaceFacts.stream().forEach(fact ->
-            assertEquals(IDBPredicates.convertPredicateNameToIDB(EBDAdditionalPredicates.INTERFACE.getName()),fact.predicate().getName())
+            assertEquals(IDBPredicates.convertPredicateNameToIDB(EDBAdditionalPredicates.INTERFACE.getName()),fact.predicate().getName())
         );
         Set<String> interfaceNames = idb.classInterfaceFacts.stream()
             .map(fact -> fact.values()[2].toString())
@@ -70,7 +70,7 @@ public class TestIDBReader {
         // from src/test/resources/idb/idb1/XMLPropertyListConfiguration.javap: major version: 52
         Fact fact = idb.bytecodeVersionFact;
         assertNotNull(fact);
-        assertEquals(IDBPredicates.convertPredicateNameToIDB(EBDAdditionalPredicates.VERSION.getName()),fact.predicate().getName());
+        assertEquals(IDBPredicates.convertPredicateNameToIDB(EDBAdditionalPredicates.VERSION.getName()),fact.predicate().getName());
         assertEquals(52,fact.values()[2]);
     }
 
@@ -79,7 +79,7 @@ public class TestIDBReader {
         // from src/test/resources/idb/idb1/XMLPropertyListConfiguration.javap: flags: (0x0021) ACC_PUBLIC, ACC_SUPER
         Fact fact = idb.classRawAccessFact;
         assertNotNull(fact);
-        assertEquals(IDBPredicates.convertPredicateNameToIDB(EBDAdditionalPredicates.ACCESS.getName()),fact.predicate().getName());
+        assertEquals(IDBPredicates.convertPredicateNameToIDB(EDBAdditionalPredicates.ACCESS.getName()),fact.predicate().getName());
         assertEquals(0x0021,fact.values()[2]);
     }
 
@@ -129,7 +129,7 @@ public class TestIDBReader {
         // flags: (0x0004) ACC_PROTECTED
         Fact fact = idb.methodRawAccessFacts.get(METHOD11);
         assertNotNull(fact);
-        assertEquals(IDBPredicates.convertPredicateNameToIDB(EBDAdditionalPredicates.ACCESS.getName()),fact.predicate().getName());
+        assertEquals(IDBPredicates.convertPredicateNameToIDB(EDBAdditionalPredicates.ACCESS.getName()),fact.predicate().getName());
         assertEquals(0x0004,fact.values()[2]);
     }
 
@@ -165,7 +165,7 @@ public class TestIDBReader {
     public void testFieldRawAccess() {
         Fact fact = idb.fieldRawAccessFacts.get(FIELD3);
         assertNotNull(fact);
-        assertEquals(IDBPredicates.convertPredicateNameToIDB(EBDAdditionalPredicates.ACCESS.getName()),fact.predicate().getName());
+        assertEquals(IDBPredicates.convertPredicateNameToIDB(EDBAdditionalPredicates.ACCESS.getName()),fact.predicate().getName());
         assertEquals(2,fact.values()[2]);
     }
 

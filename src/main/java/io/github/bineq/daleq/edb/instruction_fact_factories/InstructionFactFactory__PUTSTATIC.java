@@ -3,7 +3,7 @@ package io.github.bineq.daleq.edb.instruction_fact_factories;
 import javax.annotation.processing.Generated;
 
 import io.github.bineq.daleq.SimpleFact;
-import io.github.bineq.daleq.edb.EBDInstructionPredicate;
+import io.github.bineq.daleq.edb.EDBInstructionPredicate;
 import io.github.bineq.daleq.edb.EDBPredicateRegistry;
 import io.github.bineq.daleq.edb.FactExtractor;
 import org.objectweb.asm.tree.FieldInsnNode;
@@ -17,7 +17,7 @@ public class InstructionFactFactory__PUTSTATIC implements io.github.bineq.daleq.
         return "87f968d0-4610-44f7-b2d4-8d862d58c8bd";
     }
 
-    @Override public EBDInstructionPredicate getPredicate() {
+    @Override public EDBInstructionPredicate getPredicate() {
         return EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(179);
     }
 

@@ -18,7 +18,7 @@ public interface InstructionPredicateFactFactory<NT extends AbstractInsnNode> {
     // a unique version id, used to verify that the generator is consistent with the predicate spec (InstructionPredicate::id).
     String getVersion() ;
 
-    EBDInstructionPredicate getPredicate();
+    EDBInstructionPredicate getPredicate();
 
     Fact createFact(String id, NT node, String methodRef, int instructionCounter, FactExtractor.LabelMap labelMap);
 

@@ -10,7 +10,7 @@ import static io.github.bineq.daleq.Slot.*;
  * Predicates used in the extract DB.
  * @author jens dietrich
  */
-public enum EBDAdditionalPredicates implements Predicate {
+public enum EDBAdditionalPredicates implements Predicate {
 
     // class properties
     SUPERCLASS(symslot(Fact.ID_SLOT_NAME),symslot("name"),symslot("supername")),
@@ -45,13 +45,13 @@ public enum EBDAdditionalPredicates implements Predicate {
         }
     };
 
-    public static Set<EBDAdditionalPredicates> valuesAsSet() {
+    public static Set<EDBAdditionalPredicates> valuesAsSet() {
         return Set.of(values());
     };
 
     public final Slot[] slots;
 
-    EBDAdditionalPredicates(Slot... slots) {
+    EDBAdditionalPredicates(Slot... slots) {
         this.slots = slots;
     }
 

@@ -40,7 +40,7 @@ public abstract class AbstractFactExtractionAndComparisonTest {
         facts2 = FactExtractor.extract(byteCode2,false); // verification will be done in dedicated test
     }
 
-    protected Fact getFirstFact(List<Fact> facts,EBDAdditionalPredicates predicate) {
+    protected Fact getFirstFact(List<Fact> facts, EDBAdditionalPredicates predicate) {
         return facts.stream()
             .filter(fact -> fact.predicate().equals(predicate))
             .findFirst()
@@ -48,7 +48,7 @@ public abstract class AbstractFactExtractionAndComparisonTest {
     }
 
 
-    protected List<Fact> getFacts(List<Fact> facts,EBDAdditionalPredicates predicate) {
+    protected List<Fact> getFacts(List<Fact> facts, EDBAdditionalPredicates predicate) {
         return facts.stream()
             .filter(fact -> fact.predicate().equals(predicate))
             .collect(Collectors.toUnmodifiableList());
@@ -94,8 +94,8 @@ public abstract class AbstractFactExtractionAndComparisonTest {
 
     protected boolean isJump(Fact fact) {
         Predicate predicate = fact.predicate();
-        if (predicate instanceof EBDInstructionPredicate) {
-            EBDInstructionPredicate instructionPredicate = (EBDInstructionPredicate) predicate;
+        if (predicate instanceof EDBInstructionPredicate) {
+            EDBInstructionPredicate instructionPredicate = (EDBInstructionPredicate) predicate;
             return instructionPredicate.getAsmNodeType().equals(JumpInsnNode.class.getName());
         }
         else {

@@ -12,7 +12,7 @@ import java.util.Objects;
  * Predicates for facts representing bytecode instructions.
  * @author jens dietrich
  */
-public class EBDInstructionPredicate implements Predicate {
+public class EDBInstructionPredicate implements Predicate {
 
     private String name = null;
     private int opCode = -1;
@@ -66,7 +66,7 @@ public class EBDInstructionPredicate implements Predicate {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EBDInstructionPredicate predicate = (EBDInstructionPredicate) o;
+        EDBInstructionPredicate predicate = (EDBInstructionPredicate) o;
         return opCode == predicate.opCode && Objects.equals(name, predicate.name) && Objects.deepEquals(slots, predicate.slots) && Objects.equals(id, predicate.id) && Objects.equals(asmNodeType, predicate.asmNodeType);
     }
 
@@ -82,14 +82,14 @@ public class EBDInstructionPredicate implements Predicate {
         }
     }
 
-    public static EBDInstructionPredicate fromJson(File f) throws IOException {
+    public static EDBInstructionPredicate fromJson(File f) throws IOException {
         try (FileReader reader = new FileReader(f)) {
-            return new Gson().fromJson(reader, EBDInstructionPredicate.class);
+            return new Gson().fromJson(reader, EDBInstructionPredicate.class);
         }
     }
 
-    public static EBDInstructionPredicate fromJson(String json) throws IOException {
-        return new Gson().fromJson(json, EBDInstructionPredicate.class);
+    public static EDBInstructionPredicate fromJson(String json) throws IOException {
+        return new Gson().fromJson(json, EDBInstructionPredicate.class);
     }
 
     @Override

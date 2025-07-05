@@ -3,7 +3,6 @@ package io.github.bineq.daleq.idb.rulegeneration;
 import com.google.common.collect.Streams;
 import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.Predicate;
-import io.github.bineq.daleq.edb.EBDAdditionalPredicates;
 import io.github.bineq.daleq.edb.EDBPredicateRegistry;
 import io.github.bineq.daleq.idb.IDBRemovalPredicates;
 import org.apache.commons.cli.*;
@@ -15,7 +14,6 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Create rules to relocate instruction EDB fact to different methods when generating IDB fact.

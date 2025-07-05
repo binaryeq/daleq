@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class EDBPredicateRegistry {
 
-    public static final Map<Integer, EBDInstructionPredicate> INSTRUCTION_PREDICATES = new HashMap<>();
+    public static final Map<Integer, EDBInstructionPredicate> INSTRUCTION_PREDICATES = new HashMap<>();
     public static final List<Predicate> ALL = new ArrayList<>();
 
     public static final Logger LOG = LoggerFactory.getLogger(EDBPredicateRegistry.class);
@@ -31,7 +31,7 @@ public class EDBPredicateRegistry {
             Resource[] resources = resolver.getResources("classpath*:instruction-predicates/*.json");
             for (Resource resource : resources) {
                 String json = resource.getContentAsString(StandardCharsets.UTF_8);
-                EBDInstructionPredicate predicate = EBDInstructionPredicate.fromJson(json);
+                EDBInstructionPredicate predicate = EDBInstructionPredicate.fromJson(json);
                 int opCode = predicate.getOpCode();
                 if (INSTRUCTION_PREDICATES.containsKey(opCode)) {
                     LOG.warn("Duplicate instruction predicate for op code {}", opCode);
@@ -46,10 +46,10 @@ public class EDBPredicateRegistry {
         LOG.info(""+ INSTRUCTION_PREDICATES.size() + " instruction predicates loaded");
 
 
-        for (EBDAdditionalPredicates additionalPredicate : EBDAdditionalPredicates.values()) {
+        for (EDBAdditionalPredicates additionalPredicate : EDBAdditionalPredicates.values()) {
             ALL.add(additionalPredicate);
         }
-        ALL.addAll(INSTRUCTION_PREDICATES.values().stream().sorted(Comparator.comparingInt(EBDInstructionPredicate::getOpCode)).collect(Collectors.toList()));
+        ALL.addAll(INSTRUCTION_PREDICATES.values().stream().sorted(Comparator.comparingInt(EDBInstructionPredicate::getOpCode)).collect(Collectors.toList()));
         LOG.info(""+ ALL.size() + " predicates found");
 
     }

@@ -28,15 +28,15 @@ public class TestFactExtraction1 extends AbstractFactExtractionTest {
 
     @Test
     public void testSuperClass() {
-        Fact superClassFact = getFirstFact(EBDAdditionalPredicates.SUPERCLASS);
-        assertEquals(EBDAdditionalPredicates.SUPERCLASS,superClassFact.predicate());
+        Fact superClassFact = getFirstFact(EDBAdditionalPredicates.SUPERCLASS);
+        assertEquals(EDBAdditionalPredicates.SUPERCLASS,superClassFact.predicate());
         assertEquals("mypck/MyClass",superClassFact.values()[1]);
         assertEquals("java/lang/Object",superClassFact.values()[2]);
     }
 
     @Test
     public void testInterfaces() {
-        List<Fact> interfaceFacts = getFacts(EBDAdditionalPredicates.INTERFACE);
+        List<Fact> interfaceFacts = getFacts(EDBAdditionalPredicates.INTERFACE);
         assertEquals(2,interfaceFacts.size());
         List<String> interfaces = interfaceFacts.stream()
             .map(fact -> fact.values()[2].toString())
@@ -47,8 +47,8 @@ public class TestFactExtraction1 extends AbstractFactExtractionTest {
 
     @Test
     public void testClassVersion() {
-        Fact classVersionFact = getFirstFact(EBDAdditionalPredicates.VERSION);
-        assertEquals(EBDAdditionalPredicates.VERSION,classVersionFact.predicate());
+        Fact classVersionFact = getFirstFact(EDBAdditionalPredicates.VERSION);
+        assertEquals(EDBAdditionalPredicates.VERSION,classVersionFact.predicate());
         assertEquals("mypck/MyClass",classVersionFact.values()[1]);
         assertEquals(65,classVersionFact.values()[2]);
     }

@@ -2,7 +2,7 @@ package io.github.bineq.daleq.idb;
 
 import com.google.common.base.Preconditions;
 import io.github.bineq.daleq.*;
-import io.github.bineq.daleq.edb.EBDAdditionalPredicates;
+import io.github.bineq.daleq.edb.EDBAdditionalPredicates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
@@ -74,19 +74,19 @@ public class IDBReader {
                 }
             }
             else {
-                if (isIDBVersionOf(predicate,EBDAdditionalPredicates.SUPERCLASS)) {
+                if (isIDBVersionOf(predicate, EDBAdditionalPredicates.SUPERCLASS)) {
                     idb.classSuperclassFact = fact;
                 }
-                else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.INTERFACE)) {
+                else if (isIDBVersionOf(predicate, EDBAdditionalPredicates.INTERFACE)) {
                     idb.classInterfaceFacts.add(fact);
                 }
-                else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.CLASS_SIGNATURE)) {
+                else if (isIDBVersionOf(predicate, EDBAdditionalPredicates.CLASS_SIGNATURE)) {
                     idb.classSignatureFact = fact;
                 }
-                else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.VERSION)) {
+                else if (isIDBVersionOf(predicate, EDBAdditionalPredicates.VERSION)) {
                     idb.bytecodeVersionFact = fact;
                 }
-                else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.METHOD)) {
+                else if (isIDBVersionOf(predicate, EDBAdditionalPredicates.METHOD)) {
                     idb.methodFacts.add(fact);
                 }
                 else if (predicate==IDBRemovalPredicates.REMOVED_METHOD) {
@@ -95,18 +95,18 @@ public class IDBReader {
                 else if (predicate==IDBRemovalPredicates.REMOVED_FIELD) {
                     idb.removedFieldFacts.add(fact);
                 }
-                else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.FIELD)) {
+                else if (isIDBVersionOf(predicate, EDBAdditionalPredicates.FIELD)) {
                     idb.fieldFacts.add(fact);
                 }
-                else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.METHOD_SIGNATURE)) {
+                else if (isIDBVersionOf(predicate, EDBAdditionalPredicates.METHOD_SIGNATURE)) {
                     String methodId = getMethodId(fact);
                     idb.methodSignatureFacts.put(methodId,fact);
                 }
-                else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.FIELD_SIGNATURE)) {
+                else if (isIDBVersionOf(predicate, EDBAdditionalPredicates.FIELD_SIGNATURE)) {
                     String fieldId = getFieldId(fact);
                     idb.fieldSignatureFacts.put(fieldId,fact);
                 }
-                else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.ACCESS)) {
+                else if (isIDBVersionOf(predicate, EDBAdditionalPredicates.ACCESS)) {
                     String classOrMethodOrFieldId = getClassOrMethodOrFieldId(fact);
                     Type type = classify(classOrMethodOrFieldId);
                     if (type==Type.CLASS) {
@@ -119,7 +119,7 @@ public class IDBReader {
                         idb.methodRawAccessFacts.put(classOrMethodOrFieldId,fact);
                     }
                 }
-                else if (isIDBVersionOf(predicate,EBDAdditionalPredicates.ANNOTATION)) {
+                else if (isIDBVersionOf(predicate, EDBAdditionalPredicates.ANNOTATION)) {
                     System.out.println(predicateName);
                     String classOrMethodOrFieldId = getClassOrMethodOrFieldId(fact);
                     Type type = classify(classOrMethodOrFieldId);

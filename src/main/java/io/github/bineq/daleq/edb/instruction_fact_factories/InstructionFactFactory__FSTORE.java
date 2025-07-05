@@ -2,6 +2,7 @@ package io.github.bineq.daleq.edb.instruction_fact_factories;
 
 import javax.annotation.processing.Generated;
 
+import io.github.bineq.daleq.edb.EDBInstructionPredicate;
 import io.github.bineq.daleq.edb.FactExtractor;
 import io.github.bineq.daleq.Fact;
 import org.objectweb.asm.tree.VarInsnNode;
@@ -14,7 +15,7 @@ public class InstructionFactFactory__FSTORE implements io.github.bineq.daleq.edb
         return "1bfaee95-9bb8-4d90-9034-d39c3e371eec";
     }
 
-    @Override public io.github.bineq.daleq.edb.EBDInstructionPredicate getPredicate() {
+    @Override public EDBInstructionPredicate getPredicate() {
         return io.github.bineq.daleq.edb.EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(56);
     }
 

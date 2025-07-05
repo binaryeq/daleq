@@ -10,8 +10,8 @@ public class TestIssue33 extends AbstractEquivalenceTest  {
         String class2 = "/issue33/bfs/ConfigurationUtils$1.class";
 
         // debugging
-        String unProjectedDB1 = IDBPrinter.print(computeIDB(class1));
-        String unProjectedDB2 = IDBPrinter.print(computeIDB(class2));
+        String unProjectedIDB1 = IDBPrinter.print(computeIDB(class1));
+        String unProjectedIDB2 = IDBPrinter.print(computeIDB(class2));
 
         testEquivalence(class1,class2);
     }

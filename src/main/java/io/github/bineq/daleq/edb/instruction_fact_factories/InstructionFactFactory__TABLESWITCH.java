@@ -2,7 +2,7 @@ package io.github.bineq.daleq.edb.instruction_fact_factories;
 
 import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.SimpleFact;
-import io.github.bineq.daleq.edb.EBDInstructionPredicate;
+import io.github.bineq.daleq.edb.EDBInstructionPredicate;
 import io.github.bineq.daleq.edb.EDBPredicateRegistry;
 import io.github.bineq.daleq.edb.FactExtractor;
 import org.objectweb.asm.tree.LabelNode;
@@ -22,7 +22,7 @@ public class InstructionFactFactory__TABLESWITCH implements io.github.bineq.dale
         return "34b7f7e7-c408-463f-9673-6be96d9291ff";
     }
 
-    @Override public EBDInstructionPredicate getPredicate() {
+    @Override public EDBInstructionPredicate getPredicate() {
         return EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(170);
     }
 

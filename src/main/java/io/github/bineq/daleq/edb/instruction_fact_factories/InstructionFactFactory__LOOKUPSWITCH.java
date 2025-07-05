@@ -2,7 +2,7 @@ package io.github.bineq.daleq.edb.instruction_fact_factories;
 
 import io.github.bineq.daleq.Fact;
 import io.github.bineq.daleq.SimpleFact;
-import io.github.bineq.daleq.edb.EBDInstructionPredicate;
+import io.github.bineq.daleq.edb.EDBInstructionPredicate;
 import io.github.bineq.daleq.edb.EDBPredicateRegistry;
 import io.github.bineq.daleq.edb.FactExtractor;
 import org.objectweb.asm.tree.LabelNode;
@@ -24,7 +24,7 @@ public class InstructionFactFactory__LOOKUPSWITCH implements io.github.bineq.dal
         return "cf81047e-c7fb-48b8-94b7-ff250a4791e8";
     }
 
-    @Override public EBDInstructionPredicate getPredicate() {
+    @Override public EDBInstructionPredicate getPredicate() {
         return EDBPredicateRegistry.INSTRUCTION_PREDICATES.get(171);
     }
 
