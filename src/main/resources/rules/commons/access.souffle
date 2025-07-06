@@ -1,4 +1,4 @@
-// those rules are mainly for convinience and comprehensibility
+// those rules are mainly for convenience and comprehensibility
 // they are based on IDB_ACCESS rather than ACCESS - so any normalisation can be applied to ACCESS first
 
 .decl IDB_IS_SYNCHRONIZED(factid: symbol,classOrMethodOrFieldId: symbol)
