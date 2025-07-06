@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.idb;
 
+import io.github.bineq.daleq.Rules;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,10 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 // test for support for bytecode changes in this PR: https://github.com/openjdk/jdk/pull/5165
 public class TestPR5165 extends AbstractIDBTest {
 
-
     @Override
-    public String getRulesPath() {
-        return "/rules/advanced.souffle";
+    public Rules getRules() {
+        return Rules.defaultRules();
     }
 
     @Override

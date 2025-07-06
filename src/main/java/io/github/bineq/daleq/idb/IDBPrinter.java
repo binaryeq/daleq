@@ -2,6 +2,7 @@ package io.github.bineq.daleq.idb;
 
 import com.google.common.base.Preconditions;
 import io.github.bineq.daleq.Fact;
+import io.github.bineq.daleq.Rules;
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
 import org.apache.commons.cli.*;
@@ -25,7 +26,6 @@ import java.util.stream.Stream;
 public class IDBPrinter {
 
     public static final Logger LOG = LoggerFactory.getLogger(IDBPrinter.class);
-    public static final Path DEFAULT_RULES = Path.of(IDBPrinter.class.getResource("/rules/vanilla.souffle").getPath());
     public static final Path TMP_DIR_ROOT = Path.of(".tmp/"+IDBPrinter.class.getName());
 
     static {
@@ -42,14 +42,6 @@ public class IDBPrinter {
         .hasArg(true)
         .required(true)
         .desc("the location of the IDB (a folder containing fact files), or a bytecode file (.class)")
-        .build();
-
-    public static Option OPT_RULES = Option.builder()
-        .argName("rules")
-        .option("r")
-        .hasArg(true)
-        .required(false)
-        .desc("the location of the rules to be used to generate the IDB (.souffle)")
         .build();
 
     public static Option OPT_OUTPUT = Option.builder()
@@ -69,13 +61,11 @@ public class IDBPrinter {
         .build();
 
 
-
     public static void main(String[] args) throws Exception {
 
         Options options = new Options();
         options.addOption(OPT_IDB);
         options.addOption(OPT_OUTPUT);
-        options.addOption(OPT_RULES);
         options.addOption(OPT_PROJECT);
 
         CommandLine cli = null;
@@ -85,7 +75,6 @@ public class IDBPrinter {
             cli = parser.parse(options, args);
             String inputName = cli.getOptionValue(OPT_IDB);
             String outputFileName = cli.getOptionValue(OPT_OUTPUT);
-            String rulesFileName = cli.getOptionValue(OPT_RULES);
             Path out = Path.of(outputFileName);
 
             boolean project = cli.hasOption(OPT_PROJECT);
@@ -102,16 +91,7 @@ public class IDBPrinter {
 
                 Path classFile = input;
                 LOG.info("Generating IDB from bytecode in {}", classFile);
-                Path rules = null;
-                if (rulesFileName!=null) {
-                    rules = Path.of(rulesFileName);
-                    LOG.info("Loading existing rules from {}", rules);
-                }
-                else {
-                    rules = DEFAULT_RULES;
-                    LOG.info("Using default rules from {}", rules);
-                }
-                Preconditions.checkState(Files.exists(rules));
+
                 Path dir = Files.createTempDirectory(TMP_DIR_ROOT,null);
                 Path idbDir = dir.resolve("idb");
                 Path edbDir = dir.resolve("edb");
@@ -126,7 +106,7 @@ public class IDBPrinter {
                 LOG.info("EDB facts extracted to {}" , edbDir);
 
                 LOG.info("computing IDB");
-                Souffle.createIDB(edbDefFile,rules,edbDir,idbDir,mergedFactsAndRulesFile);
+                Souffle.createIDB(edbDefFile, Rules.defaultRules(),edbDir,idbDir,mergedFactsAndRulesFile);
                 LOG.info("EDB facts extracted to {}" , idbDir);
 
                 printIDB(idbDir, out,project);

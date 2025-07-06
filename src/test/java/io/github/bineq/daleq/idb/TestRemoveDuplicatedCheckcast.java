@@ -1,9 +1,15 @@
 package io.github.bineq.daleq.idb;
 
+import io.github.bineq.daleq.Rules;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class TestRemoveDuplicatedCheckcast extends AbstractEquivalenceTest {
+
+    @Override
+    public Rules getRules() {
+        return Rules.defaultRules();
+    }
 
     @Disabled // need new oracles, as there are changes related to JEP280 in those classes
     @Test

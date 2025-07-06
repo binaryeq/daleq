@@ -1,0 +1,4 @@
+// NORMALISATION PATTERN: Remove Redundant Checkcasts
+// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
+
+REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- CHECKCAST(factid1,methodid,instructioncounter,desc),CHECKCAST(factid2,methodid,instructioncounter-100,desc).

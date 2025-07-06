@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.idb;
 
+import io.github.bineq.daleq.Rules;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.function.Predicate;
@@ -10,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestIssue29 extends AbstractIDBTest {
 
     @Override
-    public String getRulesPath() {
-        return "/rules/advanced.souffle";
+    public Rules getRules() {
+        return Rules.defaultRules();
     }
 
     @Override

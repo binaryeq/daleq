@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import io.github.bineq.daleq.IOUtil;
+import io.github.bineq.daleq.Rules;
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
 import io.github.bineq.daleq.idb.IDB;
@@ -35,7 +36,6 @@ public class RunEvaluation {
     final static Path SAME_SOURCE_CACHE = Path.of("evaluation/same_sources.json");
     private static final Map<String,Map<String,Set<String>>> GAVS_WITH_SAME_RESOURCES = loadSameSourcesCache();
     private static Path VALIDATION_DB = null;
-    public static final String RULES = "/rules/advanced.souffle";
     private static final boolean REUSE_IDB = true;
 
     enum DB_RETENTION_POLICY {DELETE,KEEP,ZIP};
@@ -286,16 +286,13 @@ public class RunEvaluation {
                 FactExtractor.extractAndExport(classFile, edbDef, edbFactDir, true);
                 LOG.info("EBD extracted for {} in {} provided by {} in dir {}", nClassName, gav, provider, edbRoot);
 
-
-                Path rulesPath = Path.of(Souffle.class.getResource(RULES).getPath());
-
                 if (Files.exists(idbFactDir)) {
                     IOUtil.deleteDir(idbFactDir);
                 } else {
                     Files.createDirectories(idbFactDir);
                 }
 
-                Souffle.createIDB(edbDef, rulesPath, edbFactDir, idbFactDir, mergedEDBAndRules);
+                Souffle.createIDB(edbDef, Rules.defaultRules(), edbFactDir, idbFactDir, mergedEDBAndRules);
                 LOG.info("IBD computed for {} in {} provided by {} in dir {}", nClassName, gav, provider, idbFactDir);
 
                 // there might be a race condition is souffle that some background thread is still writing the IDB when createIDB returns

@@ -1,0 +1,18 @@
+// NORMALISATION PATTERN: Inline $values() method in enumerations
+// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N10.
+
+// (1) removal
+.decl IS_ENUM_VALUE_SYNTH_METHOD(factid: symbol,id: symbol)
+// @auxiliary-predicate
+IS_ENUM_VALUE_SYNTH_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,",",factid2,",",factid3,"]"),id) :- METHOD(factid1,id,classname,name,_),IDB_IS_ENUM(factid2,classname),IDB_IS_SYNTHETIC(factid3,id),name="$values".
+REMOVED_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,"]"),methodid) :- IS_ENUM_VALUE_SYNTH_METHOD(factid1,methodid).
+
+// (2) move instructions *****************************************
+// @auxiliary-predicate
+.decl IS_ENUM_STATIC_BLOCK(factid: symbol,id: symbol)
+IS_ENUM_STATIC_BLOCK(cat("R_IS_ENUM_STATIC_BLOCK","[",factid1,",",factid2,"]"),id) :- METHOD(factid1,id,classname,name,descriptor),IDB_IS_ENUM(factid2,classname),name="<clinit>",descriptor="()V".
+
+MOVED_INSTRUCTION(cat("R_MOVE_INSTRUCTIONS","[",factid1,",",factid2,",",factid3,",",factid4,"]"),sourceMethodid,sourceInstructionCounter,destMethodId,destInstructionCounter,instructionName) :- IS_ENUM_VALUE_SYNTH_METHOD(factid1,sourceMethodid), IS_ENUM_STATIC_BLOCK(factid2,destMethodId),INVOKESTATIC(factid3,destMethodId,destInstructionCounter,_,_,_,_), IDB_INSTRUCTION(factid4,sourceMethodid,sourceInstructionCounter,instructionName), !instructionName="ARETURN".
+
+// remove invocation of now inlined method
+REMOVED_INSTRUCTION(cat("R_REMOVE_INSTRUCTIONS","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- IS_ENUM_STATIC_BLOCK(factid1,methodid), INVOKESTATIC(factid2,methodid,instructioncounter,_,name,_,_), name="$values".

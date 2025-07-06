@@ -1,0 +1,3 @@
+// NORMALISATION PATTERN: anonymous classes are always final: make this explicit
+REMOVED_ACCESS(cat("R_REMOVE_ACCESS_TO_ANOINNERCLASSES","[",factid,"]"),classId) :- IS_ANOINNERCLASS(factid,classId).
+IDB_ACCESS(cat("R_MAKE_ANOINNERCLASSES_FINAL","[",factid1,",",factid2,"]"),classId,access bor 0x0010) :- ACCESS(factid1,classId,access),IS_ANOINNERCLASS(factid2,classId).

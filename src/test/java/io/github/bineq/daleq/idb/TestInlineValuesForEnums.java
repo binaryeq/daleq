@@ -1,9 +1,14 @@
 package io.github.bineq.daleq.idb;
 
+import io.github.bineq.daleq.Rules;
 import org.junit.jupiter.api.Test;
 
 public class TestInlineValuesForEnums extends AbstractEquivalenceTest {
 
+    @Override
+    public Rules getRules() {
+        return Rules.defaultRules();
+    }
 
     @Test
     public void testInlinedValuesForEnums() throws Exception {

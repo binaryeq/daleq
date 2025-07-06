@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.idb;
 
+import io.github.bineq.daleq.Rules;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -7,6 +8,11 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestIssue31 extends AbstractIDBTest {
+
+    @Override
+    public Rules getRules() {
+        return Rules.defaultRules();
+    }
 
     @Test
     public void testPresenceOfAnnotationsInIDBReports() throws IOException {
@@ -27,11 +33,6 @@ public class TestIssue31 extends AbstractIDBTest {
         assertTrue(out.contains("pck/ClassWithAnnotations::foo()V\tLpck/MethodAnnotation;\tmF1 -> 42,mF2 -> bar"));
         assertTrue(out.contains("pck/ClassWithAnnotations::f(Ljava/lang/String;\tLpck/FieldAnnotation;\tfF1 -> 42,fF2 -> bar"));
         assertTrue(out.contains("IDB_ANNOTATION"));
-    }
-
-    @Override
-    public String getRulesPath() {
-        return "/rules/advanced.souffle";
     }
 
     @Override

@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.idb;
 
+import io.github.bineq.daleq.Rules;
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
 import org.junit.jupiter.api.AfterEach;
@@ -17,17 +18,17 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public abstract class AbstractIDBTest {
 
-    protected Path rules = null;
     protected Path classFile = null;
     protected Path edbDef = null;
     protected Path edbFactDir = null;
     protected Path idbFactDir = null;
     protected Path mergedEDBAndRules = null;
 
+    public abstract Rules getRules() ;
+
     @BeforeEach
     public void setup() throws Exception {
-        rules = Path.of(Souffle.class.getResource(getRulesPath()).getPath());
-        assumeTrue(Files.exists(rules));
+
         classFile = Path.of(AbstractIDBTest.class.getResource(getPathOfClassUnderTest()).getPath());
         assumeTrue(Files.exists(classFile));
 
@@ -49,7 +50,7 @@ public abstract class AbstractIDBTest {
         FactExtractor.extractAndExport(this.classFile,this.edbDef,this.edbFactDir,true);
 
         // apply rules
-        Souffle.createIDB(this.edbDef,rules,this.edbFactDir,this.idbFactDir,this.mergedEDBAndRules);
+        Souffle.createIDB(this.edbDef,getRules(),this.edbFactDir,this.idbFactDir,this.mergedEDBAndRules);
 
     }
 
@@ -75,11 +76,8 @@ public abstract class AbstractIDBTest {
 
     @AfterEach
     public void tearDown() throws IOException {
-        rules = null;
         classFile = null;
     }
-
-    public abstract String getRulesPath() ;
 
     public abstract String getPathOfClassUnderTest() ;
 

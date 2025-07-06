@@ -1,59 +1,4 @@
-// NORMALISATION PATTERN: anonymous classes are always final: make this explicit
-REMOVED_ACCESS(cat("R_REMOVE_ACCESS_TO_ANOINNERCLASSES","[",factid,"]"),classId) :- IS_ANOINNERCLASS(factid,classId).
-IDB_ACCESS(cat("R_MAKE_ANOINNERCLASSES_FINAL","[",factid1,",",factid2,"]"),classId,access bor 0x0010) :- ACCESS(factid1,classId,access),IS_ANOINNERCLASS(factid2,classId).
-
-// **************************************************************
-
-
-// NORMALISATION PATTERN: custom rule to remove version metadata
-.decl IDB_VERSION(factid: symbol,classname: symbol,version: number)
-IDB_VERSION(cat("R_REMOVE_BYTECODE_VERSION","[",factid,"]"),classname,0) :- VERSION(factid,classname,_).
-.output IDB_VERSION
-
-// **************************************************************
-
-// NORMALISATION PATTERN: normalise changes before/after https://github.com/openjdk/jdk/pull/5165
-
-// @auxiliary-predicate
-.decl IS_ROOT_METHOD(factid: symbol,name: symbol,descriptor: symbol)
-IS_ROOT_METHOD("R_IS_ROOT_METHOD_GETCLASS","getClass", "()Ljava/lang/Class;").
-IS_ROOT_METHOD("R_IS_ROOT_METHOD_TOSTRING","toString", "()Ljava/lang/String;").
-IS_ROOT_METHOD("R_IS_ROOT_METHOD_EQUALS","equals","(Ljava/lang/Object;)Z").
-IS_ROOT_METHOD("R_IS_ROOT_METHOD_HASHCODE","hashCode","()I").
-
-// remove invokeinterface and replace with invokevirtual
-REMOVED_INSTRUCTION(cat("R_REMOVE_PR5165","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,_,name,desc,_),IS_ROOT_METHOD(factid2,name,desc).
-IDB_INVOKEVIRTUAL(cat("R_ADD_PR5165","[",factid1,",",factid2,"]"),methodid,instructioncounter,"java/lang/Object",name,desc,itf) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,_,name,desc,itf),IS_ROOT_METHOD(factid2,name,desc).
-
-// **************************************************************
-
-// NORMALISATION PATTERN: Inline $values() method in enumerations
-// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N10.
-
-// (1) removal
-.decl IS_ENUM_VALUE_SYNTH_METHOD(factid: symbol,id: symbol)
-// @auxiliary-predicate
-IS_ENUM_VALUE_SYNTH_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,",",factid2,",",factid3,"]"),id) :- METHOD(factid1,id,classname,name,_),IDB_IS_ENUM(factid2,classname),IDB_IS_SYNTHETIC(factid3,id),name="$values".
-REMOVED_METHOD(cat("R_SKIP_VALUES_SYNTH_METHOD_IN_ENUMS","[",factid1,"]"),methodid) :- IS_ENUM_VALUE_SYNTH_METHOD(factid1,methodid).
-
-// (2) move instructions *****************************************
-// @auxiliary-predicate
-.decl IS_ENUM_STATIC_BLOCK(factid: symbol,id: symbol)
-IS_ENUM_STATIC_BLOCK(cat("R_IS_ENUM_STATIC_BLOCK","[",factid1,",",factid2,"]"),id) :- METHOD(factid1,id,classname,name,descriptor),IDB_IS_ENUM(factid2,classname),name="<clinit>",descriptor="()V".
-
-MOVED_INSTRUCTION(cat("R_MOVE_INSTRUCTIONS","[",factid1,",",factid2,",",factid3,",",factid4,"]"),sourceMethodid,sourceInstructionCounter,destMethodId,destInstructionCounter,instructionName) :- IS_ENUM_VALUE_SYNTH_METHOD(factid1,sourceMethodid), IS_ENUM_STATIC_BLOCK(factid2,destMethodId),INVOKESTATIC(factid3,destMethodId,destInstructionCounter,_,_,_,_), IDB_INSTRUCTION(factid4,sourceMethodid,sourceInstructionCounter,instructionName), !instructionName="ARETURN".
-
-// remove invocation of now inlined method
-REMOVED_INSTRUCTION(cat("R_REMOVE_INSTRUCTIONS","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- IS_ENUM_STATIC_BLOCK(factid1,methodid), INVOKESTATIC(factid2,methodid,instructioncounter,_,name,_,_), name="$values".
-
-// **************************************************************
-
-// NORMALISATION PATTERN: Remove Redundant Checkcasts
-// see also Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N9.
-
-REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- CHECKCAST(factid1,methodid,instructioncounter,desc),CHECKCAST(factid2,methodid,instructioncounter-100,desc).
-
-// declaration of removed and moved items
+// DECLARATIONS OF CORE AUXILIARY PREDCATES USED AS GUARDS
 
 .decl REMOVED_INSTRUCTION(factid: symbol,methodid: symbol,instructioncounter: number)
 .output REMOVED_INSTRUCTION
@@ -70,27 +15,12 @@ REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"
 .decl REMOVED_ACCESS(factid: symbol,classOrMethodOrFieldId: symbol)
 .output REMOVED_ACCESS
 
-// Move instructions (predcate can be used to inline methods)
 .decl MOVED_INSTRUCTION(factid: symbol, sourcemethodid: symbol,sourceinstructioncounter: number, destmethodid: symbol,destinstructioncounter: number,instructionname: symbol)
 .output MOVED_INSTRUCTION
 
-// **************************************************************
-
-// NORMALISATION PATTERN: Null checks in method reference operator
-// see also: Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N6.
-// see also: https://bugs.openjdk.org/browse/JDK-8073432
-
-// auxiliary predicate
-.decl LEGACY_NON_NULL_CHECK(factid: symbol, methodid: symbol, instructioncounter: number)
-// the DUP before and the POP after ensure that the stack after the invocation remains the same
-LEGACY_NON_NULL_CHECK(cat("R_OLD_NULLCHECK","[",factid1,",",factid2,",",factid3,"]"),methodid,instructioncounter) :- INVOKEVIRTUAL(factid1,methodid,instructioncounter,"java/lang/Object","getClass","()Ljava/lang/Class;",_),DUP(factid2,methodid,instructioncounter-100),POP(factid3,methodid,instructioncounter+100).
-IDB_INVOKESTATIC(cat("R_REPLACE_OLD_NULLCHECK","[",factid1,"]"),methodid,instructioncounter,"java/util/Objects","requireNonNull","(Ljava/lang/Object;)Ljava/lang/Object;",0) :- LEGACY_NON_NULL_CHECK(factid1,methodid,instructioncounter).
-REMOVED_INSTRUCTION(cat("R_REMOVE_OLD_NULLCHECK","[",factid1,"]"),methodid,instructioncounter) :- LEGACY_NON_NULL_CHECK(factid1,methodid,instructioncounter).
-
-// **************************************************************
-
 // auxiliary predicate used in standard rules to reprersent any instruction
 .decl IDB_INSTRUCTION(factid: symbol,methodid: symbol,instructioncounter: number,instructionName: symbol)
+
 
 // STANDARD RULES
 // @generated io.github.bineq.daleq.idb.rulegeneration.BaselineRuleGeneration

@@ -1,0 +1,12 @@
+// NORMALISATION PATTERN: normalise changes before/after https://github.com/openjdk/jdk/pull/5165
+
+// @auxiliary-predicate
+.decl IS_ROOT_METHOD(factid: symbol,name: symbol,descriptor: symbol)
+IS_ROOT_METHOD("R_IS_ROOT_METHOD_GETCLASS","getClass", "()Ljava/lang/Class;").
+IS_ROOT_METHOD("R_IS_ROOT_METHOD_TOSTRING","toString", "()Ljava/lang/String;").
+IS_ROOT_METHOD("R_IS_ROOT_METHOD_EQUALS","equals","(Ljava/lang/Object;)Z").
+IS_ROOT_METHOD("R_IS_ROOT_METHOD_HASHCODE","hashCode","()I").
+
+// remove invokeinterface and replace with invokevirtual
+REMOVED_INSTRUCTION(cat("R_REMOVE_PR5165","[",factid1,",",factid2,"]"),methodid,instructioncounter) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,_,name,desc,_),IS_ROOT_METHOD(factid2,name,desc).
+IDB_INVOKEVIRTUAL(cat("R_ADD_PR5165","[",factid1,",",factid2,"]"),methodid,instructioncounter,"java/lang/Object",name,desc,itf) :- INVOKEINTERFACE(factid1,methodid,instructioncounter,_,name,desc,itf),IS_ROOT_METHOD(factid2,name,desc).

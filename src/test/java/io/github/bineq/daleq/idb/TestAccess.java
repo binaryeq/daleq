@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.idb;
 
+import io.github.bineq.daleq.Rules;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.function.Predicate;
@@ -7,9 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAccess extends AbstractIDBTest {
 
+
     @Override
-    public String getRulesPath() {
-        return "/rules/remove-redundant-checkcast.souffle";
+    public Rules getRules() {
+        return Rules.defaultRules();
     }
 
     @Override
