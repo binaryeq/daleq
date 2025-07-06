@@ -15,6 +15,9 @@
 .decl REMOVED_ACCESS(factid: symbol,classOrMethodOrFieldId: symbol)
 .output REMOVED_ACCESS
 
+.decl REMOVED_VERSION(factid: symbol,id: symbol)
+.output REMOVED_VERSION
+
 .decl MOVED_INSTRUCTION(factid: symbol, sourcemethodid: symbol,sourceinstructioncounter: number, destmethodid: symbol,destinstructioncounter: number,instructionname: symbol)
 .output MOVED_INSTRUCTION
 
@@ -40,6 +43,10 @@ IDB_FIELD(cat("R_FIELD","[",factid,"]"),id,classname,name,descriptor) :- FIELD(f
 .decl IDB_METHOD(factid: symbol,id: symbol,classname: symbol,name: symbol,descriptor: symbol)
 IDB_METHOD(cat("R_METHOD","[",factid,"]"),id,classname,name,descriptor) :- METHOD(factid,id,classname,name,descriptor),!REMOVED_METHOD(_,id).
 .output IDB_METHOD
+
+.decl IDB_VERSION(factid: symbol,classname: symbol,version: number)
+IDB_VERSION(cat("R_BYTECODE_VERSION","[",factid,"]"),classname,access) :- VERSION(factid,classname,access),!REMOVED_VERSION(_,classname).
+.output IDB_VERSION
 
 .decl IDB_CLASS_SIGNATURE(factid: symbol,classname: symbol,signature: symbol)
 IDB_CLASS_SIGNATURE(cat("R_CLASS_SIGNATURE","[",factid,"]"),classname,signature) :- CLASS_SIGNATURE(factid,classname,signature).

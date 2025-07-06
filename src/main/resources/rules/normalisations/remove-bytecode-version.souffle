@@ -1,6 +1,4 @@
 // NORMALISATION PATTERN: custom rule to remove version metadata
 // this is achived by always setting the value to 0
-// @TODO use remove-and-override pattern
-.decl IDB_VERSION(factid: symbol,classname: symbol,version: number)
 IDB_VERSION(cat("R_REMOVE_BYTECODE_VERSION","[",factid,"]"),classname,0) :- VERSION(factid,classname,_).
-.output IDB_VERSION
+REMOVED_VERSION("R_REMOVE_EXTRACTED_BYTECODE_VERSION",classname) :- VERSION(factid,classname,_).
