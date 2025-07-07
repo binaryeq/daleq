@@ -1,6 +1,7 @@
 // NORMALISATION PATTERN: Null checks in method reference operator
 // see also: Schott et al: Java Bytecode Normalization for Code Similarity Analysis. ECOOP'24. Pattern N6.
 // see also: https://bugs.openjdk.org/browse/JDK-8073432
+// see also: https://bugs.openjdk.org/browse/JDK-6520152
 
 // auxiliary predicate
 .decl LEGACY_NON_NULL_CHECK(factid: symbol, methodid: symbol, instructioncounter: number)
