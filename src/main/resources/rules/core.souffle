@@ -68,8 +68,8 @@ IDB_ACCESS(cat("R_ACCESS","[",factid,"]"),classOrMethodOrFieldId,access) :- ACCE
 IDB_IS_ANOINNERCLASS(cat("R_ANOINNERCLASS","[",factid,"]"),classId) :- IS_ANOINNERCLASS(factid,classId).
 .output IDB_IS_ANOINNERCLASS
 
-.decl IDB_ANNOTATION(factid: symbol,classOrMethodOrFieldId: symbol,annotation: symbol,parameters: symbol)
-IDB_ANNOTATION(cat("R_ANNOTATION","[",factid,"]"),classOrMethodOrFieldId,annotation,parameters) :- ANNOTATION(factid,classOrMethodOrFieldId,annotation,parameters),!REMOVED_ANNOTATION(_,classOrMethodOrFieldId,annotation).
+.decl IDB_ANNOTATION(factid: symbol,classOrMethodOrFieldId: symbol,annotation: symbol,parameters: symbol, typePath: symbol, typeRef: number)
+IDB_ANNOTATION(cat("R_ANNOTATION","[",factid,"]"),classOrMethodOrFieldId,annotation,parameters,typePath, typeRef) :- ANNOTATION(factid,classOrMethodOrFieldId,annotation,parameters,typePath, typeRef),!REMOVED_ANNOTATION(_,classOrMethodOrFieldId,annotation).
 .output IDB_ANNOTATION
 
 .decl IDB_LABEL(factid: symbol,methodid: symbol,instructioncounter: number,labelid: symbol)

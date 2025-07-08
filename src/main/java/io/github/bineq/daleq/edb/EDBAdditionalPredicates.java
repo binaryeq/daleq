@@ -31,7 +31,7 @@ public enum EDBAdditionalPredicates implements Predicate {
     ACCESS(symslot(Fact.ID_SLOT_NAME),symslot("classOrMethodOrFieldId"),numslot("access",Integer.TYPE.getName())),
 
     // annotations
-    ANNOTATION(symslot(Fact.ID_SLOT_NAME),symslot("classOrMethodOrFieldId"),symslot("annotation"),symslot("parameters")),
+    ANNOTATION(symslot(Fact.ID_SLOT_NAME),symslot("classOrMethodOrFieldId"),symslot("annotation"),symslot("parameters"),symslot("typePath"),numslot("typeRef",Integer.TYPE.getName())),
 
     IS_ANOINNERCLASS(symslot(Fact.ID_SLOT_NAME),symslot("classId")),
 

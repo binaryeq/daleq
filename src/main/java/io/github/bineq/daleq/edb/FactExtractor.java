@@ -244,6 +244,7 @@ public class FactExtractor   {
 
         // annotations
         addAnnotationFacts(classNode.visibleAnnotations,facts,classNode.name);
+        addAnnotationFacts(classNode.visibleTypeAnnotations,facts,classNode.name);
 
         // fields
         classNode.fields.stream().sorted((FIELD_COMP)).forEach(fieldNode -> {
@@ -254,6 +255,7 @@ public class FactExtractor   {
 
             // annotations
             addAnnotationFacts(fieldNode.visibleAnnotations,facts,fieldId);
+            addAnnotationFacts(fieldNode.visibleTypeAnnotations,facts,fieldId);
         });
 
         // methods
@@ -343,6 +345,7 @@ public class FactExtractor   {
 
             // annotations
             addAnnotationFacts(methodNode.visibleAnnotations,facts,methodId);
+            addAnnotationFacts(methodNode.visibleTypeAnnotations,facts,methodId);
 
         });
 
@@ -356,7 +359,7 @@ public class FactExtractor   {
         return facts;
     }
 
-    private static void addAnnotationFacts(List<AnnotationNode> annotationNodes, List<Fact> facts,String classname) {
+    private static void addAnnotationFacts(List<? extends AnnotationNode> annotationNodes, List<Fact> facts,String classname) {
         if (annotationNodes==null) return;
         annotationNodes.stream().sorted(ANNOTATION_COMP).forEach(annoNode -> {
             String desc = annoNode.desc;
@@ -375,9 +378,14 @@ public class FactExtractor   {
                 }
                 args = map.keySet().stream().map(k -> k+" -> "+map.get(k)).collect(Collectors.joining(","));
             }
-            facts.add(new SimpleFact(EDBAdditionalPredicates.ANNOTATION,FactIdGenerator.nextId(EDBAdditionalPredicates.ANNOTATION),classname,desc,args));
+            // specific arguments for type annotations
+            boolean isTypeAnnotation = annoNode instanceof TypeAnnotationNode;
+            String typePath = isTypeAnnotation ? ((TypeAnnotationNode)annoNode).typePath.toString() : "";
+            int typeRef = isTypeAnnotation ? ((TypeAnnotationNode)annoNode).typeRef : -1;
+            facts.add(new SimpleFact(EDBAdditionalPredicates.ANNOTATION,FactIdGenerator.nextId(EDBAdditionalPredicates.ANNOTATION),classname,desc,args,typePath,typeRef));
         });
     }
+
 
     private static Fact createFact(EDBInstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode, LabelMap labelMap) {
         InstructionPredicateFactFactory factory = FACT_FACTORIES.get(predicate.getOpCode());
