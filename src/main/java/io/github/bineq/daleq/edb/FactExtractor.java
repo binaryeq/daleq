@@ -380,12 +380,15 @@ public class FactExtractor   {
             }
             // specific arguments for type annotations
             boolean isTypeAnnotation = annoNode instanceof TypeAnnotationNode;
-            String typePath = isTypeAnnotation ? ((TypeAnnotationNode)annoNode).typePath.toString() : "";
+            String typePath = isTypeAnnotation ? getTypePath((TypeAnnotationNode)annoNode) : "";
             int typeRef = isTypeAnnotation ? ((TypeAnnotationNode)annoNode).typeRef : -1;
             facts.add(new SimpleFact(EDBAdditionalPredicates.ANNOTATION,FactIdGenerator.nextId(EDBAdditionalPredicates.ANNOTATION),classname,desc,args,typePath,typeRef));
         });
     }
 
+    private static String getTypePath(TypeAnnotationNode node) {
+        return node.typePath==null ? "" : node.typePath.toString();
+    }
 
     private static Fact createFact(EDBInstructionPredicate predicate, int instCounter, String methodId, AbstractInsnNode instructionNode, LabelMap labelMap) {
         InstructionPredicateFactFactory factory = FACT_FACTORIES.get(predicate.getOpCode());
