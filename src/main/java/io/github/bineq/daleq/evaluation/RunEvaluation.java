@@ -39,7 +39,7 @@ public class RunEvaluation {
     private static final boolean REUSE_IDB = true;
 
     enum DB_RETENTION_POLICY {DELETE,KEEP,ZIP};
-    private static final  DB_RETENTION_POLICY RETENTION_POLICY = DB_RETENTION_POLICY.ZIP;
+    static final  DB_RETENTION_POLICY RETENTION_POLICY = DB_RETENTION_POLICY.ZIP;
 
     private static final boolean COUNT_ONLY = false;
 
@@ -332,7 +332,7 @@ public class RunEvaluation {
         }
     }
 
-    private static void cleanupDBDir(Path dir, DB_RETENTION_POLICY retentionPolicy) throws IOException {
+    static void cleanupDBDir(Path dir, DB_RETENTION_POLICY retentionPolicy) throws IOException {
         if (retentionPolicy==DB_RETENTION_POLICY.DELETE) {
             IOUtil.deleteDir(dir);
             LOG.debug("deleted fact db {}",dir);
@@ -344,7 +344,7 @@ public class RunEvaluation {
         // nothing to do for DB_RETENTION_POLICY.KEEP
     }
 
-    private static void cleanupFile(Path file, DB_RETENTION_POLICY retentionPolicy) throws IOException {
+    static void cleanupFile(Path file, DB_RETENTION_POLICY retentionPolicy) throws IOException {
         if (retentionPolicy==DB_RETENTION_POLICY.DELETE) {
             Files.delete(file);
             LOG.debug("deleted file {}",file);
@@ -357,14 +357,14 @@ public class RunEvaluation {
         // nothing to do for DB_RETENTION_POLICY.KEEP
     }
 
-    private static String escapeDollarChar(String s) {
+    static String escapeDollarChar(String s) {
         // some change of collision here !
         return s.replace("$","_____");
     }
 
 
     // load the classes from a jar
-    private static Map<String,Content> loadClasses(Map<Path,Map<String,Content>> cache,Path jar) throws IOException {
+    static Map<String,Content> loadClasses(Map<Path, Map<String, Content>> cache, Path jar) throws IOException {
 
         if (cache.containsKey(jar)) {
             return cache.get(jar);
@@ -457,7 +457,7 @@ public class RunEvaluation {
         }
     }
 
-    private static Set<String> readFromSameSourcesCache(String provider1, String provider2) {
+    static Set<String> readFromSameSourcesCache(String provider1, String provider2) {
         Set<String> gavs = null;
         Collection<String> gavs2 = null;
         Map<String,Set<String>> map = GAVS_WITH_SAME_RESOURCES.get(provider1);
@@ -484,13 +484,13 @@ public class RunEvaluation {
         return gavs;
     }
 
-    private static String getProviderName(Path indexFile) {
+    static String getProviderName(Path indexFile) {
         return indexFile.getFileName().toString()
             .replace(".tsv","")
             .replace("gav_","");
     }
 
-    private static Set<Record> parseRecords(Path indexFile) throws IOException {
+    static Set<Record> parseRecords(Path indexFile) throws IOException {
         return Files.lines(indexFile)
             .map(line -> {
                 try {
@@ -509,7 +509,7 @@ public class RunEvaluation {
      * @param records2
      * @return
      */
-    private static Set<PairOfRecords> findCommonRecords(Set<Record> records1, Set<Record> records2) {
+    static Set<PairOfRecords> findCommonRecords(Set<Record> records1, Set<Record> records2) {
         Map<String,Record> recordsByGAV1 = new HashMap<>();
         Map<String,Record> recordsByGAV2 = new HashMap<>();
         records1.stream().forEach(record -> recordsByGAV1.put(record.gav(),record));

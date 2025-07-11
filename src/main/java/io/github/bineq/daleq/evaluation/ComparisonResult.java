@@ -7,5 +7,5 @@ package io.github.bineq.daleq.evaluation;
 public enum ComparisonResult {
 
     // note that the order is used in comparisons based on compareTo, so this matters !
-    EQUAL, EQUIVALENT, NON_EQUIVALENT, ERROR
+    EQUAL, EQUIVALENT, NON_EQUIVALENT, ERROR, UNKNOWN
 }
