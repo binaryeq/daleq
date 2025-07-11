@@ -13,10 +13,11 @@ import io.github.bineq.daleq.souffle.provenance.ProvenanceDB;
 import io.github.bineq.daleq.souffle.provenance.ProvenanceParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.BufferedReader;
+import org.springframework.core.io.Resource;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -24,6 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import static io.github.bineq.daleq.Souffle.checkSouffleExe;
 
 /**
@@ -42,8 +44,7 @@ public class DaleqAnalyser implements Analyser {
     private static final String JAR1PREFIX = "jar1-";
     private static final String JAR2PREFIX = "jar2-";
 
-    public static final String RULES = "/rules/advanced.souffle";
-
+    private static final Rules RULES = Rules.defaultRules();
     private String equivalenceIsInferredFromEqualityLink = null;
 
     @Override
@@ -112,12 +113,10 @@ public class DaleqAnalyser implements Analyser {
             Files.createDirectories(idbDir2);
             Path mergedEDBAndRules1 = dir1.resolve("mergedEDBAndRules.souffle");
             Path mergedEDBAndRules2 = dir2.resolve("mergedEDBAndRules.souffle");
-            URL rulesLoc = Souffle.class.getResource(RULES);
-
 
             try {
-                IDB idb1 = computeAndParseIDB(dir1, classFile1, edbDir1, idbDir1,mergedEDBAndRules1,rulesLoc);
-                IDB idb2 = computeAndParseIDB(dir2, classFile2, edbDir2, idbDir2,mergedEDBAndRules2,rulesLoc);
+                IDB idb1 = computeAndParseIDB(dir1, classFile1, edbDir1, idbDir1,mergedEDBAndRules1,RULES);
+                IDB idb2 = computeAndParseIDB(dir2, classFile2, edbDir2, idbDir2,mergedEDBAndRules2,RULES);
 
                 ProvenanceDB provDB1 = new ProvenanceDB(edbDir1,idbDir1,mergedEDBAndRules1);
                 ProvenanceDB provDB2 = new ProvenanceDB(edbDir2,idbDir2,mergedEDBAndRules2);
@@ -170,7 +169,7 @@ public class DaleqAnalyser implements Analyser {
                     bindings2.remove("code"); // not used in template
                     bindings2.put("edb1IL",edbToHtml(edbDir1,JAR1PREFIX,"jar1"));  // IL = inlined
                     bindings2.put("edb2IL",edbToHtml(edbDir2,JAR2PREFIX,"jar2"));
-                    bindings2.put("rules",rulesToHtml(rulesLoc));
+                    bindings2.put("rules",rulesToHtml(RULES));
                     createBindingsForAdvancedDiff(bindings2,idb1,idb2,provDB1, provDB2);
                     String link2 = ResourceUtil.createReportFromTemplate(contextDir,this, resource, ADVANCED_DIFF_TEMPLATE,"advanced-diff.html", bindings2);
                     attachments.add(new AnalysisResultAttachment("advanced-diff",link2,AnalysisResultAttachment.Kind.DIFF));
@@ -207,7 +206,7 @@ public class DaleqAnalyser implements Analyser {
 
 
 
-    private IDB computeAndParseIDB(Path contextDir, Path classFile, Path edbDir, Path idbDir, Path mergedEDBAndRules,URL rulesPath) throws Exception {
+    private IDB computeAndParseIDB(Path contextDir, Path classFile, Path edbDir, Path idbDir, Path mergedEDBAndRules,Rules rules) throws Exception {
 
         if (Files.exists(edbDir)) {
             IOUtil.deleteDir(edbDir);
@@ -222,7 +221,7 @@ public class DaleqAnalyser implements Analyser {
         Path edbDef = edbDir.resolve("db.souffle");
         Thread.sleep(500);
         FactExtractor.extractAndExport(classFile, edbDef, edbDir, true);
-        Souffle.createIDB(edbDef, Rules.defaultRules(), edbDir, idbDir, mergedEDBAndRules);
+        Souffle.createIDB(edbDef, rules, edbDir, idbDir, mergedEDBAndRules);
 
         // there might be a race condition is souffle that some background thread is still writing the IDB when createIDB returns
         // there have been cased when facts where missing, leading to NPEs when printing the IDB
@@ -605,33 +604,32 @@ public class DaleqAnalyser implements Analyser {
             .replaceAll(">", "&gt;");
     }
 
-    private String rulesToHtml(URL rules) throws IOException {
+    private String rulesToHtml(Rules rules) throws IOException {
         StringBuffer html = new StringBuffer();
-        List<String> lines = new BufferedReader(new InputStreamReader(rules.openStream())).lines().collect(Collectors.toUnmodifiableList());
-        for (String line:lines) {
-            String cssClass = null;
-            String ruleId = null;
-            line = line.trim();
-            if (line.startsWith("//")) {
-                cssClass = "datalog-comment";
-            }
-            else if (line.startsWith(".decl ")) {
-                cssClass = "datalog-declaration";
-            }
-            else if (line.startsWith(".output ")) {
-                cssClass = "datalog-output";
-            }
-            else {
-                cssClass = "datalog-rule";
-                ruleId = extractId(line);
-            }
-            if (ruleId==null) {
-                html.append("<p class=\"" + cssClass + "\">" + line + "</p>");
-            }
-            else {
-                line = line.replace(ruleId,"<strong>"+ruleId+"</strong>");
-                html.append("<p class=\"" + cssClass + " highlightable-link-target\"><a id=\""+ruleId+"\">" + line + "</a></p>");
-            }
+        for (Resource resource:rules.get()) {
+            String content = resource.getContentAsString(StandardCharsets.UTF_8);
+            html.append("// rules defined in " + resource.getFilename() + "<br/>");
+            content.lines().forEach( line -> {
+                String cssClass = null;
+                String ruleId = null;
+                line = line.trim();
+                if (line.startsWith("//")) {
+                    cssClass = "datalog-comment";
+                } else if (line.startsWith(".decl ")) {
+                    cssClass = "datalog-declaration";
+                } else if (line.startsWith(".output ")) {
+                    cssClass = "datalog-output";
+                } else {
+                    cssClass = "datalog-rule";
+                    ruleId = extractId(line);
+                }
+                if (ruleId == null) {
+                    html.append("<p class=\"" + cssClass + "\">" + line + "</p>");
+                } else {
+                    line = line.replace(ruleId, "<strong>" + ruleId + "</strong>");
+                    html.append("<p class=\"" + cssClass + " highlightable-link-target\"><a id=\"" + ruleId + "\">" + line + "</a></p>");
+                }
+            });
         }
         return html.toString();
     }
