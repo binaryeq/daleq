@@ -250,10 +250,16 @@ public class RunComparativeEvaluation {
         root = root.resolve(provider);
         Path javapFile = root.resolve(className.replace(".class", ".javap"));
         Path classFile = root.resolve(className);
-        Files.createDirectories(classFile.getParent());
-        Files.write(classFile,bytecode);
-        byte[] javap = Javap.run(classFile,javapFile);
-        return new String(javap);
+        if (!Files.exists(javapFile) || !Files.isRegularFile(classFile)) {
+            Files.createDirectories(classFile.getParent());
+            Files.write(classFile, bytecode);
+            byte[] javap = Javap.run(classFile, javapFile);
+            return new String(javap);
+        }
+        else {
+            assert Files.exists(javapFile);
+            return Files.readString(javapFile);
+        }
     }
 
     private static ComparisonResult compareUsingDaleq(String gav, String provider1, String provider2, String commonClass, byte[] bytecode1, byte[] bytecode2, Path analysisDir) throws Exception {
