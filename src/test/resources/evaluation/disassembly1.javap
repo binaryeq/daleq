@@ -1,0 +1,49 @@
+Compiled from "LoggingEventPreSerializationTransformer.java"
+public class ch.qos.logback.classic.net.LoggingEventPreSerializationTransformer implements ch.qos.logback.core.spi.PreSerializationTransformer<ch.qos.logback.classic.spi.ILoggingEvent> {
+  public ch.qos.logback.classic.net.LoggingEventPreSerializationTransformer();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public java.io.Serializable transform(ch.qos.logback.classic.spi.ILoggingEvent);
+    Code:
+       0: aload_1
+       1: ifnonnull     6
+       4: aconst_null
+       5: areturn
+       6: aload_1
+       7: instanceof    #7                  // class ch/qos/logback/classic/spi/LoggingEvent
+      10: ifeq          18
+      13: aload_1
+      14: invokestatic  #9                  // Method ch/qos/logback/classic/spi/LoggingEventVO.build:(Lch/qos/logback/classic/spi/ILoggingEvent;)Lch/qos/logback/classic/spi/LoggingEventVO;
+      17: areturn
+      18: aload_1
+      19: instanceof    #10                 // class ch/qos/logback/classic/spi/LoggingEventVO
+      22: ifeq          30
+      25: aload_1
+      26: checkcast     #10                 // class ch/qos/logback/classic/spi/LoggingEventVO
+      29: areturn
+      30: new           #15                 // class java/lang/IllegalArgumentException
+      33: dup
+      34: new           #17                 // class java/lang/StringBuilder
+      37: dup
+      38: invokespecial #19                 // Method java/lang/StringBuilder."<init>":()V
+      41: ldc           #20                 // String Unsupported type
+      43: invokevirtual #22                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      46: aload_1
+      47: invokeinterface #26,  1           // InterfaceMethod ch/qos/logback/classic/spi/ILoggingEvent.getClass:()Ljava/lang/Class;
+      52: invokevirtual #32                 // Method java/lang/Class.getName:()Ljava/lang/String;
+      55: invokevirtual #22                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      58: invokevirtual #38                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      61: invokespecial #41                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+      64: athrow
+
+  public java.io.Serializable transform(java.lang.Object);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: checkcast     #27                 // class ch/qos/logback/classic/spi/ILoggingEvent
+       5: invokevirtual #44                 // Method transform:(Lch/qos/logback/classic/spi/ILoggingEvent;)Ljava/io/Serializable;
+       8: areturn
+}
