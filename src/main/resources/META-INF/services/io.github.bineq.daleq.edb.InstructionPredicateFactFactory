@@ -11,6 +11,7 @@ io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__LCO
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__LCONST_1
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__FCONST_0
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__FCONST_1
+io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__FCONST_2
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__DCONST_0
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__DCONST_1
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__BIPUSH
@@ -49,6 +50,7 @@ io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__DUP
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__DUP_X2
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__DUP2
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__DUP2_X1
+io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__DUP2_X2
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__SWAP
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__IADD
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__LADD
@@ -71,6 +73,7 @@ io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__LRE
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__DREM
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__INEG
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__LNEG
+io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__FNEG
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__DNEG
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__ISHL
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__LSHL

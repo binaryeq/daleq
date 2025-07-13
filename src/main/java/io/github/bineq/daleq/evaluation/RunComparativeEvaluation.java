@@ -224,7 +224,6 @@ public class RunComparativeEvaluation {
 
                 LOG.info("pairs of records processed: {}",pairOfRecordsCounter.get());
 
-
                 // some statistics
                 LOG.info("jars compared: {}",gavs.size()*2);
                 LOG.info("pairs where both jars have no .class files: {}",bothJarsEmptyCounter.get());
