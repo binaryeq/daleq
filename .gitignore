@@ -1,6 +1,5 @@
 db
 target
-inferred-instructions-fact-factories/io/github/bineq/daleq/factextraction/instruction_fact_factories
 inferred-instructions-fact-factories
 inferred-instruction-predicates
 .benchmarks
@@ -9,13 +8,8 @@ trainingdata
 .tests
 .tmp
 idb.txt
-evaluation/db-mvnc-vs-gaoss
-evaluation/db-mvnc-vs-obfs
-evaluation/db-mvnc-vs-obfs-bak
-evaluation/db-mvnc-vs-obfs-bak2
-evaluation/db-mvnc-vs-gaoss-bak
+evaluation/
 sandbox
-evaluation/db-mvnc-vs-obfs-bak1
 examples
-evaluation
 demo
+evaluation-comparative

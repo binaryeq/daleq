@@ -22,8 +22,6 @@ public class Souffle {
     private static final Logger LOG = LoggerFactory.getLogger(Souffle.class);
     public static final String SOUFFLE = "SOUFFLE"; // a system property that must be set and point to the souffle binary
     public static final String COMMENT_SEP = "// ************************************************";
-
-    public static final Path COMMON_RULES_DIR = Path.of(Souffle.class.getResource("/rules/commons/").getPath());
     public static final String LINE_SEP = System.getProperty("line.separator");
 
     /**
