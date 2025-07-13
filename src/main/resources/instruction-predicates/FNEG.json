@@ -1,0 +1,23 @@
+{
+  "name": "FNEG",
+  "opCode": 118,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "280fabfc-c1e4-4910-a043-2d94477af929",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}
