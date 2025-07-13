@@ -13,10 +13,13 @@ import io.github.bineq.daleq.idb.IDBPrinter;
 import io.github.bineq.daleq.idb.IDBReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -36,6 +39,8 @@ public class RunComparativeEvaluation {
     private static Path VALIDATION_DB = null;
     private static final boolean REUSE_IDB = true;
 
+    static final Path JNORM = Path.of("tools/jnorm-cli-1.0.0.jar");
+
     record ComparativeEvaluationResultRecord(String gav, String provider1, String provider2,String clazz, ComparisonResult result4javap, ComparisonResult result4jnorm, ComparisonResult result4daleq) {
         String toCSVLine() {
             return  List.of(gav,provider1,provider2,clazz,result4javap.toString(),result4jnorm.toString(),result4daleq.toString())
@@ -51,8 +56,8 @@ public class RunComparativeEvaluation {
     public static void main (String[] args) throws Exception {
 
         try {
-
             Preconditions.checkArgument(args.length > 1, "at least the output folder and two datasets (index files *.tsv) are required");
+            Preconditions.checkArgument(Files.exists(JNORM));
 
             VALIDATION_DB = Path.of(args[0]);
             // delete db folder if it exists
@@ -109,6 +114,9 @@ public class RunComparativeEvaluation {
             AtomicInteger classesComparedCounter = new AtomicInteger(0);
             AtomicInteger pairOfRecordsCounter = new AtomicInteger(0);
             AtomicInteger bothJarsEmptyCounter = new AtomicInteger(0);
+            AtomicInteger equalClassCounter = new AtomicInteger(0);
+            AtomicInteger nonEqualClassCounter = new AtomicInteger(0);
+            Set<String> gavs = new HashSet();
 
             for (int i = 0; i < datasets.size(); i++) {
                 String provider1 = providers.get(i);
@@ -137,14 +145,19 @@ public class RunComparativeEvaluation {
                             LOG.info("\tprogress dataset pair " + pairsOfJarsRecordCounter.get() + "/" + N + " , jar(s) " + counter2.get() + "/" + pairsOfRecords.size());
                         }
                         LOG.debug("Loading classes for {} with providers {} and {}",pairOfRecords.left().gav(),provider1,provider2);
+
+                        Path jar1 = pairOfRecords.left().binMainFile();
+                        Path jar2 = pairOfRecords.right().binMainFile();
+
                         try {
-                            Map<String, Content> classes1 = RunEvaluation.loadClasses(cache, pairOfRecords.left().binMainFile());
-                            Map<String, Content> classes2 = RunEvaluation.loadClasses(cache, pairOfRecords.right().binMainFile());
+                            Map<String, Content> classes1 = RunEvaluation.loadClasses(cache, jar1);
+                            Map<String, Content> classes2 = RunEvaluation.loadClasses(cache, jar2);
                             if (classes1.size()==0 && classes2.size()==0) {
                                 bothJarsEmptyCounter.incrementAndGet();
                             }
                             String gav = pairOfRecords.left().gav();
                             assert gav.equals(pairOfRecords.right().gav());
+                            gavs.add(gav);
                             Set<String> commonClasses = Sets.intersection(classes1.keySet(), classes2.keySet());
 
                             commonClasses.stream().forEach(commonClass -> {
@@ -154,29 +167,36 @@ public class RunComparativeEvaluation {
                                 String nClassName = commonClass.replace("/",".").replace(".class","");
                                 // also replace $ char -- this creates issue with souffle
                                 nClassName = RunEvaluation.escapeDollarChar(nClassName);
-                                Path analysisDir = VALIDATION_DB.resolve(gav);
-                                analysisDir = analysisDir.resolve(nClassName);
+                                Path analysisDir4Gav = VALIDATION_DB.resolve(gav);
+                                Path analysisDir4GavNClass = analysisDir4Gav.resolve(nClassName);
 
                                 // LOG.info("TODO: compare classes {}",commonClass);
 
                                 try {
                                     byte[] bytecode1 = clazz1.load();
                                     byte[] bytecode2 = clazz2.load();
-                                    ComparisonResult result4Daleq = compareUsingDaleq(pairOfRecords.left().gav(), provider1, provider2, commonClass, bytecode1, bytecode2,analysisDir);
-                                    ComparisonResult result4JNorm = ComparisonResult.UNKNOWN ; // TODO
-                                    ComparisonResult result4Javap = compareUsingJavap(pairOfRecords.left().gav(), provider1, provider2, commonClass, bytecode1, bytecode2,analysisDir);
 
-                                    ComparativeEvaluationResultRecord resultRecord = new ComparativeEvaluationResultRecord(
-                                        gav,
-                                        provider1,
-                                        provider2,
-                                        commonClass,
-                                        result4Javap,
-                                        result4JNorm,
-                                        result4Daleq
-                                    );
-                                    results.add(resultRecord);
+                                    // only compare if different
+                                    if (!Arrays.equals(bytecode1,bytecode2)) {
+                                        nonEqualClassCounter.incrementAndGet();
+                                        ComparisonResult result4Daleq = compareUsingDaleq(pairOfRecords.left().gav(), provider1, provider2, commonClass, bytecode1, bytecode2, analysisDir4GavNClass);
+                                        ComparisonResult result4JNorm = compareUsingJNorm(pairOfRecords.left().gav(), provider1, provider2, jar1, jar2, commonClass, bytecode1, bytecode2, analysisDir4Gav, analysisDir4GavNClass);
+                                        ComparisonResult result4Javap = compareUsingJavap(pairOfRecords.left().gav(), provider1, provider2, commonClass, bytecode1, bytecode2, analysisDir4GavNClass);
 
+                                        ComparativeEvaluationResultRecord resultRecord = new ComparativeEvaluationResultRecord(
+                                            gav,
+                                            provider1,
+                                            provider2,
+                                            commonClass,
+                                            result4Javap,
+                                            result4JNorm,
+                                            result4Daleq
+                                        );
+                                        results.add(resultRecord);
+                                    }
+                                    else {
+                                        equalClassCounter.incrementAndGet();
+                                    }
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
                                 }
@@ -203,12 +223,23 @@ public class RunComparativeEvaluation {
                 }
 
                 LOG.info("pairs of records processed: {}",pairOfRecordsCounter.get());
+
+
+                // some statistics
+                LOG.info("jars compared: {}",gavs.size()*2);
                 LOG.info("pairs where both jars have no .class files: {}",bothJarsEmptyCounter.get());
                 LOG.info("classes compared: {}",classesComparedCounter.get());
+                LOG.info("classes compared - equal: {}",equalClassCounter.get());
+                LOG.info("classes compared - non-equal: {}",nonEqualClassCounter.get());
+                LOG.info("classes equivalent wrt javap: {}",results.stream().filter(r -> r.result4javap==ComparisonResult.EQUIVALENT).count());
+                LOG.info("classes equivalent wrt jnorm: {}",results.stream().filter(r -> r.result4jnorm==ComparisonResult.EQUIVALENT).count());
+                LOG.info("classes equivalent wrt daleq: {}",results.stream().filter(r -> r.result4daleq==ComparisonResult.EQUIVALENT).count());
+                LOG.info("classes with error wrt javap: {}",results.stream().filter(r -> r.result4javap==ComparisonResult.ERROR).count());
+                LOG.info("classes with error wrt jnorm: {}",results.stream().filter(r -> r.result4jnorm==ComparisonResult.ERROR).count());
+                LOG.info("classes with error wrt daleq: {}",results.stream().filter(r -> r.result4daleq==ComparisonResult.ERROR).count());
 
-
-
-
+                LOG.info("classes equivalent wrt jnorm not daleq: {}",results.stream().filter(r -> r.result4jnorm==ComparisonResult.EQUIVALENT).filter(r -> r.result4daleq==ComparisonResult.NON_EQUIVALENT).count());
+                LOG.info("classes equivalent wrt javap not daleq: {}",results.stream().filter(r -> r.result4javap==ComparisonResult.EQUIVALENT).filter(r -> r.result4daleq==ComparisonResult.NON_EQUIVALENT).count());
 
             }
 
@@ -218,7 +249,6 @@ public class RunComparativeEvaluation {
         }
 
     }
-
 
     private static ComparisonResult compareUsingJavap(String gav, String provider1, String provider2, String commonClass, byte[] bytecode1, byte[] bytecode2, Path analysisDir) throws Exception {
         if (Arrays.equals(bytecode1, bytecode2)) {
@@ -372,42 +402,83 @@ public class RunComparativeEvaluation {
         }
     }
 
-
-
-    /**
-     * Find records with matching jars.
-     * I.e. for each pair the following is true:
-     * 1. the GAVs for both records are the same
-     * 2. both have the same set of source files
-     * 3. the commons source files have equivalent content (modulo some equivalence relation)
-     * @param records1
-     * @param records2
-     * @return set of GAVs for which records exist in both sets
-     */
-    public static Set<PairOfRecords> findMatchingRecordsWithSameSources(String provider1, String provider2, Set<Record> records1, Set<Record> records2, int sourceEquivalenceMode) throws IOException {
-        Preconditions.checkArgument(sourceEquivalenceMode >= -1 && sourceEquivalenceMode <= 1, "-se must be 1 (default), -1 or 0");
-
-        // same GAVs
-        final Set<PairOfRecords> commonRecords = RunEvaluation.findCommonRecords(records1,records2);
-
-        if (sourceEquivalenceMode == 0) {
-            return commonRecords;    // No need to compute source equivalence
+    private static ComparisonResult compareUsingJNorm(String gav, String provider1, String provider2, Path jar1, Path jar2, String commonClass, byte[] bytecode1, byte[] bytecode2, Path analysisDir4Gav,Path analysisDir4GavNClass) throws Exception {
+        if (Arrays.equals(bytecode1, bytecode2)) {
+            return ComparisonResult.EQUAL;
         }
 
-        Set<String> gavsWithSameSources = RunEvaluation.readFromSameSourcesCache(provider1,provider2);
-        assert gavsWithSameSources!=null;
-        Set<PairOfRecords> pairsOfRecords = commonRecords.stream()
-            .filter(p -> gavsWithSameSources.contains(p.left().gav()))
-            .collect(Collectors.toSet());
+        try {
+            String jimple1 = jnorm(gav, provider1, jar1, commonClass, bytecode1,analysisDir4Gav,analysisDir4GavNClass);
+            assert jimple1 != null;
+            String jimple2 = jnorm(gav, provider2, jar2, commonClass, bytecode2,analysisDir4Gav,analysisDir4GavNClass);
+            assert jimple2 != null;
 
-        LOG.info("Found {} matching gavs for providers {} and {}", pairsOfRecords.size(), provider1, provider2);
+            if (jimple1.equals(jimple2)) {
+                return ComparisonResult.EQUIVALENT;
+            } else {
+                Path diff = analysisDir4GavNClass.resolve("jnorm/jnorm-diff.txt");
+                Diff.diffAndExport(jimple1,jimple2,diff);
+                return ComparisonResult.NON_EQUIVALENT;
+            }
+        }
+        catch (Exception e) {
+            LOG.error("Error evaluating jnorm-based equivalance",e);
+            return ComparisonResult.ERROR;
+        }
+    }
 
-        Set<PairOfRecords> selectedPairsOfRecords = RunEvaluation.select(pairsOfRecords);
-        LOG.info("Selected {} matching gavs for providers {} and {}", selectedPairsOfRecords.size(), provider1, provider2);
+    private static String jnorm(String gav, String provider, Path jar, String className, byte[] bytecode,Path analysisDir4Gav,Path analysisDir4GavNClass) throws IOException, InterruptedException {
+        Path dir1 = analysisDir4GavNClass.resolve("jnorm").resolve(provider);
+        Path dir2 = analysisDir4Gav.resolve("__jnorm-jar-cache").resolve(provider);
+        if (!Files.exists(dir1)) {
+            Files.createDirectories(dir1);
+        }
+        if (!Files.exists(dir2)) {
+            Files.createDirectories(dir2);
+        }
+        Path jnormOutDir = dir2.resolve("jnormalised");
+        Path jnormError = dir2.resolve("jnorm-error.txt");
+        Path jimpleFile = dir1.resolve(className.replace(".class", ".jimple"));
+        Path classFile = dir1.resolve(className);
+        if (!Files.exists(jnormOutDir)) {
+            int status = jnorm(jar,jnormOutDir,jnormError);
+            if (status != 0) {
+                // todo: parse error file and check whether error is cased by jnorm (asm) not supporting bytecode version
+                // could handle those as SKIP instead of error
+                throw new IOException("Error running jnorm");
+            }
+        }
 
-        return selectedPairsOfRecords;
+        assert Files.exists(jnormOutDir);
+        String jnormOutputName = className.replace("/",".").replace(".class",".jimple");
+        Path jnormOutput = jnormOutDir.resolve(jnormOutputName);
+
+        if (!Files.exists(jnormOutput)) {
+            LOG.warn("jimple file for {} :: {} ({}) not generated",gav,className,provider);
+            throw new RuntimeException("jimple file not generated");
+        }
+
+        if (!Files.exists(jimpleFile.getParent())) {
+            Files.createDirectories(jimpleFile.getParent());
+        }
+        Files.copy(jnormOutput, jimpleFile, StandardCopyOption.REPLACE_EXISTING);
+
+        Files.write(classFile, bytecode);
+
+        return Files.readString(jimpleFile);
 
     }
 
+    private static int jnorm(Path jar, Path jnormJar,Path errorFile) throws IOException, InterruptedException {
+        LOG.info("running jnorm on {} , output saved to {}", jar, jnormJar);
+
+        ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        Process process = new ProcessBuilder()
+            .command("/Library/Java/JavaVirtualMachines/jdk-11.0.11.jdk/Contents/Home/bin/java","-jar",JNORM.toString(),"-n","-i",jar.toString(),"-d",jnormJar.toString())
+            .inheritIO()
+            .redirectError(errorFile.toFile())
+            .start();
+        return process.waitFor();
+    }
 
 }

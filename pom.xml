@@ -80,10 +80,16 @@
             <artifactId>javaparser-core</artifactId>
             <version>3.26.1</version>
         </dependency>
+
         <dependency>
             <groupId>io.github.java-diff-utils</groupId>
             <artifactId>java-diff-utils</artifactId>
             <version>4.15</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-exec</artifactId>
+            <version>1.5.0</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
