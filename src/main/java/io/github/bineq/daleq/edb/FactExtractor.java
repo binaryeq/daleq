@@ -38,7 +38,9 @@ public class FactExtractor   {
     // by inserting gaps, rules can insert additional instructions
     public static final int INSTRUCTION_COUNTER_STEP_SIZE = 100;
 
-    public static final Pattern INNER_ANO_CLASS_PATTERN = Pattern.compile("\\w+(\\/\\w+)*\\$\\d+");
+    // interestingly there are cases with - in the package name -- see issue 33a
+    // such as org/apache/curator-test/shaded/com/google/common/cache/CacheBuilder$3
+    public static final Pattern INNER_ANO_CLASS_PATTERN = Pattern.compile("(\\w|\\-)+(\\/(\\w|\\-)+)*\\$\\d+");
 
     public static class LabelMap {
         Set<LabelNode> accessedKeys = new HashSet<>();
