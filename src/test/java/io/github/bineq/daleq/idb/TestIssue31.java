@@ -18,9 +18,9 @@ public class TestIssue31 extends AbstractIDBTest {
     public void testPresenceOfAnnotationsInIDBReports() throws IOException {
         IDB idb = IDBReader.read(this.idbFactDir);
         String out = IDBPrinter.print(idb);
-        assertTrue(out.contains("pck/ClassWithAnnotations\tLpck/ClassAnnotation;\tcF1 -> 42,cF2 -> bar"));
-        assertTrue(out.contains("pck/ClassWithAnnotations::foo()V\tLpck/MethodAnnotation;\tmF1 -> 42,mF2 -> bar"));
-        assertTrue(out.contains("pck/ClassWithAnnotations::f(Ljava/lang/String;\tLpck/FieldAnnotation;\tfF1 -> 42,fF2 -> bar"));
+        assertTrue(out.contains("pck/ClassWithAnnotations\tLpck/ClassAnnotation;\t[cF1,42,cF2,bar]"));
+        assertTrue(out.contains("pck/ClassWithAnnotations::foo()V\tLpck/MethodAnnotation;\t[mF1,42,mF2,bar]"));
+        assertTrue(out.contains("pck/ClassWithAnnotations::f(Ljava/lang/String;\tLpck/FieldAnnotation;\t[fF1,42,fF2,bar]"));
         assertTrue(out.contains("IDB_ANNOTATION"));
 
     }
@@ -29,9 +29,9 @@ public class TestIssue31 extends AbstractIDBTest {
     public void testPresenceOfAnnotationsInProjectedIDBReports() throws IOException {
         IDB idb = IDBReader.read(this.idbFactDir).project();
         String out = IDBPrinter.print(idb);
-        assertTrue(out.contains("pck/ClassWithAnnotations\tLpck/ClassAnnotation;\tcF1 -> 42,cF2 -> bar"));
-        assertTrue(out.contains("pck/ClassWithAnnotations::foo()V\tLpck/MethodAnnotation;\tmF1 -> 42,mF2 -> bar"));
-        assertTrue(out.contains("pck/ClassWithAnnotations::f(Ljava/lang/String;\tLpck/FieldAnnotation;\tfF1 -> 42,fF2 -> bar"));
+        assertTrue(out.contains("pck/ClassWithAnnotations\tLpck/ClassAnnotation;\t[cF1,42,cF2,bar]"));
+        assertTrue(out.contains("pck/ClassWithAnnotations::foo()V\tLpck/MethodAnnotation;\t[mF1,42,mF2,bar]"));
+        assertTrue(out.contains("pck/ClassWithAnnotations::f(Ljava/lang/String;\tLpck/FieldAnnotation;\t[fF1,42,fF2,bar]"));
         assertTrue(out.contains("IDB_ANNOTATION"));
     }
 

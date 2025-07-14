@@ -24,7 +24,7 @@ public class Issue31Test extends AbstractFactExtractionTest {
         assertEquals(EDBAdditionalPredicates.ANNOTATION,fact.predicate());
         assertEquals("pck/ClassWithAnnotations",fact.values()[1]);
         assertEquals("Lpck/ClassAnnotation;",fact.values()[2]);
-        assertEquals("cF1 -> 42,cF2 -> bar",fact.values()[3]);
+        assertEquals("[cF1,42,cF2,bar]",fact.values()[3]);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class Issue31Test extends AbstractFactExtractionTest {
         assertEquals(EDBAdditionalPredicates.ANNOTATION,fact.predicate());
         assertEquals("pck/ClassWithAnnotations::foo()V",fact.values()[1]);
         assertEquals("Lpck/MethodAnnotation;",fact.values()[2]);
-        assertEquals("mF1 -> 42,mF2 -> bar",fact.values()[3]);
+        assertEquals("[mF1,42,mF2,bar]",fact.values()[3]);
     }
 
     @Test
@@ -52,6 +52,6 @@ public class Issue31Test extends AbstractFactExtractionTest {
         assertEquals(EDBAdditionalPredicates.ANNOTATION,fact.predicate());
         assertEquals("pck/ClassWithAnnotations::f(Ljava/lang/String;",fact.values()[1]);
         assertEquals("Lpck/FieldAnnotation;",fact.values()[2]);
-        assertEquals("fF1 -> 42,fF2 -> bar",fact.values()[3]);
+        assertEquals("[fF1,42,fF2,bar]",fact.values()[3]);
     }
 }

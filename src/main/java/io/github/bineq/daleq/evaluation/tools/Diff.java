@@ -21,4 +21,10 @@ public class Diff {
         List<String> diff = UnifiedDiffUtils.generateUnifiedDiff("version1","version2",lines1,patch,3);
         Files.write(file,diff);
     }
+
+
+    public static Patch<String> parse(Path file) throws IOException {
+        List<String> lines = Files.readAllLines(file);
+        return UnifiedDiffUtils.parseUnifiedDiff(lines);
+    }
 }

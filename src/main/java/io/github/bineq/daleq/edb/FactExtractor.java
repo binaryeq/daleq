@@ -18,6 +18,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Extracts facts from bytecode.
@@ -369,14 +370,15 @@ public class FactExtractor   {
             String args = "";
             if (values != null) {
                 assert values.size() % 2 == 0;
-                Map<String, String> map = new TreeMap<>(); // normalise order
-                for (int i = 0; i < values.size(); i = i + 2) {
-                    String key = values.get(i).toString();
-                    Object value = values.get(i + 1);
-                    String sValue = value == null ? "null" : value.toString();
-                    map.put(key, sValue);
-                }
-                args = map.keySet().stream().map(k -> k+" -> "+map.get(k)).collect(Collectors.joining(","));
+//              Map<String, String> map = new TreeMap<>(); // normalise order
+//              for (int i = 0; i < values.size(); i = i + 2) {
+//                  String key = values.get(i).toString();
+//                  Object value = values.get(i + 1);
+//                  String sValue = value == null ? "null" : stringifyAnnotationValue(value);
+//                  map.put(key, sValue);
+//              }
+//              args = map.keySet().stream().map(k -> k+" -> "+map.get(k)).collect(Collectors.joining(","));
+                args = stringifyAnnotationValues(values);
             }
             // specific arguments for type annotations
             boolean isTypeAnnotation = annoNode instanceof TypeAnnotationNode;
@@ -384,6 +386,27 @@ public class FactExtractor   {
             int typeRef = isTypeAnnotation ? ((TypeAnnotationNode)annoNode).typeRef : -1;
             facts.add(new SimpleFact(EDBAdditionalPredicates.ANNOTATION,FactIdGenerator.nextId(EDBAdditionalPredicates.ANNOTATION),classname,desc,args,typePath,typeRef));
         });
+    }
+
+    private static String stringifyAnnotationValues(Object value) {
+        if (value==null) {
+            return "null";
+        }
+        else if (value.getClass().isArray()) {
+            Object[] arr = (Object[]) value;
+            return Stream.of(arr)
+                .map(FactExtractor::stringifyAnnotationValues)
+                .collect(Collectors.joining(",","[","]"));
+        }
+        else if (value instanceof List) {
+            List<Object> list = (List) value;
+            return list.stream()
+                .map(FactExtractor::stringifyAnnotationValues)
+                .collect(Collectors.joining(",","[","]"));
+        }
+        else  {
+            return value.toString();
+        }
     }
 
     private static String getTypePath(TypeAnnotationNode node) {
