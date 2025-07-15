@@ -406,6 +406,9 @@ public class FactExtractor   {
                 .map(FactExtractor::stringifyAnnotationValues)
                 .collect(Collectors.joining(",","[","]"));
         }
+        else if (value instanceof AnnotationNode node) {
+            return "AnnotationNode(descr -> " + node.desc + " , values -> " + stringifyAnnotationValues(node.values) +")";
+        }
         else  {
             return value.toString();
         }
