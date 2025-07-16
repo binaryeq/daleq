@@ -9,7 +9,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,6 +25,8 @@ public class Souffle {
     public static final String SOUFFLE = "SOUFFLE"; // a system property that must be set and point to the souffle binary
     public static final String COMMENT_SEP = "// ************************************************";
     public static final String LINE_SEP = System.getProperty("line.separator");
+
+    private static Map<Resource,List<String>> RULE_CACHE = new HashMap<>();
 
     /**
      * Create the DB.
@@ -48,7 +52,6 @@ public class Souffle {
         Preconditions.checkState(Files.isDirectory(edbDir));
         LOG.info("Using edb direcory {}", edbDir);
 
-
         if (!Files.exists(idbDir)) {
             Files.createDirectories(idbDir);
             LOG.info("Created directory {}", idbDir);
@@ -56,20 +59,30 @@ public class Souffle {
         LOG.info("Using idb direcory {}", idbDir);
 
         // merge programs
-        List lines = new ArrayList();
+        List<String> lines = new ArrayList();
         lines.addAll(List.of("",COMMENT_SEP,"// EDB from "+edb,COMMENT_SEP,""));
         lines.addAll(Files.readAllLines(edb));
 
         for (Resource resource : rules) {
-            lines.addAll(List.of("",COMMENT_SEP,"// COMMON RULES from " + resource,COMMENT_SEP,""));
-            try {
-                List<String> moreLines = resource.getContentAsString(StandardCharsets.UTF_8).lines().collect(Collectors.toUnmodifiableList());
-                lines.addAll(moreLines);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (RULE_CACHE.containsKey(resource)) {
+                LOG.info("Using cached rules from {}", resource.getFilename());
+                lines.addAll(RULE_CACHE.get(resource));
+            }
+            else {
+                try {
+                    List<String> lines2 = new ArrayList<>();
+                    LOG.info("reading rules from {}", resource.getFilename());
+                    lines2.addAll(List.of("",COMMENT_SEP,"// COMMON RULES from " + resource,COMMENT_SEP,""));
+                    List<String> moreLines = resource.getContentAsString(StandardCharsets.UTF_8).lines().collect(Collectors.toUnmodifiableList());
+                    lines2.addAll(moreLines);
+                    LOG.info("Caching rules from {}", resource.getFilename());
+                    RULE_CACHE.put(resource, lines2);
+                    lines.addAll(lines2);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
-
 
         Files.write(mergedEDBAndRules, lines);
         LOG.info("Merged rules and facts into single souffle program {}", mergedEDBAndRules.toFile().getAbsolutePath());
