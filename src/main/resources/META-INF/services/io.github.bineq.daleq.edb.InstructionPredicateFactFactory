@@ -154,3 +154,4 @@ io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__MON
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__MULTIANEWARRAY
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__IFNULL
 io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__IFNONNULL
+io.github.bineq.daleq.edb.instruction_fact_factories.InstructionFactFactory__FREM
