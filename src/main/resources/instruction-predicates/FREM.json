@@ -1,0 +1,23 @@
+{
+  "name": "FREM",
+  "opCode": 114,
+  "slots": [
+    {
+      "name": "factid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "methodid",
+      "type": "SYMBOL",
+      "jtype": "java.lang.String"
+    },
+    {
+      "name": "instructioncounter",
+      "type": "NUMBER",
+      "jtype": "int"
+    }
+  ],
+  "id": "02f5e92e-38d7-40e2-9177-4f70c1b31752",
+  "asmNodeType": "org.objectweb.asm.tree.InsnNode"
+}
