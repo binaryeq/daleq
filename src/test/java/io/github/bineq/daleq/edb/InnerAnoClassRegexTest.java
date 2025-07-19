@@ -32,6 +32,24 @@ public class InnerAnoClassRegexTest {
     }
 
     @Test
+    public void testIsAnoInnerClass4 () {
+        String className = "com/example/Foo$Bar$1";
+        assertTrue(INNER_ANO_CLASS_PATTERN.matcher(className).matches());
+    }
+
+    @Test
+    public void testIsAnoInnerClass5 () {
+        String className = "com/example/Foo$Bar$1$2";
+        assertTrue(INNER_ANO_CLASS_PATTERN.matcher(className).matches());
+    }
+
+    @Test
+    public void testIsntAnoInnerClass3 () {
+        String className = "com/example/Foo$Bar$Blur";
+        assertFalse(INNER_ANO_CLASS_PATTERN.matcher(className).matches());
+    }
+
+    @Test
     public void testIsntAnoInnerClass2 () {
         String className = "com/example/Foo$Bar";
         assertFalse(INNER_ANO_CLASS_PATTERN.matcher(className).matches());
