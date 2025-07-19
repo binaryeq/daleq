@@ -14,15 +14,12 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ServiceLoader;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * CLI. Produces a html report.
- * @author jens dieytrich
+ * @author jens dietrich
  */
 public class Main {
 
@@ -31,6 +28,8 @@ public class Main {
     private static final Option OPT_SRCJAR1 = new Option("s1","src1",true,"the first jar file with source code to compare (optional)");
     private static final Option OPT_SRCJAR2 = new Option("s2","src2",true,"the second jar file with source code to compare (optional)");
     private static final Option OUT = new Option("o","out",true,"the output folder where the report will be generated (required)");
+    private static final Option AUTO_OPEN_REPORT = new Option("a","autoopen",false,"if set the generated html report will be opened automatically (dont use for CLI integration)");
+
     private static final URL TEMPLATE = Main.class.getClassLoader().getResource("cli/report-template.html");
     private static final URL CSS = Main.class.getClassLoader().getResource("cli/daleq.css");
 
@@ -39,6 +38,18 @@ public class Main {
         OPT_JAR2.setRequired(true);
         OUT.setRequired(true);
     }
+
+    // keep track of exit state
+
+    // EXIT STATES
+
+    public static final int EXIT_CLASSES_EQUAL__RESOURCES_EQUAL__SOURCES_EQUIVALENT = 0;
+    public static final int EXIT_CLASSES_EQUIVALENT__RESOURCES_EQUAL__SOURCES_EQUIVALENT = 1;
+    public static final int EXIT_ALERT = 2;
+    public static final int EXIT_CLI_ERROR = 3;
+
+    // make testable
+    static int EXIT_STATE = EXIT_CLASSES_EQUAL__RESOURCES_EQUAL__SOURCES_EQUIVALENT;
 
     public static final List<Analyser> ANALYSERS =
         ServiceLoader.load(Analyser.class).stream()
@@ -56,6 +67,7 @@ public class Main {
         options.addOption(OPT_SRCJAR1);
         options.addOption(OPT_SRCJAR2);
         options.addOption(OUT);
+        options.addOption(AUTO_OPEN_REPORT);
 
         CommandLineParser parser = new DefaultParser();
 
@@ -70,6 +82,8 @@ public class Main {
             Preconditions.checkState(!Files.isDirectory(jar1));
             Preconditions.checkState(Files.exists(jar2));
             Preconditions.checkState(!Files.isDirectory(jar2));
+
+            boolean autoOpenReport = cmd.hasOption(AUTO_OPEN_REPORT);
 
             Path src1 = null;
             Path src2 = null;
@@ -90,16 +104,19 @@ public class Main {
             Preconditions.checkState(Files.isDirectory(outPath));
             Preconditions.checkState(TEMPLATE!=null);
 
-            analyse(jar1,jar2,src1,src2,outPath);
+            analyse(jar1,jar2,src1,src2,outPath,autoOpenReport);
+
+            System.exit(EXIT_STATE);
 
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("java -DSOUFFLE=<souffle-executable> -jar <built-jar>", options);
-            System.exit(1);
+            System.exit(EXIT_CLI_ERROR);
         }
     }
 
-    private static void analyse(Path jar1, Path jar2, Path src1, Path src2, Path outPath) throws IOException {
+
+    private static void analyse(Path jar1, Path jar2, Path src1, Path src2, Path outPath,boolean autoOpenReport) throws IOException {
 
         boolean sourceAvailable = src1!=null && src2!=null;
         List<Analyser> analysers = ANALYSERS.stream()
@@ -154,6 +171,9 @@ public class Main {
                     row+=String.format("  <a href=\"%s\" target=\"_blank\" title=\"%s\">%s</a>", attachment.link(),attachment.name(),getLinkSymbol(attachment.kind()));
                 }
                 row+="</td>";
+
+
+                recordState(analyser,analyserResult,resource);
             }
             table.append(row);
         }
@@ -163,9 +183,45 @@ public class Main {
         Files.copy(CSS.openStream(),css, StandardCopyOption.REPLACE_EXISTING);
         LOG.info("report written to {}", report);
 
-        new ProcessBuilder("open",report.toFile().getAbsolutePath())
-            .inheritIO()
-            .start();
+        if (autoOpenReport) {
+            new ProcessBuilder("open", report.toFile().getAbsolutePath())
+                .inheritIO()
+                .start();
+        }
+    }
+
+    /**
+     * Record the state to be used to compute the return code.
+     */
+    static void recordState(Analyser analyser, AnalysisResult result,String resource) {
+
+        if (resource.endsWith(".class")) {
+            if (analyser instanceof SameContentAnalyser) {
+                assert result.state()!=AnalysisResultState.SKIP;
+                if (result.state()==AnalysisResultState.FAIL || result.state()==AnalysisResultState.ERROR) {
+                    EXIT_STATE = Math.max(EXIT_STATE,EXIT_CLASSES_EQUIVALENT__RESOURCES_EQUAL__SOURCES_EQUIVALENT);
+                }
+            }
+            else if (analyser instanceof DaleqAnalyser) {
+                assert result.state()!=AnalysisResultState.SKIP;
+                if (result.state()==AnalysisResultState.FAIL || result.state()==AnalysisResultState.ERROR) {
+                    EXIT_STATE = Math.max(EXIT_STATE,EXIT_ALERT);
+                }
+            }
+            else if (analyser instanceof EquivalentSourceCodeAnalyser) {
+                if (result.state()==AnalysisResultState.FAIL || result.state()==AnalysisResultState.ERROR) {
+                    EXIT_STATE = Math.max(EXIT_STATE,EXIT_ALERT);
+                }
+            }
+        }
+        else {
+            if (analyser instanceof SameContentAnalyser) {
+                assert result.state()!=AnalysisResultState.SKIP;
+                if (result.state()==AnalysisResultState.FAIL || result.state()==AnalysisResultState.ERROR) {
+                    EXIT_STATE = Math.max(EXIT_STATE,EXIT_ALERT);
+                }
+            }
+        }
     }
 
 
