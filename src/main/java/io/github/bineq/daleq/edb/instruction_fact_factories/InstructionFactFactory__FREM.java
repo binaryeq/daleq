@@ -1,7 +1,8 @@
 package io.github.bineq.daleq.edb.instruction_fact_factories;
 
-import javax.annotation.processing.Generated;
 import io.github.bineq.daleq.Fact;
+
+import javax.annotation.processing.Generated;
 
 @Generated(value="io.github.bineq.daleq.edb.InstructionFactFactoryCodeGenerator", date= "2025-07-19T00:01Z",
       comments= "factory generated from ASM tree API nodes")

@@ -179,6 +179,7 @@ public class RunComparativeEvaluation {
                                     // only compare if different
                                     if (!Arrays.equals(bytecode1,bytecode2)) {
                                         nonEqualClassCounter.incrementAndGet();
+
                                         ComparisonResult result4Daleq = compareUsingDaleq(pairOfRecords.left().gav(), provider1, provider2, commonClass, bytecode1, bytecode2, analysisDir4GavNClass);
                                         ComparisonResult result4JNorm = compareUsingJNorm(pairOfRecords.left().gav(), provider1, provider2, jar1, jar2, commonClass, bytecode1, bytecode2, analysisDir4Gav, analysisDir4GavNClass);
                                         ComparisonResult result4Javap = compareUsingJavap(pairOfRecords.left().gav(), provider1, provider2, commonClass, bytecode1, bytecode2, analysisDir4GavNClass);
