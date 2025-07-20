@@ -3,6 +3,8 @@ package io.github.bineq.daleq.idb;
 import io.github.bineq.daleq.Rules;
 import io.github.bineq.daleq.Souffle;
 import io.github.bineq.daleq.edb.FactExtractor;
+import org.junit.jupiter.api.BeforeEach;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,6 +13,11 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 public abstract class AbstractEquivalenceTest {
 
     public static final Path TMP_DIR_ROOT = Path.of(".tests");
+
+    @BeforeEach
+    public void setup() {
+        assumeTrue(Souffle.checkSouffleExe(), "Souffle not set");
+    }
 
     public abstract Rules getRules() ;
 
@@ -28,10 +35,6 @@ public abstract class AbstractEquivalenceTest {
         Path idbFactDir = idbRoot.resolve( "facts");
 
         Path mergedEDBAndRules = root.resolve("mergedEDBAndRules.souffle");
-
-        // checks some preconditions !
-        //assumeTrue(Souffle.checkSouffleExe());
-        assumeTrue(Souffle.checkSouffleExe(),"Souffle not set");
 
         // create EDB
         FactExtractor.extractAndExport(classFile,edbDef,edbFactDir,true);

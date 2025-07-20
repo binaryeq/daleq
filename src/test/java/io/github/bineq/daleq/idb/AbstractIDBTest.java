@@ -29,6 +29,9 @@ public abstract class AbstractIDBTest {
     @BeforeEach
     public void setup() throws Exception {
 
+        // checks some preconditions !
+        assumeTrue(Souffle.checkSouffleExe(),"Souffle not set");
+
         classFile = Path.of(AbstractIDBTest.class.getResource(getPathOfClassUnderTest()).getPath());
         assumeTrue(Files.exists(classFile));
 
@@ -41,10 +44,6 @@ public abstract class AbstractIDBTest {
         idbFactDir = createOrEmpty(idbRoot.resolve( "facts"));
 
         mergedEDBAndRules = Path.of(".tests/" + className + "/mergedEDBAndRules.souffle");
-
-        // checks some preconditions !
-        //assumeTrue(Souffle.checkSouffleExe());
-        assumeTrue(Souffle.checkSouffleExe(),"Souffle not set");
 
         // create EDB
         FactExtractor.extractAndExport(this.classFile,this.edbDef,this.edbFactDir,true);
