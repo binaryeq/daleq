@@ -17,6 +17,7 @@ java -DSOUFFLE=<path-to-souffle> -cp "target/classes:target/dependency/*" io.git
  -o,--out <arg>     the output folder where the report will be generated (required)
  -s1,--src1 <arg>   the first jar file with source code to compare (optional)
  -s2,--src2 <arg>   the second jar file with source code to compare (optional)
+ -a,--autoopen      if set the generated html report will be opened automatically (dont use for CLI integration)
 ```
 
 The jar built can also be used directly as an executable superjar.
@@ -29,9 +30,20 @@ java -DSOUFFLE=<path-to-souffle> -jar target/daleq-<daleq-version>.jar  \
  -o,--out <arg>     the output folder where the report will be generated (required)
  -s1,--src1 <arg>   the first jar file with source code to compare (optional)
  -s2,--src2 <arg>   the second jar file with source code to compare (optional)
+ -a,--autoopen      if set the generated html report will be opened automatically (dont use for CLI integration)
 ```
 
 Running the program will create a report `report.html` in the specified output folder.
+
+The program returns with the following exit codes:
+
+```
+0 - all classes and resources are equal, source codes (if analysed) are equivalent
+1 - some classes are not equal but still equivalent, resources are equal, source-codes (if analysed) are equivalent
+2 - some classes are not equivalent (wrt daleq) or some resources (e.g. metadata) are not equal or some sources (if analysed) are not equivalent
+```
+
+This can be used to integrate the tool into CI processes. 
 
 
 ## Overview
