@@ -1,0 +1,38 @@
+
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+default_install_hook_types: [pre-commit, commit-msg, pre-push]
+default_stages: [pre-commit]
+minimum_pre_commit_version: 3.0.0
+
+repos:
+
+# These meta hooks check the pre-commit configuration itself.
+- repo: meta
+  hooks:
+  - id: check-hooks-apply
+  - id: check-useless-excludes
+
+# Enable a whole bunch of useful helper hooks, too.
+# See https://pre-commit.com/hooks.html for more hooks.
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+  - id: check-case-conflict
+  - id: check-merge-conflict
+  - id: end-of-file-fixer
+    stages: [pre-commit]
+  - id: trailing-whitespace
+    args: [--markdown-linebreak-ext=md]
+    stages: [pre-commit]
+  - id: detect-private-key
+  - id: detect-aws-credentials
+    args: [--allow-missing-credentials]
+  - id: check-yaml
+    args: [--allow-multiple-documents]
+
+# Check GitHub Actions workflow files.
+- repo: https://github.com/Mateusz-Grzelinski/actionlint-py
+  rev: v1.7.7.23
+  hooks:
+  - id: actionlint

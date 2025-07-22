@@ -33,12 +33,12 @@ see also [https://github.com/binaryeq/daleq/issues/22](https://github.com/binary
 
 ### Classes are Javap-equivalent, but not DALEQ-equivalent
 
-`org/apache/commons/configuration2/interpol/ConfigurationInterpolator.class`	
+`org/apache/commons/configuration2/interpol/ConfigurationInterpolator.class`
 
-There is a case of unsoundness in javap that we describe in the paper. 
+There is a case of unsoundness in javap that we describe in the paper.
 
-In this example, the issue seems to be the labels. 
-There is potentially a way to normalise this during the extraction phase. 
-It still needs to be confirmed that this mapping is isomorphic. 
+In this example, the issue seems to be the labels.
+There is potentially a way to normalise this during the extraction phase.
+It still needs to be confirmed that this mapping is isomorphic.
 
 See also [https://github.com/binaryeq/daleq/issues/24](https://github.com/binaryeq/daleq/issues/24)

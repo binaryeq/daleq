@@ -942,4 +942,3 @@ IDB_RETURN	projected	org/apache/commons/configuration2/interpol/ConfigurationInt
 
 
 // moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V
-

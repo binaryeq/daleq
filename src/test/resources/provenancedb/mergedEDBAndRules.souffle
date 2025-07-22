@@ -1472,4 +1472,3 @@ IDB_IS_PROTECTED(cat("R_IS_PROTECTED","[",factid,"]"),classOrMethodOrFieldId) :-
 .decl IDB_IS_TRANSIENT(factid: symbol,classOrMethodOrFieldId: symbol)
 IDB_IS_TRANSIENT(cat("R_IS_TRANSIENT","[",factid,"]"),classOrMethodOrFieldId) :- ACCESS(factid,classOrMethodOrFieldId,access), (access band 0x0080)!=0.
 .output IDB_IS_TRANSIENT
-

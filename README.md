@@ -1,9 +1,9 @@
 # DALEQ - Datalog-based Binary Equivalence
 
 
-## Build and Use CLI 
+## Build and Use CLI
 
-The program has been developed and tested with Java 17. Build DALEQ with Maven: 
+The program has been developed and tested with Java 17. Build DALEQ with Maven:
 
 `mvn clean package dependency:copy-dependencies`
 
@@ -43,7 +43,7 @@ The program returns with the following exit codes:
 2 - some classes are not equivalent (wrt daleq) or some resources (e.g. metadata) are not equal or some sources (if analysed) are not equivalent
 ```
 
-This can be used to integrate the tool into CI processes. 
+This can be used to integrate the tool into CI processes.
 
 
 ## Overview
@@ -59,20 +59,20 @@ flowchart LR
     bytecode["bytecode (.class)"] --> asm(("asm")) --> edb["EDB"] --> souffle(("souffle")) --> idb["IDB"]
 ```
 
-A database representing the bytecode is extracted. An [asm-based](https://asm.ow2.io/) static analysis is used for this purpose. 
+A database representing the bytecode is extracted. An [asm-based](https://asm.ow2.io/) static analysis is used for this purpose.
 The result is the EDB (extensional database), a folder with tsv files, each tsv file corresponding to a predicate.
-Those facts represent the bytecode, including class name, bytecode version, super types and interfaces, 
-access flags for method, fields and classes, bytecode instructions in methods, etc. 
+Those facts represent the bytecode, including class name, bytecode version, super types and interfaces,
+access flags for method, fields and classes, bytecode instructions in methods, etc.
 
 The representation is low-level, however, there is one significant abstraction (provided by _asm_): constant pool references are
-resolved. 
+resolved.
 
 Each fact has a unique generated id that is used to provide provenance.
 
 ### Step 2 - IDB Computation
 
 IDB computation applies rules to compute a second set of facts (IDB files) that normalises
-the EBD to establish whether two bytecode compared are equivalent or not. 
+the EBD to establish whether two bytecode compared are equivalent or not.
 
 Rules that are applied for this purpose are defined in
 `src/main/resources/rules/`, `advanced.souffle` is the default set.
@@ -88,7 +88,7 @@ that is passed to the JVM:
 
 ## Provenance
 
-The first slot (term) for each fact is an *id*. 
+The first slot (term) for each fact is an *id*.
 For EDB facts, those ids are generated during the bytecode analysis / extracyion phase.
 
 Example (from `AALOAD.facts`):
@@ -104,7 +104,7 @@ The  values encode a derivation tree. Example:
 R_AALOAD[F1428629]  ...
 ```
 
-This fact has been computed by applying rule `R_AALOAD` to fact `F1428629`. 
+This fact has been computed by applying rule `R_AALOAD` to fact `F1428629`.
 I.e. those ids encode a derivation tree:
 
 ```mermaid
@@ -122,7 +122,7 @@ graph TD;
     R_43 --> F3;
 ```
 
-The project contains a parser to transform those strings into 
+The project contains a parser to transform those strings into
 trees (`io.github.bineq.daleq.souffle.provenance.ProvenanceParser`).
 
 The grammar of the encoded proofs is defined here:
@@ -131,10 +131,10 @@ The grammar of the encoded proofs is defined here:
 
 ## Comparing Bytecode
 
-When trying to establish equivalence between two (compiled) classes, IDBs cannot be compared directly for the following reasons: 
+When trying to establish equivalence between two (compiled) classes, IDBs cannot be compared directly for the following reasons:
 
 1. The provenance (id) terms -- this reflects the process of normalisation that might be different for each of the classes compared
-2. the IDB contains additional facts for predicates to keep track of facts that have been removed (i.e. EDB facts that have no counterpart in the IDB), or moved. 
+2. the IDB contains additional facts for predicates to keep track of facts that have been removed (i.e. EDB facts that have no counterpart in the IDB), or moved.
 3. facts corresponding to bytecode instruction have an `instructioncounter` slot to define the order of instructions within a method. Those might change in the IDB as normalisation may move/remove/insert facts corresponding to instructions.
 
 ### Projection
@@ -149,7 +149,7 @@ and convert it into a textual representation suitable for comparison and diffing
 
 ```mermaid
 flowchart LR
-    bytecode1["bytecode1\n(.class)"] --> asm1(("asm")) --> edb1["EDB1"] --> souffle1(("souffle")) --> idb1["IDB1"] --> IDBReader1(("IDBReader/IDBPrinter"))  --> file1 --> diff(("diff")) --> result 
+    bytecode1["bytecode1\n(.class)"] --> asm1(("asm")) --> edb1["EDB1"] --> souffle1(("souffle")) --> idb1["IDB1"] --> IDBReader1(("IDBReader/IDBPrinter"))  --> file1 --> diff(("diff")) --> result
     bytecode2["bytecode2\n(.class)"] --> asm2(("asm")) --> edb2["EDB2"] --> souffle2(("souffle")) --> idb2["IDB2"] --> IDBReader2(("IDBReader/IDBPrinter"))  --> file2 --> diff(("diff"))
 
 ```
@@ -200,13 +200,37 @@ The mapping is defined by a *mapping spec* (a JSON file) in `src/main/resources/
 
 From this file, a mapping class is statically generated, the sources can be found in `src/main/java/io/github/bineq/daleq/edb/instruction_fact_factories/`, e.g. `InstructionFactFactory__AALOAD.java`.
 Those mappings are read using a service factory, i.e. the following file must contain a line with the name of each mapping used:
-`src/main/resources/META-INF/services/io.github.bineq.daleq.edb.InstructionPredicateFactFactory`. 
+`src/main/resources/META-INF/services/io.github.bineq.daleq.edb.InstructionPredicateFactFactory`.
+
+## Contributing
+
+To contribute to this project, please follow the steps below to set up your development environment.
+
+First, create a virtual environment to isolate dependencies:
+
+```bash
+python3 -m venv .venv
+```
+
+Activate the virtual environment and install the `pre-commit` hooks.
+
+```bash
+source .venv/bin/activate
+pip install -r requirements.txt
+pre-commit install
+```
+
+Now, the hooks will automatically run on each commit to check for any issues in the code. You can manually run the pre-commit hooks on all files at any time with:
+
+```bash
+pre-commit run --all-files
+```
 
 ### Adding new Mappings
 
-When an instruction with no associated mapping is encountered, a warning appears in the log, and the mapping spec is generated in `inferred-instruction-predicates`. 
+When an instruction with no associated mapping is encountered, a warning appears in the log, and the mapping spec is generated in `inferred-instruction-predicates`.
 
-The proceed as follows: 
+The proceed as follows:
 
 1. copy the new spec into `src/main/resources/instruction-predicates`
 2. run `io.github.bineq.daleq.edb.InstructionFactFactoryCodeGenerator` to generate the respective mapping class
@@ -214,7 +238,7 @@ The proceed as follows:
 4. add a row with the new mapping class to `src/main/resources/META-INF/services/io.github.bineq.daleq.edb.InstructionPredicateFactFactory`
 5. update the rules in `src/main/resources/rules` to add support for the new mapping
 
-For the last step, each instruction has the following block defining an IDB predicate (the respective EDB predicate is generated), and 
+For the last step, each instruction has the following block defining an IDB predicate (the respective EDB predicate is generated), and
 a rule that maps this to a generic `IDB_INSTRUCTION` predicate. Example:
 
 ```
@@ -224,7 +248,7 @@ IDB_AALOAD(cat("R_AALOAD","[",factid,"]"),methodid,instructioncounter) :- AALOAD
 IDB_INSTRUCTION(cat("R_AALOAD","[",factid,"]"),methodid,instructioncounter,"AALOAD") :- AALOAD(factid,methodid,instructioncounter).
 ```
 
-For a new predicate, such a block must be added. 
+For a new predicate, such a block must be added.
 The rule generator `io.github.bineq.daleq.idb.rulegeneration.BaselineRuleGeneration` can be used for this purpose.
 
 ## Notes
@@ -237,22 +261,19 @@ Tests that require souffle will not fail but will be skipped if souffle is not a
 
 ### Performance and Issues with Souffle
 
-Souffle [occasionally fails](https://github.com/binaryeq/daleq/issues/22). 
-When souffle is used, a `Thread::sleep` instruction is used to pause DALEQ. 
-This reduces the number of errors (perhaps a souffle race condition?), but makes DALEQ slower. 
+Souffle [occasionally fails](https://github.com/binaryeq/daleq/issues/22).
+When souffle is used, a `Thread::sleep` instruction is used to pause DALEQ.
+This reduces the number of errors (perhaps a souffle race condition?), but makes DALEQ slower.
 
 Souffle issues will be reported by the appplication, and flagged as __error__ .
 
 ### Adding Your Own Analyser
 
-Additional analysers can be easily added by following those steps: 
+Additional analysers can be easily added by following those steps:
 
 1. Write an analyser (say `MyAnalyser`) implementing `io.github.bineq.daleq.cli.Analyser`
 2. In your project, add a file `src/main/resources/META-INF/services/io.github.bineq.daleq.cli.Analyser`
 3. Add a line with the fully qualified name of `MyAnalyser` to this file
 4. Build a jar file
 5. When running DALEQ, add this jar file to the classpath
-6. Note that the order in which columns are displayed in reports is determined by the property `io.github.bineq.daleq.cli.Analyser::positionHint`, a values between 0 and 100. 
-
-
-
+6. Note that the order in which columns are displayed in reports is determined by the property `io.github.bineq.daleq.cli.Analyser::positionHint`, a values between 0 and 100.
