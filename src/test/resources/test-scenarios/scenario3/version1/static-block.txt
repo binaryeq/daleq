@@ -14,4 +14,3 @@
       22: aastore
       23: putstatic     #1                  // Field $VALUES:[Lorg/flywaydb/core/internal/callback/NoopCallback;
       26: return
-

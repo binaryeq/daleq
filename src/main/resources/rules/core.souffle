@@ -1152,5 +1152,3 @@ IDB_MULTIANEWARRAY(cat("R_MULTIANEWARRAY_MOVED","[",factid1,factid2,"]"),destMet
 IDB_IFNULL(cat("R_IFNULL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IFNULL(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFNULL").
 
 IDB_IFNONNULL(cat("R_IFNONNULL_MOVED","[",factid1,factid2,"]"),destMethodId,destInstructionCounter+instructioncounter/100,label) :- IFNONNULL(factid1,methodid,instructioncounter,label) , MOVED_INSTRUCTION(factid2,methodid,instructioncounter,destMethodId,destInstructionCounter,"IFNONNULL").
-
-

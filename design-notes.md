@@ -2,33 +2,33 @@
 ## Fact Extraction Layer
 
 The fact extraction layer creates facts that represent the program. This includes facts reflecting the project structure
-(e.g. the class hierarchy), and facts representing the bytecode instructions within methods. 
+(e.g. the class hierarchy), and facts representing the bytecode instructions within methods.
 
 Much of this is done by generated predicate factories, see `src/main/java/io/github/bineq/daleq/factextraction/instruction_fact_factories`.
 Those factory classes are generated using `io.github.bineq.daleq.edb.InstructionFactFactoryCodeGenerator` from
-the predicate specs in `src/main/resources/instruction-predicates`. Those specs are generated 
+the predicate specs in `src/main/resources/instruction-predicates`. Those specs are generated
 from ASM tree API notes.   Predicate factories are loaded using the service loader mechanism.
 
 Note that ASM already abstracts some [JVM bytecode instructions](https://en.wikipedia.org/wiki/List_of_Java_bytecode_instructions).
 For instance, while there are several dedicated instructions to load local variables (`aload_0`,`aload_1`, etc),
-ASM represents them as [a single `aload` instruction](https://asm.ow2.io/javadoc/org/objectweb/asm/Opcodes.html). 
+ASM represents them as [a single `aload` instruction](https://asm.ow2.io/javadoc/org/objectweb/asm/Opcodes.html).
 We follow this approach.
 
-The facts are extracted from bytecode using `io.github.bineq.daleq.edb.FactExtractor`, and 
+The facts are extracted from bytecode using `io.github.bineq.daleq.edb.FactExtractor`, and
 the database is created in a local folder. This **extensional database (EDB for short)** consists
-of `<predicate-name>.fact` files (tab separated) containing fact definitions, and a `.souffle` 
+of `<predicate-name>.fact` files (tab separated) containing fact definitions, and a `.souffle`
 file containing predicate definitions and import declarations for the respective fact files.
 
-## Rules 
+## Rules
 
-Rules are used to infer additional facts from the EDB. The result is called the **intentional database (IDB for short)**. 
+Rules are used to infer additional facts from the EDB. The result is called the **intentional database (IDB for short)**.
 An IDB usually contains the EDB as a closure operation is applied to compute this (this is the datalog fixpoint).
 
-However, we can only consider a part of the IDB by only looking at facts for certain predicates. 
+However, we can only consider a part of the IDB by only looking at facts for certain predicates.
 Those dedicated predicates are declared as *output predicates* in *souffle*, and do not have any facts in the EDB.
 We refer to this part of the IDB as **ODB (output database)**.
 
-This ODB is the base of establishing equivalence: two classes (bytecodes) are the same if their respective ODBs are the same. 
+This ODB is the base of establishing equivalence: two classes (bytecodes) are the same if their respective ODBs are the same.
 
 ## Provenance
 
@@ -37,9 +37,9 @@ TODO: implement
 To achieve soundness, all predicates have two dedictated slots: `id` and `provenance`.  
 For facts, the provenance slot is empty (empty string, or fixed string `asserted` or similar).
 
-Rules have a rule id predicate in the body. The provenance value in the 
+Rules have a rule id predicate in the body. The provenance value in the
 head is synthesised from the rule id and the ids of the premisses
-to encode a proof tree. 
+to encode a proof tree.
 
 Example:
 
@@ -54,20 +54,20 @@ Note the rule id (`R1`) in the head.
 ## Soundness
 
 Each EDB fact **should** be used to compute the ODB, this can be checked
-by analysing the provenance values. 
+by analysing the provenance values.
 
-TODO: expand discussion. 
+TODO: expand discussion.
 
 ## Example (from Listing 3 in TODO)
 
 The first slot is the unique fact id, the second slot the context (method containing the instruction).
 
-``` 
+```
 // PROGRAM 1 EDB
 invokeinterface('id1','Foo::foo()V',42,'ch/qos/logback/access/spi/IAccessEvent','getClass','()java/lang/Class;');
 ```
 
-``` 
+```
 // PROGRAM 2 EDB
 invokevirtual('id1','Foo::foo()V',42,'java/lang/Object','getClass','()java/lang/Class;');
 ```
@@ -79,11 +79,11 @@ invokevirtual('id1','Foo::foo()V',42,'java/lang/Object','getClass','()java/lang/
 // output predicates have the `_` prefix
 // the rule id is `rid1`
 
-_invokevirtual('rid1'+'['+id+']',context,instructioncounter,class,methodName,descriptor) :- 
+_invokevirtual('rid1'+'['+id+']',context,instructioncounter,class,methodName,descriptor) :-
    invokevirtual(id,context,instructioncounter,class,methodName,descriptor').
-_invokeinterface('rid2'+'['+id1+','+id2+']',context,instructioncounter,class,methodName,descriptor) :- 
+_invokeinterface('rid2'+'['+id1+','+id2+']',context,instructioncounter,class,methodName,descriptor) :-
    invokeinterface(id1,context,instructioncounter,class,methodName,descriptor'),
-   !rootmethod(id2,class,methodname,descriptor).   
+   !rootmethod(id2,class,methodname,descriptor).  
 ```
 
 ### Bytecode Versions
@@ -153,7 +153,7 @@ writer.println("<?xml version=\"1.0\" encoding=\"" + this.locator.getEncoding() 
 #### Pre-JEP280
 
 ```
-IDB_NEW		java/lang/StringBuilder 
+IDB_NEW		java/lang/StringBuilder
 IDB_DUP
 IDB_INVOKESPECIAL		java/lang/StringBuilder	<init>	()V	false
 IDB_LDC		<?xml version="1.0" encoding="
@@ -167,7 +167,7 @@ IDB_INVOKEVIRTUAL		java/lang/StringBuilder	append	(Ljava/lang/String;)Ljava/lang
 IDB_INVOKEVIRTUAL		java/lang/StringBuilder	toString	()Ljava/lang/String;	false
 
 ```
-Is this all happening within the same basic block ? 
+Is this all happening within the same basic block ?
 
 #### Post-JEP280
 
@@ -178,7 +178,7 @@ IDB_INVOKEDYNAMIC		makeConcatWithConstants	(Ljava/lang/String;)Ljava/lang/String
 
 - SOH seems to separate the two constants in `INVOKEDYNAMIC`
 - how  does makeConcatWithConstants at which position to use the value on the stack ?
-- 
+-
 
 
 ## Additional Predicates and Default Rules
@@ -217,11 +217,11 @@ REMOVED_INSTRUCTION(cat("R_REMOVE_REDUNDANT_CHECKCAST","[",factid1,",",factid2,"
 ```
 
 The difference to the existing solution is that `REMOVED_INSTRUCTION` can be declared in standard rule set and used in the `IDB_CHECKCAST` rule.
-By default, it would stay empty. 
+By default, it would stay empty.
 
 Problem: will souffle handle the negation?
 
-Similar predicates: 
+Similar predicates:
 
 ```
 REMOVED_METHOD(factid: symbol,id: symbol)
@@ -245,9 +245,9 @@ REMOVED_METHOD(cat("R_REMOVE_SYNTH_METHODS","[",factid,"]"),id) :- METHOD(factid
 
 Similar for `REMOVED_FIELD`.
 
-If a method is removed, facts related this method would stay in the database (e.g. for predicates representing access flags and signatures). 
+If a method is removed, facts related this method would stay in the database (e.g. for predicates representing access flags and signatures).
 
-Should we have similar flags for relationships like superclasses and interfaces ? Not initially, but need could arise later. 
+Should we have similar flags for relationships like superclasses and interfaces ? Not initially, but need could arise later.
 
 
 ## Modelling Inlining of Methods
@@ -256,7 +256,7 @@ Should we have similar flags for relationships like superclasses and interfaces 
 .decl INLINE(factid: symbol,hostmethodid: symbol, inlinedmethodid: symbol,instructioncounter: numeric)
 ```
 
-The `instructioncounter` is the callsite (`INVOKE*` instruction) in the host method where code is copied into. 
+The `instructioncounter` is the callsite (`INVOKE*` instruction) in the host method where code is copied into.
 
 #### Part 1: removal
 `REMOVED_INSTRUCTION(..,inlinedmethodid,instructioncounter) :- INLINE(..,_,inlinedmethodid,instructioncounter)`
@@ -264,7 +264,7 @@ The `instructioncounter` is the callsite (`INVOKE*` instruction) in the host met
 #### Part 2: addition
 
 
-- requires a rule for each instruction predicate !! 
+- requires a rule for each instruction predicate !!
 - can this be generated ?
 - could mess up labels ! a global label counter could fix this !
 

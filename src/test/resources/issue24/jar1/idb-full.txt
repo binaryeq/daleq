@@ -942,4 +942,3 @@ IDB_RETURN	R_RETURN[F120494]	org/apache/commons/configuration2/interpol/Configur
 
 
 // moved instructions for method org/apache/commons/configuration2/interpol/ConfigurationInterpolator::setStringConverter(Ljava/util/function/Function;)V
-

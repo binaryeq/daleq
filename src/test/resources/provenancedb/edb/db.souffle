@@ -486,4 +486,3 @@
 
 .decl IFNONNULL(factid: symbol,methodid: symbol,instructioncounter: number,label: symbol)
 .input IFNONNULL // facts are imported from IFNONNULL.facts
-
