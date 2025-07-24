@@ -202,31 +202,9 @@ From this file, a mapping class is statically generated, the sources can be foun
 Those mappings are read using a service factory, i.e. the following file must contain a line with the name of each mapping used:
 `src/main/resources/META-INF/services/io.github.bineq.daleq.edb.InstructionPredicateFactFactory`.
 
-## Contributing
 
-To contribute to this project, please follow the steps below to set up your development environment.
 
-First, create a virtual environment to isolate dependencies:
-
-```bash
-python3 -m venv .venv
-```
-
-Activate the virtual environment and install the `pre-commit` hooks.
-
-```bash
-source .venv/bin/activate
-pip install -r requirements.txt
-pre-commit install
-```
-
-Now, the hooks will automatically run on each commit to check for any issues in the code. You can manually run the pre-commit hooks on all files at any time with:
-
-```bash
-pre-commit run --all-files
-```
-
-### Adding new Mappings
+### Adding New Mappings
 
 When an instruction with no associated mapping is encountered, a warning appears in the log, and the mapping spec is generated in `inferred-instruction-predicates`.
 
@@ -277,3 +255,28 @@ Additional analysers can be easily added by following those steps:
 4. Build a jar file
 5. When running DALEQ, add this jar file to the classpath
 6. Note that the order in which columns are displayed in reports is determined by the property `io.github.bineq.daleq.cli.Analyser::positionHint`, a values between 0 and 100.
+
+
+## Contributing
+
+To contribute to this project, please follow the steps below to set up your development environment.
+
+First, create a virtual environment to isolate dependencies:
+
+```bash
+python3 -m venv .venv
+```
+
+Activate the virtual environment and install the `pre-commit` hooks.
+
+```bash
+source .venv/bin/activate
+pip install -r requirements.txt
+pre-commit install
+```
+
+Now, the hooks will automatically run on each commit to check for any issues in the code. You can manually run the pre-commit hooks on all files at any time with:
+
+```bash
+pre-commit run --all-files
+```
