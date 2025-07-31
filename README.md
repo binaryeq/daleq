@@ -149,9 +149,9 @@ and convert it into a textual representation suitable for comparison and diffing
 
 ```mermaid
 flowchart LR
-    bytecode1["bytecode1\n(.class)"] --> asm1(("asm")) --> edb1["EDB1"] --> souffle1(("souffle")) --> idb1["IDB1"] --> IDBReader1(("IDBReader/IDBPrinter"))  --> file1 --> diff(("diff")) --> result
-    bytecode2["bytecode2\n(.class)"] --> asm2(("asm")) --> edb2["EDB2"] --> souffle2(("souffle")) --> idb2["IDB2"] --> IDBReader2(("IDBReader/IDBPrinter"))  --> file2 --> diff(("diff"))
-
+    bytecode1["class1"] --> asm1(("asm")) --> edb1["EDB1"] --> souffle1(("souffle")) --> idb1["IDB1"] --> IDBReader1(("project"))  --> file1 --> diff --> result
+    bytecode2["class2"] --> asm2(("asm")) --> edb2["EDB2"] --> souffle2(("souffle")) --> idb2["IDB2"] --> IDBReader2(("project"))  --> file2 --> diff
+    
 ```
 
 ## Extracting Facts from Bytecode
