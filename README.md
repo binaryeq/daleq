@@ -3,11 +3,12 @@
 
 ## Build and Use CLI
 
-The program has been developed and tested with Java 17. Build DALEQ with Maven:
+DALEQ has been developed and tested with Java 17. 
+DALEQ can be build with Maven as follows:
 
 `mvn clean package dependency:copy-dependencies`
 
-Then run as follows (for windows: change the classpath separator)
+Then run DALEQ as follows (for windows: change the classpath separator accordingly):
 
 ```
 java -DSOUFFLE=<path-to-souffle> -cp "target/classes:target/dependency/*" io.github.bineq.daleq.cli.Main \
@@ -45,12 +46,10 @@ The program returns with the following exit codes:
 
 This can be used to integrate the tool into CI processes.
 
-
 ## Overview
 
-*Daleq* takes Java bytecode as input an produces a relational database.
+*Daleq* takes Java bytecode as input and produces a relational database.
 This is done in two steps.
-
 
 ### Step 1 - EDB Extraction
 
@@ -71,7 +70,7 @@ Each fact has a unique generated id that is used to provide provenance.
 
 ### Step 2 - IDB Computation
 
-IDB computation applies rules to compute a second set of facts (IDB files) that normalises
+The IDB computation applies rules to compute a second set of facts (IDB files) that normalises
 the EBD to establish whether two bytecode compared are equivalent or not.
 
 Rules that are applied for this purpose are defined in
