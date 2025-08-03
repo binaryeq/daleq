@@ -18,7 +18,7 @@ java -DSOUFFLE=<path-to-souffle> -cp "target/classes:target/dependency/*" io.git
  -o,--out <arg>     the output folder where the report will be generated (required)
  -s1,--src1 <arg>   the first jar file with source code to compare (optional)
  -s2,--src2 <arg>   the second jar file with source code to compare (optional)
- -a,--autoopen      if set the generated html report will be opened automatically (dont use for CLI integration)
+ -a,--autoopen      if set, the generated html report will be opened automatically (dont use for CLI integration)
 ```
 
 The jar built can also be used directly as an executable superjar.
@@ -152,6 +152,32 @@ flowchart LR
     bytecode2["class2"] --> asm2(("asm")) --> edb2["EDB2"] --> souffle2(("souffle")) --> idb2["IDB2"] --> IDBReader2(("project"))  --> file2 --> diff
     
 ```
+
+
+## The Generated Report
+
+This is an example of a generated report.  Here, we have compared the jar file for the artifact
+_javax.transaction:jta:1.1_ from Maven Central with the corresponding artifact rebuilt by Google's assured open source.
+Daleq employs various analysers to compare classes, meta-data and resources within the jars. 
+The results are displayed in a table, the rows correspond to files within the jar(s), and the columns correspond to the various analysers. 
+Analysers compare the content of files, specialised analysers are used to compare source code and bytecode. The actual daleq analyser results are displayed in the last column. Please have a look at our paper for more details.
+
+Possible analysis result states are:
+
+- **PASS** the comparison yields true
+- **FAIL** the comparison yields false
+- **N/A** the comparison cannot be applied (e.g., a source Code comparison cannot be used to compare bytecode)
+- **ERROR** the comparison has resulted in an error
+
+<img width="2832" height="1584" alt="image" src="https://github.com/user-attachments/assets/f840fb43-f55a-4dd2-a926-6bb4615296a0" />
+
+The markers next to each result are hyperlinks to generated pages with additional provenance. 
+For non-equivalence statements, those pages are usually diff reports rendered in HTML. 
+For daleq equivalence statements, advanced diff reports are generated based on the derivations recorded when datalog rules are applied.
+This is an example:
+
+<img width="1528" height="1150" alt="image" src="https://github.com/user-attachments/assets/d1266e1f-858a-4546-a289-4c7b5fe90edc" />
+
 
 ## Extracting Facts from Bytecode
 
