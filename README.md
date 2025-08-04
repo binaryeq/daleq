@@ -3,7 +3,7 @@
 
 ## Build and Use CLI
 
-DALEQ has been developed and tested with Java 17. 
+DALEQ has been developed and tested with Java 17.
 DALEQ can be build with Maven as follows:
 
 `mvn clean package dependency:copy-dependencies`
@@ -150,7 +150,7 @@ and convert it into a textual representation suitable for comparison and diffing
 flowchart LR
     bytecode1["class1"] --> asm1(("asm")) --> edb1["EDB1"] --> souffle1(("souffle")) --> idb1["IDB1"] --> IDBReader1(("project"))  --> file1 --> diff --> result
     bytecode2["class2"] --> asm2(("asm")) --> edb2["EDB2"] --> souffle2(("souffle")) --> idb2["IDB2"] --> IDBReader2(("project"))  --> file2 --> diff
-    
+
 ```
 
 
@@ -158,8 +158,8 @@ flowchart LR
 
 This is an example of a generated report.  Here, we have compared the jar file for the artifact
 _javax.transaction:jta:1.1_ from Maven Central with the corresponding artifact rebuilt by Google's assured open source.
-Daleq employs various analysers to compare classes, meta-data and resources within the jars. 
-The results are displayed in a table, the rows correspond to files within the jar(s), and the columns correspond to the various analysers. 
+Daleq employs various analysers to compare classes, meta-data and resources within the jars.
+The results are displayed in a table, the rows correspond to files within the jar(s), and the columns correspond to the various analysers.
 Analysers compare the content of files, specialised analysers are used to compare source code and bytecode. The actual daleq analyser results are displayed in the last column. Please have a look at our paper for more details.
 
 Possible analysis result states are:
@@ -171,8 +171,8 @@ Possible analysis result states are:
 
 <img width="2832" height="1584" alt="image" src="https://github.com/user-attachments/assets/f840fb43-f55a-4dd2-a926-6bb4615296a0" />
 
-The markers next to each result are hyperlinks to generated pages with additional provenance. 
-For non-equivalence statements, those pages are usually diff reports rendered in HTML. 
+The markers next to each result are hyperlinks to generated pages with additional provenance.
+For non-equivalence statements, those pages are usually diff reports rendered in HTML.
 For daleq equivalence statements, advanced diff reports are generated based on the derivations recorded when datalog rules are applied.
 This is an example:
 
