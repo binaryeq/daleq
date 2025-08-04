@@ -169,14 +169,14 @@ Possible analysis result states are:
 - **N/A** the comparison cannot be applied (e.g., a source Code comparison cannot be used to compare bytecode)
 - **ERROR** the comparison has resulted in an error
 
-<img width="2832" height="1584" alt="image" src="https://github.com/user-attachments/assets/f840fb43-f55a-4dd2-a926-6bb4615296a0" />
+<img width="1200" height="1584" alt="image" src="https://github.com/user-attachments/assets/f840fb43-f55a-4dd2-a926-6bb4615296a0" />
 
 The markers next to each result are hyperlinks to generated pages with additional provenance.
 For non-equivalence statements, those pages are usually diff reports rendered in HTML.
 For daleq equivalence statements, advanced diff reports are generated based on the derivations recorded when datalog rules are applied.
 This is an example:
 
-<img width="1528" height="1150" alt="image" src="https://github.com/user-attachments/assets/d1266e1f-858a-4546-a289-4c7b5fe90edc" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/d1266e1f-858a-4546-a289-4c7b5fe90edc" />
 
 
 ## Constructing the EDB Only
