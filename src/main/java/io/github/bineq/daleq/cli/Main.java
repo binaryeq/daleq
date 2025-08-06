@@ -216,7 +216,9 @@ public class Main {
         }
         else {
             if (analyser instanceof SameContentAnalyser) {
-                assert result.state()!=AnalysisResultState.SKIP;
+                //  assert result.state()!=AnalysisResultState.SKIP;
+                // it is possible that result.state()==AnalysisResultState.SKIP
+                // this happens of the resource only exists in one of the jars !
                 if (result.state()==AnalysisResultState.FAIL || result.state()==AnalysisResultState.ERROR) {
                     EXIT_STATE = Math.max(EXIT_STATE,EXIT_ALERT);
                 }
