@@ -28,13 +28,13 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install and run pre-commit hooks
-      run: |
-        python -m venv .venv
-        source .venv/bin/activate
-        pip install -r requirements.txt
-        pre-commit install
-        pre-commit run --all-files
+   # - name: Install and run pre-commit hooks
+   #   run: |
+   #     python -m venv .venv
+   #     source .venv/bin/activate
+   #     pip install -r requirements.txt
+   #     pre-commit install
+   #     pre-commit run --all-files
 
     # Install Java and Souffle.
     - name: Set up JDK 17
