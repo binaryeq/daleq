@@ -1,8 +1,8 @@
 # DALEQ - Datalog-based Binary Equivalence
 
-## Publications 
+## Publications
 
-1. [Jens Dietrich, Behnaz Hassanshahi: DALEQ - Explainable Equivalence for Java Bytecode (preprint)](https://arxiv.org/abs/2508.01530).
+1. [Jens Dietrich, Behnaz Hassanshahi: DALEQ - Explainable Equivalence for Java Bytecode (preprint)](https://arxiv.org/abs/2508.01530)
 2. [Jens Dietrich, Tim White, Behnaz Hassanshahi, Paddy Krishnan: Levels of Binary Equivalence for the Comparison of Binaries from Alternative Builds. ICSME'25](https://arxiv.org/abs/2410.08427)
 3. [Jens Dietrich, Tim White, Valerio Terragni, Behnaz Hassanshahi: Towards Cross-Build Differential Testing. ICST'25](https://www.researchgate.net/publication/391937833_Towards_Cross-Build_Differential_Testing)
 
