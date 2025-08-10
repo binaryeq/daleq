@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.1.1
+
+- fixed minor bug -- assertion in CLI Main
+
 ## 1.1.0
 
 - added CLI exit codes
