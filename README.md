@@ -16,7 +16,7 @@ DALEQ can be built with Maven as follows:
 Then run DALEQ as follows (for windows: change the classpath separator accordingly):
 
 ```
-java -DSOUFFLE=<path-to-souffle> -cp "target/classes:target/dependency/*" io.github.bineq.daleq.cli.Main \
+java -cp "target/classes:target/dependency/*" io.github.bineq.daleq.cli.Main \
 
  -j1,--jar1 <arg>   the first jar file to compare (required)
  -j2,--jar2 <arg>   the second jar file to compare (required)
@@ -29,7 +29,7 @@ java -DSOUFFLE=<path-to-souffle> -cp "target/classes:target/dependency/*" io.git
 The jar built can also be used directly as an executable superjar.
 
 ```
-java -DSOUFFLE=<path-to-souffle> -jar target/daleq-<daleq-version>.jar  \
+java -jar target/daleq-<daleq-version>.jar  \
 
  -j1,--jar1 <arg>   the first jar file to compare (required)
  -j2,--jar2 <arg>   the second jar file to compare (required)
@@ -50,6 +50,11 @@ The program returns with the following exit codes:
 ```
 
 This can be used to integrate the tool into CI processes.
+
+### Locating Souffle
+
+*Daleq* willl try to find the *souffle* executable in the path.
+This can be iveridden by passing it as a JVM argument, i.e. `-DSOUFFLE=<path-to-souffle>`.
 
 ## Overview
 

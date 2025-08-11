@@ -28,6 +28,54 @@ public class Souffle {
 
     private static Map<Resource,List<String>> RULE_CACHE = new HashMap<>();
 
+    private static String SOUFFLE_EXE = null;
+
+    static {
+        String souffleProp = System.getProperty(SOUFFLE);
+        if (souffleProp != null) {
+            LOG.info("Found souffle property: {}", souffleProp);
+            if (testSouffle(souffleProp)) {
+                SOUFFLE_EXE = souffleProp;
+                LOG.info("Using souffle executable: {}", souffleProp);
+            }
+        }
+
+        if (SOUFFLE_EXE == null) {
+            souffleProp = "souffle";
+            LOG.info("Try using souffle in path: {}", souffleProp);
+            if (testSouffle(souffleProp)) {
+                SOUFFLE_EXE = souffleProp;
+                LOG.info("Using souffle executable: {}", souffleProp);
+            }
+        }
+    }
+
+    private static boolean testSouffle(String souffleExe) {
+        try {
+            Process process = new ProcessBuilder(souffleExe, "--version")
+                .inheritIO()
+                .start();
+            process.waitFor();
+            LOG.info("Souffle exited with result {}", process.exitValue());
+            return process.exitValue() == 0;
+        }
+        catch (Exception x) {
+            LOG.error("Error trying to test souffle executable " + souffleExe,x);
+            return false;
+        }
+    }
+
+    public static String getAndCheckSouffleExe() {
+        Preconditions.checkState(SOUFFLE_EXE != null,"Souffle executable not found");
+        return SOUFFLE_EXE;
+    }
+
+    // public to check earlier, e.g. in test fixture
+    public static boolean checkSouffleExe() {
+        return SOUFFLE_EXE != null;
+    }
+
+
     /**
      * Create the DB.
      * @param edb - a file containing input predicate defs and facts
@@ -41,7 +89,7 @@ public class Souffle {
     }
 
     private static void createIDB(Path edb, Resource[] rules, Path edbDir, Path idbDir,Path mergedEDBAndRules) throws IOException, InterruptedException {
-        Path souffle = getAndCheckSouffleExe();
+        String souffle = getAndCheckSouffleExe();
 
         LOG.info("Using souffle {}", souffle);
 
@@ -88,7 +136,7 @@ public class Souffle {
         LOG.info("Merged rules and facts into single souffle program {}", mergedEDBAndRules.toFile().getAbsolutePath());
 
         LOG.info("Starting souffle");
-        Process process = new ProcessBuilder(souffle.toString(),"-F",edbDir.toString(),"-D",idbDir.toString(),mergedEDBAndRules.toString())
+        Process process = new ProcessBuilder(souffle,"-F",edbDir.toString(),"-D",idbDir.toString(),mergedEDBAndRules.toString())
             .inheritIO()
             .start();
 
@@ -105,27 +153,5 @@ public class Souffle {
     }
 
 
-    // public to check earlier, e.g. in test fixture
-    public static Path getAndCheckSouffleExe() {
-        String souffleExe = System.getProperty(SOUFFLE);
-        Preconditions.checkNotNull(souffleExe, SOUFFLE + " property not set, must point to the souffle binary, pass to JVM as follows: \"-DSOUFFLE=<dir>\"");
-        Path souffle = Path.of(souffleExe);
-        Preconditions.checkState(souffle.toFile().exists(), SOUFFLE + " does not exist");
-        return souffle;
-    }
 
-    // public to check earlier, e.g. in test fixture
-    public static boolean checkSouffleExe() {
-        String souffleExe = System.getProperty(SOUFFLE);
-        if (souffleExe == null) {
-            LOG.warn(SOUFFLE + " property not set, must point to the souffle binary, pass to JVM as follows: \"-DSOUFFLE=<dir>\"");
-            return false;
-        }
-        Path souffle = Path.of(souffleExe);
-        if (!Files.exists(souffle)) {
-            LOG.warn(SOUFFLE + " does not exist");
-            return false;
-        }
-        return true;
-    }
 }
