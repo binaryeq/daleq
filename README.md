@@ -53,8 +53,8 @@ This can be used to integrate the tool into CI processes.
 
 ### Locating Souffle
 
-*Daleq* willl try to find the *souffle* executable in the path.
-This can be iveridden by passing it as a JVM argument, i.e. `-DSOUFFLE=<path-to-souffle>`.
+*Daleq* will try to find the *souffle* executable in the path.
+This can be overridden by passing it as a JVM argument, i.e. `-DSOUFFLE=<path-to-souffle>`.
 
 ## Overview
 
@@ -87,13 +87,41 @@ Rules that are applied for this purpose are defined in
 `src/main/resources/rules/`, `advanced.souffle` is the default set.
 
 The API to generate the IDB is provided by `io.github.bineq.daleq.Souffle::createIDB`.
-This requires *souffle* to be installed.
-Any application that uses this API must provide the location of [souffle](https://souffle-lang.github.io/) via an argument
-that is passed to the JVM:
+
+### Step 3 - Comparing Bytecode
+
+When trying to establish equivalence between two (compiled) classes, IDBs cannot be compared directly for the following reasons:
+
+1. The provenance (id) terms -- this reflects the process of normalisation that might be different for each of the classes compared
+2. the IDB contains additional facts for predicates to keep track of facts that have been removed (i.e. EDB facts that have no counterpart in the IDB), or moved.
+3. facts corresponding to bytecode instruction have an `instructioncounter` slot to define the order of instructions within a method. Those might change in the IDB as normalisation may move/remove/insert facts corresponding to instructions.
+
+#### Projection
+
+The purpose of *projection* is to remove the aforementioned parts (facts and slots) from the database.
+At the moment normalisation is implemented in Java.
+
+#### Workflow to Compare two Binaries
+
+The classes `io.github.bineq.daleq.idb.IDBReader` and `io.github.bineq.daleq.idb.IDBPrinter` are used to read an IDB,
+and convert it into a textual representation suitable for comparison and diffing (using a standard text fiff tool such as _diff_ or _kdiff3_). This also supports projection.
+
+```mermaid
+flowchart LR
+    bytecode1["class1"] --> asm1(("asm")) --> edb1["EDB1"] --> souffle1(("souffle")) --> idb1["IDB1"] --> IDBReader1(("project"))  --> file1 --> diff --> result
+    bytecode2["class2"] --> asm2(("asm")) --> edb2["EDB2"] --> souffle2(("souffle")) --> idb2["IDB2"] --> IDBReader2(("project"))  --> file2 --> diff
 
 ```
--DSOUFFLE=<path to souffle binary>
-```
+
+## Normalisation Rules
+
+The datalog rules being used can be found in `src/main/resources/rules/`.
+The structure of the rules is as follows:  
+
+- `core.souffle` - mostly generated standard rules mapping EDB facts to IDB facts, plus some additional guard predicates that can be used to override default rules
+- `commons/access.souffle` - rules to derive facts for access flags such as *final* and *public* from access flags using bit encoding, for improved usability
+- `normalisations/sound` - normalisations that have no impact on program behaviour
+- `normalisations/soundy` - normalisations that are [soundy](http://soundiness.org/) in the sense that they might have some impact on program behaviour if the program uses reflection or similar dynamic programming techniques to inspect its own code. Those have been vetted for possible exploitability. For a conservative approach, those rules can be excluded from the analysis.
 
 ## Provenance
 
@@ -121,7 +149,7 @@ graph TD;
 R_AALOAD --> F1428629;
 ```
 
-A less trivial example is `R_42[F1,R_43[F2,F3]] ` , this encodes the following derivation tree:  
+A less trivial example is `R_42[F1,R_43[F2,F3]] ` , this encodes the following derivation tree:
 
 ```mermaid
 graph TD;
@@ -138,30 +166,6 @@ The grammar of the encoded proofs is defined here:
 `src/main/antlr4/io/github/bineq/daleq/souffle/provenance/Proof.g4`.
 
 
-## Comparing Bytecode
-
-When trying to establish equivalence between two (compiled) classes, IDBs cannot be compared directly for the following reasons:
-
-1. The provenance (id) terms -- this reflects the process of normalisation that might be different for each of the classes compared
-2. the IDB contains additional facts for predicates to keep track of facts that have been removed (i.e. EDB facts that have no counterpart in the IDB), or moved.
-3. facts corresponding to bytecode instruction have an `instructioncounter` slot to define the order of instructions within a method. Those might change in the IDB as normalisation may move/remove/insert facts corresponding to instructions.
-
-### Projection
-
-The purpose of *projection* is to remove the aforementioned parts (facts and slots) from the database.
-At the moment normalisation is implemented in Java.
-
-### Workflow to Compare two Binaries
-
-The classes `io.github.bineq.daleq.idb.IDBReader` and `io.github.bineq.daleq.idb.IDBPrinter` are used to read an IDB,
-and convert it into a textual representation suitable for comparison and diffing (using a standard text fiff tool such as _diff_ or _kdiff3_). This also supports projection.
-
-```mermaid
-flowchart LR
-    bytecode1["class1"] --> asm1(("asm")) --> edb1["EDB1"] --> souffle1(("souffle")) --> idb1["IDB1"] --> IDBReader1(("project"))  --> file1 --> diff --> result
-    bytecode2["class2"] --> asm2(("asm")) --> edb2["EDB2"] --> souffle2(("souffle")) --> idb2["IDB2"] --> IDBReader2(("project"))  --> file2 --> diff
-
-```
 
 
 ## The Generated Report
