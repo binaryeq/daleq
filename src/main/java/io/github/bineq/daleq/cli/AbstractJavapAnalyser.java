@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Analyser based on comparing the output of javap , concrete subclasses decide in arguments passed to javap.
@@ -36,7 +37,7 @@ public abstract class AbstractJavapAnalyser implements Analyser {
     }
 
     @Override
-    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
+    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir, Map<String,Object> options) throws IOException {
 
         AnalysisResult analysisResult = checkResourceIsPresent(jar1,jar2,resource);
         List<AnalysisResultAttachment> attachments = new ArrayList<>();

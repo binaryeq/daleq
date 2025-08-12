@@ -1,8 +1,10 @@
 package io.github.bineq.daleq.cli;
 
 import io.github.bineq.daleq.IOUtil;
+
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -21,13 +23,14 @@ public interface Analyser {
 
     // contextDir is the folder where the report is being generated
     // used to create resources that need to be linked
-    AnalysisResult analyse (String resource, Path jar1, Path jar2, Path contextDir) throws IOException ;
+    // the options argument can be used to pass CLI parameters to analysers
+    AnalysisResult analyse (String resource, Path jar1, Path jar2, Path contextDir, Map<String,Object> options) throws IOException ;
 
     String name();
 
     String description();
 
-    // this will be used to sort analysert output and determine the order of columns in generated reports
+    // this will be used to sort analyser output and determine the order of columns in generated reports
     // Use values from 0-100
     // columns with outputs of analysers with low positionHint values go to the left
     int positionHint();

@@ -3,6 +3,7 @@ package io.github.bineq.daleq.cli;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import io.github.bineq.daleq.IOUtil;
+import io.github.bineq.daleq.Rules;
 import org.apache.commons.cli.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,7 +29,8 @@ public class Main {
     private static final Option OPT_SRCJAR1 = new Option("s1","src1",true,"the first jar file with source code to compare (optional)");
     private static final Option OPT_SRCJAR2 = new Option("s2","src2",true,"the second jar file with source code to compare (optional)");
     private static final Option OUT = new Option("o","out",true,"the output folder where the report will be generated (required)");
-    private static final Option AUTO_OPEN_REPORT = new Option("a","autoopen",false,"if set the generated html report will be opened automatically (dont use for CLI integration)");
+    private static final Option AUTO_OPEN_REPORT = new Option("a","autoopen",false,"if set, the generated html report will be opened automatically (don't use this for CI integration)");
+    private static final Option SOUND_ONLY = new Option("so","soundonly",false,"if set, only sound rules will be used, soundy rules will be ignored");
 
     private static final URL TEMPLATE = Main.class.getClassLoader().getResource("cli/report-template.html");
     private static final URL CSS = Main.class.getClassLoader().getResource("cli/daleq.css");
@@ -68,11 +70,23 @@ public class Main {
         options.addOption(OPT_SRCJAR2);
         options.addOption(OUT);
         options.addOption(AUTO_OPEN_REPORT);
+        options.addOption(SOUND_ONLY);
 
+        Map<String,Object> analyserOptions = new HashMap<>();
         CommandLineParser parser = new DefaultParser();
 
         try {
             CommandLine cmd = parser.parse(options, args);
+
+            boolean soundOnly = cmd.hasOption(DaleqAnalyser.ANALYSER_OPTION_RULES);
+            if (soundOnly) {
+                LOG.info("using only sound rules");
+            }
+            else {
+                LOG.info("using all rules");
+            }
+            Rules rules = soundOnly ? Rules.SOUND_RULES : Rules.DEFAULT_RULES ;
+            analyserOptions.put(DaleqAnalyser.ANALYSER_OPTION_RULES, rules);
 
             Path jar1 = Path.of(cmd.getOptionValue(OPT_JAR1));
             Path jar2 = Path.of(cmd.getOptionValue(OPT_JAR2));
@@ -104,7 +118,7 @@ public class Main {
             Preconditions.checkState(Files.isDirectory(outPath));
             Preconditions.checkState(TEMPLATE!=null);
 
-            analyse(jar1,jar2,src1,src2,outPath,autoOpenReport);
+            analyse(jar1,jar2,src1,src2,outPath,autoOpenReport,analyserOptions);
 
             System.exit(EXIT_STATE);
 
@@ -116,7 +130,7 @@ public class Main {
     }
 
 
-    private static void analyse(Path jar1, Path jar2, Path src1, Path src2, Path outPath,boolean autoOpenReport) throws IOException {
+    private static void analyse(Path jar1, Path jar2, Path src1, Path src2, Path outPath,boolean autoOpenReport,Map<String,Object> analyserOptions) throws IOException {
 
         boolean sourceAvailable = src1!=null && src2!=null;
         List<Analyser> analysers = ANALYSERS.stream()
@@ -161,8 +175,8 @@ public class Main {
             row+="</td>";
             for (Analyser analyser:analysers) {
                 AnalysisResult analyserResult = analyser.isBytecodeAnalyser() ?
-                    analyser.analyse(resource,jar1,jar2,outPath):
-                    analyser.analyse(resource,src1,src2,outPath);
+                    analyser.analyse(resource,jar1,jar2,outPath,analyserOptions):
+                    analyser.analyse(resource,src1,src2,outPath,analyserOptions);
                 row+=String.format("<td class=\"%s\">",getCSSClass(analyserResult));
                 row+=analyserResult.state();
 

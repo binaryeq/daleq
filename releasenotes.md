@@ -1,5 +1,10 @@
 # Release Notes
 
+
+## 1.2.0
+
+- added CLI parameter to use only sound rules, ignoring "soundy" rules
+
 ## 1.1.1
 
 - fixed minor bug -- assertion in CLI Main

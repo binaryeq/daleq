@@ -1,5 +1,6 @@
 package io.github.bineq.daleq.cli;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
 import io.github.bineq.daleq.*;
@@ -44,7 +45,9 @@ public class DaleqAnalyser implements Analyser {
     private static final String JAR1PREFIX = "jar1-";
     private static final String JAR2PREFIX = "jar2-";
 
-    private static final Rules RULES = Rules.defaultRules();
+    // this is the name of the option used to pass rules to be used
+    static final String ANALYSER_OPTION_RULES = "OPT.DALEQ.RUKLES";
+
     private String equivalenceIsInferredFromEqualityLink = null;
 
     @Override
@@ -73,7 +76,11 @@ public class DaleqAnalyser implements Analyser {
     }
 
     @Override
-    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
+    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir, Map<String,Object> options) throws IOException {
+
+        Preconditions.checkArgument(options!=null);
+        Preconditions.checkArgument(options.containsKey(ANALYSER_OPTION_RULES));
+        Rules RULES = (Rules) options.get(ANALYSER_OPTION_RULES);
 
         AnalysisResult analysisResult = checkResourceIsPresent(jar1, jar2, resource);
         List<AnalysisResultAttachment> attachments = new ArrayList<>();
