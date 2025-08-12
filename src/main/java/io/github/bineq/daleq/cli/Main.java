@@ -80,7 +80,7 @@ public class Main {
         try {
             CommandLine cmd = parser.parse(options, args);
 
-            boolean soundOnly = cmd.hasOption(DaleqAnalyser.ANALYSER_OPTION_RULES);
+            boolean soundOnly = cmd.hasOption(SOUND_ONLY);
             if (soundOnly) {
                 LOG.info("using only sound rules:");
             }

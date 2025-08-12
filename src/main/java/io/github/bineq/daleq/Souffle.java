@@ -91,7 +91,7 @@ public class Souffle {
     private static void createIDB(Path edb, Resource[] rules, Path edbDir, Path idbDir,Path mergedEDBAndRules) throws IOException, InterruptedException {
         String souffle = getAndCheckSouffleExe();
 
-        LOG.info("Using souffle {}", souffle);
+        LOG.info("Using souffle exe: {}", souffle);
 
         Preconditions.checkState(Files.exists(edb));
         LOG.info("Using edb {}", edb);
@@ -113,17 +113,16 @@ public class Souffle {
 
         for (Resource resource : rules) {
             if (RULE_CACHE.containsKey(resource)) {
-                LOG.info("Using cached rules from {}", resource.getFilename());
+                LOG.debug("Using cached rules from {}", resource.getFilename());
                 lines.addAll(RULE_CACHE.get(resource));
             }
             else {
                 try {
                     List<String> lines2 = new ArrayList<>();
-                    LOG.info("reading rules from {}", resource.getFilename());
+                    LOG.info("Reading and caching rules from {}", resource.getFilename());
                     lines2.addAll(List.of("",COMMENT_SEP,"// COMMON RULES from " + resource,COMMENT_SEP,""));
                     List<String> moreLines = resource.getContentAsString(StandardCharsets.UTF_8).lines().collect(Collectors.toUnmodifiableList());
                     lines2.addAll(moreLines);
-                    LOG.info("Caching rules from {}", resource.getFilename());
                     RULE_CACHE.put(resource, lines2);
                     lines.addAll(lines2);
                 } catch (IOException e) {
