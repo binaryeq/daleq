@@ -10,6 +10,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
+
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -80,13 +82,18 @@ public class Main {
 
             boolean soundOnly = cmd.hasOption(DaleqAnalyser.ANALYSER_OPTION_RULES);
             if (soundOnly) {
-                LOG.info("using only sound rules");
+                LOG.info("using only sound rules:");
             }
             else {
-                LOG.info("using all rules");
+                LOG.info("using all rules:");
             }
             Rules rules = soundOnly ? Rules.SOUND_RULES : Rules.DEFAULT_RULES ;
             analyserOptions.put(DaleqAnalyser.ANALYSER_OPTION_RULES, rules);
+
+            // log rules being used
+            for (Resource ruleDef:rules.get()) {
+                LOG.info("\tusing rule(s) defined in: "+ruleDef);
+            }
 
             Path jar1 = Path.of(cmd.getOptionValue(OPT_JAR1));
             Path jar2 = Path.of(cmd.getOptionValue(OPT_JAR2));
