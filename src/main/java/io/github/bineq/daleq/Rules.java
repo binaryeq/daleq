@@ -25,7 +25,7 @@ public interface Rules {
         List<Resource> resources = Stream.of(defaultRules().get())
             .filter(r -> {
                 try {
-                    return ! r.getFile().getAbsolutePath().contains("/rules/normalisations/soundy/");
+                    return ! r.getURL().toString().contains("/rules/normalisations/soundy/");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
