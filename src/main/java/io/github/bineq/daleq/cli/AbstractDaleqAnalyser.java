@@ -36,8 +36,8 @@ public abstract class AbstractDaleqAnalyser implements Analyser {
     private static final String DIFF_PROJECTED_REPORT_NAME = "diff-projected.html";
     private static final String DIFF_FULL_REPORT_NAME = "diff-full.html";
     private static final boolean SOUFFLE_AVAILABLE = checkSouffleExe();
-    private static final URL PROJECTED_IDB_TEMPLATE = AbstractDaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/projected-idb.html");
-    private static final URL ADVANCED_DIFF_TEMPLATE = AbstractDaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/advanced-diff.html");
+    private static final URL PROJECTED_IDB_TEMPLATE = AbstractDaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.AbstractDaleqAnalyser/projected-idb.html");
+    private static final URL ADVANCED_DIFF_TEMPLATE = AbstractDaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.AbstractDaleqAnalyser/advanced-diff.html");
 
     private static final String JAR1PREFIX = "jar1-";
     private static final String JAR2PREFIX = "jar2-";
