@@ -1,6 +1,5 @@
 package io.github.bineq.daleq.cli;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Streams;
 import io.github.bineq.daleq.*;
@@ -13,9 +12,7 @@ import io.github.bineq.daleq.souffle.provenance.DerivationNode;
 import io.github.bineq.daleq.souffle.provenance.ProvenanceDB;
 import io.github.bineq.daleq.souffle.provenance.ProvenanceParser;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
-
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -31,43 +28,35 @@ import static io.github.bineq.daleq.Souffle.checkSouffleExe;
 
 /**
  * Analyser based on comparing the output of daleq reports.
+ * Subclasses can decide which rule set to use.
  * @author jens dietrich
  */
-public class DaleqAnalyser implements Analyser {
+public abstract class AbstractDaleqAnalyser implements Analyser {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DaleqAnalyser.class);
     private static final String DIFF_PROJECTED_REPORT_NAME = "diff-projected.html";
     private static final String DIFF_FULL_REPORT_NAME = "diff-full.html";
     private static final boolean SOUFFLE_AVAILABLE = checkSouffleExe();
-    private static final URL PROJECTED_IDB_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/projected-idb.html");
-    private static final URL ADVANCED_DIFF_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/advanced-diff.html");
+    private static final URL PROJECTED_IDB_TEMPLATE = AbstractDaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/projected-idb.html");
+    private static final URL ADVANCED_DIFF_TEMPLATE = AbstractDaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.DaleqAnalyser/advanced-diff.html");
 
     private static final String JAR1PREFIX = "jar1-";
     private static final String JAR2PREFIX = "jar2-";
 
-    // this is the name of the option used to pass rules to be used
-    static final String ANALYSER_OPTION_RULES = "OPT.DALEQ.RUKLES";
-
     private String equivalenceIsInferredFromEqualityLink = null;
+
+    protected abstract Rules getRules();
+
+    protected abstract Logger getLogger();
+
 
     @Override
     public void init(Path outDir) throws IOException {
         Analyser.super.init(outDir);
         String equivalenceIsInferredFromEqualityResourceHtmlReportName = "equivalence-inferred-from-equality.html";
-        URL equivalenceIsInferredFromEqualityResource = DaleqAnalyser.class.getClassLoader().getResource("cli/"+DaleqAnalyser.class.getName()+'/'+equivalenceIsInferredFromEqualityResourceHtmlReportName);
+        URL equivalenceIsInferredFromEqualityResource = AbstractDaleqAnalyser.class.getClassLoader().getResource("cli/"+ AbstractDaleqAnalyser.class.getName()+'/'+equivalenceIsInferredFromEqualityResourceHtmlReportName);
         Path analysisFolder = ResourceUtil.createAnalysisFolder(outDir,this);
         IOUtil.copy(equivalenceIsInferredFromEqualityResource, analysisFolder.resolve(equivalenceIsInferredFromEqualityResourceHtmlReportName));
         equivalenceIsInferredFromEqualityLink = ResourceUtil.createLink(this,equivalenceIsInferredFromEqualityResourceHtmlReportName);
-    }
-
-    @Override
-    public String name() {
-        return "daleq";
-    }
-
-    @Override
-    public String description() {
-        return "daleq based analyser";
     }
 
     @Override
@@ -76,11 +65,7 @@ public class DaleqAnalyser implements Analyser {
     }
 
     @Override
-    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir, Map<String,Object> options) throws IOException {
-
-        Preconditions.checkArgument(options!=null);
-        Preconditions.checkArgument(options.containsKey(ANALYSER_OPTION_RULES));
-        Rules RULES = (Rules) options.get(ANALYSER_OPTION_RULES);
+    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
 
         AnalysisResult analysisResult = checkResourceIsPresent(jar1, jar2, resource);
         List<AnalysisResultAttachment> attachments = new ArrayList<>();
@@ -122,8 +107,8 @@ public class DaleqAnalyser implements Analyser {
             Path mergedEDBAndRules2 = dir2.resolve("mergedEDBAndRules.souffle");
 
             try {
-                IDB idb1 = computeAndParseIDB(dir1, classFile1, edbDir1, idbDir1,mergedEDBAndRules1,RULES);
-                IDB idb2 = computeAndParseIDB(dir2, classFile2, edbDir2, idbDir2,mergedEDBAndRules2,RULES);
+                IDB idb1 = computeAndParseIDB(dir1, classFile1, edbDir1, idbDir1,mergedEDBAndRules1,getRules());
+                IDB idb2 = computeAndParseIDB(dir2, classFile2, edbDir2, idbDir2,mergedEDBAndRules2,getRules());
 
                 ProvenanceDB provDB1 = new ProvenanceDB(edbDir1,idbDir1,mergedEDBAndRules1);
                 ProvenanceDB provDB2 = new ProvenanceDB(edbDir2,idbDir2,mergedEDBAndRules2);
@@ -176,7 +161,7 @@ public class DaleqAnalyser implements Analyser {
                     bindings2.remove("code"); // not used in template
                     bindings2.put("edb1IL",edbToHtml(edbDir1,JAR1PREFIX,"jar1"));  // IL = inlined
                     bindings2.put("edb2IL",edbToHtml(edbDir2,JAR2PREFIX,"jar2"));
-                    bindings2.put("rules",rulesToHtml(RULES));
+                    bindings2.put("rules",rulesToHtml(getRules()));
                     createBindingsForAdvancedDiff(bindings2,idb1,idb2,provDB1, provDB2);
                     String link2 = ResourceUtil.createReportFromTemplate(contextDir,this, resource, ADVANCED_DIFF_TEMPLATE,"advanced-diff.html", bindings2);
                     attachments.add(new AnalysisResultAttachment("advanced-diff",link2,AnalysisResultAttachment.Kind.DIFF));
@@ -372,7 +357,7 @@ public class DaleqAnalyser implements Analyser {
             DerivationNode root2 = ProvenanceParser.parse(id2);
             return isDiffBeforeNormalisation(root1,root2,provDB1,provDB2);
         } catch (Exception x) {
-            LOG.error("Error parsing provenance",x);
+            getLogger().error("Error parsing provenance",x);
             return true; // show diff if something goes wrong!
         }
     }
@@ -484,7 +469,7 @@ public class DaleqAnalyser implements Analyser {
             html += "</table>";
 
         } catch (Exception x) {
-            LOG.error("Error parsing provenance for id \""+id+"\"",x);
+            getLogger().error("Error parsing provenance for id \""+id+"\"",x);
             html += "<div>error parsing provenance !</div>";
         }
         return html;

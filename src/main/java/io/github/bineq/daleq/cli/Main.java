@@ -3,15 +3,12 @@ package io.github.bineq.daleq.cli;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import io.github.bineq.daleq.IOUtil;
-import io.github.bineq.daleq.Rules;
 import org.apache.commons.cli.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.Resource;
-
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -31,11 +28,14 @@ public class Main {
     private static final Option OPT_SRCJAR1 = new Option("s1","src1",true,"the first jar file with source code to compare (optional)");
     private static final Option OPT_SRCJAR2 = new Option("s2","src2",true,"the second jar file with source code to compare (optional)");
     private static final Option OUT = new Option("o","out",true,"the output folder where the report will be generated (required)");
-    private static final Option AUTO_OPEN_REPORT = new Option("a","autoopen",false,"if set, the generated html report will be opened automatically (don't use this for CI integration)");
-    private static final Option SOUND_ONLY = new Option("so","soundonly",false,"if set, only sound rules will be used, soundy rules will be ignored");
+    private static final Option OPT_AUTO_OPEN_REPORT = new Option("a","autoopen",false,"if set, the generated html report will be opened automatically (don't use this for CI integration)");
+    private static final Option OPT_DALEQ = new Option("dq","daleq",true,"one of {sound,soundy,both}, default is soundy");
 
     private static final URL TEMPLATE = Main.class.getClassLoader().getResource("cli/report-template.html");
     private static final URL CSS = Main.class.getClassLoader().getResource("cli/daleq.css");
+
+    enum DaleqAnalyserType {sound,soundy,both};
+    private static final DaleqAnalyserType DEFAULT_DALEQ_ANALYSER_TYPE = DaleqAnalyserType.soundy;
 
     static {
         OPT_JAR1.setRequired(true);
@@ -71,29 +71,23 @@ public class Main {
         options.addOption(OPT_SRCJAR1);
         options.addOption(OPT_SRCJAR2);
         options.addOption(OUT);
-        options.addOption(AUTO_OPEN_REPORT);
-        options.addOption(SOUND_ONLY);
+        options.addOption(OPT_AUTO_OPEN_REPORT);
+        options.addOption(OPT_DALEQ);
 
-        Map<String,Object> analyserOptions = new HashMap<>();
         CommandLineParser parser = new DefaultParser();
 
         try {
             CommandLine cmd = parser.parse(options, args);
 
-            boolean soundOnly = cmd.hasOption(SOUND_ONLY);
-            if (soundOnly) {
-                LOG.info("using only sound rules:");
+            String daleqAnalyserTypeName = cmd.getOptionValue(OPT_DALEQ);
+            DaleqAnalyserType daleqAnalyserType = null;
+            if (daleqAnalyserTypeName==null) {
+                daleqAnalyserType = DEFAULT_DALEQ_ANALYSER_TYPE;
             }
             else {
-                LOG.info("using all rules:");
+                daleqAnalyserType = DaleqAnalyserType.valueOf(daleqAnalyserTypeName);
             }
-            Rules rules = soundOnly ? Rules.SOUND_RULES : Rules.DEFAULT_RULES ;
-            analyserOptions.put(DaleqAnalyser.ANALYSER_OPTION_RULES, rules);
 
-            // log rules being used
-            for (Resource ruleDef:rules.get()) {
-                LOG.info("\tusing rule(s) defined in: "+ruleDef);
-            }
 
             Path jar1 = Path.of(cmd.getOptionValue(OPT_JAR1));
             Path jar2 = Path.of(cmd.getOptionValue(OPT_JAR2));
@@ -104,7 +98,7 @@ public class Main {
             Preconditions.checkState(Files.exists(jar2));
             Preconditions.checkState(!Files.isDirectory(jar2));
 
-            boolean autoOpenReport = cmd.hasOption(AUTO_OPEN_REPORT);
+            boolean autoOpenReport = cmd.hasOption(OPT_AUTO_OPEN_REPORT);
 
             Path src1 = null;
             Path src2 = null;
@@ -125,7 +119,7 @@ public class Main {
             Preconditions.checkState(Files.isDirectory(outPath));
             Preconditions.checkState(TEMPLATE!=null);
 
-            analyse(jar1,jar2,src1,src2,outPath,autoOpenReport,analyserOptions);
+            analyse(jar1,jar2,src1,src2,outPath,autoOpenReport,daleqAnalyserType);
 
             System.exit(EXIT_STATE);
 
@@ -136,13 +130,29 @@ public class Main {
         }
     }
 
+    static List<Analyser> getAnalysers(boolean sourcesAvailable, DaleqAnalyserType daleqAnalyserType) {
+        return ANALYSERS.stream()
+            .filter(analyser -> analyser.isBytecodeAnalyser() || sourcesAvailable)
+            .filter(analyser -> {
+                if (analyser instanceof AbstractDaleqAnalyser)  {
+                    if (analyser.isSound()) {
+                        return daleqAnalyserType==DaleqAnalyserType.sound || daleqAnalyserType==DaleqAnalyserType.both ;
+                    }
+                    else {
+                        return daleqAnalyserType==DaleqAnalyserType.soundy || daleqAnalyserType==DaleqAnalyserType.both ;
+                    }
+                }
+                else {
+                    return true;
+                }
+            })
+            .collect(Collectors.toUnmodifiableList());
+    }
 
-    private static void analyse(Path jar1, Path jar2, Path src1, Path src2, Path outPath,boolean autoOpenReport,Map<String,Object> analyserOptions) throws IOException {
+    private static void analyse(Path jar1, Path jar2, Path src1, Path src2, Path outPath,boolean autoOpenReport,DaleqAnalyserType daleqAnalyserType) throws IOException {
 
         boolean sourceAvailable = src1!=null && src2!=null;
-        List<Analyser> analysers = ANALYSERS.stream()
-            .filter(anal -> anal.isBytecodeAnalyser() || sourceAvailable)
-            .collect(Collectors.toUnmodifiableList());
+        List<Analyser> analysers = getAnalysers(sourceAvailable,daleqAnalyserType);
 
         LOG.info("Initialising analysers");
         for (Analyser analyser:analysers) {
@@ -182,8 +192,8 @@ public class Main {
             row+="</td>";
             for (Analyser analyser:analysers) {
                 AnalysisResult analyserResult = analyser.isBytecodeAnalyser() ?
-                    analyser.analyse(resource,jar1,jar2,outPath,analyserOptions):
-                    analyser.analyse(resource,src1,src2,outPath,analyserOptions);
+                    analyser.analyse(resource,jar1,jar2,outPath):
+                    analyser.analyse(resource,src1,src2,outPath);
                 row+=String.format("<td class=\"%s\">",getCSSClass(analyserResult));
                 row+=analyserResult.state();
 
@@ -223,7 +233,7 @@ public class Main {
                     EXIT_STATE = Math.max(EXIT_STATE,EXIT_CLASSES_EQUIVALENT__RESOURCES_EQUAL__SOURCES_EQUIVALENT);
                 }
             }
-            else if (analyser instanceof DaleqAnalyser) {
+            else if (analyser instanceof AbstractDaleqAnalyser) {
                 assert result.state()!=AnalysisResultState.SKIP;
                 if (result.state()==AnalysisResultState.FAIL || result.state()==AnalysisResultState.ERROR) {
                     EXIT_STATE = Math.max(EXIT_STATE,EXIT_ALERT);

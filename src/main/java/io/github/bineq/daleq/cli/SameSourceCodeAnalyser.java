@@ -3,13 +3,13 @@ package io.github.bineq.daleq.cli;
 import io.github.bineq.daleq.IOUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Checks whether Java source code resources are equal.
@@ -32,7 +32,7 @@ public class SameSourceCodeAnalyser implements Analyser {
     }
 
     @Override
-    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir, Map<String,Object> options) throws IOException {
+    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
 
         // locate source -- TODO: kotlin & co
         resource = resource.replace(".class", ".java");

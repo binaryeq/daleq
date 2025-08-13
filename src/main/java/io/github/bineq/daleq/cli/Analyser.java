@@ -4,7 +4,6 @@ import io.github.bineq.daleq.IOUtil;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -21,10 +20,17 @@ public interface Analyser {
         return true;
     }
 
+    /**
+     * Whether the analysis is sound, as opposed to soundy.
+     * @return
+     */
+    default boolean isSound() {
+        return true;
+    }
+
     // contextDir is the folder where the report is being generated
     // used to create resources that need to be linked
-    // the options argument can be used to pass CLI parameters to analysers
-    AnalysisResult analyse (String resource, Path jar1, Path jar2, Path contextDir, Map<String,Object> options) throws IOException ;
+    AnalysisResult analyse (String resource, Path jar1, Path jar2, Path contextDir) throws IOException ;
 
     String name();
 

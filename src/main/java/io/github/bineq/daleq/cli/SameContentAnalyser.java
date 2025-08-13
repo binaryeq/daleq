@@ -24,7 +24,7 @@ public class SameContentAnalyser implements Analyser {
     }
 
     @Override
-    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir, Map<String,Object> options) throws IOException {
+    public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
         AnalysisResult analysisResult = checkResourceIsPresent(jar1,jar2,resource);
         if (analysisResult!=null) {
             return analysisResult;

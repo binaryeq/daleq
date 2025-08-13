@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class ResourceIsPresentAnalyser implements Analyser {
 
-    private static final URL DIFF_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.ResourceIsPresentAnalyser/diff.html");
+    private static final URL DIFF_TEMPLATE = ResourceIsPresentAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.ResourceIsPresentAnalyser/diff.html");
 
     @Override
     public int positionHint() {
@@ -24,7 +24,7 @@ public class ResourceIsPresentAnalyser implements Analyser {
     }
 
     @Override
-    public AnalysisResult analyse(String resource, Path jar1, Path jar2,Path contextDir, Map<String,Object> options) throws IOException {
+    public AnalysisResult analyse(String resource, Path jar1, Path jar2,Path contextDir) throws IOException {
         List<AnalysisResultAttachment> attachments = new ArrayList<>();
         Set<String> resources1 = IOUtil.nonDirEntries(jar1);
         Set<String> resources2 = IOUtil.nonDirEntries(jar2);

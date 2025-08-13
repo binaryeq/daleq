@@ -4,4 +4,5 @@ io.github.bineq.daleq.cli.EquivalentSourceCodeAnalyser
 io.github.bineq.daleq.cli.SameContentAnalyser
 io.github.bineq.daleq.cli.VerboseJavapAnalyser
 io.github.bineq.daleq.cli.CompactJavapAnalyser
-io.github.bineq.daleq.cli.DaleqAnalyser
+io.github.bineq.daleq.cli.SoundDaleqAnalyser
+io.github.bineq.daleq.cli.SoundyDaleqAnalyser

@@ -23,22 +23,14 @@ java -cp "target/classes:target/dependency/*" io.github.bineq.daleq.cli.Main \
  -o,--out <arg>     the output folder where the report will be generated (required)
  -s1,--src1 <arg>   the first jar file with source code to compare (optional)
  -s2,--src2 <arg>   the second jar file with source code to compare (optional)
- -a,--autoopen      if set, the generated html report will be opened automatically (don't use this for CI integration)
- -so,--soundonly   if set, only sound rules will be used, soundy rules will be ignored
+ -a,--autoopen      if set, the generated html report will be opened automatically (optional, don't use this for CI integration)
+ -dq,--daleq        one of {sound,soundy,both} (optional, default is soundy)
 ```
 
 The jar built can also be used directly as an executable superjar.
 
 ```
-java -jar target/daleq-<daleq-version>.jar  \
-
- -j1,--jar1 <arg>   the first jar file to compare (required)
- -j2,--jar2 <arg>   the second jar file to compare (required)
- -o,--out <arg>     the output folder where the report will be generated (required)
- -s1,--src1 <arg>   the first jar file with source code to compare (optional)
- -s2,--src2 <arg>   the second jar file with source code to compare (optional)
- -a,--autoopen      if set, the generated html report will be opened automatically (don't use this for CI integration)
- -so,--soundonly   if set, only sound rules will be used, soundy rules will be ignored
+java -jar target/daleq-<daleq-version>.jar  <options-as-before>
 ```
 
 Running the program will create a report `report.html` in the specified output folder.
