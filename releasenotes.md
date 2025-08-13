@@ -3,7 +3,7 @@
 
 ## 1.2.0
 
-- added CLI parameter to use only sound rules, ignoring "soundy" rules
+- added CLI parameter to use DALEQ with either sound rules only, soundy (and sound) rules, or both
 
 ## 1.1.1
 
