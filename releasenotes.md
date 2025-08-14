@@ -1,5 +1,10 @@
 # Release Notes
 
+
+## 1.2.0
+
+- added CLI parameter to use DALEQ with either sound rules only, soundy (and sound) rules, or both
+
 ## 1.1.1
 
 - fixed minor bug -- assertion in CLI Main

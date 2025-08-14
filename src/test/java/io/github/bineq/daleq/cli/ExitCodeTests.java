@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExitCodeTests {
 
-    private static Analyser DALEQ = new DaleqAnalyser();
+    private static Analyser DALEQ = new SoundDaleqAnalyser();
     private static Analyser SAME_SOURCE = new SameSourceCodeAnalyser();
     private static Analyser EQUIVALENT_SOURCE = new EquivalentSourceCodeAnalyser();
     private static Analyser SAME_CONTENT = new SameContentAnalyser();

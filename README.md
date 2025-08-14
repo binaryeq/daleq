@@ -23,20 +23,14 @@ java -cp "target/classes:target/dependency/*" io.github.bineq.daleq.cli.Main \
  -o,--out <arg>     the output folder where the report will be generated (required)
  -s1,--src1 <arg>   the first jar file with source code to compare (optional)
  -s2,--src2 <arg>   the second jar file with source code to compare (optional)
- -a,--autoopen      if set, the generated html report will be opened automatically (dont use for CLI integration)
+ -a,--autoopen      if set, the generated html report will be opened automatically (optional, don't use this for CI integration)
+ -dq,--daleq        one of {sound,soundy,both} (optional, default is soundy)
 ```
 
 The jar built can also be used directly as an executable superjar.
 
 ```
-java -jar target/daleq-<daleq-version>.jar  \
-
- -j1,--jar1 <arg>   the first jar file to compare (required)
- -j2,--jar2 <arg>   the second jar file to compare (required)
- -o,--out <arg>     the output folder where the report will be generated (required)
- -s1,--src1 <arg>   the first jar file with source code to compare (optional)
- -s2,--src2 <arg>   the second jar file with source code to compare (optional)
- -a,--autoopen      if set the generated html report will be opened automatically (dont use for CLI integration)
+java -jar target/daleq-<daleq-version>.jar  <options-as-before>
 ```
 
 Running the program will create a report `report.html` in the specified output folder.
@@ -121,7 +115,7 @@ The structure of the rules is as follows:
 - `core.souffle` - mostly generated standard rules mapping EDB facts to IDB facts, plus some additional guard predicates that can be used to override default rules
 - `commons/access.souffle` - rules to derive facts for access flags such as *final* and *public* from access flags using bit encoding, for improved usability
 - `normalisations/sound` - normalisations that have no impact on program behaviour
-- `normalisations/soundy` - normalisations that are [soundy](http://soundiness.org/) in the sense that they might have some impact on program behaviour if the program uses reflection or similar dynamic programming techniques to inspect its own code. Those have been vetted for possible exploitability. For a conservative approach, those rules can be excluded from the analysis.
+- `normalisations/soundy` - normalisations that are [soundy](http://soundiness.org/) in the sense that they might have some impact on program behaviour if the program uses reflection or similar dynamic programming techniques to inspect its own code. Those have been vetted for possible exploitability. For a conservative approach, those rules can be excluded from the analysis by using the _sound_ CLI option.
 
 ## Provenance
 

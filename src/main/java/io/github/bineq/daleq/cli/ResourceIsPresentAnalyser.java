@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public class ResourceIsPresentAnalyser implements Analyser {
 
-    private static final URL DIFF_TEMPLATE = DaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.ResourceIsPresentAnalyser/diff.html");
+    private static final URL DIFF_TEMPLATE = ResourceIsPresentAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.ResourceIsPresentAnalyser/diff.html");
 
     @Override
     public int positionHint() {
