@@ -115,7 +115,7 @@ The structure of the rules is as follows:
 - `core.souffle` - mostly generated standard rules mapping EDB facts to IDB facts, plus some additional guard predicates that can be used to override default rules
 - `commons/access.souffle` - rules to derive facts for access flags such as *final* and *public* from access flags using bit encoding, for improved usability
 - `normalisations/sound` - normalisations that have no impact on program behaviour
-- `normalisations/soundy` - normalisations that are [soundy](http://soundiness.org/) in the sense that they might have some impact on program behaviour if the program uses reflection or similar dynamic programming techniques to inspect its own code. Those have been vetted for possible exploitability. For a conservative approach, those rules can be excluded from the analysis.
+- `normalisations/soundy` - normalisations that are [soundy](http://soundiness.org/) in the sense that they might have some impact on program behaviour if the program uses reflection or similar dynamic programming techniques to inspect its own code. Those have been vetted for possible exploitability. For a conservative approach, those rules can be excluded from the analysis by using the _sound_ CLI option.
 
 ## Provenance
 
