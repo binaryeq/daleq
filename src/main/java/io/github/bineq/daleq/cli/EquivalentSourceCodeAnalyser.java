@@ -23,15 +23,15 @@ import java.util.stream.Collectors;
  * Differences in comments and formatting are ignored.
  * @author jens dietrich
  */
-public class EquivalentSourceCodeAnalyser implements Analyser {
+public class EquivalentSourceCodeAnalyser extends AbstractSourceCodeAnalyser {
 
     private static final String DIFF_REPORT_NAME = "diff-src-equiv.html";
     private static final Logger LOG = LoggerFactory.getLogger(EquivalentSourceCodeAnalyser.class);
     public static final Predicate<Node> IS_COMMENT = node -> node instanceof Comment;
 
     @Override
-    public boolean isBytecodeAnalyser() {
-        return false;
+    public void init(Path outDir) throws IOException {
+        super.init(outDir);
     }
 
     @Override
@@ -45,7 +45,12 @@ public class EquivalentSourceCodeAnalyser implements Analyser {
         // locate source -- TODO: kotlin & co
         resource = resource.replace(".class", ".java");
 
-        AnalysisResult analysisResult = checkResourceIsPresent(jar1,jar2,resource);
+        AnalysisResult analysisResult = checkInnerClass(resource);
+        if (analysisResult!=null) {
+            return analysisResult;
+        }
+
+        analysisResult = checkResourceIsPresent(jar1,jar2,resource);
         if (analysisResult!=null) {
             return analysisResult;
         }

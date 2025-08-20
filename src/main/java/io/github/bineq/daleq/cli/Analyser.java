@@ -48,10 +48,10 @@ public interface Analyser {
         Set<String> resources1 = IOUtil.nonDirEntries(jar1);
         Set<String> resources2 = IOUtil.nonDirEntries(jar2);
         if (!resources1.contains(resource)) {
-            return new AnalysisResult(AnalysisResultState.SKIP,"resource is missing in jar1");
+            return new AnalysisResult(AnalysisResultState.SKIP,"resource " + resource + " is missing in jar1");
         }
         else if (!resources2.contains(resource)) {
-            return new AnalysisResult(AnalysisResultState.SKIP,"resource is missing in jar2");
+            return new AnalysisResult(AnalysisResultState.SKIP,"resource " + resource + " is missing in jar2");
         }
         else return null;
     }
