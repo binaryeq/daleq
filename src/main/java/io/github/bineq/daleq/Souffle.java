@@ -95,7 +95,7 @@ public class Souffle {
 
         Preconditions.checkState(Files.exists(edb));
         LOG.info("Using edb {}", edb);
-        LOG.info("Using rules {}", Stream.of(rules).map(Resource::getFilename).collect(Collectors.joining(LINE_SEP)));
+        LOG.info("Using rules: {}", Stream.of(rules).map(Resource::getFilename).collect(Collectors.joining(", ")));
         Preconditions.checkState(Files.exists(edbDir));
         Preconditions.checkState(Files.isDirectory(edbDir));
         LOG.info("Using edb direcory {}", edbDir);

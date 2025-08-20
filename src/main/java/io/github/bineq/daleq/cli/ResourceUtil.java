@@ -106,7 +106,7 @@ public class ResourceUtil {
 
     /**
      * Create a html page from a template and return the link.
-     * @param outputDir
+     * @param contextDir
      * @param analyser
      * @param resource - the resource (file) under analysis
      * @param template - as resource reference (classpath)
