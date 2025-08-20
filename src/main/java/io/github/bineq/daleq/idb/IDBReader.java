@@ -120,7 +120,7 @@ public class IDBReader {
                     }
                 }
                 else if (isIDBVersionOf(predicate, EDBAdditionalPredicates.ANNOTATION)) {
-                    System.out.println(predicateName);
+                    // System.out.println(predicateName);
                     String classOrMethodOrFieldId = getClassOrMethodOrFieldId(fact);
                     Type type = classify(classOrMethodOrFieldId);
                     if (type==Type.CLASS) {
