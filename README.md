@@ -6,18 +6,24 @@
 2. [Jens Dietrich, Tim White, Behnaz Hassanshahi, Paddy Krishnan: Levels of Binary Equivalence for the Comparison of Binaries from Alternative Builds. ICSME'25](https://arxiv.org/abs/2410.08427)
 3. [Jens Dietrich, Tim White, Valerio Terragni, Behnaz Hassanshahi: Towards Cross-Build Differential Testing. ICST'25](https://www.researchgate.net/publication/391937833_Towards_Cross-Build_Differential_Testing)
 
+## Videos
+
+[<figure><img src="https://img.youtube.com/vi/YBBFUCoGEYU/0.jpg" width="200"/><figcaption>Part 1 - Introduction</figcaption></figure>](https://www.youtube.com/watch?v=YBBFUCoGEYU)
+
+
+[<figure><img src="https://img.youtube.com/vi/0aelJnQ2Vis/0.jpg" width="200"/><figcaption>Part 2 - Internals</figcaption></figure>](https://www.youtube.com/watch?v= 0aelJnQ2Vis)
+
+
 ## Build and Use CLI
 
 DALEQ has been developed and tested with Java 17.
-DALEQ can be built with Maven as follows:
-
-`mvn clean package dependency:copy-dependencies`
-
-Then run DALEQ as follows (for windows: change the classpath separator accordingly):
+DALEQ can be built with Maven (`mvn clean package`).
+This will create an executable `daleq-<daleq-version>` in `target`.
+This jar contains all Java dependencies needed.
+Then run DALEQ as follows:
 
 ```
-java -cp "target/classes:target/dependency/*" io.github.bineq.daleq.cli.Main \
-
+java -jar daleq-<daleq-version>
  -j1,--jar1 <arg>   the first jar file to compare (required)
  -j2,--jar2 <arg>   the second jar file to compare (required)
  -o,--out <arg>     the output folder where the report will be generated (required)
@@ -27,11 +33,6 @@ java -cp "target/classes:target/dependency/*" io.github.bineq.daleq.cli.Main \
  -dq,--daleq        one of {sound,soundy,both} (optional, default is soundy)
 ```
 
-The jar built can also be used directly as an executable superjar.
-
-```
-java -jar target/daleq-<daleq-version>.jar  <options-as-before>
-```
 
 Running the program will create a report `report.html` in the specified output folder.
 
