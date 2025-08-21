@@ -8,9 +8,9 @@
 
 ## Videos
 
-[<img src="https://img.youtube.com/vi/YBBFUCoGEYU/0.jpg" width="200"/>](https://www.youtube.com/watch?v=YBBFUCoGEYU)
+[<figure><img src="https://img.youtube.com/vi/YBBFUCoGEYU/0.jpg" width="200"/><figcaption>Part 1 - Introduction</figcaption></figure>](https://www.youtube.com/watch?v=YBBFUCoGEYU)
 
-[<img src="https://img.youtube.com/vi/0aelJnQ2Vis/0.jpg" width="200"/>](https://www.youtube.com/watch?v= 0aelJnQ2Vis)
+[<figure><img src="https://img.youtube.com/vi/0aelJnQ2Vis/0.jpg" width="200"/><figcaption>Part 2 - Internals</figcaption></figure>](https://www.youtube.com/watch?v=0aelJnQ2Vis)
 
 
 ## Build and Use CLI
