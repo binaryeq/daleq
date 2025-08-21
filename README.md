@@ -17,12 +17,12 @@
 
 DALEQ has been developed and tested with Java 17.
 DALEQ can be built with Maven (`mvn clean package`).
-This will create an executable `daleq-<daleq-version>` in `target`.
+This will create an executable `daleq-<daleq-version>.jar` in `target`.
 This jar contains all Java dependencies needed.
 Then run DALEQ as follows:
 
 ```
-java -jar daleq-<daleq-version>
+java -jar daleq-<daleq-version>.jar
  -j1,--jar1 <arg>   the first jar file to compare (required)
  -j2,--jar2 <arg>   the second jar file to compare (required)
  -o,--out <arg>     the output folder where the report will be generated (required)
@@ -31,7 +31,6 @@ java -jar daleq-<daleq-version>
  -a,--autoopen      if set, the generated html report will be opened automatically (optional, don't use this for CI integration)
  -dq,--daleq        one of {sound,soundy,both} (optional, default is soundy)
 ```
-
 
 Running the program will create a report `report.html` in the specified output folder.
 
