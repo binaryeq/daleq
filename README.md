@@ -20,7 +20,7 @@ DALEQ can be built with Maven (`mvn clean package`).
 This will create an executable `daleq-<daleq-version>.jar` in `target`.
 This jar contains all Java dependencies needed.
 
-DALEQ needs the following (non-Java) tools to be installed separatly:
+DALEQ needs the following (non-Java) tools to be installed separately:
 
 1. [souffle](https://souffle-lang.github.io/) -- the datalog engine being used
 2. [diff](https://www.man7.org/linux/man-pages/man1/diff.1.html) -- the standard diff tool
