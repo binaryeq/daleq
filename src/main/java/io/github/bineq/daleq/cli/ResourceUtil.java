@@ -75,7 +75,7 @@ public class ResourceUtil {
 
     // hyperlink to be used in report generated in outputDir
     static String createLink (Path contextDir,String resourceUnderAnalysis, Analyser analyser, String filename) {
-        return contextDir.toFile().getAbsolutePath()+'/'+analyser.getClass().getName()+'/'+resourceUnderAnalysis+'/'+filename;
+        return analyser.getClass().getName()+'/'+resourceUnderAnalysis+'/'+filename;
     }
 
     static String createLink (Analyser analyser, String filename) {
