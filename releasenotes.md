@@ -1,5 +1,10 @@
 # Release Notes
 
+
+## 1.2.2
+
+- fixed code scanning alert #2
+
 ## 1.2.1
 
 - added explanation for why the source code of inner classes is not (directly) analysed and compared, see issue #43
