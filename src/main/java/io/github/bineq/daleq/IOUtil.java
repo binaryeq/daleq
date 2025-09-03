@@ -135,7 +135,12 @@ public class IOUtil {
                 ZipEntry entry = iter.nextElement();
                 if (filter.test(entry)) {
                     String s = entry.getName();
-                    entries.add(s);
+                    if (s.contains("..")) { // prevent zip slip
+                        throw new IOException("potenial zip slip vulnerability detected for zip entry " + s);
+                    }
+                    else {
+                        entries.add(s);
+                    }
                 }
             }
             return Collections.unmodifiableSet(entries);
