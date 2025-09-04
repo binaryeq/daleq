@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.2.3
+
+- fixed code scanning alert #1
 
 ## 1.2.2
 
