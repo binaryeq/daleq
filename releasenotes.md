@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.3.2
+
+- fixed release action setup (pom)
+
 ## 1.3.1
 
 - fixed release action
