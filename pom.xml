@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <description>datalog-based binary equivalence for Java bytecode components</description>
     <name>daleq</name>
-    <url>https://github.com/bineq/daleq</url>
+    <url>https://github.com/binaryeq/daleq</url>
 
     <properties>
         <maven.compiler.target>17</maven.compiler.target>
@@ -28,7 +28,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/bineq/daleq</url>
+            <url>https://maven.pkg.github.com/binaryeq/daleq</url>
         </repository>
     </distributionManagement>
 
