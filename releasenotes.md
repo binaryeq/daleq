@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.3.0
+
+- multiple updated dependencies
+- started automated released with this version
+
 ## 1.2.3
 
 - fixed code scanning alert #1
