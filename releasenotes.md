@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.3.1
+
+- fixed release action
+
 ## 1.3.0
 
 - multiple updated dependencies

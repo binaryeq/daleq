@@ -5,7 +5,7 @@
 
     <groupId>io.github.bineq</groupId>
     <artifactId>daleq</artifactId>
-    <version>1.3.0</version>
+    <version>1.3.1</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
     <description>datalog-based binary equivalence for Java bytecode components</description>
