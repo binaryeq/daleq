@@ -1,5 +1,10 @@
 # Release Notes
 
+
+## 1.3.3
+
+- multiple updated dependencies in pom and workflows
+-
 ## 1.3.2
 
 - fixed release action setup (pom)
