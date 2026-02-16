@@ -1,10 +1,14 @@
 # Release Notes
 
+## 1.4.0
+
+- fixed issue 54 -- reports can now be moved to differnt folders
+- multiple updated dependencies in pom and workflows 
 
 ## 1.3.3
 
 - multiple updated dependencies in pom and workflows
--
+
 ## 1.3.2
 
 - fixed release action setup (pom)
