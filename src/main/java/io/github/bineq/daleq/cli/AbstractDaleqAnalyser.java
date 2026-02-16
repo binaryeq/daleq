@@ -143,14 +143,14 @@ public abstract class AbstractDaleqAnalyser implements Analyser {
                         "class",resource,
                         "jar1",asLink(jar1),
                         "jar2",asLink(jar2),
-                        "edb1",asLink(edbDir1),
-                        "edb2",asLink(edbDir2),
-                        "idb1",asLink(idbDir1),
-                        "idb2",asLink(idbDir2),
-                        "idb1txt",asLink(idbFullFile1),
-                        "idb2txt",asLink(idbFullFile2),
-                        "pidb1txt",asLink(idbProjectedFile1),
-                        "pidb2txt",asLink(idbProjectedFile2)
+                        "edb1",asLink(edbDir1, folder),
+                        "edb2",asLink(edbDir2, folder),
+                        "idb1",asLink(idbDir1, folder),
+                        "idb2",asLink(idbDir2, folder),
+                        "idb1txt",asLink(idbFullFile1, folder),
+                        "idb2txt",asLink(idbFullFile2, folder),
+                        "pidb1txt",asLink(idbProjectedFile1, folder),
+                        "pidb2txt",asLink(idbProjectedFile2, folder)
                     );
                     String link = ResourceUtil.createReportFromTemplate(contextDir,this, resource, PROJECTED_IDB_TEMPLATE,"idb-projected.html", bindings);
                     attachments.add(new AnalysisResultAttachment("diff-full",link,AnalysisResultAttachment.Kind.INFO));
@@ -159,8 +159,8 @@ public abstract class AbstractDaleqAnalyser implements Analyser {
                     Map<String,String> bindings2 = new HashMap<>();
                     bindings2.putAll(bindings);
                     bindings2.remove("code"); // not used in template
-                    bindings2.put("edb1IL",edbToHtml(edbDir1,JAR1PREFIX,"jar1"));  // IL = inlined
-                    bindings2.put("edb2IL",edbToHtml(edbDir2,JAR2PREFIX,"jar2"));
+                    bindings2.put("edb1IL",edbToHtml(edbDir1,JAR1PREFIX,"jar1",folder));  // IL = inlined
+                    bindings2.put("edb2IL",edbToHtml(edbDir2,JAR2PREFIX,"jar2",folder));
                     bindings2.put("rules",rulesToHtml(getRules()));
                     createBindingsForAdvancedDiff(bindings2,idb1,idb2,provDB1, provDB2);
                     String link2 = ResourceUtil.createReportFromTemplate(contextDir,this, resource, ADVANCED_DIFF_TEMPLATE,"advanced-diff.html", bindings2);
@@ -423,6 +423,15 @@ public abstract class AbstractDaleqAnalyser implements Analyser {
         return "<a target=\"_blank\" href=\""+link+"\">"+name+"</a>";
     }
 
+    private static String asLink(Path path, Path relativeTo) {
+        if (path.startsWith(relativeTo)) {
+            String relativePath = relativeTo.relativize(path).toString();
+            String name = path.getFileName().toString();
+            return "<a target=\"_blank\" href=\""+relativePath+"\">"+name+"</a>";
+        }
+        return asLink(path);
+    }
+
     private String htmlTableRow(Object... values) {
         return Stream.of(values)
             .map(Object::toString)
@@ -511,10 +520,10 @@ public abstract class AbstractDaleqAnalyser implements Analyser {
         return html;
     }
 
-    private static String edbToHtml(Path dir,String prefix,String jarName) throws IOException {
+    private static String edbToHtml(Path dir,String prefix,String jarName,Path relativeTo) throws IOException {
         StringBuffer html = new StringBuffer();
         html.append("The EDB (extensional database) consists of facts extracted from bytecode.");
-        html.append("The EDB can be found here: " + asLink(dir));
+        html.append("The EDB can be found here: " + asLink(dir, relativeTo));
 
         List<Path> files = Files.walk(dir)
             .filter(Files::isRegularFile)
