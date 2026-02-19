@@ -5,7 +5,7 @@
 
     <groupId>io.github.bineq</groupId>
     <artifactId>daleq</artifactId>
-    <version>1.3.3</version>
+    <version>1.4.0</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
     <description>datalog-based binary equivalence for Java bytecode components</description>
@@ -61,7 +61,7 @@
         <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm-tree</artifactId>
-            <version>9.9</version>
+            <version>9.9.1</version>
         </dependency>
         <dependency>
             <groupId>net.lingala.zip4j</groupId>
@@ -81,7 +81,7 @@
         <dependency>
             <groupId>com.github.javaparser</groupId>
             <artifactId>javaparser-core</artifactId>
-            <version>3.27.1</version>
+            <version>3.28.0</version>
         </dependency>
 
         <dependency>
@@ -92,26 +92,26 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-exec</artifactId>
-            <version>1.5.0</version>
+            <version>1.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
-            <version>1.21.2</version>
+            <version>1.22.1</version>
         </dependency>
 
         <!-- necessary to traverse resources independently on whether they are in the file system or in a zip, see issue https://github.com/binaryeq/daleq/issues/28  -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>7.0.0</version>
+            <version>7.0.3</version>
         </dependency>
 
         <!-- testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>6.0.1</version>
+            <version>6.0.2</version>
             <scope>test</scope>
         </dependency>
 

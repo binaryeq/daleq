@@ -228,13 +228,11 @@ public class Main {
 
         if (resource.endsWith(".class")) {
             if (analyser instanceof SameContentAnalyser) {
-                assert result.state()!=AnalysisResultState.SKIP;
                 if (result.state()==AnalysisResultState.FAIL || result.state()==AnalysisResultState.ERROR) {
                     EXIT_STATE = Math.max(EXIT_STATE,EXIT_CLASSES_EQUIVALENT__RESOURCES_EQUAL__SOURCES_EQUIVALENT);
                 }
             }
             else if (analyser instanceof AbstractDaleqAnalyser) {
-                assert result.state()!=AnalysisResultState.SKIP;
                 if (result.state()==AnalysisResultState.FAIL || result.state()==AnalysisResultState.ERROR) {
                     EXIT_STATE = Math.max(EXIT_STATE,EXIT_ALERT);
                 }
