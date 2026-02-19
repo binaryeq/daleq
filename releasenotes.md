@@ -1,8 +1,13 @@
 # Release Notes
 
+## 1.4.1
+
+- fixed issue 107 - removed incorrect assertions
+- multiple updated dependencies in pom
+
 ## 1.4.0
 
-- fixed issue 54 -- reports can now be moved to differnt folders
+- fixed issue 54 -- reports can now be moved to different folders
 - multiple updated dependencies in pom and workflows
 
 ## 1.3.3
