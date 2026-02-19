@@ -3,7 +3,7 @@
 ## 1.4.0
 
 - fixed issue 54 -- reports can now be moved to differnt folders
-- multiple updated dependencies in pom and workflows 
+- multiple updated dependencies in pom and workflows
 
 ## 1.3.3
 
