@@ -26,7 +26,7 @@ public abstract class AbstractEquivalenceTest {
         Path classFile = Path.of(AbstractEquivalenceTest.class.getResource(clazz).getPath());
         assumeTrue(Files.exists(classFile));
 
-        Path root = Files.createTempDirectory(TMP_DIR_ROOT,null);
+        Path root = Files.createTempDirectory(TMP_DIR_ROOT,"");
         Path edbRoot = root.resolve( "edb");
         Path edbFactDir = edbRoot.resolve( "facts");
         Path edbDef = edbRoot.resolve("db.souffle");

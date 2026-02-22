@@ -1,0 +1,45 @@
+--- bfs-dataset_WeakHashtable$1_javap-pc.txt
++++ repo1.maven.org_WeakHashtable$1_javap-pc.txt
+@@ -4,33 +4,33 @@
+
+   final org.apache.commons.logging.impl.WeakHashtable this$0;
+
+-  org.apache.commons.logging.impl.WeakHashtable$1(org.apache.commons.logging.impl.WeakHashtable, java.util.Enumeration);
++  org.apache.commons.logging.impl.WeakHashtable$1();
+     Code:
+        0: aload_0
+        1: aload_1
+        2: putfield      #1                  // Field this$0:Lorg/apache/commons/logging/impl/WeakHashtable;
+        5: aload_0
+        6: aload_2
+-       7: putfield      #2                  // Field val$enumer:Ljava/util/Enumeration;
++       7: putfield      #7                  // Field val$enumer:Ljava/util/Enumeration;
+       10: aload_0
+-      11: invokespecial #3                  // Method java/lang/Object."<init>":()V
++      11: invokespecial #11                 // Method java/lang/Object."<init>":()V
+       14: return
+
+   public boolean hasMoreElements();
+     Code:
+        0: aload_0
+-       1: getfield      #2                  // Field val$enumer:Ljava/util/Enumeration;
+-       4: invokeinterface #4,  1            // InterfaceMethod java/util/Enumeration.hasMoreElements:()Z
++       1: getfield      #7                  // Field val$enumer:Ljava/util/Enumeration;
++       4: invokeinterface #17,  1           // InterfaceMethod java/util/Enumeration.hasMoreElements:()Z
+        9: ireturn
+
+   public java.lang.Object nextElement();
+     Code:
+        0: aload_0
+-       1: getfield      #2                  // Field val$enumer:Ljava/util/Enumeration;
+-       4: invokeinterface #5,  1            // InterfaceMethod java/util/Enumeration.nextElement:()Ljava/lang/Object;
+-       9: checkcast     #6                  // class org/apache/commons/logging/impl/WeakHashtable$Referenced
++       1: getfield      #7                  // Field val$enumer:Ljava/util/Enumeration;
++       4: invokeinterface #23,  1           // InterfaceMethod java/util/Enumeration.nextElement:()Ljava/lang/Object;
++       9: checkcast     #27                 // class org/apache/commons/logging/impl/WeakHashtable$Referenced
+       12: astore_1
+       13: aload_1
+-      14: invokestatic  #7                  // Method org/apache/commons/logging/impl/WeakHashtable$Referenced.access$200:(Lorg/apache/commons/logging/impl/WeakHashtable$Referenced;)Ljava/lang/Object;
++      14: invokestatic  #29                 // Method org/apache/commons/logging/impl/WeakHashtable$Referenced.access$200:(Lorg/apache/commons/logging/impl/WeakHashtable$Referenced;)Ljava/lang/Object;
+       17: areturn
+ }

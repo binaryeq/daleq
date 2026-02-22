@@ -1,4 +1,4 @@
-// DECLARATIONS OF CORE AUXILIARY PREDCATES USED AS GUARDS
+// DECLARATIONS OF CORE AUXILIARY PREDICATES USED AS GUARDS
 
 .decl REMOVED_INSTRUCTION(factid: symbol,methodid: symbol,instructioncounter: number)
 .output REMOVED_INSTRUCTION
@@ -17,6 +17,9 @@
 
 .decl REMOVED_VERSION(factid: symbol,id: symbol)
 .output REMOVED_VERSION
+
+.decl REMOVED_SIGNATURE(factid: symbol,classOrMethodOrFieldId: symbol)
+.output REMOVED_SIGNATURE
 
 .decl MOVED_INSTRUCTION(factid: symbol, sourcemethodid: symbol,sourceinstructioncounter: number, destmethodid: symbol,destinstructioncounter: number,instructionname: symbol)
 .output MOVED_INSTRUCTION
@@ -49,15 +52,15 @@ IDB_VERSION(cat("R_BYTECODE_VERSION","[",factid,"]"),classname,access) :- VERSIO
 .output IDB_VERSION
 
 .decl IDB_CLASS_SIGNATURE(factid: symbol,classname: symbol,signature: symbol)
-IDB_CLASS_SIGNATURE(cat("R_CLASS_SIGNATURE","[",factid,"]"),classname,signature) :- CLASS_SIGNATURE(factid,classname,signature).
+IDB_CLASS_SIGNATURE(cat("R_CLASS_SIGNATURE","[",factid,"]"),classname,signature) :- CLASS_SIGNATURE(factid,classname,signature), !REMOVED_SIGNATURE(_,classname).
 .output IDB_CLASS_SIGNATURE
 
 .decl IDB_FIELD_SIGNATURE(factid: symbol,fieldid: symbol,signature: symbol)
-IDB_FIELD_SIGNATURE(cat("R_FIELD_SIGNATURE","[",factid,"]"),fieldid,signature) :- FIELD_SIGNATURE(factid,fieldid,signature).
+IDB_FIELD_SIGNATURE(cat("R_FIELD_SIGNATURE","[",factid,"]"),fieldid,signature) :- FIELD_SIGNATURE(factid,fieldid,signature), !REMOVED_SIGNATURE(_,fieldid).
 .output IDB_FIELD_SIGNATURE
 
 .decl IDB_METHOD_SIGNATURE(factid: symbol,methodid: symbol,signature: symbol)
-IDB_METHOD_SIGNATURE(cat("R_METHOD_SIGNATURE","[",factid,"]"),methodid,signature) :- METHOD_SIGNATURE(factid,methodid,signature).
+IDB_METHOD_SIGNATURE(cat("R_METHOD_SIGNATURE","[",factid,"]"),methodid,signature) :- METHOD_SIGNATURE(factid,methodid,signature), !REMOVED_SIGNATURE(_,methodid).
 .output IDB_METHOD_SIGNATURE
 
 .decl IDB_ACCESS(factid: symbol,classOrMethodOrFieldId: symbol,access: number)

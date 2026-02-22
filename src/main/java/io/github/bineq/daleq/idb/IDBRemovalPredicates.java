@@ -36,7 +36,8 @@ public enum IDBRemovalPredicates implements Predicate {
     REMOVED_FIELD(symslot(Fact.ID_SLOT_NAME),symslot("id")),
     REMOVED_VERSION(symslot(Fact.ID_SLOT_NAME),symslot("id")),
     REMOVED_ANNOTATION(symslot(Fact.ID_SLOT_NAME),symslot("classOrMethodOrFieldId"),symslot("annotation")),
-    REMOVED_ACCESS(symslot(Fact.ID_SLOT_NAME),symslot("classOrMethodOrFieldId"))
+    REMOVED_ACCESS(symslot(Fact.ID_SLOT_NAME),symslot("classOrMethodOrFieldId")),
+    REMOVED_SIGNATURE(symslot(Fact.ID_SLOT_NAME),symslot("classOrMethodOrFieldId"))
     ;
 
     public static Set<IDBRemovalPredicates> valuesAsSet() {

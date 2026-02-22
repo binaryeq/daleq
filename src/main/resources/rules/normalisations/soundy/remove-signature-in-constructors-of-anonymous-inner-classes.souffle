@@ -1,0 +1,9 @@
+// NORMALISATION PATTERN: Remove Signature from Constructors of anonymous inner classes
+
+//cat("R_REMOVE_SIGNATURE_FROM_CONSTRUCTORS_OF_ANO_INNER_CLASSES","[",factid1,",",factid2,",",factid3,"]")
+//cat("IS_CONSTRUCTOR_IN_ANOINNER_CLASS","[",factid1,",",factid2,"]")
+
+.decl IS_CONSTRUCTOR_IN_ANOINNER_CLASS(factid: symbol,methodId: symbol)
+IS_CONSTRUCTOR_IN_ANOINNER_CLASS(cat("IS_CONSTRUCTOR_IN_ANOINNER_CLASS","[",factid1,",",factid2,"]"),methodid) :- METHOD(factid1,methodid,classId,"<init>",_),IS_ANOINNERCLASS(factid2,classId).
+REMOVED_SIGNATURE(cat("REMOVE_SIGNATURES_FROM_ANOINNER_CLASSES","[",factid1,"]"),methodid) :- IS_CONSTRUCTOR_IN_ANOINNER_CLASS(factid1,methodid).
+IDB_METHOD_SIGNATURE(cat("REMOVE_SIGNATURES_FROM_ANOINNER_CLASSES_SET_TO_NULL","[",factid1,"]"),methodid,"null") :- IS_CONSTRUCTOR_IN_ANOINNER_CLASS(factid1,methodid).
