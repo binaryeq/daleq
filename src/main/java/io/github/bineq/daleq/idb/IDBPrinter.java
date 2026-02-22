@@ -208,7 +208,7 @@ public class IDBPrinter {
         for (String methodId:methodIds) {
             lines.addAll(comment2("details for method " + methodId));
             Fact methodSignatureFact = idb.methodSignatureFacts.get(methodId);
-            lines.add(stringify(methodSignatureFact));
+             lines.add(stringify(methodSignatureFact));
             Fact methodRawAccessFact = idb.methodRawAccessFacts.get(methodId);
             lines.add(stringify(methodRawAccessFact));
             for (Fact methodAccessFact:idb.methodAccessFacts.getOrDefault(methodId, Set.of())) {

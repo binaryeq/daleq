@@ -1,0 +1,132 @@
+Classfile /Users/jens/Development/binaryeq/tmp/signature-field-sample-data/03_commons-logging_commons-logging_1.3.0/bfs-dataset_WeakHashtable$1.class
+  Last modified 19/02/2026; size 1240 bytes
+  SHA-256 checksum 612ecba0f2d4896796635e001faf114c8833ac61a0df74966924b2612a27c8ef
+  Compiled from "WeakHashtable.java"
+class org.apache.commons.logging.impl.WeakHashtable$1 implements java.util.Enumeration
+  minor version: 0
+  major version: 52
+  flags: (0x0020) ACC_SUPER
+  this_class: #8                          // org/apache/commons/logging/impl/WeakHashtable$1
+  super_class: #9                         // java/lang/Object
+  interfaces: 1, fields: 2, methods: 3, attributes: 3
+Constant pool:
+   #1 = Fieldref           #8.#35         // org/apache/commons/logging/impl/WeakHashtable$1.this$0:Lorg/apache/commons/logging/impl/WeakHashtable;
+   #2 = Fieldref           #8.#36         // org/apache/commons/logging/impl/WeakHashtable$1.val$enumer:Ljava/util/Enumeration;
+   #3 = Methodref          #9.#37         // java/lang/Object."<init>":()V
+   #4 = InterfaceMethodref #10.#38        // java/util/Enumeration.hasMoreElements:()Z
+   #5 = InterfaceMethodref #10.#39        // java/util/Enumeration.nextElement:()Ljava/lang/Object;
+   #6 = Class              #40            // org/apache/commons/logging/impl/WeakHashtable$Referenced
+   #7 = Methodref          #6.#41         // org/apache/commons/logging/impl/WeakHashtable$Referenced.access$200:(Lorg/apache/commons/logging/impl/WeakHashtable$Referenced;)Ljava/lang/Object;
+   #8 = Class              #42            // org/apache/commons/logging/impl/WeakHashtable$1
+   #9 = Class              #43            // java/lang/Object
+  #10 = Class              #44            // java/util/Enumeration
+  #11 = Utf8               val$enumer
+  #12 = Utf8               Ljava/util/Enumeration;
+  #13 = Utf8               this$0
+  #14 = Utf8               Lorg/apache/commons/logging/impl/WeakHashtable;
+  #15 = Utf8               <init>
+  #16 = Utf8               (Lorg/apache/commons/logging/impl/WeakHashtable;Ljava/util/Enumeration;)V
+  #17 = Utf8               Code
+  #18 = Utf8               LineNumberTable
+  #19 = Utf8               LocalVariableTable
+  #20 = Utf8               this
+  #21 = Utf8               InnerClasses
+  #22 = Utf8               Lorg/apache/commons/logging/impl/WeakHashtable$1;
+  #23 = Utf8               hasMoreElements
+  #24 = Utf8               ()Z
+  #25 = Utf8               nextElement
+  #26 = Utf8               ()Ljava/lang/Object;
+  #27 = Utf8               nextReference
+  #28 = Utf8               Referenced
+  #29 = Utf8               Lorg/apache/commons/logging/impl/WeakHashtable$Referenced;
+  #30 = Utf8               SourceFile
+  #31 = Utf8               WeakHashtable.java
+  #32 = Utf8               EnclosingMethod
+  #33 = Class              #45            // org/apache/commons/logging/impl/WeakHashtable
+  #34 = NameAndType        #46:#47        // keys:()Ljava/util/Enumeration;
+  #35 = NameAndType        #13:#14        // this$0:Lorg/apache/commons/logging/impl/WeakHashtable;
+  #36 = NameAndType        #11:#12        // val$enumer:Ljava/util/Enumeration;
+  #37 = NameAndType        #15:#48        // "<init>":()V
+  #38 = NameAndType        #23:#24        // hasMoreElements:()Z
+  #39 = NameAndType        #25:#26        // nextElement:()Ljava/lang/Object;
+  #40 = Utf8               org/apache/commons/logging/impl/WeakHashtable$Referenced
+  #41 = NameAndType        #49:#50        // access$200:(Lorg/apache/commons/logging/impl/WeakHashtable$Referenced;)Ljava/lang/Object;
+  #42 = Utf8               org/apache/commons/logging/impl/WeakHashtable$1
+  #43 = Utf8               java/lang/Object
+  #44 = Utf8               java/util/Enumeration
+  #45 = Utf8               org/apache/commons/logging/impl/WeakHashtable
+  #46 = Utf8               keys
+  #47 = Utf8               ()Ljava/util/Enumeration;
+  #48 = Utf8               ()V
+  #49 = Utf8               access$200
+  #50 = Utf8               (Lorg/apache/commons/logging/impl/WeakHashtable$Referenced;)Ljava/lang/Object;
+{
+  final java.util.Enumeration val$enumer;
+    descriptor: Ljava/util/Enumeration;
+    flags: (0x1010) ACC_FINAL, ACC_SYNTHETIC
+
+  final org.apache.commons.logging.impl.WeakHashtable this$0;
+    descriptor: Lorg/apache/commons/logging/impl/WeakHashtable;
+    flags: (0x1010) ACC_FINAL, ACC_SYNTHETIC
+
+  org.apache.commons.logging.impl.WeakHashtable$1(org.apache.commons.logging.impl.WeakHashtable, java.util.Enumeration);
+    descriptor: (Lorg/apache/commons/logging/impl/WeakHashtable;Ljava/util/Enumeration;)V
+    flags: (0x0000)
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_0
+         1: aload_1
+         2: putfield      #1                  // Field this$0:Lorg/apache/commons/logging/impl/WeakHashtable;
+         5: aload_0
+         6: aload_2
+         7: putfield      #2                  // Field val$enumer:Ljava/util/Enumeration;
+        10: aload_0
+        11: invokespecial #3                  // Method java/lang/Object."<init>":()V
+        14: return
+      LineNumberTable:
+        line 345: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      15     0  this   Lorg/apache/commons/logging/impl/WeakHashtable$1;
+            0      15     1 this$0   Lorg/apache/commons/logging/impl/WeakHashtable;
+
+  public boolean hasMoreElements();
+    descriptor: ()Z
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #2                  // Field val$enumer:Ljava/util/Enumeration;
+         4: invokeinterface #4,  1            // InterfaceMethod java/util/Enumeration.hasMoreElements:()Z
+         9: ireturn
+      LineNumberTable:
+        line 348: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      10     0  this   Lorg/apache/commons/logging/impl/WeakHashtable$1;
+
+  public java.lang.Object nextElement();
+    descriptor: ()Ljava/lang/Object;
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=2, args_size=1
+         0: aload_0
+         1: getfield      #2                  // Field val$enumer:Ljava/util/Enumeration;
+         4: invokeinterface #5,  1            // InterfaceMethod java/util/Enumeration.nextElement:()Ljava/lang/Object;
+         9: checkcast     #6                  // class org/apache/commons/logging/impl/WeakHashtable$Referenced
+        12: astore_1
+        13: aload_1
+        14: invokestatic  #7                  // Method org/apache/commons/logging/impl/WeakHashtable$Referenced.access$200:(Lorg/apache/commons/logging/impl/WeakHashtable$Referenced;)Ljava/lang/Object;
+        17: areturn
+      LineNumberTable:
+        line 352: 0
+        line 353: 13
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      18     0  this   Lorg/apache/commons/logging/impl/WeakHashtable$1;
+           13       5     1 nextReference   Lorg/apache/commons/logging/impl/WeakHashtable$Referenced;
+}
+SourceFile: "WeakHashtable.java"
+EnclosingMethod: #33.#34                // org.apache.commons.logging.impl.WeakHashtable.keys
+InnerClasses:
+  #8;                                     // class org/apache/commons/logging/impl/WeakHashtable$1

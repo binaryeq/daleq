@@ -153,7 +153,7 @@ public class IDBReader {
                 }
 
                 else {
-                    LOG.warn("TODO: classify fact for predicate {}",predicateName);
+                    LOG.warn("no classification inferred for predicate {} (removal or helper predicates not listed)",predicateName);
                 }
             }
         }

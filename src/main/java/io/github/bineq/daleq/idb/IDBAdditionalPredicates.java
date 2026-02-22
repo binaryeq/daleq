@@ -14,7 +14,7 @@ import static io.github.bineq.daleq.Slot.symslot;
 public enum IDBAdditionalPredicates implements Predicate {
 
 
-    // placeholder if a rule remove a fact (e.g. a redundant checkcast)
+    // placeholder if a rule removes a fact (e.g. a redundant checkcast)
     // a NOPE fact will still carry provenance that references the removed fact
     // and the context (method + instruction id)
     NOPE(symslot(Fact.ID_SLOT_NAME),symslot("methodid"),numslot("instructioncounter",Integer.TYPE.getName())) {
