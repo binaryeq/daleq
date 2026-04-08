@@ -24,6 +24,16 @@ public class SameContentAnalyser implements Analyser {
     }
 
     @Override
+    public SoundnessLevel isSound() {
+        return SoundnessLevel.NA;
+    }
+
+    @Override
+    public EnumSet<AnalysedResourceType> analysedFiletypes() {
+        return EnumSet.of(AnalysedResourceType.Text);
+    }
+
+    @Override
     public AnalysisResult analyse(String resource, Path jar1, Path jar2, Path contextDir) throws IOException {
         AnalysisResult analysisResult = checkResourceIsPresent(jar1,jar2,resource);
         if (analysisResult!=null) {

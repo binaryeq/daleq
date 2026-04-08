@@ -2,6 +2,7 @@ package io.github.bineq.daleq.cli;
 
 /**
  * Analyser based on comparing the output of javap -c -p
+ * Note that there are cornercases of unsoundness related to unused constants.
  * @author jens dietrich
  */
 public class CompactJavapAnalyser extends AbstractJavapAnalyser {

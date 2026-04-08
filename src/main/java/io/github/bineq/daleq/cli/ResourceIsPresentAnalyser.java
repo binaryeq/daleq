@@ -5,10 +5,7 @@ import io.github.bineq.daleq.IOUtil;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Checks whether a resource with a given name exists in both jars.
@@ -21,6 +18,16 @@ public class ResourceIsPresentAnalyser implements Analyser {
     @Override
     public int positionHint() {
         return 10;
+    }
+
+    @Override
+    public SoundnessLevel isSound() {
+        return SoundnessLevel.NA;
+    }
+
+    @Override
+    public EnumSet<AnalysedResourceType> analysedFiletypes() {
+        return EnumSet.of(AnalysedResourceType.Any);
     }
 
     @Override

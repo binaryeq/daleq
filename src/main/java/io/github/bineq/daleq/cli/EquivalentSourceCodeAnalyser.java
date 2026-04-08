@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -32,6 +33,16 @@ public class EquivalentSourceCodeAnalyser extends AbstractSourceCodeAnalyser {
     @Override
     public void init(Path outDir) throws IOException {
         super.init(outDir);
+    }
+
+    @Override
+    public SoundnessLevel isSound() {
+        return SoundnessLevel.NA;
+    }
+
+    @Override
+    public EnumSet<AnalysedResourceType> analysedFiletypes() {
+        return EnumSet.of(AnalysedResourceType.JavaSourceCode);
     }
 
     @Override

@@ -4,6 +4,7 @@ import io.github.bineq.daleq.IOUtil;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.EnumSet;
 import java.util.Set;
 
 /**
@@ -12,21 +13,20 @@ import java.util.Set;
  */
 public interface Analyser {
 
-    /**
-     * By default, analysers are checking bytecode. If set to false, the analyser will check the jars passed for source code.
-     * @return
-     */
-    default boolean isBytecodeAnalyser() {
-        return true;
-    }
 
     /**
      * Whether the analysis is sound, as opposed to soundy.
+     * Soundness means that equivalence under-approximates behavioural equivalence.
+     * Soundiness means that equivalence under-approximates behavioural equivalence only when no reflection-like programming patterns are used.
      * @return
      */
-    default boolean isSound() {
-        return true;
-    }
+    SoundnessLevel isSound() ;
+
+    /**
+     * An enum of file types an analyser can analyse.
+     * @return
+     */
+    EnumSet<AnalysedResourceType> analysedFiletypes() ;
 
     // contextDir is the folder where the report is being generated
     // used to create resources that need to be linked
@@ -48,10 +48,10 @@ public interface Analyser {
         Set<String> resources1 = IOUtil.nonDirEntries(jar1);
         Set<String> resources2 = IOUtil.nonDirEntries(jar2);
         if (!resources1.contains(resource)) {
-            return new AnalysisResult(AnalysisResultState.SKIP,"resource " + resource + " is missing in jar1");
+            return new AnalysisResult(AnalysisResultState.SKIP,"resource " + resource + " is missing in package 1");
         }
         else if (!resources2.contains(resource)) {
-            return new AnalysisResult(AnalysisResultState.SKIP,"resource " + resource + " is missing in jar2");
+            return new AnalysisResult(AnalysisResultState.SKIP,"resource " + resource + " is missing in package 2");
         }
         else return null;
     }

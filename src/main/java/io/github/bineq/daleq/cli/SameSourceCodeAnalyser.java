@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -21,6 +22,8 @@ public class SameSourceCodeAnalyser extends AbstractSourceCodeAnalyser {
     private static final String DIFF_REPORT_NAME = "diff-src.html";
     private static final Logger LOG = LoggerFactory.getLogger(SameSourceCodeAnalyser.class);
 
+
+
     @Override
     public void init(Path outDir) throws IOException {
         super.init(outDir);
@@ -29,6 +32,17 @@ public class SameSourceCodeAnalyser extends AbstractSourceCodeAnalyser {
     @Override
     public int positionHint() {
         return 30;
+    }
+
+    @Override
+    public SoundnessLevel isSound() {
+        return SoundnessLevel.NA;
+    }
+
+    @Override
+    public EnumSet<AnalysedResourceType> analysedFiletypes() {
+        // note that this analyses bytecode by mapping it to source code provided as additional input files
+        return EnumSet.of(AnalysedResourceType.JavaByteCode);
     }
 
     @Override

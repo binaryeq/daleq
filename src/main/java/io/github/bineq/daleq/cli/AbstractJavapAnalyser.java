@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -24,6 +25,17 @@ public abstract class AbstractJavapAnalyser implements Analyser {
     protected static final String DIFF_REPORT_NAME = "diff.html";
 
     private String equivalenceIsInferredFromEqualityLink = null;
+
+
+    @Override
+    public SoundnessLevel isSound() {
+        return SoundnessLevel.SOUND;
+    }
+
+    @Override
+    public EnumSet<AnalysedResourceType> analysedFiletypes() {
+        return EnumSet.of(AnalysedResourceType.JavaByteCode);
+    }
 
     @Override
     public void init(Path outDir) throws IOException {

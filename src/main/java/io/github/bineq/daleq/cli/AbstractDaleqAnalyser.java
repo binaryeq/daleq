@@ -38,16 +38,17 @@ public abstract class AbstractDaleqAnalyser implements Analyser {
     private static final boolean SOUFFLE_AVAILABLE = checkSouffleExe();
     private static final URL PROJECTED_IDB_TEMPLATE = AbstractDaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.AbstractDaleqAnalyser/projected-idb.html");
     private static final URL ADVANCED_DIFF_TEMPLATE = AbstractDaleqAnalyser.class.getResource("/cli/io.github.bineq.daleq.cli.AbstractDaleqAnalyser/advanced-diff.html");
-
     private static final String JAR1PREFIX = "jar1-";
     private static final String JAR2PREFIX = "jar2-";
-
     private String equivalenceIsInferredFromEqualityLink = null;
 
     protected abstract Rules getRules();
-
     protected abstract Logger getLogger();
 
+    @Override
+    public EnumSet<AnalysedResourceType> analysedFiletypes() {
+        return EnumSet.of(AnalysedResourceType.JavaByteCode);
+    }
 
     @Override
     public void init(Path outDir) throws IOException {

@@ -21,6 +21,11 @@ public class SoundDaleqAnalyser extends AbstractDaleqAnalyser {
     }
 
     @Override
+    public SoundnessLevel isSound() {
+        return SoundnessLevel.SOUND;
+    }
+
+    @Override
     public String name() {
         return "daleq (sound)";
     }
@@ -34,10 +39,6 @@ public class SoundDaleqAnalyser extends AbstractDaleqAnalyser {
     public int positionHint() {
         return 90;
     }
-
-
-
-
 
 
 }

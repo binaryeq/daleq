@@ -37,7 +37,7 @@ public class SoundyDaleqAnalyser extends AbstractDaleqAnalyser {
     }
 
     @Override
-    public boolean isSound() {
-        return false;
+    public SoundnessLevel isSound() {
+        return SoundnessLevel.SOUNDY;
     }
 }
