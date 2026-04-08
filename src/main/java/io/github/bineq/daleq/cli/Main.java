@@ -196,7 +196,7 @@ public class Main {
             // filter by soundness
             .filter(analyser -> {
                 if (analyser instanceof AbstractDaleqAnalyser)  {
-                    if (analyser.isSound()) {
+                    if (analyser.isSound() == SoundnessLevel.SOUND) {
                         return daleqAnalyserType==DaleqAnalyserType.sound || daleqAnalyserType==DaleqAnalyserType.both ;
                     }
                     else {
