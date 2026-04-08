@@ -30,15 +30,18 @@ For Souffle, the executable can also be passed to DALEQ as a parameter.
 Then run DALEQ as follows:
 
 ```
-java -jar daleq-<daleq-version>.jar
- -j1,--jar1 <arg>   the first jar file to compare (required)
- -j2,--jar2 <arg>   the second jar file to compare (required)
+java -DSOUFFLE=<souffle-executable> -jar daleq-<daleq-version>.jar
+ -p1,--pck1 <arg>   the first package file to compare - either .jar (for JVM/Maven packages) or .whl (for python packages) (required)
+ -p2,--pck2 <arg>   the second package file to compare - either .jar (for JVM/Maven packages) or .whl (for python packages) (required)
  -o,--out <arg>     the output folder where the report will be generated (required)
- -s1,--src1 <arg>   the first jar file with source code to compare (optional)
- -s2,--src2 <arg>   the second jar file with source code to compare (optional)
- -a,--autoopen      if set, the generated html report will be opened automatically (optional, don't use this for CI integration)
- -dq,--daleq        one of {sound,soundy,both} (optional, default is soundy)
+ -s1,--src1 <arg>   the first jar file with source code to compare (only if JVM/Maven packages are analysed - optional)
+ -s2,--src2 <arg>   the second jar file with source code to compare (only if JVM/Maven packages are analysed - optional)
+ -a,--autoopen      if set, the generated html report will be opened automatically (don't use this for CI integration)
+ -dq,--daleq <arg>  one of {sound,soundy,both}, default is soundy
 ```
+
+DALEQ supports comparing both **JVM/Maven artifacts** (`.jar` files) and **Python packages** (`.whl` files).
+Both package files passed must use the same format.
 
 Running the program will create a report `report.html` in the specified output folder.
 
