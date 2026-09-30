@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.5.1
+
+- maintenance: updated dependencies
 
 ## 1.5.0
 
